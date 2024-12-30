@@ -1,17 +1,17 @@
 <template>
-	<view class="top">
+	<view class="top flex-center-column">
 		<image class="logo" mode="widthFix" src="/static/logo.png"></image>
 		<text class="tips">一款简约风格的聊天应用</text>
 	</view>
 	<view class="bottom">
 		<fui-input-comp placeholder="请输入账号">
 			<template #left>
-				<image class="icon-input" mode="widthFix" src="/static/home/user.png"></image>
+				<image class="icon-input" mode="widthFix" src="/static/login/user.png"></image>
 			</template>
 		</fui-input-comp>
 		<fui-input-comp :marginTop="35" password placeholder="请输入密码">
 			<template #left>
-				<image class="icon-input" mode="widthFix" src="/static/home/password.png"></image>
+				<image class="icon-input" mode="widthFix" src="/static/login/password.png"></image>
 			</template>
 		</fui-input-comp>
 		<view class="forgot-password">

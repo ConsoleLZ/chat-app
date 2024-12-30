@@ -1,13 +1,7 @@
-.top {
-	height: 400rpx;
-}
-.logo {
-	width: 300rpx;
-}
-.bottom {
+.box {
 	margin-top: 100rpx;
 }
-.login-btn {
+.register-btn {
 	width: 80%;
 	height: 90rpx;
 	border-radius: 10rpx;
@@ -18,16 +12,10 @@
 	justify-content: center;
 	align-items: center;
 }
-.login-btn .login-text {
+.register-btn .register-text {
 	color: $color3;
 }
 .icon-input {
 	width: 48rpx;
 	margin-right: 30rpx;
-}
-.forgot-password {
-	display: flex;
-	align-items: flex-end;
-	margin-top: 35rpx;
-	margin-right: 15rpx;
 }
