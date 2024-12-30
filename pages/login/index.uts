@@ -3,5 +3,15 @@ import FuiInputComp from '@/components/fui-input/fui-input.uvue'
 export default {
 	components: {
 		FuiInputComp
-	}
+	},
+	data(){
+		return {
+			
+		}
+	},
+	methods: {
+		onRegister(){
+			console.log('去注册')
+		}
+	},
 }
