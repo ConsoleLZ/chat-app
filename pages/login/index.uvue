@@ -1,6 +1,6 @@
 <template>
 	<view class="top">
-		<image class="logo" src="/static/logo.png"></image>
+		<image class="logo" mode="widthFix" src="/static/logo.png"></image>
 		<text class="tips">一款简约风格的聊天应用</text>
 	</view>
 	<view class="bottom">
