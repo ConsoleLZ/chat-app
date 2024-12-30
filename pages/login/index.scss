@@ -21,13 +21,8 @@
 	justify-content: center;
 	align-items: center;
 }
-.login-btn .text {
-	color: #ffffff;
-}
-.register {
-	display: flex;
-	align-items: center;
-	margin-top: 80rpx;
+.login-btn .login-text {
+	color: $color3;
 }
 .icon-input {
 	width: 48rpx;
