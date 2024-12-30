@@ -1,0 +1,19 @@
+<template>
+	<view class="top">
+		<image class="logo" src="/static/logo.png"></image>
+		<text class="tips">一款简约风格的聊天应用</text>
+	</view>
+	<view class="bottom">
+		<fui-input-comp label="账号" placeholder="请输入账号"></fui-input-comp>
+		<fui-input-comp :marginTop="35" :password="true" label="密码" placeholder="请输入密码"></fui-input-comp>
+		<view class="login-btn">
+			<text class="text">登录</text>
+		</view>
+		<view class="register">
+			<text class="tips">没有账号？<text class="register-text">去注册</text></text>
+		</view>
+	</view>
+</template>
+
+<script lang="uts" src="./index.uts"></script>
+<style lang="scss" src="./index.scss"></style>

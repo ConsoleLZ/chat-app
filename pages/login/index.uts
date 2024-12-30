@@ -1,0 +1,7 @@
+import FuiInputComp from '@/components/fui-input/fui-input.uvue'
+
+export default {
+	components: {
+		FuiInputComp
+	}
+}

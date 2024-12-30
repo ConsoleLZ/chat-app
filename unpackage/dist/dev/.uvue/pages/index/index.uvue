@@ -1,0 +1,14 @@
+export default {
+	data(){
+		return {
+			test: '123'
+		}
+	}
+}
+
+function GenPagesIndexIndexRender(): any | null {
+const _ctx = this
+const _cache = this.$.renderCache
+  return createElementVNode("view", null, " 111 ")
+}
+const GenPagesIndexIndexStyles = []
