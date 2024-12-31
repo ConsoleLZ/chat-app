@@ -14,11 +14,19 @@
 				<image class="icon-input" mode="widthFix" src="/static/login/password.png"></image>
 			</template>
 		</fui-input-comp>
+		<fui-input-comp :marginTop="35" password placeholder="请输入验证码">
+			<template #left>
+				<image class="icon-input" mode="widthFix" src="/static/login/code.png"></image>
+			</template>
+			<template #default>
+				<canvas @click="onChangeCode" style="width: 200rpx;height: 55rpx;" id="canvas"></canvas>
+			</template>
+		</fui-input-comp>
 		<view class="forgot-password">
 			<text class="action-tips">忘记密码？</text>
 		</view>
-		<view class="login-btn" @click="onLogin">
-			<text class="login-text">登录</text>
+		<view class="login-btn">
+			<fui-button text="登录" @onclick="onLogin" :loading="isLoading" :disabled="isLoading"></fui-button>
 		</view>
 		<view class="flex-center-row" style="margin-top: 30rpx;">
 			<view style="margin-right: 10rpx;">
@@ -34,4 +42,4 @@
 </template>
 
 <script lang="uts" src="./index.uts"></script>
-<style lang="scss" src="./index.scss"></style>
+<style lang="scss" src="./index.scss" scoped></style>

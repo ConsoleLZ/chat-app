@@ -1,20 +1,24 @@
 import FuiInputComp from '@/components/fui-input/fui-input.uvue'
 import FuiToastComp from "@/components/fui-toast/fui-toast.uvue"
+import FuiButtonComp from "@/components/fui-button/fui-button.uvue"
 import { FuiToastShowParam } from '@/components/fui-types/index.uts'
 import { ComponentPublicInstance } from 'vue'
 import { errorColor } from '@/utils/constants.uts'
 import { SERVER_URL } from '@/config.uts'
+import { drawCaptcha } from '@/utils/utils.uts'
 
 export default {
 	components: {
 		FuiInputComp,
-		FuiToastComp
+		FuiToastComp,
+		FuiButtonComp
 	},
 	data() {
 		return {
 			errorColor,
 			account: null, // 账号
 			password: null, // 密码
+			isLoading: false
 		}
 	},
 	methods: {
@@ -23,9 +27,15 @@ export default {
 				url: '/pages/register/index'
 			})
 		},
+		// 更换验证码
+		onChangeCode() {
+			drawCaptcha('canvas', 200, 55, 45)
+		},
 		// 登录
 		onLogin() {
-			let toastError = {
+			console.log(111)
+			this.isLoading = true
+			const toastError = {
 				text: '登录失败'
 			} as FuiToastShowParam;
 			uni.request({
@@ -36,8 +46,14 @@ export default {
 				fail(err) {
 					console.log(err);
 					(this.$refs['toast'] as ComponentPublicInstance).$callMethod('show', toastError);
+				},
+				complete() {
+					this.isLoading = false
 				}
 			})
-		}
+		},
 	},
+	onReady() {
+		drawCaptcha('canvas', 200, 80, 45)
+	}
 }

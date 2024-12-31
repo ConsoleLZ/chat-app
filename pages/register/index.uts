@@ -1,22 +1,24 @@
 import FuiInputComp from '@/components/fui-input/fui-input.uvue'
-import {drawCaptcha} from '@/utils/utils.uts'
+import { drawCaptcha } from '@/utils/utils.uts'
+import FuiButtonComp from "@/components/fui-button/fui-button.uvue"
 
 export default {
 	components: {
-		FuiInputComp
+		FuiInputComp,
+		FuiButtonComp
 	},
-	data(){
+	data() {
 		return {
-			
+			isLoading: false
 		}
-	},
-	onReady(){
-		drawCaptcha('canvas', 200, 80, 45)
 	},
 	methods: {
 		// 更换验证码
-		onChangeCode(){
-			drawCaptcha('canvas', 200, 80, 45)
+		onChangeCode() {
+			drawCaptcha('canvas', 200, 55, 45)
 		}
 	},
+	onReady() {
+		drawCaptcha('canvas', 200, 80, 45)
+	}
 }
