@@ -33,7 +33,6 @@ export default {
 		},
 		// 登录
 		onLogin() {
-			console.log(111)
 			this.isLoading = true
 			const toastError = {
 				text: '登录失败'

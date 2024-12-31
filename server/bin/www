@@ -7,6 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('server:server');
 var http = require('http');
+var os = require('os'); // 引入 os 模块
 
 /**
  * Get port from environment and store in Express.
@@ -25,10 +26,10 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-const hostname = '192.168.0.105'
+const hostname = '0.0.0.0';
 
-server.listen(port,hostname, ()=>{
-  console.log('后台服务启动成功', `http://${hostname}:${port}`)
+server.listen(port, hostname, () => {
+  console.log('后台服务启动成功', `http://${getWLANIPv4Address()}:${port}`);
 });
 server.on('error', onError);
 server.on('listening', onListening);
@@ -91,4 +92,26 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
+}
+
+/**
+ * 获取无线局域网适配器 (WLAN) 的 IPv4 地址
+ */
+
+function getWLANIPv4Address() {
+  const interfaces = os.networkInterfaces();
+  for (const devName in interfaces) {
+    // 查找包含 "WLAN" 或 "Wi-Fi" 的网络接口名称
+    if (devName.toLowerCase().includes("wlan") || devName.toLowerCase().includes("wi-fi")) {
+      const iface = interfaces[devName].find((details) => {
+        // 只返回非内部（非 loopback）的 IPv4 地址
+        return details.family === 'IPv4' && !details.internal;
+      });
+      if (iface) {
+        // 返回找到的第一个符合条件的IP地址
+        return iface.address;
+      }
+    }
+  }
+  return '127.0.0.1'; // 如果没有找到合适的IP，则默认返回localhost
 }
