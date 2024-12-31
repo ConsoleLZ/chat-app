@@ -1,0 +1,11 @@
+[
+	{
+		"id": 1,
+		"name": "测试用户1",
+		"avatar": "https://pic.imgdb.cn/item/665f06ac5e6d1bfa0573f8c5.jpg",
+		"account": "test1",
+		"password": "123456",
+		"createTime": 1735637664266,
+		"friendList": []
+	}
+]

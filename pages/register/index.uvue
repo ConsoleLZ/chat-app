@@ -1,6 +1,11 @@
 <template>
 	<view class="box">
-		<fui-input-comp placeholder="请输入账号">
+		<fui-input-comp placeholder="请输入您的名字">
+			<template #left>
+				<image class="icon-input" mode="widthFix" src="/static/login/name.png"></image>
+			</template>
+		</fui-input-comp>
+		<fui-input-comp :marginTop="35" placeholder="请输入账号">
 			<template #left>
 				<image class="icon-input" mode="widthFix" src="/static/login/user.png"></image>
 			</template>
