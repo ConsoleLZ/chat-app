@@ -4,12 +4,12 @@
 		<text class="tips">一款简约风格的聊天应用</text>
 	</view>
 	<view class="bottom">
-		<fui-input-comp placeholder="请输入账号">
+		<fui-input-comp v-model="account" placeholder="请输入账号">
 			<template #left>
 				<image class="icon-input" mode="widthFix" src="/static/login/user.png"></image>
 			</template>
 		</fui-input-comp>
-		<fui-input-comp :marginTop="35" password placeholder="请输入密码">
+		<fui-input-comp v-model="password" :marginTop="35" password placeholder="请输入密码">
 			<template #left>
 				<image class="icon-input" mode="widthFix" src="/static/login/password.png"></image>
 			</template>
@@ -17,7 +17,7 @@
 		<view class="forgot-password">
 			<text class="action-tips">忘记密码？</text>
 		</view>
-		<view class="login-btn">
+		<view class="login-btn" @click="onLogin">
 			<text class="login-text">登录</text>
 		</view>
 		<view class="flex-center-row" style="margin-top: 30rpx;">

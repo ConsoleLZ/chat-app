@@ -6,7 +6,8 @@ export default {
 	},
 	data(){
 		return {
-			
+			account: null, // 账号
+			password: null, // 密码
 		}
 	},
 	methods: {
@@ -14,6 +15,10 @@ export default {
 			uni.navigateTo({
 				url: '/pages/register/index'
 			})
+		},
+		// 登录
+		onLogin(){
+			console.log(this)
 		}
 	},
 }
