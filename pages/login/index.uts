@@ -29,7 +29,7 @@ export default {
 		},
 		// 更换验证码
 		onChangeCode() {
-			drawCaptcha('canvas', 200, 55, 45)
+			drawCaptcha('canvas', 200, 85, 45)
 		},
 		// 登录
 		onLogin() {
@@ -53,6 +53,6 @@ export default {
 		},
 	},
 	onReady() {
-		drawCaptcha('canvas', 200, 80, 45)
+		drawCaptcha('canvas', 200, 85, 45)
 	}
 }
