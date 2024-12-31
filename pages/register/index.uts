@@ -11,9 +11,12 @@ export default {
 		}
 	},
 	onReady(){
-		drawCaptcha('canvas', 200, 80)
+		drawCaptcha('canvas', 200, 80, 45)
 	},
 	methods: {
-		
+		// 更换验证码
+		onChangeCode(){
+			drawCaptcha('canvas', 200, 80, 45)
+		}
 	},
 }

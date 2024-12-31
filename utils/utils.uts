@@ -1,5 +1,5 @@
 // 生成图形验证码
-export const drawCaptcha = (dom : string, w: number, h: number) => {
+export const drawCaptcha = (dom : string, w: number, h: number, fontSize: number) => {
 	function getRandomColor() {
 		return `rgb(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)})`;
 	}
@@ -22,12 +22,10 @@ export const drawCaptcha = (dom : string, w: number, h: number) => {
 				captcha += char;
 
 				// 设置字体大小和样式
-				ctx.font = '50px sans-serif'
+				ctx.font = `${fontSize}px sans-serif`
 
 				// 设置文本颜色
 				ctx.fillStyle = getRandomColor()
-
-				// 设置文本基线
 
 				// 绘制文本
 				ctx.fillText(char, i * 25 + 20, h / 2 + 20);
