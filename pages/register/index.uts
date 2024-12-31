@@ -11,7 +11,7 @@ export default {
 		}
 	},
 	onReady(){
-		drawCaptcha('canvas')
+		drawCaptcha('canvas', 200, 80)
 	},
 	methods: {
 		
