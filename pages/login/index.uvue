@@ -29,6 +29,8 @@
 			</view>
 		</view>
 	</view>
+
+	<fui-toast ref="toast" :radius="16" :background="errorColor"></fui-toast>
 </template>
 
 <script lang="uts" src="./index.uts"></script>

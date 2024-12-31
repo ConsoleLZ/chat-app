@@ -1,0 +1,1 @@
+export const errorColor : string = '#ff3f3f'
