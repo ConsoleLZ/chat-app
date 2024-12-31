@@ -1,0 +1,18 @@
+// 生成图形验证码
+export const drawCaptcha = (dom : string) => {
+	function getRandomColor() {
+	    return `rgb(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)})`;
+	}
+	uni.createCanvasContextAsync({
+		id: dom,
+		success: (context : CanvasContext) => {
+			// 随机颜色
+			const getRandomColor = ()=> {
+				return `rgb(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)})`;
+			}
+			const ctx = context.getContext('2d')!;
+			ctx.fillStyle = getRandomColor()
+			ctx.fillRect(0,0,200,80)
+		}
+	})
+}

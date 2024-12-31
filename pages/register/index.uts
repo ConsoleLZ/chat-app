@@ -1,4 +1,5 @@
 import FuiInputComp from '@/components/fui-input/fui-input.uvue'
+import {drawCaptcha} from '@/utils/utils.uts'
 
 export default {
 	components: {
@@ -8,6 +9,9 @@ export default {
 		return {
 			
 		}
+	},
+	onReady(){
+		drawCaptcha('canvas')
 	},
 	methods: {
 		
