@@ -1,0 +1,3 @@
+import { networkRequest } from '@/utils/utils.uts'
+
+export const PostLoginStore = new networkRequest('/api/login', 'POST')
