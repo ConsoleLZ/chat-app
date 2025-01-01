@@ -1,3 +1,4 @@
 import { networkRequest } from '@/utils/utils.uts'
 
+// 登录
 export const PostLoginStore = new networkRequest('/api/login', 'POST')

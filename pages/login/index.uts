@@ -1,8 +1,5 @@
 import FuiInputComp from '@/components/fui-input/fui-input.uvue'
-import FuiToastComp from "@/components/fui-toast/fui-toast.uvue"
 import FuiButtonComp from "@/components/fui-button/fui-button.uvue"
-import { FuiToastShowParam } from '@/components/fui-types/index.uts'
-import { ComponentPublicInstance } from 'vue'
 import { errorColor } from '@/utils/constants.uts'
 import { drawCaptcha } from '@/utils/utils.uts'
 import { PostLoginStore } from '@/store/index.uts'
@@ -10,7 +7,6 @@ import { PostLoginStore } from '@/store/index.uts'
 export default {
 	components: {
 		FuiInputComp,
-		FuiToastComp,
 		FuiButtonComp
 	},
 	data() {
@@ -33,6 +29,9 @@ export default {
 		},
 		// 登录
 		onLogin() {
+			if (this.account === null || this.password === null) {
+				return
+			}
 			PostLoginStore.request({
 				account: this.account,
 				password: this.password
@@ -41,23 +40,6 @@ export default {
 			}).catch(err => {
 				console.log(err)
 			})
-			// this.isLoading = true
-			// const toastError = {
-			// 	text: '登录失败'
-			// } as FuiToastShowParam;
-			// uni.request({
-			// 	url: `${SERVER_URL}/api/login`,
-			// 	success(res) {
-			// 		console.log(res);
-			// 	},
-			// 	fail(err) {
-			// 		console.log(err);
-			// 		(this.$refs['toast'] as ComponentPublicInstance).$callMethod('show', toastError);
-			// 	},
-			// 	complete() {
-			// 		this.isLoading = false
-			// 	}
-			// })
 		},
 	},
 	onReady() {
