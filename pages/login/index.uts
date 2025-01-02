@@ -4,6 +4,8 @@ import { errorColor } from '@/utils/constants.uts'
 import { drawCaptcha } from '@/utils/utils.uts'
 import { PostLoginStore } from '@/store/index.uts'
 import MessageComp from '@/components/message/index.uvue'
+import {MessageModel} from '@/components/message/types.uts'
+import { ComponentPublicInstance } from 'vue'
 
 export default {
 	components: {
@@ -31,17 +33,18 @@ export default {
 		},
 		// 登录
 		onLogin() {
-			if (this.account === null || this.password === null) {
-				return
-			}
-			PostLoginStore.request({
-				account: this.account,
-				password: this.password
-			}).then(res => {
-				console.log(res)
-			}).catch(err => {
-				console.log(err)
-			})
+			(this.$refs['message'] as MessageModel).success('123')
+			// if (this.account === null || this.password === null) {
+			// 	return
+			// }
+			// PostLoginStore.request({
+			// 	account: this.account,
+			// 	password: this.password
+			// }).then(res => {
+			// 	console.log(res)
+			// }).catch(err => {
+			// 	console.log(err)
+			// })
 		},
 	},
 	onReady() {

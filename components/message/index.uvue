@@ -1,10 +1,11 @@
 <template>
-	<view class="message">
+	<view class="message" v-if="visible">
 		<view class="flex-row view">
 			<image class="margin-right-10" style="width: 32rpx;" src="./image/success.png" mode="widthFix"></image>
-			<text class="text">Hello, Ant Design Vue!</text>
+			<text class="text">{{message}}</text>
 		</view>
 	</view>
 </template>
 
+<script lang="uts" src="./index.uts"></script>
 <style lang="scss" src="./index.scss" scoped></style>
