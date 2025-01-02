@@ -1,0 +1,30 @@
+.tips {
+	font-size: 26rpx;
+	color: $color1;
+	margin: 15rpx 0;
+}
+.action-tips {
+	font-size: 26rpx;
+	color: #4062f9;
+}
+.flex-row{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.flex-center-row {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+.flex-center-column {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.margin-right-10 {
+	margin-right: 10rpx;
+}

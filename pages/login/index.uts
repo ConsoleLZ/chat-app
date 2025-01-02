@@ -3,11 +3,13 @@ import FuiButtonComp from "@/components/fui-button/fui-button.uvue"
 import { errorColor } from '@/utils/constants.uts'
 import { drawCaptcha } from '@/utils/utils.uts'
 import { PostLoginStore } from '@/store/index.uts'
+import MessageComp from '@/components/message/index.uvue'
 
 export default {
 	components: {
 		FuiInputComp,
-		FuiButtonComp
+		FuiButtonComp,
+		MessageComp
 	},
 	data() {
 		return {
@@ -25,7 +27,7 @@ export default {
 		},
 		// 更换验证码
 		onChangeCode() {
-			drawCaptcha('canvas', 200, 85, 45)
+			drawCaptcha('canvas')
 		},
 		// 登录
 		onLogin() {
@@ -43,6 +45,6 @@ export default {
 		},
 	},
 	onReady() {
-		drawCaptcha('canvas', 200, 85, 45)
+		drawCaptcha('canvas')
 	}
 }

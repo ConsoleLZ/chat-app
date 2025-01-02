@@ -1,0 +1,17 @@
+.message {
+	width: 100%;
+	position: fixed;
+	top: 20rpx;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 999;
+	.view {
+		background-color: #e0e4eb;
+		padding: 10rpx 20rpx;
+		border-radius: 10rpx;
+	}
+	.text {
+		font-size: 30rpx;
+	}
+}

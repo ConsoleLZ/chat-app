@@ -15,10 +15,10 @@ export default {
 	methods: {
 		// 更换验证码
 		onChangeCode() {
-			drawCaptcha('canvas', 200, 85, 45)
+			drawCaptcha('canvas')
 		}
 	},
 	onReady() {
-		drawCaptcha('canvas', 200, 85, 45)
+		drawCaptcha('canvas')
 	}
 }

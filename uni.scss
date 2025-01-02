@@ -2,25 +2,3 @@ $primaryColor: #165af7;
 $color1: #666666;
 $color2: #dddddd;
 $color3: #ffffff;
-
-.tips {
-	font-size: 26rpx;
-	color: $color1;
-	margin: 15rpx 0;
-}
-.action-tips {
-	font-size: 26rpx;
-	color: #4062f9;
-}
-.flex-center-row {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-}
-.flex-center-column {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-}

@@ -19,7 +19,7 @@
 				<image class="icon-input" mode="widthFix" src="/static/login/code.png"></image>
 			</template>
 			<template #default>
-				<canvas @click="onChangeCode" style="width: 200rpx;height: 55rpx;" id="canvas"></canvas>
+				<canvas @click="onChangeCode" style="width: 200rpx;height: 35px;" id="canvas"></canvas>
 			</template>
 		</fui-input-comp>
 		<view class="forgot-password">
@@ -37,6 +37,7 @@
 			</view>
 		</view>
 	</view>
+	<message-comp />
 </template>
 
 <script lang="uts" src="./index.uts"></script>

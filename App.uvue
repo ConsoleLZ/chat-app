@@ -35,3 +35,4 @@
 </script>
 
 <style lang="scss" src="./uni.scss"></style>
+<style lang="scss" src="./utils/utils.scss"></style>

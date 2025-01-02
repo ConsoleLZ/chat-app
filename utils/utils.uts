@@ -2,7 +2,10 @@ import { MethodsType } from './types.uts'
 import { SERVER_URL } from '@/config.uts'
 
 // 生成图形验证码
-export const drawCaptcha = (dom : string, w : number, h : number, fontSize : number) => {
+export const drawCaptcha = (dom : string) => {
+	const w = 200
+	const h = 70
+	const fontSize = 45
 	function getRandomColor() {
 		return `rgb(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)})`;
 	}
