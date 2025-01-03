@@ -1,3 +1,6 @@
+import successIcon from './image/success.png'
+import errorIcon from './image/error.png'
+
 export default {
 	props: {
 		closeTime: {
@@ -5,18 +8,29 @@ export default {
 			default: 3
 		}
 	},
-	data(){
+	data() {
 		return {
 			visible: false,
-			message: null
+			message: null,
+			icon: null
 		}
 	},
 	methods: {
-		success(value: string){
+		success(value : string) {
 			this.message = value
 			this.visible = true
-			
-			setTimeout(()=>{
+			this.icon = successIcon
+
+			setTimeout(() => {
+				this.visible = false
+			}, this.closeTime * 1000)
+		},
+		error(value : string) {
+			this.message = value
+			this.visible = true
+			this.icon = errorIcon
+
+			setTimeout(() => {
 				this.visible = false
 			}, this.closeTime * 1000)
 		}

@@ -32,7 +32,7 @@ export default {
 		},
 		// 登录
 		onLogin() {
-			(this.$refs['messageRef'] as ComponentPublicInstance).$callMethod('success', '123')
+			(this.$refs['messageRef'] as ComponentPublicInstance).$callMethod('error', '123')
 			// if (this.account === null || this.password === null) {
 			// 	return
 			// }
