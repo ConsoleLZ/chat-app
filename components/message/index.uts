@@ -1,5 +1,6 @@
 import successIcon from './image/success.png'
 import errorIcon from './image/error.png'
+import warnIcon from './image/warn.png'
 
 export default {
 	props: {
@@ -29,6 +30,15 @@ export default {
 			this.message = value
 			this.visible = true
 			this.icon = errorIcon
+
+			setTimeout(() => {
+				this.visible = false
+			}, this.closeTime * 1000)
+		},
+		warn(value : string) {
+			this.message = value
+			this.visible = true
+			this.icon = warnIcon
 
 			setTimeout(() => {
 				this.visible = false

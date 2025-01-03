@@ -1,7 +1,7 @@
 .message {
 	width: 100%;
 	position: fixed;
-	top: 20px;
+	top: 500rpx;
 	opacity: 0;
 	display: flex;
 	justify-content: center;
@@ -10,8 +10,8 @@
 	transition-duration: 200ms;
 	transition-property: opacity, transform;
 	.view {
-		background-color: #f8f8f8;
-		padding: 15rpx 30rpx;
+		background-color: #fafafa;
+		padding: 20rpx 30rpx;
 		border-radius: 8rpx;
 	}
 	.text {
