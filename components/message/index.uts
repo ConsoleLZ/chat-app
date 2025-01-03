@@ -1,4 +1,10 @@
 export default {
+	props: {
+		closeTime: {
+			type: Number,
+			default: 3
+		}
+	},
 	data(){
 		return {
 			visible: false,
@@ -9,6 +15,10 @@ export default {
 		success(value: string){
 			this.message = value
 			this.visible = true
+			
+			setTimeout(()=>{
+				this.visible = false
+			}, this.closeTime * 1000)
 		}
 	}
 }

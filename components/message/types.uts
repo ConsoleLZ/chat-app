@@ -1,3 +1,0 @@
-export interface MessageModel {
-	success: (value: string) => void;
-}

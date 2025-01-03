@@ -1,5 +1,5 @@
 <template>
-	<view class="message" v-if="visible">
+	<view :class="visible ? 'message show' : 'message'">
 		<view class="flex-row view">
 			<image class="margin-right-10" style="width: 32rpx;" src="./image/success.png" mode="widthFix"></image>
 			<text class="text">{{message}}</text>

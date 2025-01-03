@@ -1,17 +1,24 @@
 .message {
 	width: 100%;
 	position: fixed;
-	top: 20rpx;
+	top: 20px;
+	opacity: 0;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	z-index: 999;
+	transition-duration: 200ms;
+	transition-property: opacity, transform;
 	.view {
-		background-color: #e0e4eb;
-		padding: 10rpx 20rpx;
-		border-radius: 10rpx;
+		background-color: #f8f8f8;
+		padding: 15rpx 30rpx;
+		border-radius: 8rpx;
 	}
 	.text {
 		font-size: 30rpx;
 	}
+}
+.show {
+	transform: translateY(-10rpx);
+	opacity: 1;
 }
