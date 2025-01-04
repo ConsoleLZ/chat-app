@@ -4,9 +4,9 @@ const router = express.Router();
 const {dbConfig, userTable} = require('../db.config')
 const {tokenManager} = require('../tokenManager')
 
-/* GET home page. */
+// 登录
 router.post("/login", async function (req, res) {
-  // // 创建连接池
+  // 创建连接池
   const config = dbConfig();
   const promisePool = mysql2.createPool(config).promise();
   let users = await promisePool.query(

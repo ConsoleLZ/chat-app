@@ -1,15 +1,29 @@
 <script lang="uts">
+	import { PostVerifiedStore } from '@/store/index.uts'
+
 	let firstBackTime = 0
 	export default {
 		onLaunch: function () {
 
 		},
 		onShow: function () {
-			// 路由拦截
-			console.log(uni.getStorageSync('token'))
-			// uni.redirectTo({
-			// 	url: '/pages/login/index'
-			// })
+			// 页面路由拦截
+			console.log('页面路由拦截')
+			PostVerifiedStore.request({
+				token: uni.getStorageSync('token')
+			}).then(res => {
+				const ok = res.data?.ok as boolean
+				if (!ok) {
+					uni.redirectTo({
+						url: '/pages/login/index'
+					})
+				}
+			}).catch(() => {
+				uni.showToast({
+					title: '服务器错误',
+					icon: 'error'
+				})
+			})
 		},
 		onHide: function () {
 

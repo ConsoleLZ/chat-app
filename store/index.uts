@@ -2,3 +2,6 @@ import { networkRequest } from '@/utils/http/index.uts'
 
 // 登录
 export const PostLoginStore = new networkRequest<UTSJSONObject>('/api/login', 'POST')
+
+// token校验
+export const PostVerifiedStore = new networkRequest<UTSJSONObject>('/verified', 'POST')
