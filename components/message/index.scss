@@ -3,12 +3,12 @@
 	position: fixed;
 	top: 500rpx;
 	opacity: 0;
-	display: flex;
 	justify-content: center;
 	align-items: center;
 	z-index: 999;
 	transition-duration: 200ms;
 	transition-property: opacity, transform;
+	display: none;
 	.view {
 		background-color: #fafafa;
 		padding: 20rpx 30rpx;
@@ -21,4 +21,5 @@
 .show {
 	transform: translateY(-10rpx);
 	opacity: 1;
+	display: flex;
 }
