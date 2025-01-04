@@ -39,10 +39,8 @@ export default {
 			PostLoginStore.request({
 				account: this.account,
 				password: this.password
-			} as any).then(res => {
+			}).then(res => {
 				console.log(res)
-			}).catch(err => {
-				console.log(err)
 			})
 		},
 	},

@@ -46,8 +46,8 @@ export class networkRequest<T> {
 	private method : MethodsType;
 
 	constructor(url : string, method : MethodsType) {
-		this.url = SERVER_URL + url
-		this.method = method
+		this.url = SERVER_URL + url;
+		this.method = method;
 	}
 
 	request(data : any) : Promise<RequestSuccess<T>> {
@@ -56,13 +56,13 @@ export class networkRequest<T> {
 				url: this.url,
 				data,
 				method: this.method,
-				success(res : RequestSuccess<T>) {
-					resolve(res)
+				success(res) {
+					resolve(res as RequestSuccess<T>); // 这里直接使用泛型 T
 				},
 				fail(err) {
-					reject(err)
-				}
-			})
-		})
+					reject(err);
+				},
+			}); // 这里使用类型断言，确保类型正确
+		});
 	}
 }
