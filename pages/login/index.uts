@@ -42,7 +42,7 @@ export default {
 				password: this.password
 			})
 
-			const data = res.data as UTSJSONObject
+			const data = res.data
 			console.log(data?.ok)
 		},
 	},
