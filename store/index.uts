@@ -1,5 +1,4 @@
 import { networkRequest } from '@/utils/utils.uts'
-import { PostLoginResponse } from './types.uts'
 
 // 登录
-export const PostLoginStore = new networkRequest<PostLoginResponse>('/api/login', 'POST');
+export const PostLoginStore = new networkRequest('/api/login', 'POST')
