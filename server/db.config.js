@@ -5,7 +5,7 @@ function dbConfig() {
     user: "root",
     password: "123456",
     database: "chat-app",
-    connectionLimit: 1,
+    connectLimit: 1,
   };
 }
 

@@ -2,7 +2,7 @@ const express = require("express");
 const mysql2 = require("mysql2");
 const router = express.Router();
 const {dbConfig, userTable} = require('../db.config')
-const {tokenManager} = require('../utils/utils')
+const {tokenManager} = require('../tokenManager')
 
 /* GET home page. */
 router.post("/login", async function (req, res) {
