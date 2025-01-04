@@ -37,7 +37,6 @@
 			</view>
 		</view>
 	</view>
-	<message-comp ref="messageRef" />
 </template>
 
 <script lang="uts" src="./index.uts"></script>
