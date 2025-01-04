@@ -1,48 +1,54 @@
-import successIcon from './image/success.png'
-import errorIcon from './image/error.png'
-import warnIcon from './image/warn.png'
+import successIcon from './image/success.png';
+import errorIcon from './image/error.png';
+import warnIcon from './image/warn.png';
 
 export default {
 	props: {
 		closeTime: {
 			type: Number,
-			default: 3
+			default: 3 // 默认关闭时间为3秒
 		}
 	},
 	data() {
 		return {
 			visible: false,
 			message: null,
-			icon: null
-		}
+			icon: null,
+			timer: null // 存储定时器ID
+		};
 	},
 	methods: {
-		success(value : string) {
-			this.message = value
-			this.visible = true
-			this.icon = successIcon
+		showMessage(value : string, icon : string) {
+			this.message = value;
+			this.icon = icon;
+			this.visible = true;
 
-			setTimeout(() => {
-				this.visible = false
-			}, this.closeTime * 1000)
+			// 清除之前的定时器（如果存在）
+			if (this.timer !== null) {
+				const timer = this.timer as number
+				clearTimeout(timer);
+			}
+
+			// 设置新的定时器
+			this.timer = setTimeout(() => {
+				this.visible = false;
+			}, this.closeTime * 1000);
+		},
+		success(value : string) {
+			this.showMessage(value, successIcon);
 		},
 		error(value : string) {
-			this.message = value
-			this.visible = true
-			this.icon = errorIcon
-
-			setTimeout(() => {
-				this.visible = false
-			}, this.closeTime * 1000)
+			this.showMessage(value, errorIcon);
 		},
 		warn(value : string) {
-			this.message = value
-			this.visible = true
-			this.icon = warnIcon
-
-			setTimeout(() => {
-				this.visible = false
-			}, this.closeTime * 1000)
+			this.showMessage(value, warnIcon);
+		}
+	},
+	beforeDestroy() {
+		// 组件销毁前清除定时器，防止内存泄漏
+		if (this.timer !== null) {
+			const timer = this.timer as number
+			clearTimeout(timer);
 		}
 	}
-}
+};
