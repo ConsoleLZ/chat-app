@@ -14,8 +14,8 @@ export default {
 	data() {
 		return {
 			errorColor,
-			account: null, // 账号
-			password: null, // 密码
+			account: 'test1', // 账号
+			password: '123456', // 密码
 			isLoading: false
 		}
 	},
@@ -46,7 +46,9 @@ export default {
 				password: this.password
 			}).then(res => {
 				const ok = res.data?.ok as boolean
+				const token = res.data?.token as string
 				if (ok) {
+					uni.setStorageSync('token', token)
 					uni.showToast({
 						title: '登录成功',
 						icon: 'success'
