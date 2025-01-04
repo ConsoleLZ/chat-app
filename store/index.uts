@@ -1,4 +1,4 @@
-import { networkRequest } from '@/utils/utils.uts'
+import { networkRequest } from '@/utils/http/index.uts'
 import { LoginResponse } from './types.uts'
 
 // 登录
