@@ -53,6 +53,11 @@ export default {
 						title: '登录成功',
 						icon: 'success'
 					})
+					setTimeout(() => {
+						uni.redirectTo({
+							url: '/pages/index/index'
+						})
+					}, 1500)
 				} else {
 					uni.showToast({
 						title: '账号或密码错误',
