@@ -14,11 +14,11 @@ router.post("/login", async function (req, res) {
   ); //sql语句
   if (users[0].length) {
     res.send({ 
-      ok: 1,
+      ok: true,
       token: tokenManager().encryptToken(users[0][0], '1h')
      });
   } else {
-    res.send({ ok: 0 });
+    res.send({ ok: false });
   }
 });
 module.exports = router;

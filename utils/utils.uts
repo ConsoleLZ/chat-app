@@ -62,7 +62,7 @@ export class networkRequest<T> {
 				fail(err) {
 					reject(err);
 				},
-			}); // 这里使用类型断言，确保类型正确
+			});
 		});
 	}
 }
