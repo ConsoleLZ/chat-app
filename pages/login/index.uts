@@ -78,6 +78,9 @@ export default {
 						title: message,
 						icon: 'error'
 					})
+
+					this.captchaInput = null
+					this.onChangeCode()
 				}
 			}).catch((error) => {
 				uni.showToast({
