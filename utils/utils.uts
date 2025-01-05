@@ -1,38 +1,43 @@
 // 生成图形验证码
-export const drawCaptcha = (dom : string) => {
+export const drawCaptcha = (dom : string) : Promise<string> => {
 	const w = 200
 	const h = 70
 	const fontSize = 45
+	let captcha = '';
 	function getRandomColor() {
 		return `rgb(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)})`;
 	}
-	uni.createCanvasContextAsync({
-		id: dom,
-		success: (context : CanvasContext) => {
-			const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-			let captcha = '';
-			// 随机颜色
-			const getRandomColor = () => {
-				return `rgb(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)})`;
-			}
-			const ctx = context.getContext('2d')!;
-			ctx.fillStyle = getRandomColor()
-			ctx.fillRect(0, 0, w, h)
 
-			// 绘制验证码字符
-			for (let i = 0; i < 6; i++) { // 生成6位验证码
-				const char = chars.charAt(Math.floor(Math.random() * chars.length));
-				captcha += char;
-
-				// 设置字体大小和样式
-				ctx.font = `${fontSize}px sans-serif`
-
-				// 设置文本颜色
+	return new Promise((resolve, reject) => {
+		uni.createCanvasContextAsync({
+			id: dom,
+			success: (context : CanvasContext) => {
+				console.log('验证码绘制成功')
+				const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+				const ctx = context.getContext('2d')!;
 				ctx.fillStyle = getRandomColor()
+				ctx.fillRect(0, 0, w, h)
 
-				// 绘制文本
-				ctx.fillText(char, i * 25 + 20, h / 2 + 20);
+				// 绘制验证码字符
+				for (let i = 0; i < 6; i++) { // 生成6位验证码
+					const char = chars.charAt(Math.floor(Math.random() * chars.length));
+					captcha += char;
+
+					// 设置字体大小和样式
+					ctx.font = `${fontSize}px sans-serif`
+
+					// 设置文本颜色
+					ctx.fillStyle = getRandomColor()
+
+					// 绘制文本
+					ctx.fillText(char, i * 25 + 20, h / 2 + 20);
+				}
+
+				resolve(captcha)
+			},
+			fail() {
+				reject(false)
 			}
-		}
+		})
 	})
 }

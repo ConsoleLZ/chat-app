@@ -15,7 +15,9 @@ export default {
 		return {
 			account: null, // 账号
 			password: null, // 密码
-			isLoading: false
+			isLoading: false,
+			captchaInput: null, // 输入的验证码
+			captcha: null, // 验证码
 		}
 	},
 	methods: {
@@ -26,7 +28,10 @@ export default {
 		},
 		// 更换验证码
 		onChangeCode() {
-			drawCaptcha('canvas')
+			drawCaptcha('canvas').then(res => {
+				this.captcha = res
+				console.log(this.captcha, 'this.captcha')
+			})
 		},
 		// 登录
 		onLogin() {
@@ -76,6 +81,9 @@ export default {
 		},
 	},
 	onReady() {
-		drawCaptcha('canvas')
+		drawCaptcha('canvas').then(res => {
+			this.captcha = res
+			console.log(this.captcha, 'this.captcha')
+		})
 	}
 }

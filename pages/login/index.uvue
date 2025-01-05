@@ -14,7 +14,7 @@
 				<image class="icon-input" mode="widthFix" src="/static/login/password.png"></image>
 			</template>
 		</fui-input-comp>
-		<fui-input-comp :marginTop="35" password placeholder="请输入验证码">
+		<fui-input-comp v-model="captchaInput" :marginTop="35" password placeholder="请输入验证码">
 			<template #left>
 				<image class="icon-input" mode="widthFix" src="/static/login/code.png"></image>
 			</template>
