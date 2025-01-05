@@ -155,7 +155,7 @@
 			},
 			value: {
 				type: [Object, String, Number],
-				default: ''
+				default: null
 			},
 			//保留属性
 			modelValue: {
@@ -437,7 +437,7 @@
 					if (event.detail.value != '') this.val = value;
 				})
 				//如果为空时返回0 ，当双向绑定会将输入框赋值0
-				const inputValue = event.detail.value != '' ? value : ''
+				const inputValue = event.detail.value != '' ? value : null
 				this.$emit('input', inputValue);
 				this.$emit('update:modelValue', inputValue)
 			},
@@ -454,8 +454,8 @@
 				if (this.disabled && !this.readonly) return;
 				this.setFocusOrBlur(false)
 				this.val = '';
-				this.$emit('input', '');
-				this.$emit('update:modelValue', '')
+				this.$emit('input', null);
+				this.$emit('update:modelValue', null)
 			},
 			fieldClick() {
 				this.$emit('onclick', this.name);
@@ -483,8 +483,8 @@
 			reset() {
 				this.setFocusOrBlur(false)
 				this.val = '';
-				this.$emit('input', '');
-				this.$emit('update:modelValue', '')
+				this.$emit('input', null);
+				this.$emit('update:modelValue', null)
 			},
 			getSubmitValue() : string {
 				return this.val
