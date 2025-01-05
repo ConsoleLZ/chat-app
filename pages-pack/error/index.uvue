@@ -1,0 +1,6 @@
+<template>
+	<view class="flex-center-row">
+		<image src="/static/error.png" mode="widthFix"></image>
+	</view>
+	<text style="font-size: 30rpx;text-align: center;" class="tips">服务器已崩溃...</text>
+</template>
