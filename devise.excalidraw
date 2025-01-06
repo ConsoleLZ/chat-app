@@ -5871,8 +5871,8 @@
     {
       "id": "tRvW6c4yVyS-fdI3I39k1",
       "type": "rectangle",
-      "x": -85.07142039707719,
-      "y": 2264.7619345528738,
+      "x": -78.07142039707719,
+      "y": 2259.7619345528738,
       "width": 137,
       "height": 88,
       "angle": 0,
@@ -5890,8 +5890,8 @@
         "type": 3
       },
       "seed": 1659730539,
-      "version": 282,
-      "versionNonce": 1569440107,
+      "version": 288,
+      "versionNonce": 1598948357,
       "isDeleted": false,
       "boundElements": [
         {
@@ -5899,15 +5899,15 @@
           "type": "text"
         }
       ],
-      "updated": 1736160141020,
+      "updated": 1736161750221,
       "link": null,
       "locked": false
     },
     {
       "id": "xQ3tln71Wy-vJ12V2ZRnO",
       "type": "text",
-      "x": -47.07142039707719,
-      "y": 2296.2619345528738,
+      "x": -40.07142039707719,
+      "y": 2291.2619345528738,
       "width": 61,
       "height": 25,
       "angle": 0,
@@ -5923,11 +5923,11 @@
       "index": "b0v",
       "roundness": null,
       "seed": 680392133,
-      "version": 256,
-      "versionNonce": 621173771,
+      "version": 262,
+      "versionNonce": 89733989,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1736160141020,
+      "updated": 1736161750221,
       "link": null,
       "locked": false,
       "text": "实时性",
@@ -5943,8 +5943,8 @@
     {
       "id": "zCr7wdk9KXphG9gksQU0m",
       "type": "rectangle",
-      "x": -82.07142039707719,
-      "y": 2402.7619345528738,
+      "x": -79.07142039707719,
+      "y": 2401.7619345528738,
       "width": 137,
       "height": 88,
       "angle": 0,
@@ -5962,8 +5962,8 @@
         "type": 3
       },
       "seed": 1159149259,
-      "version": 312,
-      "versionNonce": 1670685355,
+      "version": 315,
+      "versionNonce": 1114296357,
       "isDeleted": false,
       "boundElements": [
         {
@@ -5971,15 +5971,15 @@
           "type": "text"
         }
       ],
-      "updated": 1736160141020,
+      "updated": 1736161749171,
       "link": null,
       "locked": false
     },
     {
       "id": "ayc4aI0Cfm2xoyEWNqjVu",
       "type": "text",
-      "x": -44.07142039707719,
-      "y": 2434.2619345528738,
+      "x": -41.07142039707719,
+      "y": 2433.2619345528738,
       "width": 61,
       "height": 25,
       "angle": 0,
@@ -5995,11 +5995,11 @@
       "index": "b0x",
       "roundness": null,
       "seed": 607432549,
-      "version": 284,
-      "versionNonce": 1373705547,
+      "version": 287,
+      "versionNonce": 1598522245,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1736160141020,
+      "updated": 1736161749171,
       "link": null,
       "locked": false,
       "text": "一致性",
@@ -6015,8 +6015,8 @@
     {
       "id": "xE7HTat8Uui_LGUqAdBdN",
       "type": "rectangle",
-      "x": -79.07142039707719,
-      "y": 2553.7619345528738,
+      "x": -73.07142039707719,
+      "y": 2554.7619345528738,
       "width": 137,
       "height": 88,
       "angle": 0,
@@ -6034,8 +6034,8 @@
         "type": 3
       },
       "seed": 1015092523,
-      "version": 357,
-      "versionNonce": 1257682507,
+      "version": 366,
+      "versionNonce": 355929931,
       "isDeleted": false,
       "boundElements": [
         {
@@ -6043,15 +6043,15 @@
           "type": "text"
         }
       ],
-      "updated": 1736160376196,
+      "updated": 1736161743591,
       "link": null,
       "locked": false
     },
     {
       "id": "Lk9bvRX8fDcCY_KrJmRcs",
       "type": "text",
-      "x": -41.57142039707719,
-      "y": 2585.2619345528738,
+      "x": -35.57142039707719,
+      "y": 2586.2619345528738,
       "width": 62,
       "height": 25,
       "angle": 0,
@@ -6067,11 +6067,11 @@
       "index": "b0xV",
       "roundness": null,
       "seed": 396781317,
-      "version": 338,
-      "versionNonce": 385856747,
+      "version": 347,
+      "versionNonce": 1238167019,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1736160376196,
+      "updated": 1736161743591,
       "link": null,
       "locked": false,
       "text": "安全性",
@@ -6087,8 +6087,8 @@
     {
       "id": "wB6u8oc8BKNKHAOiYFtSj",
       "type": "rectangle",
-      "x": -76.07142039707719,
-      "y": 2711.7619345528738,
+      "x": -71.07142039707719,
+      "y": 2713.7619345528738,
       "width": 137,
       "height": 88,
       "angle": 0,
@@ -6106,8 +6106,8 @@
         "type": 3
       },
       "seed": 431385099,
-      "version": 400,
-      "versionNonce": 778832165,
+      "version": 411,
+      "versionNonce": 1117526149,
       "isDeleted": false,
       "boundElements": [
         {
@@ -6115,15 +6115,15 @@
           "type": "text"
         }
       ],
-      "updated": 1736160437598,
+      "updated": 1736161747588,
       "link": null,
       "locked": false
     },
     {
       "id": "eZm4EUQMjaigzXGeeD_RS",
       "type": "text",
-      "x": -38.07142039707719,
-      "y": 2743.2619345528738,
+      "x": -33.07142039707719,
+      "y": 2745.2619345528738,
       "width": 61,
       "height": 25,
       "angle": 0,
@@ -6139,11 +6139,11 @@
       "index": "b0xl",
       "roundness": null,
       "seed": 1388662821,
-      "version": 381,
-      "versionNonce": 146381957,
+      "version": 392,
+      "versionNonce": 1861271525,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1736160437598,
+      "updated": 1736161747588,
       "link": null,
       "locked": false,
       "text": "完整性",
@@ -6213,20 +6213,20 @@
       "index": "b0z",
       "roundness": null,
       "seed": 736599883,
-      "version": 121,
-      "versionNonce": 99212363,
+      "version": 129,
+      "versionNonce": 1442319435,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1736160297429,
+      "updated": 1736161454614,
       "link": null,
       "locked": false,
-      "text": "1. 单聊\n2. 群聊\n3. 文件发送\n4. 语音和视频通话（暂定）\n5. 表情包\n6. 聊天记录的查找\n7. 历史记录存储（保证切换设备后能够正确获取到聊天记录）\n8. app为关闭状态，在手机消息中可以感知用户发送的消息\n9. 离线消息的存储与推送",
+      "text": "1. 单聊\n2. 群聊\n3. 文件发送\n4. 语音和视频通话（暂定）\n5. 表情包\n6. 聊天记录的查找\n7. 历史记录存储（保证切换设备后能够正确获取到聊天记录）\n8. app为关闭状态，在手机消息中可以收到用户发送的消息\n9. 离线消息的存储与推送",
       "fontSize": 20,
       "fontFamily": 5,
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "1. 单聊\n2. 群聊\n3. 文件发送\n4. 语音和视频通话（暂定）\n5. 表情包\n6. 聊天记录的查找\n7. 历史记录存储（保证切换设备后能够正确获取到聊天记录）\n8. app为关闭状态，在手机消息中可以感知用户发送的消息\n9. 离线消息的存储与推送",
+      "originalText": "1. 单聊\n2. 群聊\n3. 文件发送\n4. 语音和视频通话（暂定）\n5. 表情包\n6. 聊天记录的查找\n7. 历史记录存储（保证切换设备后能够正确获取到聊天记录）\n8. app为关闭状态，在手机消息中可以收到用户发送的消息\n9. 离线消息的存储与推送",
       "autoResize": true,
       "lineHeight": 1.25
     },
