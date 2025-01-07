@@ -14,3 +14,37 @@
 		font-size: 36rpx;
 	}
 }
+.main {
+	padding: 0 50rpx;
+}
+.search {
+	height: 90rpx;
+	background-color: #f6f6f6;
+	font-size: 30rpx;
+	border-radius: 10rpx;
+	padding: 0 20rpx;
+	margin-bottom: 25rpx;
+}
+.message-list {
+	.message-list-item {
+		border-bottom: 1px solid $color4;
+		padding: 16rpx 0;
+	}
+	.avatar {
+		$size: 90rpx;
+		width: $size;
+		height: $size;
+		border-radius: $size;
+		background-color: $color2;
+		margin-right: 15rpx
+	}
+	.title {
+		font-size: 32rpx;
+		font-weight: 700;
+		margin-bottom: 12rpx;
+	}
+	.message {
+		font-size: 24rpx;
+		color: $color1;
+	}
+}
