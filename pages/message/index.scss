@@ -4,7 +4,7 @@
     padding: 50rpx;
 	margin-top: 50rpx;
 	.image {
-		$size: 80rpx;
+		$size: 70rpx;
 		width: $size;
 		height: $size;
 		border-radius: $size;
@@ -12,6 +12,5 @@
 	}
 	.title {
 		font-size: 36rpx;
-		font-weight: 700;
 	}
 }

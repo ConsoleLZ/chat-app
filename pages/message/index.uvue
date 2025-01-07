@@ -6,7 +6,7 @@
 			</image>
 		</view>
 		<text class="title">消息</text>
-		<image style="width: 42rpx;" src="/static/message/add.png" mode="widthFix"></image>
+		<image style="width: 36rpx;" src="/static/message/add.png" mode="widthFix"></image>
 	</view>
 </template>
 
