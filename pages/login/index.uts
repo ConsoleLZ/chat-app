@@ -67,8 +67,8 @@ export default {
 						icon: 'success'
 					})
 					setTimeout(() => {
-						uni.redirectTo({
-							url: '/pages/index/index'
+						uni.switchTab({
+							url: 'pages/message/index'
 						})
 					}, 1500)
 				} else {

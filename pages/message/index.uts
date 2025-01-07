@@ -4,4 +4,10 @@ export default {
 
 		}
 	},
+	onShow() {
+		uni.setTabBarBadge({ //显示红点 
+			index: 0,
+			text: '5'
+		})
+	}
 }

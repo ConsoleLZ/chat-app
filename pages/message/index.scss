@@ -50,4 +50,18 @@
 		font-size: 24rpx;
 		color: #aaaaaa;
 	}
+	.point {
+		$size: 35rpx;
+		width: $size;
+		height: $size;
+		border-radius: $size;
+		background-color: #f63e1f;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		.point-text {
+			font-size: 24rpx;
+			color: #ffffff;
+		}
+	}
 }

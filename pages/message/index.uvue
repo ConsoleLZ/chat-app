@@ -22,7 +22,12 @@
 						<text class="title">赵丽颖</text>
 						<text class="time">11:34</text>
 					</view>
-					<text class="message">今天出来吃饭吗~</text>
+					<view style="margin-bottom: 12rpx;" class="flex-between-row">
+						<text class="message">今天出来吃饭吗~</text>
+						<view class="point">
+							<text class="point-text">9</text>
+						</view>
+					</view>
 				</view>
 			</view>
 		</view>
