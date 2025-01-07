@@ -1,27 +1,21 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path": "pages/index/index",
+			"path": "pages/message/index",
 			"style": {
-				"navigationBarTitleText": "首页",
-				"navigationBarBackgroundColor": "#165af7",
-				"navigationBarTextStyle": "#ffffff"
+				"navigationStyle": "custom"
 			}
 		},
 		{
 			"path": "pages/friend-list/index",
 			"style": {
-				"navigationBarTitleText": "联系人列表",
-				"navigationBarBackgroundColor": "#165af7",
-				"navigationBarTextStyle": "#ffffff"
+				"navigationBarTitleText": "联系人列表"
 			}
 		},
 		{
 			"path": "pages/about/index",
 			"style": {
-				"navigationBarTitleText": "我的",
-				"navigationBarBackgroundColor": "#165af7",
-				"navigationBarTextStyle": "#ffffff"
+				"navigationBarTitleText": "个人中心"
 			}
 		},
 		{
@@ -50,10 +44,8 @@
 		}
 	],
 	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "chat-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+		"navigationBarBackgroundColor": "#ffffff",
+		"navigationBarTextStyle": "black"
 	},
 	"tabBar": {
 		"color": "#7A7E83",
@@ -61,7 +53,7 @@
 		"borderStyle": "white",
 		"backgroundColor": "#f9f9f9",
 		"list": [{
-				"pagePath": "pages/index/index",
+				"pagePath": "pages/message/index",
 				"iconPath": "/static/tabbar/message.png",
 				"selectedIconPath": "/static/tabbar/message-select.png",
 				"text": "消息"
