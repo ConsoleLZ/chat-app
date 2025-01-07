@@ -27,7 +27,7 @@
 }
 .message-list {
 	.message-list-item {
-		border-bottom: 1px solid $color4;
+		border-bottom: 1px solid #f6f6f6;
 		padding: 16rpx 0;
 	}
 	.avatar {
@@ -44,10 +44,10 @@
 	}
 	.time {
 		font-size: 20rpx;
-		color: $color1;
+		color: #aaaaaa;
 	}
 	.message {
 		font-size: 24rpx;
-		color: $color1;
+		color: #aaaaaa;
 	}
 }
