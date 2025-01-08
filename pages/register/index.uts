@@ -50,9 +50,28 @@ export default {
 				account: this.account,
 				password: this.password
 			}).then(res => {
-				console.log(res)
+				const ok = res.data?.ok as boolean
+				if (ok) {
+					uni.showToast({
+						title: '注册成功',
+						icon: 'success'
+					})
+					setTimeout(() => {
+						uni.redirectTo({
+							url: '/pages/login/index'
+						})
+					}, 1500)
+				} else {
+					uni.showToast({
+						title: '注册失败',
+						icon: 'error'
+					})
+				}
 			}).catch(error => {
-				console.log(error)
+				uni.showToast({
+					title: '服务器错误',
+					icon: 'error'
+				})
 			}).finally(() => {
 				this.isLoading = false
 			})

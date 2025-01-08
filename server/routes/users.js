@@ -3,16 +3,17 @@ const mysql2 = require("mysql2");
 const router = express.Router();
 const { dbConfig, userTable } = require("../db.config");
 const { tokenManager } = require("../tokenManager");
+const dayjs = require("dayjs");
 
 // 登录
 router.post("/login", async function (req, res) {
-  if(!req.body.account || !req.body.password){
+  if (!req.body.account || !req.body.password) {
     res.send({
-      ok:false,
-      message: '账户或者密码不能为空'
-    })
+      ok: false,
+      message: "账户或者密码不能为空",
+    });
 
-    return
+    return;
   }
   // 创建连接池
   try {
@@ -43,14 +44,14 @@ router.post("/login", async function (req, res) {
 
 // 注册
 router.post("/register", async function (req, res) {
-  const {name, account, password} = req.body
-  if(!name || !account || !password){
+  const { name, account, password } = req.body;
+  if (!name || !account || !password) {
     res.send({
-      ok:false,
-      message: '参数不能为空'
-    })
+      ok: false,
+      message: "参数不能为空",
+    });
 
-    return
+    return;
   }
 
   // 创建连接池
@@ -58,12 +59,14 @@ router.post("/register", async function (req, res) {
     const config = dbConfig();
     const promisePool = mysql2.createPool(config).promise();
     let sqlResult = await promisePool.query(
-      `INSERT INTO ${userTable} (name, account, password) VALUES ('${name}', '${account}', '${password}');`
+      `INSERT INTO ${userTable} (name, account, password, avatar, createTime) VALUES ('${name}', '${account}', '${password}', 'https://pic1.imgdb.cn/item/677e34bed0e0a243d4f1d025.png', '${dayjs().format(
+        "YYYY-MM-DD HH:mm:ss"
+      )}');`
     );
     if (sqlResult.length) {
       res.send({
         ok: true,
-        message: '注册成功',
+        message: "注册成功",
       });
     } else {
       res.send({
