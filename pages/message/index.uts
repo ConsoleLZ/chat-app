@@ -1,11 +1,13 @@
+import { state } from '@/global.uts'
+
 export default {
 	data() {
 		return {
-
+			isLogin: state.isLogin
 		}
 	},
 	onShow() {
-		uni.setTabBarBadge({ //显示红点 
+		uni.setTabBarBadge({
 			index: 0,
 			text: '5'
 		})

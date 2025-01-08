@@ -1,31 +1,33 @@
 <template>
-	<view class="navbar flex-row">
-		<view class="image">
-			<image style="width: 100%;" src="https://static.zcool.cn/git_z/z/site/favicon.ico?version=1618914637608"
-				mode="widthFix">
-			</image>
+	<view v-if="isLogin">
+		<view class="navbar flex-row">
+			<view class="image">
+				<image style="width: 100%;" src="https://static.zcool.cn/git_z/z/site/favicon.ico?version=1618914637608"
+					mode="widthFix">
+				</image>
+			</view>
+			<text class="title">消息</text>
+			<image style="width: 36rpx;" src="/static/message/add.png" mode="widthFix"></image>
 		</view>
-		<text class="title">消息</text>
-		<image style="width: 36rpx;" src="/static/message/add.png" mode="widthFix"></image>
-	</view>
-	<view class="main">
-		<input class="search" type="text" placeholder="搜索" />
-		<view class="message-list">
-			<view class="flex-row message-list-item">
-				<view class="avatar">
-					<image style="width: 100%;"
-						src="https://ts1.cn.mm.bing.net/th?id=OIP-C.QNid3RU3iL-ZwGMLdAhjbgHaKX&w=211&h=295&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2"
-						mode="widthFix"></image>
-				</view>
-				<view style="flex: 1;">
-					<view style="margin-bottom: 12rpx;" class="flex-between-row">
-						<text class="title">赵丽颖</text>
-						<text class="time">11:34</text>
+		<view class="main">
+			<input class="search" type="text" placeholder="搜索" />
+			<view class="message-list">
+				<view class="flex-row message-list-item">
+					<view class="avatar">
+						<image style="width: 100%;"
+							src="https://ts1.cn.mm.bing.net/th?id=OIP-C.QNid3RU3iL-ZwGMLdAhjbgHaKX&w=211&h=295&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2"
+							mode="widthFix"></image>
 					</view>
-					<view class="flex-between-row">
-						<text class="message">今天出来吃饭吗~</text>
-						<view class="point">
-							<text class="point-text">9</text>
+					<view style="flex: 1;">
+						<view style="margin-bottom: 12rpx;" class="flex-between-row">
+							<text class="title">赵丽颖</text>
+							<text class="time">11:34</text>
+						</view>
+						<view class="flex-between-row">
+							<text class="message">今天出来吃饭吗~</text>
+							<view class="point">
+								<text class="point-text">9</text>
+							</view>
 						</view>
 					</view>
 				</view>

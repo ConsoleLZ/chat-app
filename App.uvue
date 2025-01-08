@@ -22,7 +22,7 @@
 						url: '/pages/login/index'
 					})
 				}
-			}).catch(() => {
+			}).catch((error) => {
 				uni.redirectTo({
 					url: '/pages-pack/error/index'
 				})
