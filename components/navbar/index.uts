@@ -22,8 +22,10 @@ export default {
 		onCloseDialog() {
 			const dialogElement = uni.getElementById('dialog')!
 			const dialogBoxElement = uni.getElementById('dialog-box')!
-			dialogElement.style.setProperty('display', 'none')
 			dialogBoxElement.style.setProperty('transform', 'scale(0)')
+			setTimeout(() => {
+				dialogElement.style.setProperty('display', 'none')
+			}, 200)
 		},
 		// 添加好友
 		onAdd() {

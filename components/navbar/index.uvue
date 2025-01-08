@@ -7,7 +7,7 @@
 		<text class="title">{{title}}</text>
 		<image @click="onShowDialog" style="width: 36rpx;" src="/static/message/add.png" mode="widthFix"></image>
 	</view>
-	<view @click="onCloseDialog" id="dialog" class="dialog">
+	<view @click.stop="onCloseDialog" id="dialog" class="dialog">
 		<view id="dialog-box" class="dialog-box flex-center-column">
 			<view @click="onAdd" class="flex-center-row">
 				<image style="width: 36rpx;margin-right: 10rpx;" src="@/static/add-friend.png" mode="widthFix"></image>
