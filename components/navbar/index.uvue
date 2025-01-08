@@ -5,11 +5,11 @@
 			</image>
 		</view>
 		<text class="title">{{title}}</text>
-		<image style="width: 36rpx;" src="/static/message/add.png" mode="widthFix"></image>
-		<view class="dialog flex-center-column">
-			<view class="flex-center-row">
+		<image @click="onShowDialog" style="width: 36rpx;" src="/static/message/add.png" mode="widthFix"></image>
+		<view id="dialog" class="dialog flex-center-column">
+			<view @click="onAdd" class="flex-center-row">
 				<image style="width: 36rpx;margin-right: 10rpx;" src="@/static/add.png" mode="widthFix"></image>
-				<text style="font-size: 30rpx;">加好友/群</text>
+				<text style="font-size: 30rpx;color: #ffffff;">加好友/群</text>
 			</view>
 		</view>
 	</view>

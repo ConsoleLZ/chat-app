@@ -10,6 +10,17 @@ export default {
 			avatar: null
 		}
 	},
+	methods: {
+		// 显示弹框
+		onShowDialog() {
+			const dialogElement = uni.getElementById('dialog')!
+			dialogElement.style.setProperty('transform', 'scale(1)')
+		},
+		// 添加好友
+		onAdd() {
+			console.log('123')
+		}
+	},
 	onLoad() {
 		this.avatar = (uni.getStorageSync('userInfo') as UTSJSONObject)?.avatar
 	}
