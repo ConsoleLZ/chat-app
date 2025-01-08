@@ -14,7 +14,16 @@ export default {
 		// 显示弹框
 		onShowDialog() {
 			const dialogElement = uni.getElementById('dialog')!
-			dialogElement.style.setProperty('transform', 'scale(1)')
+			const dialogBoxElement = uni.getElementById('dialog-box')!
+			dialogElement.style.setProperty('display', 'flex')
+			dialogBoxElement.style.setProperty('transform', 'scale(1)')
+		},
+		// 关闭弹框
+		onCloseDialog() {
+			const dialogElement = uni.getElementById('dialog')!
+			const dialogBoxElement = uni.getElementById('dialog-box')!
+			dialogElement.style.setProperty('display', 'none')
+			dialogBoxElement.style.setProperty('transform', 'scale(0)')
 		},
 		// 添加好友
 		onAdd() {
@@ -23,5 +32,12 @@ export default {
 	},
 	onLoad() {
 		this.avatar = (uni.getStorageSync('userInfo') as UTSJSONObject)?.avatar
+	},
+	mounted() {
+		const dialogElement = uni.getElementById('dialog')!
+		const windowInfo = uni.getWindowInfo()
+
+		dialogElement.style.setProperty('width', `${windowInfo.screenWidth}px`)
+		dialogElement.style.setProperty('height', `${windowInfo.screenHeight}px`)
 	}
 }
