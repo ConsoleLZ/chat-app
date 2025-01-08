@@ -13,8 +13,8 @@ export default {
 	},
 	data() {
 		return {
-			account: null, // 账号
-			password: null, // 密码
+			account: 'test1', // 账号
+			password: '123456', // 密码
 			isLoading: false,
 			captchaInput: null, // 输入的验证码
 			captcha: null, // 验证码
@@ -35,23 +35,23 @@ export default {
 		},
 		// 登录
 		onLogin() {
-			if (this.account === null || this.password === null || this.captchaInput === null) {
-				uni.showToast({
-					title: '账号、密码和验证码都不能为空',
-					icon: 'error'
-				})
-				return
-			}
+			// if (this.account === null || this.password === null || this.captchaInput === null) {
+			// 	uni.showToast({
+			// 		title: '账号、密码和验证码都不能为空',
+			// 		icon: 'error'
+			// 	})
+			// 	return
+			// }
 
-			if (this.captchaInput !== this.captcha) {
-				uni.showToast({
-					title: '验证码错误',
-					icon: 'error'
-				})
-				this.captchaInput = null
-				this.onChangeCode()
-				return
-			}
+			// if (this.captchaInput !== this.captcha) {
+			// 	uni.showToast({
+			// 		title: '验证码错误',
+			// 		icon: 'error'
+			// 	})
+			// 	this.captchaInput = null
+			// 	this.onChangeCode()
+			// 	return
+			// }
 			this.isLoading = true
 
 			PostLoginStore.request({
