@@ -22,16 +22,20 @@
 		z-index: 999;
 		display: none;
 		.dialog-box {
-			width: 260rpx;
-			padding: 20rpx 40rpx;
+			width: 280rpx;
+			padding: 12rpx 0;
 			min-height: 180rpx;
 			background-color: #ffffff;
-			border-radius: 10rpx;
+			border-radius: 14rpx;
 			position: absolute;
 			right: 60rpx;
 			top: 180rpx;
 			transform: scale(0);
 			transition: transform 200ms;
 			transform-origin: 100% 0%;
+			.item {
+				width: 100%;
+				padding: 22rpx 0;
+			}
 		}
 }

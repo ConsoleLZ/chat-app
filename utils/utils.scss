@@ -12,6 +12,11 @@
 	flex-direction: row;
 	align-items: center;
 }
+.flex-column{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
 .flex-center-row {
 	display: flex;
 	flex-direction: row;
@@ -33,4 +38,7 @@
 
 .margin-right-10 {
 	margin-right: 10rpx;
+}
+.hover-class {
+	background-color: #dddddd;
 }
