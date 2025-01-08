@@ -1,0 +1,14 @@
+<template>
+	<view class="navbar flex-row">
+		<view class="image">
+			<image style="width: 100%;" src="https://static.zcool.cn/git_z/z/site/favicon.ico?version=1618914637608"
+				mode="widthFix">
+			</image>
+		</view>
+		<text class="title">{{title}}</text>
+		<image style="width: 36rpx;" src="/static/message/add.png" mode="widthFix"></image>
+	</view>
+</template>
+
+<script lang="uts" src="./index.uts"></script>
+<style lang="scss" src="./index.scss" scoped></style>

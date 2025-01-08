@@ -1,13 +1,5 @@
 <template>
-	<view class="navbar flex-row">
-		<view class="image">
-			<image style="width: 100%;" src="https://static.zcool.cn/git_z/z/site/favicon.ico?version=1618914637608"
-				mode="widthFix">
-			</image>
-		</view>
-		<text class="title">消息</text>
-		<image style="width: 36rpx;" src="/static/message/add.png" mode="widthFix"></image>
-	</view>
+	<navbar-comp title="消息" />
 	<view class="main">
 		<input class="search" type="text" placeholder="搜索" />
 		<view class="message-list">

@@ -1,5 +1,8 @@
 <template>
+	<navbar-comp title="联系人" />
 	<view>
 		好友
 	</view>
 </template>
+
+<script lang="uts" src="./index.uts"></script>

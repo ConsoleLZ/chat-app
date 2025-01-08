@@ -3,16 +3,5 @@ import NavbarComp from '@/components/navbar/index.uvue'
 export default {
 	components: {
 		NavbarComp
-	},
-	data() {
-		return {
-
-		}
-	},
-	onShow() {
-		uni.setTabBarBadge({
-			index: 0,
-			text: '5'
-		})
 	}
 }

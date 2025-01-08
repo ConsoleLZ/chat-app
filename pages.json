@@ -9,7 +9,7 @@
 		{
 			"path": "pages/friend-list/index",
 			"style": {
-				"navigationBarTitleText": "联系人列表"
+				"navigationStyle": "custom"
 			}
 		},
 		{
