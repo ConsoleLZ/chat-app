@@ -3,5 +3,8 @@ import { networkRequest } from '@/utils/http/index.uts'
 // 登录
 export const PostLoginStore = new networkRequest<UTSJSONObject>('/api/login', 'POST')
 
+// 注册
+export const PostRegisterStore = new networkRequest<UTSJSONObject>('/api/register', 'POST')
+
 // token校验
 export const PostVerifiedStore = new networkRequest<UTSJSONObject>('/verified', 'POST')

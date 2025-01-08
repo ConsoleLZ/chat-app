@@ -1,16 +1,16 @@
 <template>
 	<view class="box">
-		<fui-input-comp placeholder="请输入您的名字">
+		<fui-input-comp v-model="name" placeholder="请输入您的昵称">
 			<template #left>
 				<image class="icon-input" mode="widthFix" src="/static/login/name.png"></image>
 			</template>
 		</fui-input-comp>
-		<fui-input-comp :marginTop="35" placeholder="请输入账号">
+		<fui-input-comp v-model="account" :marginTop="35" placeholder="请输入账号">
 			<template #left>
 				<image class="icon-input" mode="widthFix" src="/static/login/user.png"></image>
 			</template>
 		</fui-input-comp>
-		<fui-input-comp :marginTop="35" password placeholder="请输入密码">
+		<fui-input-comp v-model="password" :marginTop="35" password placeholder="请输入密码">
 			<template #left>
 				<image class="icon-input" mode="widthFix" src="/static/login/password.png"></image>
 			</template>
@@ -29,7 +29,7 @@
 			</template>
 		</fui-input-comp>
 		<view class="register-btn">
-			<fui-button text="注册" :loading="isLoading" :disabled="isLoading"></fui-button>
+			<fui-button @click="onRegister" text="注册" :loading="isLoading" :disabled="isLoading"></fui-button>
 		</view>
 	</view>
 </template>

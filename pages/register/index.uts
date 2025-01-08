@@ -1,6 +1,7 @@
 import FuiInputComp from '@/components/fui-input/fui-input.uvue'
 import { drawCaptcha } from '@/utils/utils.uts'
 import FuiButtonComp from "@/components/fui-button/fui-button.uvue"
+import { PostRegisterStore } from '@/store/index.uts'
 
 export default {
 	components: {
@@ -9,13 +10,52 @@ export default {
 	},
 	data() {
 		return {
-			isLoading: false
+			isLoading: false,
+			name: null,
+			account: null,
+			password: null
 		}
 	},
 	methods: {
 		// 更换验证码
 		onChangeCode() {
 			drawCaptcha('canvas')
+		},
+		// 注册
+		onRegister() {
+			if (this.name === null) {
+				uni.showToast({
+					title: '昵称不能为空',
+					icon: 'error'
+				})
+				return
+			}
+			if (this.account === null) {
+				uni.showToast({
+					title: '账号不能为空',
+					icon: 'error'
+				})
+				return
+			}
+			if (this.password === null) {
+				uni.showToast({
+					title: '密码不能为空',
+					icon: 'error'
+				})
+				return
+			}
+			this.isLoading = true
+			PostRegisterStore.request({
+				name: this.name,
+				account: this.account,
+				password: this.password
+			}).then(res => {
+				console.log(res)
+			}).catch(error => {
+				console.log(error)
+			}).finally(() => {
+				this.isLoading = false
+			})
 		}
 	},
 	onReady() {
