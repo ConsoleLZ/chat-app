@@ -52,6 +52,7 @@
 		"selectedColor": "#165af7",
 		"borderStyle": "white",
 		"backgroundColor": "#f9f9f9",
+		"redDotColor": "#165af7",
 		"list": [{
 				"pagePath": "pages/message/index",
 				"iconPath": "/static/tabbar/message.png",
