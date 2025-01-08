@@ -4,5 +4,13 @@ export default {
 			type: String,
 			default: null
 		}
+	},
+	data() {
+		return {
+			avatar: null
+		}
+	},
+	onLoad() {
+		this.avatar = (uni.getStorageSync('userInfo') as UTSJSONObject)?.avatar
 	}
 }

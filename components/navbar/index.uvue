@@ -1,8 +1,7 @@
 <template>
 	<view class="navbar flex-row">
 		<view class="image">
-			<image style="width: 100%;" src="https://static.zcool.cn/git_z/z/site/favicon.ico?version=1618914637608"
-				mode="widthFix">
+			<image style="width: 100%;" :src="avatar" mode="widthFix">
 			</image>
 		</view>
 		<text class="title">{{title}}</text>
