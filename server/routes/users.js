@@ -25,7 +25,12 @@ router.post("/login", async function (req, res) {
     if (users[0].length) {
       res.send({
         ok: true,
-        token: tokenManager().encryptToken(users[0][0], "24h"),
+        token: tokenManager().encryptToken(users[0][0], "10s"),
+        userInfo: {
+          id: users[0][0].id,
+          name: users[0][0].name,
+          avatar: users[0][0].avatar
+        }
       });
     } else {
       res.send({

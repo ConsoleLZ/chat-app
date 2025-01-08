@@ -61,7 +61,9 @@ export default {
 				const ok = res.data?.ok as boolean
 				if (ok) {
 					const token = res.data?.token as string
+					const userInfo = res.data?.userInfo as any
 					uni.setStorageSync('token', token)
+					uni.setStorageSync('userInfo', userInfo)
 					uni.showToast({
 						title: '登录成功',
 						icon: 'success'
