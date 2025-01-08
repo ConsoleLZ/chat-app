@@ -1,8 +1,9 @@
 <template>
 	<navbar-comp title="联系人" />
-	<view>
-		好友
+	<view class="main">
+		<input class="search" type="text" placeholder="搜索" />
 	</view>
 </template>
 
 <script lang="uts" src="./index.uts"></script>
+<style lang="scss" src="./index.scss" scoped></style>
