@@ -6,6 +6,7 @@
 		</view>
 		<text class="title">{{title}}</text>
 		<image style="width: 36rpx;" src="/static/message/add.png" mode="widthFix"></image>
+		<view class="dialog"></view>
 	</view>
 </template>
 

@@ -3,6 +3,9 @@
     height: 160rpx;
     padding: 50rpx;
 	margin-top: 50rpx;
+	position: relative;
+	z-index: 999;
+	overflow: visible;
 	.image {
 		$size: 70rpx;
 		width: $size;
@@ -12,5 +15,16 @@
 	}
 	.title {
 		font-size: 36rpx;
+	}
+	.dialog {
+		width: 260rpx;
+		padding: 20rpx 40rpx;
+		min-height: 180rpx;
+		background-color: #ffffff;
+		box-shadow: 0 0 20rpx rgba(0, 0, 0, 0.12);
+		border-radius: 10rpx;
+		position: absolute;
+		right: 60rpx;
+		bottom: -150rpx;
 	}
 }
