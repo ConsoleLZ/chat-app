@@ -6952,16 +6952,20 @@
         "type": 3
       },
       "seed": 486025053,
-      "version": 887,
-      "versionNonce": 2107046099,
+      "version": 888,
+      "versionNonce": 1447510141,
       "isDeleted": false,
       "boundElements": [
         {
           "id": "huohPA1IzoVAcAAiPVaV1",
           "type": "text"
+        },
+        {
+          "id": "QFbTCLmDN6n6P9tu4lpfk",
+          "type": "arrow"
         }
       ],
-      "updated": 1736319612527,
+      "updated": 1736320606256,
       "link": null,
       "locked": false
     },
@@ -8319,9 +8323,9 @@
     {
       "id": "QFbTCLmDN6n6P9tu4lpfk",
       "type": "arrow",
-      "x": -197.07142039707531,
+      "x": -197.07142039707554,
       "y": 3534.7619345528738,
-      "width": 467.8067282460501,
+      "width": 691.4017069096808,
       "height": 508,
       "angle": 0,
       "strokeColor": "#1e1e1e",
@@ -8338,8 +8342,8 @@
         "type": 2
       },
       "seed": 1424692445,
-      "version": 777,
-      "versionNonce": 1658129971,
+      "version": 970,
+      "versionNonce": 1835745651,
       "isDeleted": false,
       "boundElements": [
         {
@@ -8347,7 +8351,7 @@
           "id": "7InJ9GEgji0VRLRonMLHD"
         }
       ],
-      "updated": 1736319625347,
+      "updated": 1736320611951,
       "link": null,
       "locked": false,
       "points": [
@@ -8356,24 +8360,24 @@
           0
         ],
         [
-          299.9999999999981,
-          186
+          291.99999999999835,
+          211
         ],
         [
-          467.8067282460501,
+          691.4017069096808,
           508
         ]
       ],
       "lastCommittedPoint": null,
       "startBinding": {
         "elementId": "JvhKsc36h5wIilY0rN6GP",
-        "focus": 0.5018858108986689,
+        "focus": 0.4581691390373068,
         "gap": 2,
         "fixedPoint": null
       },
       "endBinding": {
-        "elementId": "jDS2gaS9nZt_XT4EI5Um0",
-        "focus": 0.18969017570206131,
+        "elementId": "W5zPUDWQVfFvryDFH4-n6",
+        "focus": 0.3620537964170373,
         "gap": 1,
         "fixedPoint": null
       },
