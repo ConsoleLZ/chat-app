@@ -18,7 +18,7 @@ export default {
 				mask: true
 			})
 			PostSearchUsersStore.request({
-				account: this.inputValue
+				searchValue: this.inputValue
 			}).then(res => {
 				this.$emit('success', res.data)
 			}).catch(error => {

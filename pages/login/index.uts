@@ -13,7 +13,7 @@ export default {
 	},
 	data() {
 		return {
-			account: 'test1', // 账号
+			account: 'admin', // 账号
 			password: '123456', // 密码
 			isLoading: false,
 			captchaInput: null, // 输入的验证码
