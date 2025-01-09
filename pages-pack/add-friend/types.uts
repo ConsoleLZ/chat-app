@@ -1,6 +1,0 @@
-export type UserListModel {
-	id : number
-	name : string
-	avatar : string
-	account : string
-}

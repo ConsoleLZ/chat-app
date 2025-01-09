@@ -1,5 +1,4 @@
 import NavbarComp from './comps/navbar/index.uvue'
-import { UserListModel } from './types.uts'
 
 export default {
 	components: {
@@ -7,16 +6,15 @@ export default {
 	},
 	data() {
 		return {
-			userList: [] as UserListModel[]
+			userList: [] as UTSJSONObject[]
 		}
 	},
 	methods: {
 		success(value : UTSJSONObject) {
 			const ok = value.ok as boolean
 			if (ok) {
-				const userList = value.users as UserListModel[]
+				const userList = value.users as UTSJSONObject[]
 				this.userList = userList
-				console.log(this.userList)
 			} else {
 				uni.showToast({
 					title: '没有找到该用户',
