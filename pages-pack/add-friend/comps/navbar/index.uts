@@ -10,7 +10,7 @@ export default {
 			inputValue: null
 		}
 	},
-	emits: ['success'],
+	emits: ['success', 'clear'],
 	methods: {
 		onConfirm() {
 			uni.showLoading({
@@ -30,9 +30,14 @@ export default {
 				uni.hideLoading()
 			})
 		},
+		// 返回页面
+		onBack() {
+			uni.navigateBack()
+		},
 		// 清空
 		onClear() {
 			this.inputValue = null
+			this.$emit('clear')
 		}
 	}
 }

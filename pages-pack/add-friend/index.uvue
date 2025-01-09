@@ -1,6 +1,6 @@
 <template>
-	<navbar-comp @success="success" />
-	<view class="search-list" v-if="userList.length!">
+	<navbar-comp @success="success" @clear="clear" />
+	<view class="search-list" v-if="userList.length">
 		<view class="user-list">
 			<text style="font-size: 24rpx;margin-bottom: 20rpx;color: gray;">用户</text>
 			<view v-for="item in userList" :key="item?.id" class="flex-row list-item">
