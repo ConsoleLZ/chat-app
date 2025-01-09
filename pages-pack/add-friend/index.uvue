@@ -1,5 +1,26 @@
 <template>
 	<navbar-comp />
+	<view class="search-list">
+		<view class="user-list">
+			<text style="font-size: 24rpx;margin-bottom: 20rpx;color: gray;">用户</text>
+			<view class="flex-row">
+				<view class="image">
+					<image style="width: 100%;" src="https://airbnb.io/favicon.ico" mode="widthFix"></image>
+				</view>
+				<view class="flex-between-row" style="flex: 1;padding: 0 5rpx;">
+					<view>
+						<text style="font-size: 30rpx;font-weight: 700;margin-bottom: 10rpx;">测试用户</text>
+						<view class="flex-row">
+							<text class="tag">111</text>
+							<text class="tag">222</text>
+						</view>
+					</view>
+					<button class="btn">添加</button>
+				</view>
+			</view>
+		</view>
+	</view>
 </template>
 
 <script lang="uts" src="./index.uts"></script>
+<style lang="scss" src="./index.scss" scoped></style>

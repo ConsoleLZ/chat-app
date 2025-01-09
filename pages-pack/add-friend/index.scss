@@ -1,0 +1,27 @@
+.search-list {
+	padding: 0 24rpx;
+	.user-list {
+		background-color: #ffffff;
+		border-radius: 12rpx;
+		min-height: 200rpx;
+		padding: 24rpx 30rpx;
+	}
+	.image {
+		$size: 90rpx;
+		width: $size;
+		height: $size;
+		border-radius: $size;
+		background-color: rgba(218, 218, 218, 0.39);
+		margin-right: 10rpx;
+	}
+	.btn {
+		font-size: 28rpx;
+	}
+	.tag {
+		font-size: 24rpx;
+		padding: 6rpx 12rpx;
+		border-radius: 8rpx;
+		background-color: #ececec;
+		margin-right: 10rpx;
+	}
+}

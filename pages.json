@@ -37,7 +37,9 @@
 		{
 			"path": "pages-pack/add-friend/index",
 			"style": {
-				"navigationStyle": "custom"
+				"navigationStyle": "custom",
+				"backgroundColor": "#f7f7f7",
+				"backgroundColorContent": "#f7f7f7"
 			}
 		},
 		{
