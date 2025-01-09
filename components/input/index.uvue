@@ -1,5 +1,5 @@
 <template>
-	<input @input="onInput" class="search" type="text" :placeholder="placeholder" />
+	<input :value="inputValue" @input="onInput" class="search" type="text" :placeholder="placeholder" />
 </template>
 
 <script lang="uts" src="./index.uts"></script>

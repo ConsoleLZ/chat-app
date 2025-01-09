@@ -10,11 +10,22 @@ export default {
 		}
 	},
 	emits: ['update:modelValue'],
+	data() {
+		return {
+			inputValue: null
+		}
+	},
+	watch: {
+		modelValue(value : any | null) {
+			this.inputValue = value
+		}
+	},
 	methods: {
 		onInput(event : UniInputEvent) {
 			const value = event.detail.value
 			const inputValue = event.detail.value != '' ? value : null
-			this.$emit('update:modelValue', inputValue)
+			this.inputValue = inputValue
+			this.$emit('update:modelValue', this.inputValue)
 		}
 	}
 }

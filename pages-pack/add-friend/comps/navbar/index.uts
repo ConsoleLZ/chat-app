@@ -29,6 +29,10 @@ export default {
 			}).finally(() => {
 				uni.hideLoading()
 			})
+		},
+		// 清空
+		onClear() {
+			this.inputValue = null
 		}
 	}
 }
