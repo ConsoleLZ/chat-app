@@ -1,7 +1,7 @@
 <template>
 	<navbar-comp title="消息" />
 	<view class="main">
-		<input-comp style="margin-bottom: 20rpx;" placeholder="搜索" />
+		<input-comp style="margin-bottom: 20rpx;" confirm-type="search" placeholder="搜索" />
 		<view class="message-list">
 			<view class="flex-row message-list-item">
 				<view class="avatar">

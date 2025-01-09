@@ -2,7 +2,7 @@ export default {
 	props: {
 		placeholder: {
 			type: String,
-			default: ''
+			default: '请输入'
 		},
 		modelValue: {
 			type: String,

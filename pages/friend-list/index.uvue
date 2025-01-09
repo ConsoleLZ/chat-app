@@ -1,7 +1,7 @@
 <template>
 	<navbar-comp title="联系人" />
 	<view class="main">
-		<InputComp placeholder="搜索" />
+		<input-comp style="margin-bottom: 20rpx;" confirm-type="search" placeholder="搜索" />
 	</view>
 </template>
 
