@@ -9,7 +9,8 @@
 				</view>
 				<view class="flex-between-row" style="flex: 1;padding: 0 5rpx;">
 					<view>
-						<text style="font-size: 30rpx;font-weight: 700;margin-bottom: 10rpx;">{{item?.name}}</text>
+						<text
+							style="font-size: 30rpx;font-weight: 700;margin-bottom: 10rpx;">{{item?.name}}({{item?.account}})</text>
 						<view class="flex-row">
 							<text class="tag">未知</text>
 						</view>
