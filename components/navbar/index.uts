@@ -12,14 +12,16 @@ export default {
 	},
 	methods: {
 		// 显示弹框
-		onShowDialog() {
+		async onShowDialog() {
+			await uni.hideTabBar()!
 			const dialogElement = uni.getElementById('dialog')!
 			const dialogBoxElement = uni.getElementById('dialog-box')!
 			dialogElement.style.setProperty('display', 'flex')
 			dialogBoxElement.style.setProperty('transform', 'scale(1)')
 		},
 		// 关闭弹框
-		onCloseDialog() {
+		async onCloseDialog() {
+			await uni.showTabBar()!
 			const dialogElement = uni.getElementById('dialog')!
 			const dialogBoxElement = uni.getElementById('dialog-box')!
 			dialogBoxElement.style.setProperty('transform', 'scale(0)')
