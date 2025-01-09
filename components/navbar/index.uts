@@ -29,7 +29,9 @@ export default {
 		},
 		// 添加好友
 		onAdd() {
-			console.log('123')
+			uni.navigateTo({
+				url: '/pages-pack/add-friend/index'
+			})
 		}
 	},
 	onLoad() {

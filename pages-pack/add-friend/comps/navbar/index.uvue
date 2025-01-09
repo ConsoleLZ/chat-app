@@ -1,0 +1,10 @@
+<template>
+	<view class="navbar flex-center-row">
+		<image style="width: 42rpx;" src="/static/back.png" mode="widthFix"></image>
+		<input-comp style="flex: 1;margin: 0 32rpx;" placeholder="搜索用户账号/群ID" />
+		<text class="text">清空</text>
+	</view>
+</template>
+
+<script lang="uts" src="./index.uts"></script>
+<style lang="scss" src="./index.scss" scoped></style>

@@ -1,0 +1,7 @@
+import NavbarComp from './comps/navbar/index.uvue'
+
+export default {
+	components: {
+		NavbarComp
+	}
+}

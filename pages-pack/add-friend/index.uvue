@@ -1,0 +1,5 @@
+<template>
+	<navbar-comp />
+</template>
+
+<script lang="uts" src="./index.uts"></script>

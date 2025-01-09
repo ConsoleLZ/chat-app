@@ -1,0 +1,7 @@
+import InputComp from '@/components/input/index.uvue'
+
+export default {
+	components: {
+		InputComp
+	}
+}
