@@ -6,7 +6,8 @@ export default {
 	},
 	data() {
 		return {
-			userList: [] as UTSJSONObject[]
+			userList: [] as UTSJSONObject[],
+			userId: null
 		}
 	},
 	methods: {
@@ -16,11 +17,15 @@ export default {
 				const userList = value.users as UTSJSONObject[]
 				this.userList = userList
 			} else {
+				const message = value.message as string
 				uni.showToast({
-					title: '没有找到该用户',
+					title: message,
 					icon: 'error'
 				})
 			}
 		}
+	},
+	onLoad() {
+		this.userId = (uni.getStorageSync('userInfo') as UTSJSONObject)?.id as number
 	}
 }

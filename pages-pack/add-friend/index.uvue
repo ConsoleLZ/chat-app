@@ -15,7 +15,7 @@
 							<text class="tag">未知</text>
 						</view>
 					</view>
-					<button class="btn">添加</button>
+					<button class="btn" v-if="userId !== item?.id">添加</button>
 				</view>
 			</view>
 		</view>
