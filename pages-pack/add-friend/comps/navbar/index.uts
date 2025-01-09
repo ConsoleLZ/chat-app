@@ -10,17 +10,24 @@ export default {
 			inputValue: null
 		}
 	},
+	emits: ['success'],
 	methods: {
 		onConfirm() {
+			uni.showLoading({
+				title: '搜索中',
+				mask: true
+			})
 			PostSearchUsersStore.request({
 				account: this.inputValue
 			}).then(res => {
-				console.log(res)
+				this.$emit('success', res.data)
 			}).catch(error => {
 				uni.showToast({
 					title: '服务器错误',
 					icon: 'error'
 				})
+			}).finally(() => {
+				uni.hideLoading()
 			})
 		}
 	}

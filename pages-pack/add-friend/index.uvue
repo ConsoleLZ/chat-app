@@ -1,18 +1,17 @@
 <template>
-	<navbar-comp />
-	<view class="search-list">
+	<navbar-comp @success="success" />
+	<view class="search-list" v-if="userList.length!">
 		<view class="user-list">
 			<text style="font-size: 24rpx;margin-bottom: 20rpx;color: gray;">用户</text>
-			<view class="flex-row">
+			<view v-for="item in userList" :key="item?.id" class="flex-row list-item">
 				<view class="image">
-					<image style="width: 100%;" src="https://airbnb.io/favicon.ico" mode="widthFix"></image>
+					<image style="width: 100%;" :src="item?.avatar" mode="widthFix"></image>
 				</view>
 				<view class="flex-between-row" style="flex: 1;padding: 0 5rpx;">
 					<view>
-						<text style="font-size: 30rpx;font-weight: 700;margin-bottom: 10rpx;">测试用户</text>
+						<text style="font-size: 30rpx;font-weight: 700;margin-bottom: 10rpx;">{{item?.name}}</text>
 						<view class="flex-row">
-							<text class="tag">111</text>
-							<text class="tag">222</text>
+							<text class="tag">未知</text>
 						</view>
 					</view>
 					<button class="btn">添加</button>

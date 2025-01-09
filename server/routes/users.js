@@ -107,10 +107,17 @@ router.post("/searchUsers", async function (req, res) {
     let users = await promisePool.query(
       `SELECT id,name,avatar,account,createTime FROM ${userTable} WHERE account='${account}'`
     );
-    res.send({
-      ok: true,
-      users: users[0]
-    })
+    if (users[0].length) {
+      res.send({
+        ok: true,
+        users: users[0],
+      });
+    } else {
+      res.send({
+        ok: false,
+        message: "未查询到结果",
+      });
+    }
   } catch (error) {
     console.log("数据库连接失败，请检查数据库是否存活");
     res.send({
