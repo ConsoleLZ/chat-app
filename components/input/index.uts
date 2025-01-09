@@ -1,0 +1,20 @@
+export default {
+	props: {
+		placeholder: {
+			type: String,
+			default: ''
+		},
+		modelValue: {
+			type: String,
+			default: null
+		}
+	},
+	emits: ['update:modelValue'],
+	methods: {
+		onInput(event : UniInputEvent) {
+			const value = event.detail.value
+			const inputValue = event.detail.value != '' ? value : null
+			this.$emit('update:modelValue', inputValue)
+		}
+	}
+}

@@ -1,6 +1,6 @@
 function dbConfig() {
   return {
-    host: "192.168.0.100",
+    host: "172.20.104.6",
     port: 3306,
     user: "root",
     password: "123456",

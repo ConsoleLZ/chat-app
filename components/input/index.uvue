@@ -1,8 +1,5 @@
 <template>
-	<navbar-comp title="联系人" />
-	<view class="main">
-		<InputComp placeholder="搜索" />
-	</view>
+	<input @input="onInput" class="search" type="text" :placeholder="placeholder" />
 </template>
 
 <script lang="uts" src="./index.uts"></script>
