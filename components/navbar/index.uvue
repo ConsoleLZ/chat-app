@@ -10,7 +10,7 @@
 	<view @click.stop="onCloseDialog" id="dialog" class="dialog">
 		<view id="dialog-box" class="dialog-box flex-column">
 			<view hover-class="hover-class" @click="onAdd" class="flex-center-row item">
-				<image style="width: 38rpx;margin-right: 14rpx;" src="@/static/add-friend.png" mode="widthFix"></image>
+				<image style="width: 34rpx;margin-right: 14rpx;" src="@/static/add-friend.png" mode="widthFix"></image>
 				<text style="font-size: 32rpx;">加好友/群</text>
 			</view>
 		</view>

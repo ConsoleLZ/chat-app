@@ -3,7 +3,7 @@
 		<image @click="onBack" style="width: 42rpx;" src="/static/back.png" mode="widthFix"></image>
 		<input-comp v-model="inputValue" @confirm="onConfirm" :auto-focus="true" confirm-type="search"
 			style="flex: 1;margin-left: 32rpx;background-color: #ffffff;margin-right: 12rpx;"
-			placeholder="搜索用户账号/群ID" />
+			placeholder="搜索用户账号/用户昵称/群ID" />
 		<view hover-class="hover-class" :hover-stay-time="50" style="padding: 10rpx 20rpx;">
 			<text class="text" @click="onClear">清空</text>
 		</view>
