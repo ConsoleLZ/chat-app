@@ -6,5 +6,8 @@ export const PostLoginStore = new networkRequest<UTSJSONObject>('/api/login', 'P
 // 注册
 export const PostRegisterStore = new networkRequest<UTSJSONObject>('/api/register', 'POST')
 
+// 用户搜索
+export const PostSearchUsersStore = new networkRequest<UTSJSONObject>('/api/searchUsers', 'POST')
+
 // token校验
 export const PostVerifiedStore = new networkRequest<UTSJSONObject>('/verified', 'POST')

@@ -29,8 +29,8 @@ router.post("/login", async function (req, res) {
         userInfo: {
           id: users[0][0].id,
           name: users[0][0].name,
-          avatar: users[0][0].avatar
-        }
+          avatar: users[0][0].avatar,
+        },
       });
     } else {
       res.send({
@@ -79,6 +79,38 @@ router.post("/register", async function (req, res) {
         message: "注册失败",
       });
     }
+  } catch (error) {
+    console.log("数据库连接失败，请检查数据库是否存活");
+    res.send({
+      ok: false,
+      message: "服务器发生错误",
+    });
+  }
+});
+
+// 根据账号搜索用户
+router.post("/searchUsers", async function (req, res) {
+  const { account } = req.body;
+  if (!account) {
+    res.send({
+      ok: false,
+      message: "参数不能为空",
+    });
+
+    return;
+  }
+
+  // 创建连接池
+  try {
+    const config = dbConfig();
+    const promisePool = mysql2.createPool(config).promise();
+    let users = await promisePool.query(
+      `SELECT id,name,avatar,account,createTime FROM ${userTable} WHERE account='${account}'`
+    );
+    res.send({
+      ok: true,
+      users: users[0]
+    })
   } catch (error) {
     console.log("数据库连接失败，请检查数据库是否存活");
     res.send({

@@ -1,8 +1,8 @@
 <template>
 	<view class="navbar flex-center-row">
 		<image style="width: 42rpx;" src="/static/back.png" mode="widthFix"></image>
-		<input-comp :auto-focus="true" confirm-type="search" style="flex: 1;margin: 0 32rpx;"
-			placeholder="搜索用户账号/群ID" />
+		<input-comp v-model="inputValue" @confirm="onConfirm" :auto-focus="true" confirm-type="search"
+			style="flex: 1;margin: 0 32rpx;" placeholder="搜索用户账号/群ID" />
 		<text class="text">清空</text>
 	</view>
 </template>

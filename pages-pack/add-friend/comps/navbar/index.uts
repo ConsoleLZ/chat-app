@@ -1,7 +1,27 @@
 import InputComp from '@/components/input/index.uvue'
+import { PostSearchUsersStore } from '@/store/index.uts'
 
 export default {
 	components: {
 		InputComp
+	},
+	data() {
+		return {
+			inputValue: null
+		}
+	},
+	methods: {
+		onConfirm() {
+			PostSearchUsersStore.request({
+				account: this.inputValue
+			}).then(res => {
+				console.log(res)
+			}).catch(error => {
+				uni.showToast({
+					title: '服务器错误',
+					icon: 'error'
+				})
+			})
+		}
 	}
 }
