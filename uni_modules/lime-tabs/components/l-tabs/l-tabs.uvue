@@ -1,0 +1,329 @@
+<template>
+	<view class="l-tabs">
+		<view class="l-tabs__wrap" :style="[styles]">
+			<slot name="left"></slot>
+			<scroll-view class="l-tabs__scroll" 
+				:class="{'l-tabs__scroll--split': split}"
+				ref="scrollRef"
+				:scroll-left="scrollLeft"
+				direction="horizontal"
+				:scroll-with-animation="true" 
+				:show-scrollbar="false"
+				:enhanced="true"
+				@scroll="onScroll">
+				<view ref="navRef" class="l-tabs__nav">
+					<view class="l-tabs__item" 
+						v-for="(item, index) in tabs"
+						:key="index" 
+						:class="{
+							'l-tabs__item--active': index == currentIndex,
+							'l-tabs__item--evenly': spaceEvenly, 
+							'l-tabs__item--disabled': item.disabled}"
+						@click="onClick(index, item)">
+						<l-badge 
+							v-if="item.dot == true || item.badge != null" 
+							:dot="item.dot" 
+							:offset="item.offset"
+							:content="item.badge">
+							<text
+								:style="[
+									!item.disabled && color != null && index != currentIndex ? ('color:' + color) : '',
+									!item.disabled && activeColor != null && index == currentIndex ? 'color:' + activeColor : '',
+								]"
+								class="l-tabs__item-text"
+								:class="[
+									'l-tabs__item-text--' + size,
+									{
+										'l-tabs__item-text--disabled': item.disabled,
+										'l-tabs__item-text--active': index == currentIndex
+									}
+								]"
+							>{{item.label}}</text>	
+						</l-badge>
+						<text
+							v-else
+							:style="[
+								!item.disabled && color != null && index != currentIndex ? ('color:' + color) : '',
+								!item.disabled && activeColor != null && index == currentIndex ? 'color:' + activeColor : '',
+							]"
+							class="l-tabs__item-text"
+							:class="[
+								'l-tabs__item-text--' + size,
+								{
+									'l-tabs__item-text--disabled': item.disabled,
+									'l-tabs__item-text--active': index == currentIndex
+								}
+							]">{{item.label}}</text>	
+					</view>
+					<view ref="trackRef" :style="[trackStyle]" class="l-tabs__track"></view>
+				</view>
+			</scroll-view>
+			<slot name="right"></slot>
+		</view>
+		<view class="l-tabs__content"
+			@touchstart="onTouchStart"
+			@touchmove="onTouchMove"
+			@touchend="onTouchEnd"
+			@touchcancel="onTouchEnd"
+			:class="{'l-tabs__content--animated': animated}"
+			v-if="$slots['default'] != null">
+			<view class="l-tabs__content-inner" ref="innerRef">
+				<slot></slot>
+			</view>  
+		</view>
+	</view>
+</template>
+
+<script lang="uts" setup>
+	import { TabsProps, TabPanel } from './type';
+	import { TabPanelProps } from '../l-tab-panel/type';
+	import { calcScrollOffset , ease} from './utils';
+	import { clamp } from '@/uni_modules/lime-shared/clamp';
+	import { useTouch } from './touch'
+	const emits = defineEmits(['change','click'])
+
+	const props = withDefaults(defineProps<TabsProps>(), {
+		showLine: true,
+		visible: false,
+		ellipsis: false,
+		size: 'medium',
+		spaceEvenly: true,
+		swipeable: false,
+		duration: 0.3,
+		animated: false,
+		split: true,
+	})
+	
+	const children = ref<LTabPanelComponentPublicInstance[]>([])
+	const scrollLeft = ref(0);
+	const lastLeft = ref(0);
+	
+	const modelValue = defineModel({type: Number})
+	
+	
+	const currentValue = computed({
+		set(value: number) {
+			modelValue.value = value;
+			emits('change', value)
+		},
+		get():number {
+			return props.value ?? modelValue.value
+		}
+	} as WritableComputedOptions<number>);
+	
+	const styles = computed(():Map<string, any>=>{
+		const style = new Map<string, any>();
+		
+		if(props.bgColor != null) {
+			style.set('background', props.bgColor!)
+		}
+		
+		return style
+	})
+	const trackStyle = computed(():Map<string, any>=>{
+		const style = new Map<string, any>();
+		
+		if(props.lineColor != null) {
+			style.set('background', props.lineColor!)
+		}
+		if(props.lineWidth != null) {
+			style.set('width', props.lineWidth!)
+		}
+		if(props.lineHeight != null) {
+			style.set('height', props.lineHeight!)
+		}
+		return style
+	})
+	
+	const tabs = computed(():TabPanel[] => {
+		if(props.list != null && props.list!.length > 0) {
+			return props.list!.map((item):TabPanel => {
+				return {
+					badge: item.get('badge'),
+					dot: item.getBoolean('dot') ?? false,
+					disabled: item.getBoolean('disabled') ?? false,
+					label: item.getString('label'),
+					offset: item.getArray('offset') as any[]|null,
+					value: item.getNumber('value'),
+				}  as TabPanel
+			})
+		}	
+		return children.value.map((item):TabPanel => {
+			
+			// 安卓端数组属性存在BUG 死循环
+			// #ifdef APP-ANDROID
+			const _offset = item.$.exposed.get('_offset') as Ref<string>
+			const offset = _offset.value.length > 0 ? _offset.value.split(',') : [] 
+			// #endif
+			// #ifndef APP-ANDROID
+			const offset = item.offset ?? []
+			// #endif
+			return {
+				badge: item.badge,
+				dot: item.dot ?? false,
+				disabled: item.disabled ?? false,
+				label: item.label,
+				offset: offset as any[],
+				value: item.value
+			} as TabPanel
+		})
+	})
+	
+	const currentIndex = computed(() :number => {
+		const index = tabs.value.findIndex((child, index):boolean => (child.value ?? index) == currentValue.value)
+		return index > -1 ? index : 0;
+	})
+	
+	
+	
+	const scrollRef = ref<UniScrollViewElement|null>(null)
+	const trackRef = ref<UniElement|null>(null)
+	const navRef = ref<UniElement|null>(null)
+	const innerRef = ref<UniElement|null>(null)
+	
+	const moveToActiveTab = () => {
+		nextTick(()=>{
+			if(navRef.value == null || scrollRef.value == null) return;
+			// #ifdef WEB
+			const childs = Array.from(navRef.value.children)
+			// #endif
+			// #ifndef WEB
+			const childs = navRef.value!.children;
+			// #endif
+			const index = currentIndex.value + (childs.length -  tabs.value.length - 1) / 2;
+			const child = childs[index]
+			const containerWidth = scrollRef.value!.offsetWidth;
+			const childRect = child.getBoundingClientRect()
+			let totalSize = 0;
+			let distance = 0;
+			let count = 0;
+			
+			childs.forEach(item =>{
+				if(count < index) {
+					distance += item.offsetWidth;
+					count += 1;
+				}
+				totalSize += item.offsetWidth
+			})
+			if(totalSize == 0) return
+			if(!props.spaceEvenly) {
+				navRef.value!.style.setProperty('width', `${totalSize}px`)
+			}
+			const offset = calcScrollOffset(containerWidth, childRect.left, child.offsetWidth, lastLeft.value)
+			const maxOffset = totalSize - containerWidth;
+			scrollLeft.value = clamp(offset, 0, maxOffset)
+			
+			if(trackRef.value != null) {
+				const trackLineWidth = trackRef.value!.offsetWidth;
+				distance += (child.offsetWidth - trackLineWidth) / 2;
+				trackRef.value!.style.setProperty(`transform`, `translateX(${distance}px)`)
+			}
+		})
+	}
+	const updateInnerStyle = (offset: number)=>{
+		nextTick(()=>{
+			if(innerRef.value == null) return;
+			const width = innerRef.value!.parentElement?.offsetWidth ?? 0;
+			// innerRef.value!.style.setProperty('width', `${tabs.value.length * 100}%`)
+			innerRef.value!.style.setProperty('width', `${tabs.value.length * width}px`)
+			const left = -width * currentIndex.value + offset;
+			if(offset != 0) {
+				innerRef.value!.style.setProperty('transition-duration', `0s`)
+				innerRef.value!.style.setProperty('transform', `translateX(${left}px)`)
+			} else {
+				if(props.animated){
+					innerRef.value!.style.setProperty('transition-duration', offset != 0 || !props.animated ? '0s' : `${props.duration}s`)
+				}
+				nextTick(()=>{
+					// innerRef.value!.style.setProperty('transform', `translateX(${-100 * currentIndex.value}%)`)
+					innerRef.value!.style.setProperty('transform', `translateX(${left}px)`)
+				})
+			}
+		})
+	}
+	const onScroll = (e: UniScrollEvent) => {
+		lastLeft.value = e.detail.scrollLeft;
+	}
+	const onClick = (index : number, item : TabPanel) => {
+		const { value = index, disabled, label } = item;
+		if (disabled || currentValue.value == value )return
+		currentValue.value = value;
+		emits('click', value)
+		moveToActiveTab()
+	}
+	
+	const getAvailableTabIndex = (deltaX: number):number => {
+		const step = deltaX > 0 ? -1 : 1;
+		const len = tabs.value.length;
+		for (let i = step; currentIndex.value + step >= 0 && currentIndex.value + step < len; i += step) {
+			const newIndex = currentIndex.value + i;
+			
+			if (newIndex >= 0 && newIndex < len && tabs.value.length > newIndex && !tabs.value[newIndex].disabled) {
+			   return newIndex;
+			}
+		}
+		return -1; 
+	}
+	const touch = useTouch();
+	const onTouchStart = (event: UniTouchEvent) => {
+		if (!props.swipeable) return;
+		 touch.start(event);
+	}
+
+	const onTouchMove = (event: UniTouchEvent) => {
+		if (!props.swipeable) return;
+		touch.move(event);
+		const {direction, deltaX, startX } = touch
+		if(direction.value != 'horizontal') return
+		if(!props.animated) return	
+		const isAtFirstTab = currentIndex.value == 0;
+		const isAtLastTab = currentIndex.value == tabs.value.length - 1;
+			
+		if ((isAtFirstTab && deltaX.value > 0) || (isAtLastTab && deltaX.value < 0)) {
+			 const base = isAtFirstTab ? 1 : -1;
+			const adjustedDelta = ease(deltaX.value, base);
+			updateInnerStyle(adjustedDelta);
+		} else {
+			updateInnerStyle(deltaX.value);
+		}
+	}
+	
+	const onTouchEnd = () => {
+		if (!props.swipeable) return;
+		const {direction, deltaX, offsetX } = touch
+		const minSwipeDistance = 50;
+		if(direction.value == 'horizontal' && offsetX.value >= minSwipeDistance) {
+			const index = getAvailableTabIndex(deltaX.value);
+			if (index != -1) {
+				onClick(index, tabs.value[index])
+			}
+		}
+		updateInnerStyle(0)
+	}
+	
+	const stopWatch = watch(tabs,(_v:TabPanel[])=> {
+		moveToActiveTab()
+	})
+	
+	const stopValueWatch = watch(currentValue, (_v:number)=>{
+		moveToActiveTab()
+		updateInnerStyle(0)
+	})
+	
+	onMounted(()=>{
+		if(tabs.value.length == 0) return
+		moveToActiveTab()
+		updateInnerStyle(0)
+	})
+	
+	onUnmounted(()=>{
+		stopWatch()
+		stopValueWatch()
+	})
+	
+	provide('LimeTabs', children)
+</script>
+
+<style lang="scss">
+	@import './index';
+</style>

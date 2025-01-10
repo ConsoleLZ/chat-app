@@ -1,0 +1,101 @@
+<template>
+	<view class="l-badge__wrapper" v-if="$slots['default'] != null">
+		<slot></slot>
+		<text v-if="hasContent || dot" class="l-badge" :class="classes" :style="[styles]">
+			<slot name="content">{{renderContent}}</slot>
+		</text>
+	</view>
+	<text v-else-if="hasContent || dot" class="l-badge" :class="classes" :style="[styles]">
+		<slot name="content">{{renderContent}}</slot>
+	</text>
+</template>
+<script lang="uts" setup>
+	import { isNumeric } from '@/uni_modules/lime-shared/isNumeric'
+	import { isNumber } from '@/uni_modules/lime-shared/isNumber'
+	import { addUnit } from '@/uni_modules/lime-shared/addUnit'
+	import { toBoolean } from '@/uni_modules/lime-shared/toBoolean'
+	import { getOffsetWithMinusString } from './utils'
+	import { BadgeProps } from './type'
+	defineOptions({
+		name: 'l-badge'
+	})
+	const name = 'l-badge'
+	const props = withDefaults(defineProps<BadgeProps>(), {
+		dot: false,
+		max: 99,
+		showZero: false,
+		// #ifdef APP-ANDROID
+		offset: [] as any[],
+		// #endif
+		// #ifndef APP-ANDROID
+		offset: [] as (string | number)[],
+		// #endif
+		position: 'top-right'
+	})
+	
+	const context = getCurrentInstance()!
+	const classes = computed(():Map<string, boolean>=>{
+		const cls = new Map<string, boolean>()
+		cls.set(`${name}--fixed`, toBoolean(context.slots['default']));
+		cls.set(`${name}--dot`, props.dot);
+		cls.set(`${name}--${props.position}`, context.slots['default'] != null);
+		return cls
+	})
+	const styles = computed(():Map<string, any|null>=>{
+		const style = new Map<string, any|null>()
+		if(toBoolean(props.color)) {
+			style.set('background', props.color!)
+		}
+		const positions = props.position.split('-');
+		const offset = props.offset;
+		if(offset.length == 2) {
+			const x = offset[0];
+			const y = offset[1];
+			if(context.slots['default'] != null) {
+				if(positions.length == 2) {
+					const offsetY = positions[0], offsetX = positions[1];
+					if(isNumber(y)) {
+						const _y = y as number
+						style.set(offsetY, addUnit(offsetY == 'top' ? _y : -_y))
+					} else {
+						style.set(offsetY, offsetY == 'top' ? addUnit(y) : getOffsetWithMinusString(`${y}`))
+					}
+					if(isNumber(x)) {
+						const _x = x as number
+						style.set(offsetX, addUnit(offsetX == 'left' ? _x : -_x))
+					} else {
+						style.set(offsetY, offsetY == 'left' ? addUnit(x) : getOffsetWithMinusString(`${x}`))
+					}
+				}
+			} else {
+				style.set('margin-top', addUnit(y))
+				style.set('margin-left', addUnit(x))
+			}
+		}
+		return style
+	});
+	const hasContent = computed<boolean>(():boolean => {
+		if(toBoolean(context.slots['content'])) {
+			return true
+		}
+		const content = props.content;
+		return (content != '' && content != null && (props.showZero || content !== '0'));
+	});
+	const renderContent = computed<string>(():string=>{
+		const dot = props.dot
+		const max = props.max
+		const content = props.content
+		if(!dot && hasContent.value) {
+			if(max != 0 && isNumeric(content) && parseFloat(content.toString()) > max) {
+				return `${max}+`
+			}
+		}
+		if(dot) {
+			return ''
+		}
+		return `${content ?? ""}`
+	})
+</script>
+<style lang="scss">
+	@import './index-u';
+</style>

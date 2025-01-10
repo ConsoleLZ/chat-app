@@ -1,0 +1,38 @@
+<template>
+	<view class="l-tab__panel" aria-role="tabpanel">
+		<slot/>
+	</view>
+</template>
+<script lang="uts" setup>
+	import { TabPanelProps } from './type';
+	import { TabPanel } from '../l-tabs/type'
+	const props = withDefaults(defineProps<TabPanelProps>(), {})
+	const children = inject<LTabPanelComponentPublicInstance[]|null>('LimeTabs', null) as Ref<LTabPanelComponentPublicInstance[]>|null;
+	const instance = getCurrentInstance()!.proxy!
+	onMounted(()=>{
+		if(children == null) return
+		children.value.push(instance as LTabPanelComponentPublicInstance)
+	})
+	
+	
+	// #ifdef APP-ANDROID
+	const _offset = ref<string>((props.offset??[]).join(','))
+	watch((): any[] => props.offset??[], (v: any[])=>{
+		if(v.length > 0) {
+			_offset.value = v.join(',')
+		}
+	})
+	defineExpose({
+		_offset
+	})
+	// #endif
+	
+	
+	onUnmounted(()=>{
+		if(children == null) return
+		children.value = children.value.filter((it):boolean => it != (instance))
+	})
+</script>
+<style lang="scss">
+	@import './index';
+</style>
