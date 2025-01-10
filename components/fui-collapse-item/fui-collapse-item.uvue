@@ -4,7 +4,7 @@
 			:style="{background:background}">
 			<view class="fui-collapse__title">
 				<slot></slot>
-			</view> 
+			</view>
 			<view v-if="arrow"
 				:class="{'fui-collapse__arrow-close':!isOpen,'fui-collapse__arrow-active': isOpen, 'fui-collapse__item-ani': animation}"
 				class="fui-collapse__arrow" :style="{marginRight:`${arrowRight}rpx`}">

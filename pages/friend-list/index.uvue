@@ -4,7 +4,7 @@
 		<input-comp confirm-type="search" placeholder="搜索" />
 		<l-tabs :split="false" :swipeable="true" :value="tabsValue" @click="onChangeTabs">
 			<l-tab-panel :value="0" label="用户">
-				<fui-collapse-item>
+				<fui-collapse-item :animation="false" :expand="true">
 					<view class="fui-item__box">
 						<text class="fui-text">好友</text>
 					</view>
@@ -27,6 +27,26 @@
 							</view>
 						</view>
 					</template>
+				</fui-collapse-item>
+				<fui-collapse-item :animation="false">
+					<view class="fui-item__box">
+						<text class="fui-text">朋友</text>
+					</view>
+				</fui-collapse-item>
+				<fui-collapse-item :animation="false">
+					<view class="fui-item__box">
+						<text class="fui-text">同学</text>
+					</view>
+				</fui-collapse-item>
+				<fui-collapse-item :animation="false">
+					<view class="fui-item__box">
+						<text class="fui-text">家人</text>
+					</view>
+				</fui-collapse-item>
+				<fui-collapse-item :animation="false">
+					<view class="fui-item__box">
+						<text class="fui-text">特别关心</text>
+					</view>
 				</fui-collapse-item>
 			</l-tab-panel>
 			<l-tab-panel :value="1" label="群聊">
