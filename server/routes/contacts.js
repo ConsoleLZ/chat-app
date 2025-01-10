@@ -49,4 +49,46 @@ router.post("/add-contact-people", async function (req, res) {
   }
 });
 
+// 查询联系人
+router.get("/get-contacts", async function (req, res) {
+  const { userId } = req.query;
+
+  // 参数验证
+  if (!userId) {
+    return res.status(400).json({
+      ok: false,
+      message: "缺少用户ID参数",
+    });
+  }
+
+  try {
+    // 构建 SQL 查询语句
+    let sql = `SELECT contactUserId, name, avatar 
+                 FROM ${contactsTable} 
+                 WHERE userId = ?`;
+
+    // 执行查询
+    const [rows] = await promisePool.query(sql, [userId]);
+
+    // 检查查询结果
+    if (rows.length > 0) {
+      res.json({
+        ok: true,
+        contacts: rows,
+      });
+    } else {
+      res.status(404).json({
+        ok: false,
+        message: "未找到联系人",
+      });
+    }
+  } catch (error) {
+    console.error("数据库交互失败:", error);
+    res.status(500).json({
+      ok: false,
+      message: "服务器发生错误",
+    });
+  }
+});
+
 module.exports = router;

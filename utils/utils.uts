@@ -42,7 +42,7 @@ export const drawCaptcha = (dom : string) : Promise<string> => {
 	})
 }
 
-// get请求时的参数拼接
+// get请求时的参数拼接(暂时只支持parms对象key的值为字符串)
 export const buildQueryString = (params : UTSJSONObject) : string => {
 	// 首先检查输入是否为对象且不是null
 	if (typeof params !== 'object' || params === null) {
@@ -50,7 +50,7 @@ export const buildQueryString = (params : UTSJSONObject) : string => {
 	}
 
 	// 创建一个数组来存储键值对
-	const queryStringParts = [];
+	const queryStringParts = [] as string[];
 
 	// 定义编码函数以确保安全的URL参数
 	function encode(value : string) {
@@ -60,7 +60,7 @@ export const buildQueryString = (params : UTSJSONObject) : string => {
 	// 遍历对象的键值对并添加到数组中
 	for (const key in params) {
 		if (params.hasOwnProperty(key)) {
-			let value = params[key]!;
+			let value = params[key] as string;
 
 			// 如果值是数组或对象，需要序列化它们
 			if (Array.isArray(value) || typeof value === 'object') {

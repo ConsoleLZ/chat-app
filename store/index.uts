@@ -12,5 +12,8 @@ export const PostSearchUsersStore = new networkRequest<UTSJSONObject>('/api/sear
 // 添加联系人
 export const PostAddContactPeopleStore = new networkRequest<UTSJSONObject>('/api/add-contact-people', 'POST')
 
+// 查找联系人
+export const GetContactsStore = new networkRequest<UTSJSONObject>('/api/get-contacts', 'GET')
+
 // token校验
 export const PostVerifiedStore = new networkRequest<UTSJSONObject>('/verified', 'POST')
