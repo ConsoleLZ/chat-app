@@ -1,5 +1,5 @@
 import NavbarComp from './comps/navbar/index.uvue'
-import { PostAddContactPeopleStore, GetContactsStore } from '@/store/index.uts'
+import { PostAddContactPeopleStore } from '@/store/index.uts'
 
 export default {
 	components: {
@@ -8,12 +8,13 @@ export default {
 	data() {
 		return {
 			userList: [] as UTSJSONObject[],
-			userId: null
+			userId: null,
+			contactsId: [] as number[] // 存储已有的联系人
 		}
 	},
 	methods: {
 		// 添加联系人
-		onAddUser(item : UTSJSONObject) {
+		async onAddUser(item : UTSJSONObject) {
 			uni.showLoading({
 				title: '加载中...'
 			})
@@ -49,12 +50,8 @@ export default {
 			if (ok) {
 				const userList = value.users as UTSJSONObject[]
 				this.userList = userList
-			} else {
-				const message = value.message as string
-				uni.showToast({
-					title: message,
-					icon: 'error'
-				})
+				this.contactsId = value.contactsId as number[]
+				console.log(this.contactsId)
 			}
 		},
 		// 清空
@@ -64,10 +61,5 @@ export default {
 	},
 	onLoad() {
 		this.userId = (uni.getStorageSync('userInfo') as UTSJSONObject)?.id as number
-		GetContactsStore.get({
-			userId: '6'
-		}).then(res => {
-			console.log(res)
-		})
 	}
 }

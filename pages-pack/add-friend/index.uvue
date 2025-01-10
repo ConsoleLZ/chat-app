@@ -15,7 +15,9 @@
 							<text class="tag">未知</text>
 						</view>
 					</view>
-					<button @click="onAddUser(item)" class="btn" v-if="userId !== item?.id">添加</button>
+					<button :disabled="true" class="btn"
+						v-if="(contactsId.includes(item.id as number) as boolean) || userId === item.id">已添加</button>
+					<button @click="onAddUser(item)" class="btn" v-else>添加</button>
 				</view>
 			</view>
 		</view>

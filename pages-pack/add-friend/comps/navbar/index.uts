@@ -1,5 +1,5 @@
 import InputComp from '@/components/input/index.uvue'
-import { PostSearchUsersStore } from '@/store/index.uts'
+import { PostSearchUsersStore, GetContactsStore } from '@/store/index.uts'
 
 export default {
 	components: {
@@ -17,10 +17,25 @@ export default {
 				title: '搜索中',
 				mask: true
 			})
-			PostSearchUsersStore.post({
+			const userId = (uni.getStorageSync('userInfo') as UTSJSONObject)?.id as number
+			const promise1 = PostSearchUsersStore.post({
 				searchValue: this.inputValue
-			}).then(res => {
-				this.$emit('success', res.data)
+			})
+			const promise2 = GetContactsStore.post({
+				userId
+			})
+
+			Promise.all([promise1, promise2]).then(res => {
+				const contactsId = [] as number[]
+				(res[1].data?.contacts as UTSJSONObject[]).forEach(item => {
+					contactsId.push(item.contactUserId as number)
+				})
+				const obj = {
+					ok: true,
+					users: res[0].data?.users,
+					contactsId
+				} as UTSJSONObject
+				this.$emit('success', obj)
 			}).catch(error => {
 				uni.showToast({
 					title: '服务器错误',

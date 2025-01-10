@@ -31,9 +31,11 @@ export default {
 		},
 		// 添加好友
 		onAdd() {
-			uni.navigateTo({
-				url: '/pages-pack/add-friend/index'
-			})
+			setTimeout(() => {
+				uni.navigateTo({
+					url: '/pages-pack/add-friend/index'
+				})
+			}, 200)
 		}
 	},
 	onLoad() {
