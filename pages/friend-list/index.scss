@@ -2,3 +2,29 @@
 	padding: 0 50rpx;
 	position: relative;
 }
+.friend-list {
+	.friend-list-item {
+		border-bottom: 1px solid #f6f6f6;
+		padding: 16rpx 0;
+	}
+	.avatar {
+		$size: 90rpx;
+		width: $size;
+		height: $size;
+		border-radius: $size;
+		background-color: #dddddd;
+		margin-right: 15rpx
+	}
+	.title {
+		font-size: 32rpx;
+		font-weight: 700;
+	}
+	.time {
+		font-size: 20rpx;
+		color: #aaaaaa;
+	}
+	.status {
+		font-size: 24rpx;
+		color: #aaaaaa;
+	}
+}

@@ -51,7 +51,6 @@ export default {
 				const userList = value.users as UTSJSONObject[]
 				this.userList = userList
 				this.contactsId = value.contactsId as number[]
-				console.log(this.contactsId)
 			}
 		},
 		// 清空
