@@ -8,25 +8,7 @@ export default {
 	},
 	data() {
 		return {
-			tabsValue: 0,
-			list: [
-				{
-					value: 1,
-					label: '选项',
-				},
-				{
-					value: 2,
-					label: '选项',
-				},
-				{
-					value: 3,
-					label: '选项',
-				},
-				{
-					value: 4,
-					label: '选项',
-				}
-			] as UTSJSONObject[]
+			tabsValue: 0
 		}
 	},
 	methods: {
