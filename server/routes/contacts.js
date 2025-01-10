@@ -63,7 +63,7 @@ router.get("/get-contacts", async function (req, res) {
 
   try {
     // 构建 SQL 查询语句
-    let sql = `SELECT contactUserId, name, avatar 
+    let sql = `SELECT *
                  FROM ${contactsTable} 
                  WHERE userId = ?`;
 
