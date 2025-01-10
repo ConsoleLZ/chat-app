@@ -9,13 +9,13 @@
 				</view>
 				<view class="flex-between-row" style="flex: 1;padding: 0 5rpx;">
 					<view>
-						<text
+						<text class="text-ellipsis-300"
 							style="font-size: 30rpx;font-weight: 700;margin-bottom: 10rpx;">{{item?.name}}({{item?.account}})</text>
 						<view class="flex-row">
 							<text class="tag">未知</text>
 						</view>
 					</view>
-					<button class="btn" v-if="userId !== item?.id">添加</button>
+					<button @click="onAddUser(item)" class="btn" v-if="userId !== item?.id">添加</button>
 				</view>
 			</view>
 		</view>

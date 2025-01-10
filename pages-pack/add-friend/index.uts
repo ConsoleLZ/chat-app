@@ -1,4 +1,5 @@
 import NavbarComp from './comps/navbar/index.uvue'
+import { PostAddContactPeopleStore } from '@/store/index.uts'
 
 export default {
 	components: {
@@ -11,6 +12,28 @@ export default {
 		}
 	},
 	methods: {
+		// 添加联系人
+		onAddUser(item : UTSJSONObject) {
+			uni.showLoading({
+				title: '加载中...'
+			})
+			const userId = (uni.getStorageSync('userInfo') as UTSJSONObject)?.id as number
+			PostAddContactPeopleStore.request({
+				contactUserId: item?.id,
+				userId,
+				name: item?.name,
+				avatar: item.avatar
+			}).then(res => {
+				console.log(res)
+			}).catch(error => {
+				uni.showToast({
+					title: '服务器错误',
+					icon: 'error'
+				})
+			}).finally(() => {
+				uni.hideLoading()
+			})
+		},
 		success(value : UTSJSONObject) {
 			const ok = value.ok as boolean
 			if (ok) {
