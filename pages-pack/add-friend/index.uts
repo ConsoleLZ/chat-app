@@ -18,7 +18,7 @@ export default {
 				title: '加载中...'
 			})
 			const userId = (uni.getStorageSync('userInfo') as UTSJSONObject)?.id as number
-			PostAddContactPeopleStore.request({
+			PostAddContactPeopleStore.post({
 				contactUserId: item?.id,
 				userId,
 				name: item?.name,

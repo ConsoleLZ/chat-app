@@ -45,7 +45,7 @@ export default {
 				return
 			}
 			this.isLoading = true
-			PostRegisterStore.request({
+			PostRegisterStore.post({
 				name: this.name,
 				account: this.account,
 				password: this.password

@@ -17,7 +17,7 @@ export default {
 				title: '搜索中',
 				mask: true
 			})
-			PostSearchUsersStore.request({
+			PostSearchUsersStore.post({
 				searchValue: this.inputValue
 			}).then(res => {
 				this.$emit('success', res.data)

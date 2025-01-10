@@ -1,5 +1,6 @@
 import { MethodsType } from './types.uts'
 import { SERVER_URL } from '@/config.uts'
+import { buildQueryString } from '@/utils/utils.uts'
 
 // 网络请求
 export class networkRequest<T> {
@@ -11,11 +12,26 @@ export class networkRequest<T> {
 		this.method = method;
 	}
 
-	request(data : UTSJSONObject) : Promise<RequestSuccess<T>> {
+	post(data : UTSJSONObject) : Promise<RequestSuccess<T>> {
 		return new Promise((resolve, reject) => {
 			uni.request({
 				url: this.url,
 				data,
+				method: this.method,
+				success(res) {
+					resolve(res as RequestSuccess<T>); // 这里直接使用泛型 T
+				},
+				fail(err) {
+					reject(err);
+				},
+			});
+		});
+	}
+
+	get(params : UTSJSONObject) : Promise<RequestSuccess<T>> {
+		return new Promise((resolve, reject) => {
+			uni.request({
+				url: this.url + buildQueryString(params),
 				method: this.method,
 				success(res) {
 					resolve(res as RequestSuccess<T>); // 这里直接使用泛型 T

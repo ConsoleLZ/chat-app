@@ -54,7 +54,7 @@ export default {
 			// }
 			this.isLoading = true
 
-			PostLoginStore.request({
+			PostLoginStore.post({
 				account: this.account,
 				password: this.password
 			}).then(res => {

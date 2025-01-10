@@ -13,7 +13,7 @@
 				title: '加载中...',
 				mask: true
 			})
-			PostVerifiedStore.request({
+			PostVerifiedStore.post({
 				token: uni.getStorageSync('token')
 			}).then(res => {
 				const ok = res.data?.ok as boolean
