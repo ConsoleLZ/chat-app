@@ -4,9 +4,7 @@
 }
 .friend-list {
 	margin-top: 20rpx;
-	min-height: 1200rpx;
 	.friend-list-item {
-		border-bottom: 1px solid #f6f6f6;
 		padding: 16rpx 0;
 	}
 	.avatar {
@@ -29,4 +27,16 @@
 		font-size: 24rpx;
 		color: #aaaaaa;
 	}
+}
+.fui-item__box {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 26rpx 32rpx;
+	box-sizing: border-box;
+}
+.fui-text {
+	font-size: 28rpx;
+	width: 680rpx;
 }

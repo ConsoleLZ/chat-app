@@ -1,10 +1,14 @@
 import NavbarComp from '@/components/navbar/index.uvue'
 import InputComp from '@/components/input/index.uvue'
+import fuiCollapse from "@/components/fui-collapse/fui-collapse.uvue"
+import fuiCollapseItem from "@/components/fui-collapse-item/fui-collapse-item.uvue"
 
 export default {
 	components: {
 		NavbarComp,
-		InputComp
+		InputComp,
+		fuiCollapse,
+		fuiCollapseItem
 	},
 	data() {
 		return {

@@ -4,23 +4,30 @@
 		<input-comp confirm-type="search" placeholder="搜索" />
 		<l-tabs :split="false" :swipeable="true" :value="tabsValue" @click="onChangeTabs">
 			<l-tab-panel :value="0" label="用户">
-				<view class="friend-list">
-					<view class="flex-row friend-list-item">
-						<view class="avatar">
-							<image style="width: 100%;"
-								src="https://ts1.cn.mm.bing.net/th?id=OIP-C.QNid3RU3iL-ZwGMLdAhjbgHaKX&w=211&h=295&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2"
-								mode="widthFix"></image>
-						</view>
-						<view style="flex: 1;">
-							<view style="margin-bottom: 12rpx;" class="flex-between-row">
-								<text class="title">赵丽颖</text>
-							</view>
-							<view class="flex-between-row">
-								<text class="status">[在线]</text>
-							</view>
-						</view>
+				<fui-collapse-item>
+					<view class="fui-item__box">
+						<text class="fui-text">好友</text>
 					</view>
-				</view>
+					<template v-slot:content>
+						<view class="friend-list">
+							<view class="flex-row friend-list-item">
+								<view class="avatar">
+									<image style="width: 100%;"
+										src="https://ts1.cn.mm.bing.net/th?id=OIP-C.QNid3RU3iL-ZwGMLdAhjbgHaKX&w=211&h=295&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2"
+										mode="widthFix"></image>
+								</view>
+								<view style="flex: 1;">
+									<view style="margin-bottom: 12rpx;" class="flex-between-row">
+										<text class="title">赵丽颖</text>
+									</view>
+									<view class="flex-between-row">
+										<text class="status">[在线]</text>
+									</view>
+								</view>
+							</view>
+						</view>
+					</template>
+				</fui-collapse-item>
 			</l-tab-panel>
 			<l-tab-panel :value="1" label="群聊">
 				<text style="padding: 15px;">群聊</text>
