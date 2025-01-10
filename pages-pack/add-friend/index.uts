@@ -24,7 +24,17 @@ export default {
 				name: item?.name,
 				avatar: item.avatar
 			}).then(res => {
-				console.log(res)
+				const ok = res.data?.ok as boolean
+				if (ok) {
+					uni.showToast({
+						title: '添加成功'
+					})
+				} else {
+					uni.showToast({
+						title: '添加失败',
+						icon: 'error'
+					})
+				}
 			}).catch(error => {
 				uni.showToast({
 					title: '服务器错误',

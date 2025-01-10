@@ -11,6 +11,7 @@ const router = express.Router();
 router.post("/add-contact-people", async function (req, res) {
   const { contactUserId, userId, name, avatar } = req.body;
 
+  // 参数验证
   if (!contactUserId || !userId || !name || !avatar) {
     return res.status(400).json({
       ok: false,
@@ -18,47 +19,34 @@ router.post("/add-contact-people", async function (req, res) {
     });
   }
 
-  console.log(contactUserId, userId, name, avatar);
-  //   try {
-  //     const [rows] = await promisePool.query(
-  //       `SELECT * FROM ${userTable} WHERE account = ?`,
-  //       [account]
-  //     );
+  try {
+    // 使用 ON DUPLICATE KEY UPDATE 处理可能的重复插入
+    const [result] = await promisePool.query(
+      `INSERT INTO ${contactsTable} (contactUserId, userId, name, avatar)
+         VALUES (?, ?, ?, ?)
+         ON DUPLICATE KEY UPDATE name = VALUES(name), avatar = VALUES(avatar)`,
+      [contactUserId, userId, name, avatar]
+    );
 
-  //     if (rows.length === 0) {
-  //       return res.status(401).json({
-  //         ok: false,
-  //         message: "账号或密码错误",
-  //       });
-  //     }
-
-  //     const user = rows[0];
-
-  //     // 验证密码
-  //     const isPasswordValid = await bcrypt.compare(password, user.password);
-  //     if (!isPasswordValid) {
-  //       return res.status(401).json({
-  //         ok: false,
-  //         message: "账号或密码错误",
-  //       });
-  //     }
-
-  //     res.json({
-  //       ok: true,
-  //       token: tokenManager().encryptToken(user, "24h"),
-  //       userInfo: {
-  //         id: user.id,
-  //         name: user.name,
-  //         avatar: user.avatar,
-  //       },
-  //     });
-  //   } catch (error) {
-  //     console.error("数据库交互失败:", error);
-  //     res.status(500).json({
-  //       ok: false,
-  //       message: "服务器发生错误",
-  //     });
-  //   }
+    // 检查 affectedRows 判断是否成功插入或更新
+    if (result.affectedRows > 0) {
+      res.json({
+        ok: true,
+        message: "添加成功或已更新",
+      });
+    } else {
+      res.status(500).json({
+        ok: false,
+        message: "操作失败",
+      });
+    }
+  } catch (error) {
+    console.error("数据库交互失败:", error);
+    res.status(500).json({
+      ok: false,
+      message: "服务器发生错误",
+    });
+  }
 });
 
 module.exports = router;
