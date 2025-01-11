@@ -1,5 +1,5 @@
 import InputComp from '@/components/input/index.uvue'
-import { PostSearchUsersStore, GetContactsStore } from '@/store/index.uts'
+import { GetSearchUsersStore, GetContactsStore } from '@/store/index.uts'
 
 export default {
 	components: {
@@ -18,11 +18,11 @@ export default {
 				mask: true
 			})
 			const userId = (uni.getStorageSync('userInfo') as UTSJSONObject)?.id as number
-			const promise1 = PostSearchUsersStore.get({
+			const promise1 = GetSearchUsersStore.get({
 				searchValue: this.inputValue
 			})
-			const promise2 = GetContactsStore.post({
-				userId
+			const promise2 = GetContactsStore.get({
+				userId: userId.toString()
 			})
 
 			Promise.all([promise1, promise2]).then(res => {

@@ -2,6 +2,7 @@ import NavbarComp from '@/components/navbar/index.uvue'
 import InputComp from '@/components/input/index.uvue'
 import fuiCollapse from "@/components/fui-collapse/fui-collapse.uvue"
 import fuiCollapseItem from "@/components/fui-collapse-item/fui-collapse-item.uvue"
+import { GetContactsStore } from '@/store/index.uts'
 
 export default {
 	components: {
@@ -12,12 +13,21 @@ export default {
 	},
 	data() {
 		return {
-			tabsValue: 0
+			tabsValue: 0,
+			contactsData: [] as UTSJSONObject[]
 		}
 	},
 	methods: {
 		onChangeTabs(index : number) {
 			this.tabsValue = index
 		}
-	}
+	},
+	onShow() {
+		const userId = (uni.getStorageSync('userInfo') as UTSJSONObject)?.id as number
+		GetContactsStore.get({
+			userId: userId.toString()
+		}).then(res => {
+			console.log(res.data)
+		})
+	},
 }
