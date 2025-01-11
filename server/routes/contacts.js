@@ -101,7 +101,8 @@ router.get("/get-contacts", async function (req, res) {
     if (rows.length > 0) {
       res.json({
         ok: true,
-        contacts: classifyContacts(rows),
+        contacts: rows,
+        classifyContacts: classifyContacts(rows)
       });
     } else {
       res.status(404).json({

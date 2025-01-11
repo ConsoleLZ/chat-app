@@ -30,7 +30,7 @@ export default {
 		GetContactsStore.get({
 			userId: userId.toString()
 		}).then(res => {
-			this.contactsList = res.data?.contacts as UTSJSONObject
+			this.contactsList = res.data?.classifyContacts as UTSJSONObject
 		}).catch(() => {
 			uni.showToast({
 				title: '服务器错误',
