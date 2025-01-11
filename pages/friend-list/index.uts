@@ -22,7 +22,7 @@ export default {
 			this.tabsValue = index
 		}
 	},
-	onShow() {
+	onLoad() {
 		uni.showLoading({
 			title: '加载中...'
 		})
@@ -31,6 +31,7 @@ export default {
 			userId: userId.toString()
 		}).then(res => {
 			this.contactsList = res.data?.classifyContacts as UTSJSONObject
+			console.log(this.contactsList)
 		}).catch(() => {
 			uni.showToast({
 				title: '服务器错误',
