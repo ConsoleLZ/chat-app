@@ -61,6 +61,34 @@ router.get("/get-contacts", async function (req, res) {
     });
   }
 
+  // 分类函数
+  function classifyContacts(contacts) {
+    // 预定义的分组名称
+    const predefinedGroups = ["normal", "friend", "schoolmate", "family", 'particularly'];
+    // 初始化结果对象，所有预定义分组都设置为空数组
+    const result = predefinedGroups.reduce((acc, group) => {
+      acc[group] = [];
+      return acc;
+    }, {});
+
+    // 根据联系人的分组添加到相应数组中
+    contacts.forEach((contact) => {
+      let group = contact.grouping || "unclassified";
+      // 如果不是预定义的分组，使用 'unclassified'
+      if (predefinedGroups.includes(group)) {
+        result[group].push(contact);
+      } else {
+        // 确保 'unclassified' 也在预定义分组列表中，或者单独处理
+        if (!result["unclassified"]) {
+          result["unclassified"] = [];
+        }
+        result["unclassified"].push(contact);
+      }
+    });
+
+    return result;
+  }
+
   try {
     // 构建 SQL 查询语句
     let sql = `SELECT *
@@ -69,12 +97,11 @@ router.get("/get-contacts", async function (req, res) {
 
     // 执行查询
     const [rows] = await promisePool.query(sql, [userId]);
-
     // 检查查询结果
     if (rows.length > 0) {
       res.json({
         ok: true,
-        contacts: rows,
+        contacts: classifyContacts(rows),
       });
     } else {
       res.status(404).json({

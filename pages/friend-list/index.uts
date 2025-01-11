@@ -14,7 +14,7 @@ export default {
 	data() {
 		return {
 			tabsValue: 0,
-			contactsData: [] as UTSJSONObject[]
+			contactsList: {} as UTSJSONObject
 		}
 	},
 	methods: {
@@ -23,11 +23,21 @@ export default {
 		}
 	},
 	onShow() {
+		uni.showLoading({
+			title: '加载中...'
+		})
 		const userId = (uni.getStorageSync('userInfo') as UTSJSONObject)?.id as number
 		GetContactsStore.get({
 			userId: userId.toString()
 		}).then(res => {
-			console.log(res.data)
+			this.contactsList = res.data?.contacts as UTSJSONObject
+		}).catch(() => {
+			uni.showToast({
+				title: '服务器错误',
+				icon: 'error'
+			})
+		}).finally(() => {
+			uni.hideLoading()
 		})
 	},
 }
