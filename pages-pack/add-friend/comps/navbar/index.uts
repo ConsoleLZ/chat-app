@@ -18,7 +18,7 @@ export default {
 				mask: true
 			})
 			const userId = (uni.getStorageSync('userInfo') as UTSJSONObject)?.id as number
-			const promise1 = PostSearchUsersStore.post({
+			const promise1 = PostSearchUsersStore.get({
 				searchValue: this.inputValue
 			})
 			const promise2 = GetContactsStore.post({

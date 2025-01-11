@@ -110,8 +110,8 @@ router.post("/register", async function (req, res) {
 });
 
 // 根据账号或者名字搜索用户
-router.post("/search-users", async function (req, res) {
-  const { searchValue } = req.body;
+router.get("/search-users", async function (req, res) {
+  const { searchValue } = req.query;
 
   if (!searchValue) {
     return res.status(400).json({

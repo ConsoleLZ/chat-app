@@ -7,7 +7,7 @@ export const PostLoginStore = new networkRequest<UTSJSONObject>('/api/login', 'P
 export const PostRegisterStore = new networkRequest<UTSJSONObject>('/api/register', 'POST')
 
 // 搜索用户
-export const PostSearchUsersStore = new networkRequest<UTSJSONObject>('/api/search-users', 'POST')
+export const PostSearchUsersStore = new networkRequest<UTSJSONObject>('/api/search-users', 'GET')
 
 // 添加联系人
 export const PostAddContactPeopleStore = new networkRequest<UTSJSONObject>('/api/add-contact-people', 'POST')
