@@ -1,15 +1,15 @@
 import NavbarComp from '@/components/navbar/index.uvue'
 import InputComp from '@/components/input/index.uvue'
-import fuiCollapse from "@/components/fui-collapse/fui-collapse.uvue"
-import fuiCollapseItem from "@/components/fui-collapse-item/fui-collapse-item.uvue"
+import FuiCollapse from "@/components/fui-collapse/fui-collapse.uvue"
+import FuiCollapseItem from "@/components/fui-collapse-item/fui-collapse-item.uvue"
 import { GetContactsStore } from '@/store/index.uts'
 
 export default {
 	components: {
 		NavbarComp,
 		InputComp,
-		fuiCollapse,
-		fuiCollapseItem
+		FuiCollapse,
+		FuiCollapseItem
 	},
 	data() {
 		return {
@@ -45,6 +45,7 @@ export default {
 		this.init()
 	},
 	onPullDownRefresh() {
+		this.contactsList = {}
 		this.init()
 		uni.stopPullDownRefresh()
 	}
