@@ -20,25 +20,32 @@ export default {
 	methods: {
 		onChangeTabs(index : number) {
 			this.tabsValue = index
+		},
+		init() {
+			uni.showLoading({
+				title: '加载中...'
+			})
+			const userId = (uni.getStorageSync('userInfo') as UTSJSONObject)?.id as number
+			GetContactsStore.get({
+				userId: userId.toString()
+			}).then(res => {
+				this.contactsList = res.data?.classifyContacts as UTSJSONObject
+				console.log(this.contactsList)
+			}).catch(() => {
+				uni.showToast({
+					title: '服务器错误',
+					icon: 'error'
+				})
+			}).finally(() => {
+				uni.hideLoading()
+			})
 		}
 	},
 	onLoad() {
-		uni.showLoading({
-			title: '加载中...'
-		})
-		const userId = (uni.getStorageSync('userInfo') as UTSJSONObject)?.id as number
-		GetContactsStore.get({
-			userId: userId.toString()
-		}).then(res => {
-			this.contactsList = res.data?.classifyContacts as UTSJSONObject
-			console.log(this.contactsList)
-		}).catch(() => {
-			uni.showToast({
-				title: '服务器错误',
-				icon: 'error'
-			})
-		}).finally(() => {
-			uni.hideLoading()
-		})
+		this.init()
 	},
+	onPullDownRefresh() {
+		this.init()
+		uni.stopPullDownRefresh()
+	}
 }

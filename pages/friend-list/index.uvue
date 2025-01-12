@@ -4,7 +4,7 @@
 		<input-comp confirm-type="search" placeholder="搜索" />
 		<l-tabs :split="false" :swipeable="true" :value="tabsValue" @click="onChangeTabs">
 			<l-tab-panel :value="0" label="用户">
-				<fui-collapse-item :animation="false">
+				<fui-collapse-item :animation="false" :expand="true">
 					<view class="fui-item__box">
 						<text class="fui-text">好友</text>
 					</view>
