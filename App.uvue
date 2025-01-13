@@ -1,6 +1,6 @@
 <script lang="uts">
 	import { PostVerifiedStore } from '@/store/index.uts'
-	import { openSocket } from './utils/socket/index.uts'
+	import { socket } from './utils/socket/index.uts'
 
 	let firstBackTime = 0
 	export default {
@@ -23,7 +23,7 @@
 						url: '/pages/login/index'
 					})
 				} else {
-					openSocket()
+					socket().connect()
 				}
 			}).catch((error) => {
 				uni.redirectTo({

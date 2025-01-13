@@ -1,12 +1,22 @@
 import { SOCKET_URL } from '@/config.uts'
+type SocketType = {
+	connect : () => void
+}
 
-export const openSocket = () : void => {
-	const socketTask = uni.connectSocket({ url: SOCKET_URL }) as SocketTask
+export const socket = () : SocketType => {
+	let socketTask = null as SocketTask
+	const connect = () : void => {
+		const sTask = uni.connectSocket({ url: SOCKET_URL }) as SocketTask
+		sTask.onOpen(() => {
+			console.log('socket连接成功')
+			socketTask = sTask
+		})
+		sTask.onError(() => {
+			console.log('socket连接失败')
+		})
+	}
 
-	socketTask.onOpen(() => {
-		console.log('socket连接成功')
-	})
-	socketTask.onError(() => {
-		console.log('socket连接失败')
-	})
+	return {
+		connect
+	}
 }
