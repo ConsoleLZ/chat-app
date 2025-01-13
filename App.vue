@@ -40,6 +40,4 @@ export default {
 };
 </script>
 
-<style>
-/*每个页面公共css */
-</style>
+<style lang="scss" src="@/utils/utils.scss"></style>

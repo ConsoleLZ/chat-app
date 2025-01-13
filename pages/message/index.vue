@@ -1,5 +1,5 @@
 <template>
-    <div>
-        消息
-    </div>
+    <navbar-comp />
 </template>
+
+<script src="./index.js"></script>
