@@ -30,7 +30,6 @@ export default {
 				userId: userId.toString()
 			}).then(res => {
 				this.contactsList = res.data?.classifyContacts as UTSJSONObject
-				console.log(this.contactsList)
 			}).catch(() => {
 				uni.showToast({
 					title: '服务器错误',

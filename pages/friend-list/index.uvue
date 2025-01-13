@@ -11,7 +11,7 @@
 					<template v-if="(contactsList.normal as UTSJSONObject[]).length" v-slot:content>
 						<view class="friend-list">
 							<view v-for="item in (contactsList.normal as UTSJSONObject[])" :key="item?.id"
-								class="flex-row friend-list-item">
+								class="flex-row friend-list-item" hover-class="hover-class">
 								<view class="avatar">
 									<image style="width: 100%;" :src="item.avatar" mode="widthFix"></image>
 								</view>
