@@ -1,11 +1,20 @@
-import { defineComponent, reactive, toRefs, ref } from 'vue';
+import {
+	defineComponent,
+	reactive,
+	toRefs,
+	ref
+} from 'vue';
+import {
+	postLoginStore
+} from '@/store/index.js'
 
 export default defineComponent({
 	setup() {
 		const state = reactive({
 			isPasswordType: true,
 			account: '',
-			password: ''
+			password: '',
+			isLoading: false
 		});
 
 		const components = {
@@ -18,7 +27,7 @@ export default defineComponent({
 			},
 			// 登录
 			onLogin() {
-				if(state.account === '' || state.password === ''){
+				if (state.account === '' || state.password === '') {
 					components.toastRef.value.show({
 						type: 'warning',
 						title: '提示',
@@ -26,7 +35,21 @@ export default defineComponent({
 					});
 					return
 				}
-				console.log(state.account, state.password);
+				state.isLoading = true
+				postLoginStore.post({
+					account: state.account,
+					password: state.password
+				}).then(res => {
+					console.log(res)
+				}).catch(() => {
+					components.toastRef.value.show({
+						type: 'error',
+						title: '提示',
+						message: '服务器错误'
+					});
+				}).finally(() => {
+					state.isLoading = false
+				})
 			}
 		};
 
