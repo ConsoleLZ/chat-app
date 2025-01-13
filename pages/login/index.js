@@ -1,12 +1,5 @@
-import {
-	defineComponent,
-	reactive,
-	toRefs,
-	ref
-} from 'vue';
-import {
-	postLoginStore
-} from '@/store/index.js'
+import { defineComponent, reactive, toRefs, ref } from 'vue';
+import { postLoginStore } from '@/store/index.js';
 
 export default defineComponent({
 	setup() {
@@ -33,23 +26,27 @@ export default defineComponent({
 						title: '提示',
 						message: '账号或者密码不能为空'
 					});
-					return
+					return;
 				}
-				state.isLoading = true
-				postLoginStore.post({
-					account: state.account,
-					password: state.password
-				}).then(res => {
-					console.log(res)
-				}).catch(() => {
-					components.toastRef.value.show({
-						type: 'error',
-						title: '提示',
-						message: '服务器错误'
+				state.isLoading = true;
+				postLoginStore
+					.post({
+						account: state.account,
+						password: state.password
+					})
+					.then(res => {
+						console.log(res);
+					})
+					.catch(() => {
+						components.toastRef.value.show({
+							type: 'error',
+							title: '提示',
+							message: '服务器错误'
+						});
+					})
+					.finally(() => {
+						state.isLoading = false;
 					});
-				}).finally(() => {
-					state.isLoading = false
-				})
 			}
 		};
 

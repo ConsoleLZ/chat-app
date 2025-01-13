@@ -1,6 +1,6 @@
 {
 	"scripts": {
-		"format": "prettier --write \"*.js\" \"*.vue\" \"*.scss\" \"*.json\""
+		"format": "prettier --write \"**/*.{js,vue,scss,json}\""
 	},
 	"dependencies": {
 		"@climblee/uv-ui": "^1.1.20"
