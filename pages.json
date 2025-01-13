@@ -1,0 +1,22 @@
+{
+	"easycom": {
+		"autoscan": true,
+		"custom": {
+			"^uv-(.*)": "@climblee/uv-ui/components/uv-$1/uv-$1.vue"
+		}
+	},
+	"pages": [
+		{
+			"path": "pages/login/index",
+			"style": {
+				"navigationBarTitleText": "登录"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTitleText": "随聊",
+		"navigationBarBackgroundColor": "#165af7",
+		"navigationBarTextStyle": "#ffffff"
+	},
+	"uniIdRouter": {}
+}
