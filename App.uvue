@@ -1,6 +1,6 @@
 <script lang="uts">
 	import { PostVerifiedStore } from '@/store/index.uts'
-	import { SOCKET_URL } from './config.uts'
+	import { openSocket } from './utils/socket/index.uts'
 
 	let firstBackTime = 0
 	export default {
@@ -14,14 +14,6 @@
 				title: '加载中...',
 				mask: true
 			})
-
-			const socketTask = uni.connectSocket({ url: SOCKET_URL }) as SocketTask
-			socketTask.onOpen(() => {
-				console.log('socket连接成功')
-			})
-			socketTask.onError(() => {
-				console.log('socket连接失败')
-			})
 			PostVerifiedStore.post({
 				token: uni.getStorageSync('token')
 			}).then(res => {
@@ -30,6 +22,8 @@
 					uni.redirectTo({
 						url: '/pages/login/index'
 					})
+				} else {
+					openSocket()
 				}
 			}).catch((error) => {
 				uni.redirectTo({
