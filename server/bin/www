@@ -8,13 +8,7 @@ var app = require('../app');
 var debug = require('debug')('server:server');
 var http = require('http');
 var os = require('os'); // 引入 os 模块
-const { WebSocketServer } = require("ws")
-
-const wss = new WebSocketServer({ port: 3001 });
-
-wss.on('connection', ()=>{
-  console.log('连接成功')
-})
+require('../routes/socket')
 
 /**
  * Get port from environment and store in Express.

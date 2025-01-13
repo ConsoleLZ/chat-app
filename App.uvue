@@ -1,5 +1,6 @@
 <script lang="uts">
 	import { PostVerifiedStore } from '@/store/index.uts'
+	import { SOCKET_URL } from './config.uts'
 
 	let firstBackTime = 0
 	export default {
@@ -14,7 +15,7 @@
 				mask: true
 			})
 
-			const socketTask = uni.connectSocket({ url: 'ws://172.20.104.9:3001' }) as SocketTask
+			const socketTask = uni.connectSocket({ url: SOCKET_URL }) as SocketTask
 			socketTask.onOpen(() => {
 				console.log('socket连接成功')
 			})
