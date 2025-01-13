@@ -1,12 +1,19 @@
-import { defineComponent, reactive, toRefs, ref } from 'vue';
-import { postLoginStore } from '@/store/index.js';
+import {
+	defineComponent,
+	reactive,
+	toRefs,
+	ref
+} from 'vue';
+import {
+	postLoginStore
+} from '@/store/index.js';
 
 export default defineComponent({
 	setup() {
 		const state = reactive({
 			isPasswordType: true,
-			account: '',
-			password: '',
+			account: 'admin',
+			password: '123456',
 			isLoading: false
 		});
 
@@ -35,7 +42,26 @@ export default defineComponent({
 						password: state.password
 					})
 					.then(res => {
-						console.log(res);
+						const ok = res.data?.ok
+						if (ok) {
+							uni.setStorageSync('token', res.data?.token)
+							components.toastRef.value.show({
+								type: 'success',
+								title: '提示',
+								message: '登录成功',
+								complete() {
+									uni.redirectTo({
+										url: '/pages/message/index'
+									})
+								}
+							});
+						}else {
+							components.toastRef.value.show({
+								type: 'error',
+								title: '提示',
+								message: '账号或者密码错误'
+							});
+						}
 					})
 					.catch(() => {
 						components.toastRef.value.show({
