@@ -31,7 +31,8 @@
 						<view class="tag">未知</view>
 					</view>
 				</view>
-				<uv-button type="primary" text="添加"></uv-button>
+				<uv-button v-if="!contactUserIdList.includes(item.id) && userId !== item.id" type="primary" text="添加"></uv-button>
+				<uv-button v-else type="primary" disabled text="已添加"></uv-button>
 			</view>
 		</view>
 	</view>

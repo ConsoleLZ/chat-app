@@ -8,7 +8,6 @@ export class Request {
 	}
 
 	get(params) {
-		console.log(this.url + buildQueryString(params))
 		return new Promise((resolve, reject) => {
 			uni.request({
 				url: this.url + buildQueryString(params),
