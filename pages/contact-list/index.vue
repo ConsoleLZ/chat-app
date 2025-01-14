@@ -3,17 +3,17 @@
 	<uv-tabs :list="tabList" @click="onChangeTabs"></uv-tabs>
 	<view>
 		<view v-if="tabsIndex === 0">
-			<uv-collapse accordion :border="false" value="expand">
+			<uv-collapse ref="collapseRef" accordion :border="false" value="expand">
 				<uv-collapse-item title="特别关心">111</uv-collapse-item>
 				<uv-collapse-item title="家人">111</uv-collapse-item>
 				<uv-collapse-item title="同学">111</uv-collapse-item>
 				<uv-collapse-item title="朋友">111</uv-collapse-item>
 				<uv-collapse-item title="好友" name="expand">
 					<view class="contact-list">
-						<view class="flex-center-row contact-list-item">
-							<uv-avatar size="90rpx" style="margin-right: 15rpx" src="https://consolelz.github.io/"></uv-avatar>
+						<view class="flex-center-row contact-list-item" v-for="item in classifyContactsData?.normal" :key="item.id">
+							<uv-avatar size="90rpx" style="margin-right: 15rpx" :src="item.avatar"></uv-avatar>
 							<view style="flex: 1">
-								<view class="title">嘻嘻</view>
+								<view class="title">{{item.name}}</view>
 								<view class="flex-row">
 									<text style="font-size: 24rpx;">[手机在线]</text>
 								</view>
@@ -25,6 +25,7 @@
 		</view>
 		<view v-else-if="tabsIndex === 1">222</view>
 	</view>
+    <uv-toast ref="toastRef"></uv-toast>
 </template>
 
 <script src="./index.js"></script>
