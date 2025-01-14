@@ -13,7 +13,16 @@ export default defineComponent({
 		});
 
 		const methods = {
-			
+			// 展示遮罩
+			async onShowOverlay(){
+				await uni.hideTabBar()
+				state.isShowOverlay = true
+			},
+			// 关闭遮罩
+			async onCloseOverlay(){
+				await uni.showTabBar()
+				state.isShowOverlay = false
+			}
 		};
 
 		return {
