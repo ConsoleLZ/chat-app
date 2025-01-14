@@ -9,7 +9,7 @@ export default defineComponent({
 	},
 	setup() {
 		const state = reactive({
-			
+			isShowOverlay: false
 		});
 
 		const methods = {
