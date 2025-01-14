@@ -22,8 +22,7 @@
 			"path": "pages/about/index",
 			"style": {
 				"navigationBarTitleText": "个人中心",
-				"navigationBarBackgroundColor": "#ffffff",
-				"navigationBarTextStyle": "black"
+				"navigationBarBackgroundColor": "#ffffff"
 			}
 		},
 		{
@@ -36,7 +35,7 @@
 	"globalStyle": {
 		"navigationBarTitleText": "随聊",
 		"navigationBarBackgroundColor": "#165af7",
-		"navigationBarTextStyle": "#ffffff"
+		"navigationBarTextStyle": "black"
 	},
 	"tabBar": {
 		"color": "#7A7E83",
