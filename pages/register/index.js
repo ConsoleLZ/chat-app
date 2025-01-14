@@ -1,19 +1,13 @@
-import {
-	defineComponent,
-	reactive,
-	toRefs,
-	ref
-} from 'vue';
-import {
-	postLoginStore
-} from '@/store/index.js';
+import { defineComponent, reactive, toRefs, ref } from 'vue';
+import { postRegisterStore } from '@/store/index.js';
 
 export default defineComponent({
 	setup() {
 		const state = reactive({
 			isPasswordType: true,
-			account: 'admin',
-			password: '123456',
+			account: '',
+			password: '',
+			name: '',
 			isLoading: false
 		});
 
@@ -25,40 +19,34 @@ export default defineComponent({
 			onChangePasswordType() {
 				state.isPasswordType = !state.isPasswordType;
 			},
-			// 登录
-			onLogin() {
-				if (state.account === '' || state.password === '') {
-					components.toastRef.value.show({
-						type: 'warning',
-						title: '提示',
-						message: '账号或者密码不能为空'
-					});
+			// 注册
+			onRegister() {
+				if (state.account === '' || state.password === '' || state.name === '') {
 					return;
 				}
 				state.isLoading = true;
-				postLoginStore
+				postRegisterStore
 					.post({
+						name: state.name,
 						account: state.account,
 						password: state.password
 					})
 					.then(res => {
-						const ok = res.data?.ok
+						const ok = res.data.ok;
 						if (ok) {
-							uni.setStorageSync('token', res.data?.token)
-							uni.setStorageSync('userInfo', res.data?.userInfo)
 							components.toastRef.value.show({
 								type: 'success',
 								title: '提示',
-								message: '登录成功',
+								message: '注册成功',
 								complete() {
-									uni.switchTab({ url: '/pages/message/index' })
+									uni.navigateTo({ url: '/pages/login/index' });
 								}
 							});
-						}else {
+						} else {
 							components.toastRef.value.show({
 								type: 'error',
 								title: '提示',
-								message: '账号或者密码错误'
+								message: '注册失败,请联系管理'
 							});
 						}
 					})
@@ -72,17 +60,13 @@ export default defineComponent({
 					.finally(() => {
 						state.isLoading = false;
 					});
-			},
-			// 去注册
-			onRegister(){
-				uni.navigateTo({ url: '/pages/register/index' })
 			}
 		};
 
 		return {
-			...methods,
 			...components,
-			...toRefs(state)
+			...toRefs(state),
+			...methods
 		};
 	}
 });

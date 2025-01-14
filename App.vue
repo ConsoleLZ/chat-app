@@ -19,9 +19,9 @@ export default {
 			.then(res => {
 				const ok = res.data?.ok;
 				if (!ok) {
-					uni.redirectTo({
-						url: '/pages/login/index'
-					});
+					// uni.redirectTo({
+					// 	url: '/pages/login/index'
+					// });
 				}
 			})
 			.catch(error => {

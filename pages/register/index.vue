@@ -1,6 +1,10 @@
 <template>
-	<uv-image src="/static/logo.svg" mode="widthFix" class="logo"></uv-image>
 	<view class="main">
+		<uv-input class="input" v-model="name" clearable placeholder="请输入您的昵称">
+			<template #prefix>
+				<uv-image style="margin: 6rpx;" width="26rpx" src="/static/name.png" mode="widthFix"></uv-image>
+			</template>
+		</uv-input>
 		<uv-input
 			class="input"
 			v-model="account"
@@ -23,14 +27,12 @@
 		</uv-input>
 		<uv-button
 			type="primary"
-			@click="onLogin"
 			:loading="isLoading"
 			:disabled="isLoading"
-			loadingText="登录中..."
-			text="登录"
+			loadingText="加载中..."
+			@click="onRegister"
+			text="注册"
 		></uv-button>
-		<view class="or-text">——OR——</view>
-		<uv-button type="primary" @click="onRegister" :plain="true" text="注册"></uv-button>
 	</view>
 	<uv-toast ref="toastRef"></uv-toast>
 </template>

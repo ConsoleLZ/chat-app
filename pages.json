@@ -38,6 +38,13 @@
 				"navigationBarTitleText": "登录",
 				"navigationBarTextStyle": "white"
 			}
+		},
+		{
+			"path": "pages/register/index",
+			"style": {
+				"navigationBarTitleText": "注册",
+				"navigationBarTextStyle": "white"
+			}
 		}
 	],
 	"globalStyle": {
@@ -76,7 +83,7 @@
 		"current": 0,
 		"list": [{
 			"name": "",
-			"path": "pages/contact-list/index",
+			"path": "",
 			"query": ""
 		}]
 	}
