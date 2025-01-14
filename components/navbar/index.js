@@ -25,7 +25,9 @@ export default defineComponent({
 			},
 			// 跳转到搜索联系人页面
 			onJumpSearchContact(){
-				uni.navigateTo({ url: '/sub-pages/search-contact/index' })
+				setTimeout(()=>{
+					uni.navigateTo({ url: '/sub-pages/search-contact/index' })
+				}, 150)
 			}
 		};
 
