@@ -1,7 +1,7 @@
 <template>
 	<view class="navbar flex-row">
 		<uv-avatar size="60rpx" src="https://pic.imgdb.cn/item/665f06ac5e6d1bfa0573f8c5.jpg"></uv-avatar>
-		<text class="title">消息</text>
+		<text class="title">{{ title }}</text>
 		<image @click="onShowOverlay" style="width: 36rpx" src="/static/add.png" mode="widthFix"></image>
 	</view>
 	<uv-overlay :show="isShowOverlay" @click="onCloseOverlay" opacity="0.2" duration="150">

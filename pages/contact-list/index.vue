@@ -1,5 +1,5 @@
 <template>
-    <div>
-        联系人
-    </div>
+    <navbar-comp title="联系人" />
 </template>
+
+<script src="./index.js"></script>
