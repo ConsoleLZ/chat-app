@@ -1,6 +1,7 @@
 import { defineComponent, reactive, toRefs, ref } from 'vue';
 import NavbarComp from '@/components/navbar/index.vue';
 import { getContactsStore } from '@/store/index.js';
+import { onPullDownRefresh } from '@dcloudio/uni-app'
 
 export default defineComponent({
 	components: {
@@ -51,10 +52,15 @@ export default defineComponent({
 					})
 					.finally(() => {
 						uni.hideLoading();
+                        uni.stopPullDownRefresh()
 						components.collapseRef.value.init()
 					});
 			}
 		};
+
+        onPullDownRefresh(()=>{
+            methods.getContactsData()
+        })
 
 		methods.getContactsData()
 	
