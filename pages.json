@@ -26,7 +26,7 @@
 			}
 		},
 		{
-			"path": "sub-pages/add-contact/index",
+			"path": "sub-pages/search-contact/index",
 			"style": {
 				"navigationStyle": "custom"
 			}
@@ -74,7 +74,7 @@
 		"current": 0,
 		"list": [{
 			"name": "",
-			"path": "sub-pages/add-contact/index",
+			"path": "sub-pages/search-contact/index",
 			"query": ""
 		}]
 	}
