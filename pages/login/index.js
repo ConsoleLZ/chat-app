@@ -45,6 +45,7 @@ export default defineComponent({
 						const ok = res.data?.ok
 						if (ok) {
 							uni.setStorageSync('token', res.data?.token)
+							uni.setStorageSync('userInfo', res.data?.userInfo)
 							components.toastRef.value.show({
 								type: 'success',
 								title: '提示',
