@@ -9,7 +9,8 @@ export default defineComponent({
 	},
 	setup() {
 		const state = reactive({
-			isShowOverlay: false
+			isShowOverlay: false,
+			userInfo: uni.getStorageSync('userInfo')
 		});
 
 		const methods = {

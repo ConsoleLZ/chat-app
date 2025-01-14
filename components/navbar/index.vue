@@ -1,6 +1,6 @@
 <template>
 	<view class="navbar flex-row">
-		<uv-avatar size="60rpx" src="https://pic.imgdb.cn/item/665f06ac5e6d1bfa0573f8c5.jpg"></uv-avatar>
+		<uv-avatar size="60rpx" :src="userInfo.avatar"></uv-avatar>
 		<text class="title">{{ title }}</text>
 		<image @click="onShowOverlay" style="width: 36rpx" src="/static/add.png" mode="widthFix"></image>
 	</view>
