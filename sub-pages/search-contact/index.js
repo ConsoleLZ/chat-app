@@ -51,7 +51,16 @@ export default defineComponent({
 					.finally(() => {
 						uni.hideLoading();
 					});
-			}
+			},
+            // 清空列表
+            onClear(){
+                state.searchValue = ''
+                state.users = null
+            },
+            // 返回
+            onBack(){
+                uni.navigateBack({ delta: 1 })
+            }
 		};
 
 		return {

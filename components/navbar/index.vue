@@ -6,7 +6,7 @@
 	</view>
 	<uv-overlay :show="isShowOverlay" @click="onCloseOverlay" opacity="0.2" duration="150">
 		<view class="overlay-box flex-column">
-			<view class="flex-center-row" style="padding: 15rpx 0;width: 100%;" hover-class="hover-class-background" hover-stay-time="150">
+			<view @click="onJumpSearchContact" class="flex-center-row" style="padding: 15rpx 0;width: 100%;" hover-class="hover-class-background" hover-stay-time="150">
 				<uv-image
 					src="/static/add-friend.png"
 					width="36rpx"

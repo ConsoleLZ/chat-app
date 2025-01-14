@@ -22,6 +22,10 @@ export default defineComponent({
 			async onCloseOverlay(){
 				await uni.showTabBar()
 				state.isShowOverlay = false
+			},
+			// 跳转到搜索联系人页面
+			onJumpSearchContact(){
+				uni.navigateTo({ url: '/sub-pages/search-contact/index' })
 			}
 		};
 

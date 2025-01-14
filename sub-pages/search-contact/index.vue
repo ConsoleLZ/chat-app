@@ -1,7 +1,7 @@
 <template>
 	<view class="container">
 		<view class="navbar flex-center-row">
-			<uv-icon name="arrow-left"></uv-icon>
+			<uv-icon @click="onBack" name="arrow-left"></uv-icon>
 			<view style="flex: 1; margin: 0 20rpx">
 				<uv-input
 					v-model="searchValue"
@@ -14,7 +14,7 @@
 				></uv-input>
 			</view>
 			<view>
-				<uv-text type="primary" text="清空"></uv-text>
+				<uv-text @click="onClear" type="primary" text="清空"></uv-text>
 			</view>
 		</view>
 		<view class="search-list" v-if="users">
