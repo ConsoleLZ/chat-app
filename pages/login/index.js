@@ -51,9 +51,7 @@ export default defineComponent({
 								title: '提示',
 								message: '登录成功',
 								complete() {
-									uni.redirectTo({
-										url: '/pages/message/index'
-									})
+									uni.switchTab({ url: '/pages/message/index' })
 								}
 							});
 						}else {
