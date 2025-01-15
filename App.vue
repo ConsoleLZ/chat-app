@@ -1,6 +1,6 @@
 <script>
 import { postVerifiedStore } from '@/store/index.js';
-import { initSocket, connectSocket } from '@/utils/socketService.js';
+import { initSocket } from '@/utils/socketService.js';
 
 export default {
 	onLaunch: function () {
@@ -10,7 +10,6 @@ export default {
 		console.log('页面路由拦截');
 		// 初始化并连接到服务器
 		initSocket();
-		connectSocket();
 
 		// 页面路由拦截
 		uni.showLoading({
