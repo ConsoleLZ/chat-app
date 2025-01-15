@@ -1,7 +1,8 @@
 import {
 	defineComponent,
 	reactive,
-	ref
+	ref,
+	toRefs
 } from 'vue'
 import {
 	getApplicationStore
@@ -29,7 +30,6 @@ export default defineComponent({
 					contactUserId: uni.getStorageSync('userInfo').id
 				}).then(res => {
 					state.dataList = res.data.users
-					console.log(state.dataList)
 				}).catch(() => {
 					components.toastRef.value.show({
 						type: 'error',
@@ -45,5 +45,10 @@ export default defineComponent({
 		onShow(()=>{
 			methods.getData()
 		})
+		
+		return {
+			...toRefs(state),
+			...methods
+		}
 	}
 })

@@ -1,9 +1,9 @@
 <template>
-	<view class="list">
-		<view class="flex-center-row list-item">
-			<uv-avatar size="90rpx" style="margin-right: 15rpx" src="https://pic.imgdb.cn/item/665f06ac5e6d1bfa0573f8c5.jpg"></uv-avatar>
+	<view class="list" v-if="dataList">
+		<view class="flex-center-row list-item" v-for="item in dataList" :key="item.id">
+			<uv-avatar size="90rpx" style="margin-right: 15rpx" :src="item.avatar"></uv-avatar>
 			<view style="flex: 1">
-				<view class="title">123</view>
+				<view class="title">{{item.name}}</view>
 				<view class="flex-row">
 					<view class="tag">未知</view>
 				</view>
@@ -11,6 +11,7 @@
 			<uv-button type="primary" text="同意"></uv-button>
 		</view>
 	</view>
+	<uv-empty v-else style="height: 80vh;" mode="data" icon-size="100rpx"></uv-empty>
 	
 	<uv-toast ref="toastRef"></uv-toast>
 </template>
