@@ -14,7 +14,9 @@ const table = {
   // 用户表
   userTable: 'users',
   // 联系人表
-  contactsTable: 'contacts'
+  contactsTable: 'contacts',
+  // 联系人申请表
+  contactsApplicationTable: 'contactsApplication'
 }
 
 module.exports = {
