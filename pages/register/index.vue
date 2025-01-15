@@ -2,7 +2,7 @@
 	<view class="main">
 		<uv-input class="input" v-model="name" clearable placeholder="请输入您的昵称">
 			<template #prefix>
-				<uv-image style="margin: 6rpx;" width="26rpx" src="/static/name.png" mode="widthFix"></uv-image>
+				<uv-image style="margin: 6rpx" width="26rpx" src="/static/name.png" mode="widthFix"></uv-image>
 			</template>
 		</uv-input>
 		<uv-input

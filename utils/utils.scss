@@ -7,12 +7,12 @@
 	font-size: 26rpx;
 	color: #4062f9;
 }
-.flex-row{
+.flex-row {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 }
-.flex-column{
+.flex-column {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -43,8 +43,8 @@
 	background-color: #f1efef;
 }
 .text-ellipsis-300 {
-  white-space: nowrap;        /* 防止文本换行 */
-  overflow: hidden;           /* 隐藏溢出内容 */
-  text-overflow: ellipsis;    /* 溢出部分显示为省略号 */
-  width: 300rpx;               /* 设置一个固定的宽度 */
+	white-space: nowrap; /* 防止文本换行 */
+	overflow: hidden; /* 隐藏溢出内容 */
+	text-overflow: ellipsis; /* 溢出部分显示为省略号 */
+	width: 300rpx; /* 设置一个固定的宽度 */
 }

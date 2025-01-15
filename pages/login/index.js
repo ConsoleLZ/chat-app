@@ -1,12 +1,5 @@
-import {
-	defineComponent,
-	reactive,
-	toRefs,
-	ref
-} from 'vue';
-import {
-	postLoginStore
-} from '@/store/index.js';
+import { defineComponent, reactive, toRefs, ref } from 'vue';
+import { postLoginStore } from '@/store/index.js';
 
 export default defineComponent({
 	setup() {
@@ -42,19 +35,19 @@ export default defineComponent({
 						password: state.password
 					})
 					.then(res => {
-						const ok = res.data?.ok
+						const ok = res.data?.ok;
 						if (ok) {
-							uni.setStorageSync('token', res.data?.token)
-							uni.setStorageSync('userInfo', res.data?.userInfo)
+							uni.setStorageSync('token', res.data?.token);
+							uni.setStorageSync('userInfo', res.data?.userInfo);
 							components.toastRef.value.show({
 								type: 'success',
 								title: '提示',
 								message: '登录成功',
 								complete() {
-									uni.switchTab({ url: '/pages/message/index' })
+									uni.switchTab({ url: '/pages/message/index' });
 								}
 							});
-						}else {
+						} else {
 							components.toastRef.value.show({
 								type: 'error',
 								title: '提示',
@@ -74,8 +67,8 @@ export default defineComponent({
 					});
 			},
 			// 去注册
-			onRegister(){
-				uni.navigateTo({ url: '/pages/register/index' })
+			onRegister() {
+				uni.navigateTo({ url: '/pages/register/index' });
 			}
 		};
 

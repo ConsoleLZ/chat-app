@@ -1,23 +1,23 @@
 .navbar {
-    justify-content: space-between;
-    height: 130rpx;
-    padding: 50rpx 50rpx 0 50rpx;
-    background-color: #ffffff;
-    position: relative;
+	justify-content: space-between;
+	height: 130rpx;
+	padding: 50rpx 50rpx 0 50rpx;
+	background-color: #ffffff;
+	position: relative;
 	.title {
 		font-size: 36rpx;
-        text-align: center;
-        position: relative;
-        left: -10rpx;
+		text-align: center;
+		position: relative;
+		left: -10rpx;
 	}
 }
 .overlay-box {
-    width: 300rpx;
-    min-height: 210rpx;
-    border-radius: 12rpx;
-    background-color: #ffffff;
-    position: absolute;
-    top: 165rpx;
-    right: 50rpx;
-    padding: 30rpx 0;
+	width: 300rpx;
+	min-height: 210rpx;
+	border-radius: 12rpx;
+	background-color: #ffffff;
+	position: absolute;
+	top: 165rpx;
+	right: 50rpx;
+	padding: 30rpx 0;
 }

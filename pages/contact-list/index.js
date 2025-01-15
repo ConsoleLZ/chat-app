@@ -1,7 +1,7 @@
 import { defineComponent, reactive, toRefs, ref } from 'vue';
 import NavbarComp from '@/components/navbar/index.vue';
 import { getContactsStore } from '@/store/index.js';
-import { onPullDownRefresh } from '@dcloudio/uni-app'
+import { onPullDownRefresh } from '@dcloudio/uni-app';
 
 export default defineComponent({
 	components: {
@@ -23,7 +23,7 @@ export default defineComponent({
 
 		const components = {
 			toastRef: ref(null),
-			collapseRef: ref(null),
+			collapseRef: ref(null)
 		};
 
 		const methods = {
@@ -31,10 +31,10 @@ export default defineComponent({
 				state.tabsIndex = value.index;
 			},
 			// 跳转到新朋友页面
-			onJumpNew(){
+			onJumpNew() {
 				uni.navigateTo({
 					url: '/sub-pages/new-contacts/index'
-				})
+				});
 			},
 			// 获取联系人数据
 			getContactsData() {
@@ -47,7 +47,7 @@ export default defineComponent({
 						userId: userInfo.id
 					})
 					.then(res => {
-						state.classifyContactsData = res.data.classifyContacts
+						state.classifyContactsData = res.data.classifyContacts;
 					})
 					.catch(() => {
 						components.toastRef.value.show({
@@ -58,18 +58,18 @@ export default defineComponent({
 					})
 					.finally(() => {
 						uni.hideLoading();
-                        uni.stopPullDownRefresh()
-						components.collapseRef.value.init()
+						uni.stopPullDownRefresh();
+						components.collapseRef.value.init();
 					});
 			}
 		};
 
-        onPullDownRefresh(()=>{
-            methods.getContactsData()
-        })
+		onPullDownRefresh(() => {
+			methods.getContactsData();
+		});
 
-		methods.getContactsData()
-	
+		methods.getContactsData();
+
 		return {
 			...components,
 			...methods,

@@ -20,18 +20,19 @@
 		<view class="search-list" v-if="users">
 			<uv-text style="margin-bottom: 24rpx" size="24rpx" type="info" text="用户"></uv-text>
 			<view class="flex-center-row search-list-item" v-for="item in users" :key="item.id">
-				<uv-avatar
-					size="90rpx"
-					style="margin-right: 15rpx"
-					:src="item.avatar"
-				></uv-avatar>
+				<uv-avatar size="90rpx" style="margin-right: 15rpx" :src="item.avatar"></uv-avatar>
 				<view style="flex: 1">
 					<view class="title">{{ item.name }}</view>
 					<view class="flex-row">
 						<view class="tag">未知</view>
 					</view>
 				</view>
-				<uv-button @click="onApplicationAdd(item.id)" v-if="!contactUserIdList.includes(item.id) && userId !== item.id" type="primary" text="添加"></uv-button>
+				<uv-button
+					@click="onApplicationAdd(item.id)"
+					v-if="!contactUserIdList.includes(item.id) && userId !== item.id"
+					type="primary"
+					text="添加"
+				></uv-button>
 				<uv-button v-else type="primary" disabled text="已添加"></uv-button>
 			</view>
 		</view>

@@ -77,9 +77,10 @@ export default defineComponent({
 					.then(res => {
 						const contacts = res[1].data.contacts;
 						state.users = res[0].data?.users;
-						contacts && contacts.forEach(item => {
-							state.contactUserIdList.push(item.contactUserId);
-						});
+						contacts &&
+							contacts.forEach(item => {
+								state.contactUserIdList.push(item.contactUserId);
+							});
 					})
 					.catch(err => {
 						console.log(err);

@@ -1,5 +1,5 @@
 import { SERVER_URL } from '@/config.js';
-import {buildQueryString} from './utils'
+import { buildQueryString } from './utils';
 
 export class Request {
 	constructor(url, method) {
