@@ -27,12 +27,6 @@
 			}
 		},
 		{
-			"path": "sub-pages/search-contact/index",
-			"style": {
-				"navigationStyle": "custom"
-			}
-		},
-		{
 			"path": "pages/login/index",
 			"style": {
 				"navigationBarTitleText": "登录",
@@ -45,16 +39,29 @@
 				"navigationBarTitleText": "注册",
 				"navigationBarTextStyle": "white"
 			}
+		},
+		{
+			"path": "sub-pages/search-contact/index",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "sub-pages/new-contacts/index",
+			"style": {
+				"navigationBarTitleText": "新朋友",
+				"navigationBarBackgroundColor": "#ffffff"
+			}
 		}
 	],
 	"globalStyle": {
 		"navigationBarTitleText": "随聊",
-		"navigationBarBackgroundColor": "#165af7",
+		"navigationBarBackgroundColor": "#3c9cff",
 		"navigationBarTextStyle": "black"
 	},
 	"tabBar": {
 		"color": "#7A7E83",
-		"selectedColor": "#165af7",
+		"selectedColor": "#3c9cff",
 		"borderStyle": "white",
 		"backgroundColor": "#f9f9f9",
 		"list": [

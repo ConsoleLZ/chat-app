@@ -30,6 +30,12 @@ export default defineComponent({
 			onChangeTabs(value) {
 				state.tabsIndex = value.index;
 			},
+			// 跳转到新朋友页面
+			onJumpNew(){
+				uni.navigateTo({
+					url: '/sub-pages/new-contacts/index'
+				})
+			},
 			// 获取联系人数据
 			getContactsData() {
 				uni.showLoading({

@@ -1,5 +1,13 @@
 <template>
 	<navbar-comp title="联系人" />
+	<uv-list>
+		<uv-list-item
+			@click="onJumpNew"
+			title="新朋友"
+			note="交友需谨慎哦"
+			link
+		></uv-list-item>
+	</uv-list>
 	<uv-tabs :list="tabList" @click="onChangeTabs"></uv-tabs>
 	<view>
 		<view v-if="tabsIndex === 0">
@@ -10,12 +18,16 @@
 				<uv-collapse-item title="朋友">111</uv-collapse-item>
 				<uv-collapse-item title="好友" name="expand">
 					<view class="contact-list">
-						<view class="flex-center-row contact-list-item" v-for="item in classifyContactsData?.normal" :key="item.id">
+						<view
+							class="flex-center-row contact-list-item"
+							v-for="item in classifyContactsData?.normal"
+							:key="item.id"
+						>
 							<uv-avatar size="90rpx" style="margin-right: 15rpx" :src="item.avatar"></uv-avatar>
 							<view style="flex: 1">
-								<view class="title">{{item.name}}</view>
+								<view class="title">{{ item.name }}</view>
 								<view class="flex-row">
-									<text style="font-size: 24rpx;">[手机在线]</text>
+									<text style="font-size: 24rpx">[手机在线]</text>
 								</view>
 							</view>
 						</view>
@@ -25,7 +37,7 @@
 		</view>
 		<view v-else-if="tabsIndex === 1">222</view>
 	</view>
-    <uv-toast ref="toastRef"></uv-toast>
+	<uv-toast ref="toastRef"></uv-toast>
 </template>
 
 <script src="./index.js"></script>
