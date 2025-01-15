@@ -77,12 +77,12 @@ export default defineComponent({
 					.then(res => {
 						const contacts = res[1].data.contacts;
 						state.users = res[0].data?.users;
-						contacts.forEach(item => {
+						contacts && contacts.forEach(item => {
 							state.contactUserIdList.push(item.contactUserId);
 						});
-						console.log(state.contactUserIdList);
 					})
-					.catch(() => {
+					.catch(err => {
+						console.log(err);
 						components.toastRef.value.show({
 							type: 'error',
 							title: '提示',

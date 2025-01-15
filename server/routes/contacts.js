@@ -105,7 +105,7 @@ router.get("/get-contacts", async function (req, res) {
         classifyContacts: classifyContacts(rows)
       });
     } else {
-      res.status(404).json({
+      res.json({
         ok: false,
         message: "未找到联系人",
       });
