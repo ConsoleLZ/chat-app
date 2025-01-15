@@ -1,6 +1,6 @@
 <script>
 import { postVerifiedStore } from '@/store/index.js';
-import { io } from 'socket.io-client';
+import { initSocket, connectSocket } from '@/utils/socketService.js';
 
 export default {
 	onLaunch: function () {
@@ -8,8 +8,9 @@ export default {
 	},
 	onShow: function () {
 		console.log('页面路由拦截');
-		// 创建一个与服务器的连接
-		const socket = io('http://172.20.104.9:3001');
+		// 初始化并连接到服务器
+		initSocket();
+		connectSocket();
 
 		// 页面路由拦截
 		uni.showLoading({
