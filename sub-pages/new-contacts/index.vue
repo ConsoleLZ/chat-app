@@ -11,6 +11,9 @@
 			<uv-button type="primary" text="同意"></uv-button>
 		</view>
 	</view>
+	
+	<uv-toast ref="toastRef"></uv-toast>
 </template>
 
+<script src="./index.js"></script>
 <style lang="scss" src="./index.scss" scoped></style>

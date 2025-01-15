@@ -56,4 +56,45 @@ router.post('/application', async function (req, res) {
 	}
 });
 
+// 查找正在申请成为联系人的用户
+router.get('/get-application', async function (req, res) {
+	const { contactUserId } = req.query;
+
+	// 参数验证
+	if (!contactUserId) {
+		return res.status(400).json({
+			ok: false,
+			message: '缺少参数'
+		});
+	}
+
+	try {
+		// 构建 SQL 查询语句
+		let sql = `SELECT *
+				   FROM ${contactsApplicationTable} 
+				   WHERE contactUserId = ?`;
+
+		// 执行查询
+		const [rows] = await promisePool.query(sql, [contactUserId]);
+		// 检查查询结果
+		if (rows.length > 0) {
+			res.json({
+				ok: true,
+				users: rows
+			});
+		} else {
+			res.json({
+				ok: false,
+				message: '暂无申请的朋友'
+			});
+		}
+	} catch (error) {
+		console.error('数据库交互失败:', error);
+		res.status(500).json({
+			ok: false,
+			message: '服务器发生错误'
+		});
+	}
+});
+
 module.exports = router;

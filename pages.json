@@ -49,8 +49,7 @@
 		{
 			"path": "sub-pages/new-contacts/index",
 			"style": {
-				"navigationBarTitleText": "新朋友",
-				"navigationBarBackgroundColor": "#ffffff"
+				"navigationBarTitleText": "新朋友"
 			}
 		}
 	],

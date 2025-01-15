@@ -15,5 +15,8 @@ export const getSearchUsersStore = new Request('/api/search-users', 'GET')
 // 申请添加为联系人
 export const postApplicationStore = new Request('/api/application', 'POST')
 
+// 正在申请成为联系人的用户
+export const getApplicationStore = new Request('/api/get-application', 'GET')
+
 // 查找联系人
 export const getContactsStore = new Request('/api/get-contacts', 'GET')
