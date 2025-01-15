@@ -1,11 +1,14 @@
-import { io } from 'socket.io-client';
+import io from '@hyoga/uni-socket.io';
 import {SOCKET_URL} from '@/config.js'
 
 let socket = null;
 
 export function initSocket() {
   if (!socket) {
-    io(SOCKET_URL)
+    socket = io(SOCKET_URL, {
+      transports: ['websocket', 'polling'],
+			timeout: 5000
+    })
   }
 }
 

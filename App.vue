@@ -8,9 +8,6 @@ export default {
 	},
 	onShow: function () {
 		console.log('页面路由拦截');
-		// 初始化并连接到服务器
-		initSocket();
-
 		// 页面路由拦截
 		uni.showLoading({
 			title: '加载中...',
@@ -26,6 +23,9 @@ export default {
 					uni.redirectTo({
 						url: '/pages/login/index'
 					});
+				} else {
+					// 初始化并连接到服务器
+					initSocket();
 				}
 			})
 			.catch(error => {
