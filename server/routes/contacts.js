@@ -1,15 +1,15 @@
 const express = require('express');
 const mysql2 = require('mysql2');
-const { dbConfig, contactsTable } = require('../db.config');
+const { dbConfig, contactsTable, contactsApplicationTable } = require('../db.config');
 
 // 创建一个全局的连接池
 const promisePool = mysql2.createPool(dbConfig()).promise();
 
 const router = express.Router();
 
-// 添加联系人
-router.post('/add-contact-people', async function (req, res) {
-	const { contactUserId, userId, name, avatar } = req.body;
+// 同意申请
+router.post('/agree-application', async function (req, res) {
+	const { contactUserId, userId, name, avatar, isUpdate } = req.body;
 
 	// 参数验证
 	if (!contactUserId || !userId || !name || !avatar) {
@@ -30,9 +30,19 @@ router.post('/add-contact-people', async function (req, res) {
 
 		// 检查 affectedRows 判断是否成功插入或更新
 		if (result.affectedRows > 0) {
+			// 如果 isUpdate 为 true，则更新 contactsApplicationTable 中对应的 agree 字段
+			if (isUpdate) {
+				await promisePool.query(
+					`UPDATE ${contactsApplicationTable}
+           SET agree = 1
+           WHERE userId = ? AND contactUserId = ?`,
+					[userId, contactUserId]
+				);
+			}
+
 			res.json({
 				ok: true,
-				message: '添加成功或已更新'
+				message: '操作成功'
 			});
 		} else {
 			res.status(500).json({

@@ -20,3 +20,6 @@ export const getApplicationStore = new Request('/api/get-application', 'GET');
 
 // 查找联系人
 export const getContactsStore = new Request('/api/get-contacts', 'GET');
+
+// 同意申请
+export const postAgreeApplicationStore = new Request('/api/agree-application', 'POST')

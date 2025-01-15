@@ -8,7 +8,8 @@
 					<view class="tag">未知</view>
 				</view>
 			</view>
-			<uv-button type="primary" text="同意"></uv-button>
+			<uv-button v-if="item.agree === 0" @click="onAgree(item)" type="primary" text="同意"></uv-button>
+			<uv-button v-else type="primary" text="已同意" disabled></uv-button>
 		</view>
 	</view>
 	<uv-empty v-else style="height: 80vh" mode="data" icon-size="100rpx"></uv-empty>
