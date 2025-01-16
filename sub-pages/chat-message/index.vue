@@ -26,8 +26,8 @@
 			<uv-button type="primary" @click="sendMessage" class="send-btn" :disabled="!inputText">发送</uv-button>
 		</view>
 		<view class="select flex-row">
-			<uv-icon style="margin-right: 36rpx;" size="46rpx" name="/static/face.png"></uv-icon>
-			<uv-icon size="45rpx" name="/static/photo.png"></uv-icon>
+			<uv-icon style="margin-right: 66rpx;" size="46rpx" name="/static/face.png"></uv-icon>
+			<uv-icon size="41rpx" name="/static/photo.png"></uv-icon>
 		</view>
 	</view>
 </template>
