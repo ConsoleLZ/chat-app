@@ -12,7 +12,7 @@ router.post('/agree-application', async function (req, res) {
 	const { contactUserId, userId, name, avatar, isUpdate } = req.body;
 
 	// 参数验证
-	if (!contactUserId || !userId || !name || !avatar) {
+	if (!contactUserId || !userId || !name) {
 		return res.status(400).json({
 			ok: false,
 			message: '参数为空'

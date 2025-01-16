@@ -21,7 +21,8 @@
 							:key="item.id"
 							style="padding: 12rpx;"
 						>
-							<uv-avatar size="90rpx" style="margin-right: 15rpx" :src="item.avatar"></uv-avatar>
+							<uv-avatar v-if="item.avatar !== '' && item.avatar" size="90rpx" style="margin-right: 15rpx" :src="item.avatar"></uv-avatar>
+							<uv-avatar v-else :text="item.name?.slice(0, 1)" size="90rpx" style="margin-right: 15rpx"></uv-avatar>
 							<view style="flex: 1">
 								<view class="title">{{ item.name }}</view>
 								<view class="flex-row">
