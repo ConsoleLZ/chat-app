@@ -1,4 +1,5 @@
-import { defineComponent, reactive, toRefs, nextTick } from 'vue';
+import { defineComponent, reactive, toRefs, nextTick, ref } from 'vue';
+import { faceList } from './constants';
 
 export default defineComponent({
 	setup() {
@@ -29,6 +30,14 @@ export default defineComponent({
 			scrollTop: 9999
 		});
 
+		const constants = {
+			faceList
+		};
+
+		const components = {
+			popupRef: ref(null)
+		};
+
 		const methods = {
 			sendMessage() {
 				if (state.inputText.trim()) {
@@ -39,9 +48,13 @@ export default defineComponent({
 					});
 					state.inputText = '';
 					nextTick(() => {
-						state.scrollTop += 1
+						state.scrollTop += 1;
 					});
 				}
+			},
+			// 打开表情包弹窗
+			openFace() {
+				components.popupRef.value.open();
 			},
 			goBack() {
 				uni.navigateBack();
@@ -50,7 +63,9 @@ export default defineComponent({
 
 		return {
 			...toRefs(state),
-			...methods
+			...methods,
+			...components,
+			...constants
 		};
 	}
 });

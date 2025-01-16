@@ -69,4 +69,13 @@
 		padding: 0 20rpx 20rpx 20rpx;
 		background-color: #fff;
 	}
+  .popupFace {
+    height: 340rpx;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    justify-items: center;
+    font-size: 42rpx;
+    padding: 30rpx 15rpx;
+    overflow-y: auto;
+  }
 }

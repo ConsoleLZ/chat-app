@@ -13,7 +13,7 @@
 		<!-- 消息列表 -->
 		<scroll-view class="message-list" scroll-y :scroll-top="scrollTop">
 			<view v-for="(msg, index) in messages" :key="index" :class="['message-item', msg.isMe ? 'me' : 'other']">
-				<uv-avatar :src="msg.avatar" shape="circle" style="background-color: #e0e0e0;"></uv-avatar>
+				<uv-avatar :src="msg.avatar" shape="circle" style="background-color: #e0e0e0"></uv-avatar>
 				<view class="message-content">
 					{{ msg.content }}
 				</view>
@@ -27,10 +27,15 @@
 		</view>
 		<view class="select flex-row">
 			<!-- 发送表情包 -->
-			<uv-icon style="margin-right: 66rpx;" size="46rpx" name="/static/face.png"></uv-icon>
+			<uv-icon @click="openFace" style="margin-right: 66rpx" size="46rpx" name="/static/face.png"></uv-icon>
 			<!-- 发送图片 -->
 			<uv-icon size="41rpx" name="/static/photo.png"></uv-icon>
 		</view>
+		<uv-popup ref="popupRef" mode="bottom">
+			<view class="popupFace">
+				<text v-for="(item, index) in faceList" :key="index">{{ item }}</text>
+			</view>
+		</uv-popup>
 	</view>
 </template>
 
