@@ -33,7 +33,7 @@
 		</view>
 		<uv-popup ref="popupRef" mode="bottom">
 			<view class="popupFace">
-				<text v-for="(item, index) in faceList" :key="index">{{ item }}</text>
+				<text @click="selectFace(item)" v-for="(item, index) in faceList" :key="index">{{ item }}</text>
 			</view>
 		</uv-popup>
 	</view>

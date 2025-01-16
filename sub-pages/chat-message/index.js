@@ -56,6 +56,11 @@ export default defineComponent({
 			openFace() {
 				components.popupRef.value.open();
 			},
+			// 选择表情
+			selectFace(item){
+				state.inputText += item
+				components.popupRef.value.close();
+			},
 			goBack() {
 				uni.navigateBack();
 			}
