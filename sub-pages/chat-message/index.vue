@@ -26,7 +26,9 @@
 			<uv-button type="primary" @click="sendMessage" class="send-btn" :disabled="!inputText">发送</uv-button>
 		</view>
 		<view class="select flex-row">
+			<!-- 发送表情包 -->
 			<uv-icon style="margin-right: 66rpx;" size="46rpx" name="/static/face.png"></uv-icon>
+			<!-- 发送图片 -->
 			<uv-icon size="41rpx" name="/static/photo.png"></uv-icon>
 		</view>
 	</view>
