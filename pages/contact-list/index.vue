@@ -15,8 +15,11 @@
 					<view class="contact-list">
 						<view
 							class="flex-center-row contact-list-item"
+							hover-class="hover-class-background"
+							hover-stay-time="150"
 							v-for="item in classifyContactsData?.normal"
 							:key="item.id"
+							style="padding: 12rpx;"
 						>
 							<uv-avatar size="90rpx" style="margin-right: 15rpx" :src="item.avatar"></uv-avatar>
 							<view style="flex: 1">
