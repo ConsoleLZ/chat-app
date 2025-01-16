@@ -51,6 +51,12 @@
 			"style": {
 				"navigationBarTitleText": "新朋友"
 			}
+		},
+		{
+			"path": "sub-pages/chat-message/index",
+			"style": {
+				"navigationStyle": "custom"
+			}
 		}
 	],
 	"globalStyle": {
@@ -90,7 +96,7 @@
 		"list": [
 			{
 				"name": "",
-				"path": "",
+				"path": "sub-pages/chat-message/index",
 				"query": ""
 			}
 		]
