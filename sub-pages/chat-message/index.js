@@ -23,54 +23,10 @@ export default defineComponent({
 					content: '你是谁？',
 					isMe: true,
 					avatar: '/static/logo.svg'
-				},
-				{
-					content: '好的',
-					isMe: false,
-					avatar: '/static/logo.svg'
-				},
-				{
-					content: '你是谁？',
-					isMe: true,
-					avatar: '/static/logo.svg'
-				},
-				{
-					content: '好的',
-					isMe: false,
-					avatar: '/static/logo.svg'
-				},
-				{
-					content: '你是谁？',
-					isMe: true,
-					avatar: '/static/logo.svg'
-				},
-				{
-					content: '好的',
-					isMe: false,
-					avatar: '/static/logo.svg'
-				},
-				{
-					content: '你是谁？',
-					isMe: true,
-					avatar: '/static/logo.svg'
-				},
-				{
-					content: '好的',
-					isMe: false,
-					avatar: '/static/logo.svg'
-				},
-				{
-					content: '你是谁？',
-					isMe: true,
-					avatar: '/static/logo.svg'
-				},
-				{
-					content: '哈哈哈哈',
-					isMe: true,
-					avatar: '/static/logo.svg'
 				}
 			],
-			inputText: ''
+			inputText: '',
+			scrollTop: 9999
 		});
 
 		const methods = {
@@ -83,10 +39,7 @@ export default defineComponent({
 					});
 					state.inputText = '';
 					nextTick(() => {
-						uni.pageScrollTo({
-							scrollTop: 99999,
-							duration: 300
-						});
+						state.scrollTop += 1
 					});
 				}
 			},
