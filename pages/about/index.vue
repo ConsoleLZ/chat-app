@@ -6,7 +6,7 @@
 			<uv-list-item title="设置" thumb="/static/about/set.png" link thumb-size="sm"></uv-list-item>
 			<uv-list-item title="版本号: 1.0.0" thumb="/static/about/version.png" link thumb-size="sm"></uv-list-item>
 		</uv-list>
-		<uv-button style="width: 80%; margin: 100rpx auto" type="error" text="退出登录"></uv-button>
+		<uv-button @click="onQuit" style="width: 80%; margin: 100rpx auto" type="error" text="退出登录"></uv-button>
 	</view>
 </template>
 

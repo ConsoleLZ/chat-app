@@ -76,12 +76,11 @@ router.post('/register', async function (req, res) {
 		const hashedPassword = await bcrypt.hash(password, 10);
 
 		const [result] = await promisePool.query(
-			`INSERT INTO ${userTable} (name, account, password, avatar, createTime) VALUES (?, ?, ?, ?, ?)`,
+			`INSERT INTO ${userTable} (name, account, password, createTime) VALUES (?, ?, ?, ?, ?)`,
 			[
 				name,
 				account,
 				hashedPassword,
-				'https://pic1.imgdb.cn/item/677e34bed0e0a243d4f1d025.png',
 				dayjs().format('YYYY-MM-DD HH:mm:ss')
 			]
 		);
