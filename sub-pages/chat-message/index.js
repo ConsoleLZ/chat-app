@@ -1,32 +1,11 @@
 import { defineComponent, reactive, toRefs, nextTick, ref } from 'vue';
 import { faceList } from './constants';
-import {getSocket} from '@/utils/socketService'
+import { getSocket } from '@/utils/socketService';
 
 export default defineComponent({
 	setup() {
 		const state = reactive({
-			messages: [
-				{
-					content: '你好，有什么可以帮您？',
-					isMe: false,
-					avatar: '/static/logo.svg'
-				},
-				{
-					content: '没有',
-					isMe: true,
-					avatar: '/static/logo.svg'
-				},
-				{
-					content: '好的',
-					isMe: false,
-					avatar: '/static/logo.svg'
-				},
-				{
-					content: '你是谁？',
-					isMe: true,
-					avatar: '/static/logo.svg'
-				}
-			],
+			messages: [],
 			inputText: '',
 			scrollTop: 9999
 		});
@@ -41,12 +20,13 @@ export default defineComponent({
 
 		const methods = {
 			sendMessage() {
+				const userInfo = uni.getStorageSync('userInfo')
 				if (state.inputText.trim()) {
-					getSocket().emit('chat message', state.inputText)
+					getSocket().emit('chat message', state.inputText);
 					state.messages.push({
 						content: state.inputText,
 						isMe: true,
-						avatar: '/static/logo.svg'
+						avatar: userInfo.avatar
 					});
 					state.inputText = '';
 					nextTick(() => {
@@ -59,14 +39,23 @@ export default defineComponent({
 				components.popupRef.value.open();
 			},
 			// 选择表情
-			selectFace(item){
-				state.inputText += item
+			selectFace(item) {
+				state.inputText += item;
 				components.popupRef.value.close();
 			},
 			goBack() {
 				uni.navigateBack();
 			}
 		};
+
+		// 监听服务器消息
+		getSocket().on('chat message', data => {
+			state.messages.push({
+				content: data,
+				isMe: false,
+				avatar: '/static/logo.svg'
+			});
+		});
 
 		return {
 			...toRefs(state),

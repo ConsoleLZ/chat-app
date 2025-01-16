@@ -24,8 +24,8 @@ io.on('connection', socket => {
 	socket.on('chat message', msg => {
 		console.log('message: ' + msg);
 
-		// 广播消息给所有客户端（包括发送者）
-		io.emit('chat message', msg);
+		// 广播消息给所有其他客户端，不包括发送者
+		socket.broadcast.emit('chat message', msg);
 	});
 
 	// 当用户断开连接时触发
