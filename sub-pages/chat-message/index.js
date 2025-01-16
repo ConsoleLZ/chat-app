@@ -1,5 +1,6 @@
 import { defineComponent, reactive, toRefs, nextTick, ref } from 'vue';
 import { faceList } from './constants';
+import {getSocket} from '@/utils/socketService'
 
 export default defineComponent({
 	setup() {
@@ -41,6 +42,7 @@ export default defineComponent({
 		const methods = {
 			sendMessage() {
 				if (state.inputText.trim()) {
+					getSocket().emit('chat message', state.inputText)
 					state.messages.push({
 						content: state.inputText,
 						isMe: true,

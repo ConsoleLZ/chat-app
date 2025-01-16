@@ -25,7 +25,10 @@ export default {
 					});
 				} else {
 					// 初始化并连接到服务器
-					initSocket();
+					const socket = initSocket();
+					socket.on('chat message', (data)=>{
+						console.log(data)
+					})
 				}
 			})
 			.catch(error => {

@@ -10,6 +10,8 @@ export function initSocket() {
 			timeout: 5000
     })
   }
+
+  return socket
 }
 
 export function getSocket() {
