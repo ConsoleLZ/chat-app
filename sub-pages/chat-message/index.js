@@ -51,6 +51,9 @@ export default defineComponent({
 		// 监听服务器消息
 		listenPrivateMessage(data => {
 			state.messages.push(data)
+			nextTick(() => {
+				state.scrollTop += 1;
+			});
 		});
 
 		onLoad(options => {
