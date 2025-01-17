@@ -1,6 +1,6 @@
 <script>
 import { postVerifiedStore } from '@/store/index.js';
-import { initSocket } from '@/utils/socketService.js';
+import { initSocket, listenPrivateMessage } from '@/utils/socketService.js';
 
 export default {
 	onLaunch: function () {
@@ -26,6 +26,13 @@ export default {
 				} else {
 					// 初始化并连接到服务器
 					const socket = initSocket(uni.getStorageSync('userInfo'));
+
+					// 监听服务器消息
+					listenPrivateMessage(data => {
+						const messages = uni.getStorageSync('messages') === '' ? [] : uni.getStorageSync('messages')
+						messages.push(data)
+						uni.setStorageSync('messages', messages)
+					});
 				}
 			})
 			.catch(error => {

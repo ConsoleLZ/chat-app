@@ -13,7 +13,7 @@
 		<!-- 消息列表 -->
 		<scroll-view class="message-list" scroll-y :scroll-top="scrollTop">
 			<view v-for="(msg, index) in messages" :key="index">
-				<view v-if="msg.senderId == chatInfo.contactUserId || msg.isMe" :class="['message-item', msg.isMe ? 'me' : 'other']">
+				<view v-if="msg.senderId == chatInfo.contactUserId || msg.receiverId == chatInfo.contactUserId" :class="['message-item', msg.isMe ? 'me' : 'other']">
 					<uv-avatar
 						v-if="msg.userInfo.avatar !== '' && msg.userInfo.avatar"
 						:src="msg.userInfo.avatar"
