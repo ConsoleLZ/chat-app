@@ -61,3 +61,23 @@ export function listenUpdateUsers(callback) {
 		socket.on('update users', callback);
 	}
 }
+
+/**
+ * 创建一条消息
+ * @senderId 发送者id
+ * @receiverId 接收者id
+ * @content 消息内容
+ * @userInfo 发送该条消息的用户信息
+ * @isMe 是否是自己发送的
+ * @messageType 消息类型
+ */
+export function createMessage(senderId, receiverId, content, userInfo, isMe, messageType = 'text') {
+	return {
+		senderId,
+		receiverId,
+		content,
+		userInfo,
+		isMe,
+		messageType
+	};
+}

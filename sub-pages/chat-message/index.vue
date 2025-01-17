@@ -13,8 +13,8 @@
 		<!-- 消息列表 -->
 		<scroll-view class="message-list" scroll-y :scroll-top="scrollTop">
 			<view v-for="(msg, index) in messages" :key="index" :class="['message-item', msg.isMe ? 'me' : 'other']">
-				<uv-avatar v-if="msg.avatar !== '' && msg.avatar" :src="msg.avatar" shape="circle" style="background-color: #e0e0e0"></uv-avatar>
-				<uv-avatar v-else :text="msg.name.slice(0, 1)" fontSize="14" bg-color="#8696de"></uv-avatar>
+				<uv-avatar v-if="msg.userInfo.avatar !== '' && msg.userInfo.avatar" :src="msg.userInfo.avatar" shape="circle" style="background-color: #e0e0e0"></uv-avatar>
+				<uv-avatar v-else :text="msg.userInfo.name.slice(0, 1)" fontSize="14" bg-color="#8696de"></uv-avatar>
 				<view class="message-content">
 					{{ msg.content }}
 				</view>
