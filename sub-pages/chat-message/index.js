@@ -1,6 +1,6 @@
 import { defineComponent, reactive, toRefs, nextTick, ref } from 'vue';
 import { faceList } from './constants';
-import { sendPrivateMessage } from '@/utils/socketService';
+import { sendPrivateMessage, listenPrivateMessage } from '@/utils/socketService';
 import { onLoad } from '@dcloudio/uni-app';
 
 export default defineComponent({
@@ -28,7 +28,8 @@ export default defineComponent({
 					state.messages.push({
 						content: state.inputText,
 						isMe: true,
-						avatar: userInfo.avatar
+						avatar: userInfo.avatar,
+						name: userInfo.name
 					});
 					state.inputText = '';
 					nextTick(() => {
@@ -51,13 +52,14 @@ export default defineComponent({
 		};
 
 		// 监听服务器消息
-		// getSocket().on('chat message', data => {
-		// 	state.messages.push({
-		// 		content: data,
-		// 		isMe: false,
-		// 		avatar: '/static/logo.svg'
-		// 	});
-		// });
+		listenPrivateMessage(({message, name})=>{
+			state.messages.push({
+				content: message,
+				isMe: false,
+				avatar: state.chatInfo.avatar,
+				name
+			});
+		})
 
 		onLoad((options)=>{
             state.chatInfo = JSON.parse(options.userInfo)

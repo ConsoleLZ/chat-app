@@ -29,6 +29,7 @@ io.on('connection', socket => {
 		if (!users[userId]) {
 			users[userId] = socket.id;
 			socket.userId = userId;
+			socket.username = userInfo.name
 			io.emit('update users', Object.keys(users)); // 发送当前在线用户列表给所有客户端
 		} else {
 			console.log(`Username ${userId} is already taken`);
@@ -37,15 +38,15 @@ io.on('connection', socket => {
 
 	// 监听来自客户端的消息
 	socket.on('private message', ({ to, msg }) => {
-		console.log(users)
 		const toSocketId = users[to];
 		if (toSocketId) {
 			// 发送私信给指定用户
 			io.to(toSocketId).emit('private message', {
 				from: socket.userId,
-				message: msg
+				message: msg,
+				name: socket.username
 			});
-			console.log(`message from ${socket.userId} to ${to}: ${msg}`);
+			console.log(`message from ${socket.username} to ${to}: ${msg}`);
 		} else {
 			console.log(`User ${to} not found`);
 		}
