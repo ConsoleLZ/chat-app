@@ -2,7 +2,7 @@
 	<view class="chat-container">
 		<!-- 顶部导航 -->
 		<uv-navbar
-			title="聊天"
+			:title="userInfo.name"
 			:border="true"
 			:fixed="true"
 			placeholder

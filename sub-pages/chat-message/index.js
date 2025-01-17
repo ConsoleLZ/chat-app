@@ -1,13 +1,15 @@
 import { defineComponent, reactive, toRefs, nextTick, ref } from 'vue';
 import { faceList } from './constants';
 import { getSocket } from '@/utils/socketService';
+import { onLoad } from '@dcloudio/uni-app';
 
 export default defineComponent({
 	setup() {
 		const state = reactive({
 			messages: [],
 			inputText: '',
-			scrollTop: 9999
+			scrollTop: 9999,
+			userInfo: {}
 		});
 
 		const constants = {
@@ -56,6 +58,10 @@ export default defineComponent({
 				avatar: '/static/logo.svg'
 			});
 		});
+
+		onLoad((options)=>{
+            state.userInfo = JSON.parse(options.userInfo)
+        })
 
 		return {
 			...toRefs(state),
