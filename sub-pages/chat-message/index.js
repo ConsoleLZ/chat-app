@@ -50,9 +50,7 @@ export default defineComponent({
 
 		// 监听服务器消息
 		listenPrivateMessage(data => {
-			if (data.senderId == state.chatInfo.contactUserId) {
-				state.messages.push(data);
-			}
+			state.messages.push(data);
 		});
 
 		onLoad(options => {
