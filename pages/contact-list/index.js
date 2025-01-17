@@ -36,6 +36,10 @@ export default defineComponent({
 					url: '/sub-pages/new-contacts/index'
 				});
 			},
+			// 跳转到用户详情页
+			onJumpUserDetail(userInfo){
+				console.log(userInfo)
+			},
 			// 获取联系人数据
 			getContactsData() {
 				uni.showLoading({
