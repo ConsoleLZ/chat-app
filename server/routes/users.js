@@ -76,7 +76,7 @@ router.post('/register', async function (req, res) {
 		const hashedPassword = await bcrypt.hash(password, 10);
 
 		const [result] = await promisePool.query(
-			`INSERT INTO ${userTable} (name, account, password, createTime) VALUES (?, ?, ?, ?, ?)`,
+			`INSERT INTO ${userTable} (name, account, password, createTime) VALUES (?, ?, ?, ?)`,
 			[
 				name,
 				account,
