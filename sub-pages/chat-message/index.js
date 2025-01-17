@@ -1,6 +1,6 @@
 import { defineComponent, reactive, toRefs, nextTick, ref } from 'vue';
 import { faceList } from './constants';
-import { sendPrivateMessage, listenPrivateMessage, createMessage } from '@/utils/socketService';
+import { sendPrivateMessage, listenPrivateMessage, createPrivateMessage } from '@/utils/socketService';
 import { onLoad } from '@dcloudio/uni-app';
 
 export default defineComponent({
@@ -24,8 +24,10 @@ export default defineComponent({
 			sendMessage() {
 				const userInfo = uni.getStorageSync('userInfo');
 				if (state.inputText.trim()) {
-					sendPrivateMessage(state.chatInfo.contactUserId, state.inputText);
-					state.messages.push(createMessage(userInfo.id, state.chatInfo.userId, state.inputText, userInfo,true));
+					sendPrivateMessage(state.chatInfo.contactUserId, state.inputText, userInfo);
+					state.messages.push(
+						createPrivateMessage(userInfo.id, state.chatInfo.userId, state.inputText, userInfo, true)
+					);
 					state.inputText = '';
 					nextTick(() => {
 						state.scrollTop += 1;
@@ -48,13 +50,9 @@ export default defineComponent({
 
 		// 监听服务器消息
 		listenPrivateMessage(data => {
-			console.log(data);
-			// state.messages.push({
-			// 	content: message,
-			// 	isMe: false,
-			// 	avatar: state.chatInfo.avatar,
-			// 	name
-			// });
+			if (data.senderId == state.chatInfo.contactUserId) {
+				state.messages.push(data);
+			}
 		});
 
 		onLoad(options => {

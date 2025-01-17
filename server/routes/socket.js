@@ -28,27 +28,22 @@ io.on('connection', socket => {
 		const userId = userInfo?.id
 		if (!users[userId]) {
 			users[userId] = socket.id;
-			socket.userId = userId;
-			socket.username = userInfo.name
+			socket.userId = userId
 			io.emit('update users', Object.keys(users)); // 发送当前在线用户列表给所有客户端
 		} else {
-			console.log(`Username ${userId} is already taken`);
+			console.log(`Username ${userInfo.name} is already taken`);
 		}
 	});
 
 	// 监听来自客户端的消息
-	socket.on('private message', ({ to, msg }) => {
+	socket.on('private message', ({ to, msg, userInfo }) => {
 		const toSocketId = users[to];
 		if (toSocketId) {
 			// 发送私信给指定用户
-			io.to(toSocketId).emit('private message', {
-				from: socket.userId,
-				message: msg,
-				name: socket.username
-			});
-			console.log(`message from ${socket.username} to ${to}: ${msg}`);
+			io.to(toSocketId).emit('private message', createPrivateMessage(userInfo.id, to, msg, userInfo, false));
+			console.log(`message from ${userInfo.name} to ${to}: ${msg}`);
 		} else {
-			console.log(`User ${to} not found`);
+			console.log(`User ${userInfo.name} not found`);
 		}
 	});
 
@@ -68,3 +63,23 @@ const port = 3001;
 server.listen(port, '0.0.0.0', () => {
 	console.log(`socket服务启动成功，端口在:${port}`);
 });
+
+/**
+ * 创建一条私聊消息
+ * @senderId 发送者id
+ * @receiverId 接收者id
+ * @content 消息内容
+ * @userInfo 发送该条消息的用户信息
+ * @isMe 是否是自己发送的
+ * @messageType 消息类型
+ */
+function createPrivateMessage(senderId, receiverId, content, userInfo, isMe, messageType = 'text') {
+	return {
+		senderId,
+		receiverId,
+		content,
+		userInfo,
+		isMe,
+		messageType
+	};
+}

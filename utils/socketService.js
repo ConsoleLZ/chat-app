@@ -49,9 +49,9 @@ export function listenPrivateMessage(callback) {
 }
 
 // 发送私聊消息
-export function sendPrivateMessage(to, msg) {
+export function sendPrivateMessage(to, msg, userInfo) {
 	if (socket) {
-		socket.emit('private message', { to, msg });
+		socket.emit('private message', { to, msg, userInfo });
 	}
 }
 
@@ -63,7 +63,7 @@ export function listenUpdateUsers(callback) {
 }
 
 /**
- * 创建一条消息
+ * 创建一条私聊消息
  * @senderId 发送者id
  * @receiverId 接收者id
  * @content 消息内容
@@ -71,7 +71,7 @@ export function listenUpdateUsers(callback) {
  * @isMe 是否是自己发送的
  * @messageType 消息类型
  */
-export function createMessage(senderId, receiverId, content, userInfo, isMe, messageType = 'text') {
+export function createPrivateMessage(senderId, receiverId, content, userInfo, isMe, messageType = 'text') {
 	return {
 		senderId,
 		receiverId,
