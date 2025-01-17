@@ -25,7 +25,7 @@ export default {
 					});
 				} else {
 					// 初始化并连接到服务器
-					const socket = initSocket();
+					const socket = initSocket(uni.getStorageSync('userInfo'));
 				}
 			})
 			.catch(error => {

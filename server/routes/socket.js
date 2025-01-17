@@ -16,21 +16,48 @@ const io = new Server(server, {
 	}
 });
 
+// 存储用户的映射关系 (username -> socket.id)
+const users = {};
+
 // 监听连接事件
 io.on('connection', socket => {
 	console.log('a user connected');
 
-	// 监听来自客户端的消息
-	socket.on('chat message', msg => {
-		console.log('message: ' + msg);
+	// 接收用户信息并存储
+	socket.on('user info', (userInfo) => {
+		const userId = userInfo?.id
+		if (!users[userId]) {
+			users[userId] = socket.id;
+			socket.userId = userId;
+			io.emit('update users', Object.keys(users)); // 发送当前在线用户列表给所有客户端
+		} else {
+			console.log(`Username ${userId} is already taken`);
+		}
+	});
 
-		// 广播消息给所有其他客户端，不包括发送者
-		socket.broadcast.emit('chat message', msg);
+	// 监听来自客户端的消息
+	socket.on('private message', ({ to, msg }) => {
+		console.log(users)
+		const toSocketId = users[to];
+		if (toSocketId) {
+			// 发送私信给指定用户
+			io.to(toSocketId).emit('private message', {
+				from: socket.userId,
+				message: msg
+			});
+			console.log(`message from ${socket.userId} to ${to}: ${msg}`);
+		} else {
+			console.log(`User ${to} not found`);
+		}
 	});
 
 	// 当用户断开连接时触发
 	socket.on('disconnect', () => {
-		console.log('user disconnected');
+		if (socket.userId) {
+			delete users[socket.userId];
+			io.emit('update users', Object.keys(users)); // 更新在线用户列表
+			console.log(`${socket.userId} disconnected`);
+		}
 	});
 });
 

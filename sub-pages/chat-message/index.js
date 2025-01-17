@@ -1,6 +1,6 @@
 import { defineComponent, reactive, toRefs, nextTick, ref } from 'vue';
 import { faceList } from './constants';
-import { getSocket } from '@/utils/socketService';
+import { sendPrivateMessage } from '@/utils/socketService';
 import { onLoad } from '@dcloudio/uni-app';
 
 export default defineComponent({
@@ -9,7 +9,7 @@ export default defineComponent({
 			messages: [],
 			inputText: '',
 			scrollTop: 9999,
-			userInfo: {}
+			chatInfo: {} // 联系人信息
 		});
 
 		const constants = {
@@ -24,7 +24,7 @@ export default defineComponent({
 			sendMessage() {
 				const userInfo = uni.getStorageSync('userInfo')
 				if (state.inputText.trim()) {
-					getSocket().emit('chat message', state.inputText);
+					sendPrivateMessage(state.chatInfo.contactUserId, state.inputText)
 					state.messages.push({
 						content: state.inputText,
 						isMe: true,
@@ -51,16 +51,16 @@ export default defineComponent({
 		};
 
 		// 监听服务器消息
-		getSocket().on('chat message', data => {
-			state.messages.push({
-				content: data,
-				isMe: false,
-				avatar: '/static/logo.svg'
-			});
-		});
+		// getSocket().on('chat message', data => {
+		// 	state.messages.push({
+		// 		content: data,
+		// 		isMe: false,
+		// 		avatar: '/static/logo.svg'
+		// 	});
+		// });
 
 		onLoad((options)=>{
-            state.userInfo = JSON.parse(options.userInfo)
+            state.chatInfo = JSON.parse(options.userInfo)
         })
 
 		return {
