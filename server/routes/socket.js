@@ -21,40 +21,44 @@ const users = {};
 
 // 监听连接事件
 io.on('connection', socket => {
-	console.log('a user connected');
+	try {
+		console.log('a user connected');
 
-	// 接收用户信息并存储
-	socket.on('user info', (userInfo) => {
-		const userId = userInfo?.id
-		if (!users[userId]) {
-			users[userId] = socket.id;
-			socket.userId = userId
-			io.emit('update users', Object.keys(users)); // 发送当前在线用户列表给所有客户端
-		} else {
-			console.log(`Username ${userInfo.name} is already taken`);
-		}
-	});
+		// 接收用户信息并存储
+		socket.on('user info', userInfo => {
+			const userId = userInfo?.id;
+			if (!users[userId]) {
+				users[userId] = socket.id;
+				socket.userId = userId;
+				io.emit('update users', Object.keys(users)); // 发送当前在线用户列表给所有客户端
+			} else {
+				console.log(`Username ${userInfo.name} is already taken`);
+			}
+		});
 
-	// 监听来自客户端的消息
-	socket.on('private message', ({ to, msg, userInfo }) => {
-		const toSocketId = users[to];
-		if (toSocketId) {
-			// 发送私信给指定用户
-			io.to(toSocketId).emit('private message', createPrivateMessage(userInfo.id, to, msg, userInfo, false));
-			console.log(`message from ${userInfo.name} to ${to}: ${msg}`);
-		} else {
-			console.log(`User ${userInfo.name} not found`);
-		}
-	});
+		// 监听来自客户端的消息
+		socket.on('private message', ({ to, msg, userInfo }) => {
+			const toSocketId = users[to];
+			if (toSocketId) {
+				// 发送私信给指定用户
+				io.to(toSocketId).emit('private message', createPrivateMessage(userInfo.id, to, msg, userInfo, false));
+				console.log(`message from ${userInfo.name} to ${to}: ${msg}`);
+			} else {
+				console.log(`User ${userInfo.name} not found`);
+			}
+		});
 
-	// 当用户断开连接时触发
-	socket.on('disconnect', () => {
-		if (socket.userId) {
-			delete users[socket.userId];
-			io.emit('update users', Object.keys(users)); // 更新在线用户列表
-			console.log(`${socket.userId} disconnected`);
-		}
-	});
+		// 当用户断开连接时触发
+		socket.on('disconnect', () => {
+			if (socket.userId) {
+				delete users[socket.userId];
+				io.emit('update users', Object.keys(users)); // 更新在线用户列表
+				console.log(`${socket.userId} disconnected`);
+			}
+		});
+	} catch (error) {
+		console.log('聊天服务出错了', error);
+	}
 });
 
 const port = 3001;
