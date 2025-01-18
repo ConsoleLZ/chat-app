@@ -111,7 +111,7 @@ function createPrivateMessage(senderId, receiverId, content, userInfo, isMe, mes
 }
 
 // 初始化redis
-function initRedis() {
+async function initRedis() {
 	const redisClient = redis.createClient({
 		url: `redis://:${redisConfig.password}@${redisConfig.host}:${redisConfig.port}`
 	});
@@ -126,7 +126,7 @@ function initRedis() {
 		console.error('Redis client error:', err);
 	});
 
-	redisClient.connect()
+	await redisClient.connect()
 
 	return redisClient
 }
