@@ -21,8 +21,8 @@ const io = new Server(server, {
 // 存储用户的映射关系 (userId -> socket.id)
 const users = {};
 
-// 离线消息队列
-const offlineMessages = [];
+// Redis客户端
+let redisClient;
 
 // 监听连接事件
 io.on('connection', socket => {
@@ -37,16 +37,10 @@ io.on('connection', socket => {
 				socket.userId = userId;
 
 				// 检查并发送离线消息
-				const messagesForUser = offlineMessages.filter(msg => msg.to === userId);
-				messagesForUser.forEach(msg => {
-					socket.emit(
-						'private message',
-						createPrivateMessage(msg.from, userId, msg.message, msg.userInfo, false)
-					);
+				const messages = await getMessagesFromRedis(userId);
+				messages.forEach(msg => {
+					socket.emit('private message', msg);
 				});
-
-				// 清除已发送的离线消息
-				offlineMessages.splice(0, offlineMessages.length, ...offlineMessages.filter(msg => msg.to !== userId));
 
 				io.emit('update users', Object.keys(users)); // 发送当前在线用户列表给所有客户端
 			} else {
@@ -55,16 +49,17 @@ io.on('connection', socket => {
 		});
 
 		// 监听来自客户端的消息
-		socket.on('private message', ({ to, msg, userInfo }) => {
+		socket.on('private message', async ({ to, msg, userInfo }) => {
 			const toSocketId = users[to];
+			const message = createPrivateMessage(userInfo.id, to, msg, userInfo, false);
+			
+			// 存储消息到Redis
+			await storeMessageInRedis(message);
+			
 			if (toSocketId) {
 				// 如果接收者在线，直接发送消息
-				io.to(toSocketId).emit('private message', createPrivateMessage(userInfo.id, to, msg, userInfo, false));
+				io.to(toSocketId).emit('private message', message);
 				console.log(`message from ${userInfo.name} to ${to}: ${msg}`);
-			} else {
-				// 如果接收者不在线，存储离线消息
-				offlineMessages.push({ to, from: userInfo.id, message: msg, userInfo });
-				console.log(`Offline message stored for user ${to}`);
 			}
 		});
 
@@ -106,13 +101,50 @@ function createPrivateMessage(senderId, receiverId, content, userInfo, isMe, mes
 		content,
 		userInfo,
 		isMe,
-		messageType
+		messageType,
+		createTime: Date.now()
 	};
+}
+
+/**
+ * 将消息存储到Redis
+ * @param {Object} message 消息对象
+ */
+async function storeMessageInRedis(message) {
+	const key = `messages:${message.senderId}:${message.receiverId}`;
+	const value = JSON.stringify(message);
+	
+	// 使用有序集合存储，以时间戳为score
+	await redisClient.zAdd(key, {
+		score: message.createTime,
+		value
+	});
+}
+
+/**
+ * 从Redis获取消息历史
+ * @param {string} userId 用户ID
+ * @returns {Array} 消息数组
+ */
+async function getMessagesFromRedis(userId) {
+	// 获取所有与该用户相关的消息key
+	const keys = await redisClient.keys(`messages:*:${userId}`);
+	
+	let messages = [];
+	for (const key of keys) {
+		// 获取有序集合中的所有消息
+		const values = await redisClient.zRange(key, 0, -1);
+		messages = messages.concat(values.map(v => JSON.parse(v)));
+	}
+	
+	// 按时间排序
+	messages.sort((a, b) => a.createTime - b.createTime);
+	return messages;
 }
 
 // 初始化redis
 async function initRedis() {
-	const redisClient = redis.createClient({
+	redisClient = redis.createClient({
 		url: `redis://:${redisConfig.password}@${redisConfig.host}:${redisConfig.port}`
 	});
 
@@ -126,7 +158,5 @@ async function initRedis() {
 		console.error('Redis client error:', err);
 	});
 
-	await redisClient.connect()
-
-	return redisClient
+	await redisClient.connect();
 }

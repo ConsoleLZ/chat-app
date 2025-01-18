@@ -29,6 +29,7 @@ export default {
 
 					// 监听服务器消息
 					listenPrivateMessage(data => {
+						console.log(data)
 						const messages = uni.getStorageSync('messages') === '' ? [] : uni.getStorageSync('messages')
 						messages.push(data)
 						uni.setStorageSync('messages', messages)
