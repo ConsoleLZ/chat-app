@@ -51,14 +51,23 @@ io.on('connection', socket => {
 		// 监听来自客户端的消息
 		socket.on('private message', async ({ to, msg, userInfo }) => {
 			const toSocketId = users[to];
-			const message = createPrivateMessage(userInfo.id, to, msg, userInfo, false);
+			// 创建消息对象
+			const message = createPrivateMessage(userInfo.id, to, msg, userInfo);
 			
 			// 存储消息到Redis
 			await storeMessageInRedis(message);
 			
 			if (toSocketId) {
-				// 如果接收者在线，直接发送消息
-				io.to(toSocketId).emit('private message', message);
+				// 发送给接收方
+				io.to(toSocketId).emit('private message', {
+					...message,
+					isMe: false
+				});
+				// 发送给自己
+				socket.emit('private message', {
+					...message,
+					isMe: true
+				});
 				console.log(`message from ${userInfo.name} to ${to}: ${msg}`);
 			}
 		});
@@ -91,16 +100,14 @@ initRedis();
  * @param receiverId 接收者id
  * @param content 消息内容
  * @param userInfo 发送该条消息的用户信息
- * @param isMe 是否是自己发送的
  * @param messageType 消息类型
  */
-function createPrivateMessage(senderId, receiverId, content, userInfo, isMe, messageType = 'text') {
+function createPrivateMessage(senderId, receiverId, content, userInfo, messageType = 'text') {
 	return {
 		senderId,
 		receiverId,
 		content,
 		userInfo,
-		isMe,
 		messageType,
 		createTime: Date.now()
 	};
@@ -127,14 +134,21 @@ async function storeMessageInRedis(message) {
  * @returns {Array} 消息数组
  */
 async function getMessagesFromRedis(userId) {
-	// 获取所有与该用户相关的消息key
-	const keys = await redisClient.keys(`messages:*:${userId}`);
+	// 获取所有与该用户相关的消息key（作为发送方和接收方）
+	const sendKeys = await redisClient.keys(`messages:${userId}:*`);
+	const receiveKeys = await redisClient.keys(`messages:*:${userId}`);
+	const allKeys = [...new Set([...sendKeys, ...receiveKeys])]; // 去重
 	
 	let messages = [];
-	for (const key of keys) {
+	for (const key of allKeys) {
 		// 获取有序集合中的所有消息
 		const values = await redisClient.zRange(key, 0, -1);
-		messages = messages.concat(values.map(v => JSON.parse(v)));
+		messages = messages.concat(values.map(v => {
+			const message = JSON.parse(v);
+			// 根据当前用户身份设置isMe
+			message.isMe = message.senderId === userId;
+			return message;
+		}));
 	}
 	
 	// 按时间排序

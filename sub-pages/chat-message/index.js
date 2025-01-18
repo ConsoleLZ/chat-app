@@ -6,7 +6,7 @@ import { onLoad } from '@dcloudio/uni-app';
 export default defineComponent({
 	setup() {
 		const state = reactive({
-			messages: uni.getStorageSync('messages') === '' ? [] : uni.getStorageSync('messages'),
+			messages: [],
 			inputText: '',
 			scrollTop: 9999,
 			chatInfo: {} // 联系人信息
@@ -26,8 +26,15 @@ export default defineComponent({
 				if (state.inputText.trim()) {
 					const message = createPrivateMessage(userInfo.id, state.chatInfo.contactUserId, state.inputText, userInfo, true)
 					sendPrivateMessage(state.chatInfo.contactUserId, state.inputText, userInfo);
-					state.messages.push(message);
-					uni.setStorageSync('messages', state.messages)
+					
+					// 更新本地消息
+					const messages = uni.getStorageSync('messages') === '' ? {} : uni.getStorageSync('messages');
+					messages[message.createTime] = message;
+					uni.setStorageSync('messages', messages);
+					
+					// 更新显示的消息
+					state.messages = Object.values(messages).sort((a, b) => a.createTime - b.createTime);
+					
 					state.inputText = '';
 					nextTick(() => {
 						state.scrollTop += 1;
@@ -50,14 +57,27 @@ export default defineComponent({
 
 		// 监听服务器消息
 		listenPrivateMessage(data => {
-			state.messages.push(data)
-			nextTick(() => {
-				state.scrollTop += 1;
-			});
+			// 更新本地存储
+			const messages = uni.getStorageSync('messages') === '' ? {} : uni.getStorageSync('messages');
+			if (!messages[data.createTime]) {
+				messages[data.createTime] = data;
+				uni.setStorageSync('messages', messages);
+				
+				// 更新显示的消息
+				state.messages = Object.values(messages).sort((a, b) => a.createTime - b.createTime);
+				
+				nextTick(() => {
+					state.scrollTop += 1;
+				});
+			}
 		});
 
 		onLoad(options => {
 			state.chatInfo = JSON.parse(options.userInfo);
+			
+			// 初始化时加载消息
+			const messages = uni.getStorageSync('messages') === '' ? {} : uni.getStorageSync('messages');
+			state.messages = Object.values(messages).sort((a, b) => a.createTime - b.createTime);
 		});
 
 		return {
