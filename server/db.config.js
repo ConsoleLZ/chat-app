@@ -1,6 +1,6 @@
 function dbConfig() {
 	return {
-		host: '172.20.104.6',
+		host: '192.168.0.105',
 		port: 3306,
 		user: 'root',
 		password: '123456',
@@ -8,6 +8,12 @@ function dbConfig() {
 		connectionLimit: 1
 	};
 }
+
+const redisConfig = {
+	host: '192.168.0.105', // Redis服务器地址
+	port: 6379, // Redis服务器端口
+	password: '123456' // Redis密码
+};
 
 // 数据库所有的表
 const table = {
@@ -21,5 +27,6 @@ const table = {
 
 module.exports = {
 	dbConfig,
+	redisConfig,
 	...table
 };

@@ -1,6 +1,8 @@
 // 引入必要的模块
 const http = require('http');
 const { Server } = require('socket.io');
+const { redisConfig } = require('../db.config');
+const redis = require('redis');
 
 // 创建 HTTP 服务器
 const server = http.createServer((req, res) => {
@@ -86,6 +88,8 @@ server.listen(port, '0.0.0.0', () => {
 	console.log(`socket服务启动成功，端口在:${port}`);
 });
 
+initRedis();
+
 /**
  * 创建一条私聊消息
  * @param senderId 发送者id
@@ -104,4 +108,25 @@ function createPrivateMessage(senderId, receiverId, content, userInfo, isMe, mes
 		isMe,
 		messageType
 	};
+}
+
+// 初始化redis
+function initRedis() {
+	const redisClient = redis.createClient({
+		url: `redis://:${redisConfig.password}@${redisConfig.host}:${redisConfig.port}`
+	});
+
+	// 连接成功事件
+	redisClient.on('connect', () => {
+		console.log('redis连接成功，端口在' + redisConfig.port);
+	});
+
+	// 监听错误信息
+	redisClient.on('error', err => {
+		console.error('Redis client error:', err);
+	});
+
+	redisClient.connect()
+
+	return redisClient
 }

@@ -1,2 +1,2 @@
-export const SERVER_URL = 'http://172.20.104.9:3000';
-export const SOCKET_URL = 'ws://172.20.104.9:3001';
+export const SERVER_URL = 'http://192.168.0.106:3000';
+export const SOCKET_URL = 'ws://192.168.0.106:3001';
