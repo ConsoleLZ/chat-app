@@ -53,21 +53,36 @@ io.on('connection', socket => {
 			const toSocketId = users[to];
 			// 创建消息对象
 			const message = createPrivateMessage(userInfo.id, to, msg, userInfo);
+			if (!message.createTime) {
+				console.error('Invalid message: missing createTime', message);
+				return;
+			}
 			
 			// 存储消息到Redis
 			await storeMessageInRedis(message);
 			
 			if (toSocketId) {
 				// 发送给接收方
-				io.to(toSocketId).emit('private message', {
+				const receiverMessage = {
 					...message,
 					isMe: false
-				});
+				};
+				if (!receiverMessage.createTime) {
+					console.error('Invalid receiver message: missing createTime', receiverMessage);
+					return;
+				}
+				io.to(toSocketId).emit('private message', receiverMessage);
+				
 				// 发送给自己
-				socket.emit('private message', {
+				const senderMessage = {
 					...message,
 					isMe: true
-				});
+				};
+				if (!senderMessage.createTime) {
+					console.error('Invalid sender message: missing createTime', senderMessage);
+					return;
+				}
+				socket.emit('private message', senderMessage);
 				console.log(`message from ${userInfo.name} to ${to}: ${msg}`);
 			}
 		});
@@ -118,6 +133,11 @@ function createPrivateMessage(senderId, receiverId, content, userInfo, messageTy
  * @param {Object} message 消息对象
  */
 async function storeMessageInRedis(message) {
+	if (!message.createTime) {
+		console.error('Cannot store message without createTime', message);
+		return;
+	}
+	
 	const key = `messages:${message.senderId}:${message.receiverId}`;
 	const value = JSON.stringify(message);
 	
@@ -126,6 +146,9 @@ async function storeMessageInRedis(message) {
 		score: message.createTime,
 		value
 	});
+	
+	// 设置过期时间（7天）
+	await redisClient.expire(key, 60 * 60 * 24 * 7);
 }
 
 /**

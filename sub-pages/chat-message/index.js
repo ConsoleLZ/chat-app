@@ -24,12 +24,15 @@ export default defineComponent({
 			sendMessage() {
 				const userInfo = uni.getStorageSync('userInfo');
 				if (state.inputText.trim()) {
-					const message = createPrivateMessage(userInfo.id, state.chatInfo.contactUserId, state.inputText, userInfo, true)
+					const message = createPrivateMessage(userInfo.id, state.chatInfo.contactUserId, state.inputText, userInfo);
 					sendPrivateMessage(state.chatInfo.contactUserId, state.inputText, userInfo);
 					
-					// 更新本地消息
-					const messages = uni.getStorageSync('messages') === '' ? {} : uni.getStorageSync('messages');
-					messages[message.createTime] = message;
+					// 更新本地存储
+					const messages = uni.getStorageSync('messages') || {};
+					messages[message.createTime] = {
+						...message,
+						isMe: true
+					};
 					uni.setStorageSync('messages', messages);
 					
 					// 更新显示的消息
@@ -58,7 +61,7 @@ export default defineComponent({
 		// 监听服务器消息
 		listenPrivateMessage(data => {
 			// 更新本地存储
-			const messages = uni.getStorageSync('messages') === '' ? {} : uni.getStorageSync('messages');
+			const messages = uni.getStorageSync('messages') || {};
 			if (!messages[data.createTime]) {
 				messages[data.createTime] = data;
 				uni.setStorageSync('messages', messages);
@@ -76,7 +79,7 @@ export default defineComponent({
 			state.chatInfo = JSON.parse(options.userInfo);
 			
 			// 初始化时加载消息
-			const messages = uni.getStorageSync('messages') === '' ? {} : uni.getStorageSync('messages');
+			const messages = uni.getStorageSync('messages') || {};
 			state.messages = Object.values(messages).sort((a, b) => a.createTime - b.createTime);
 		});
 
