@@ -62,7 +62,7 @@ io.on('connection', socket => {
 			await storeMessageInRedis(message);
 			
 			if (toSocketId) {
-				// 发送给接收方
+				// 只发送给接收方
 				const receiverMessage = {
 					...message,
 					isMe: false
@@ -72,17 +72,6 @@ io.on('connection', socket => {
 					return;
 				}
 				io.to(toSocketId).emit('private message', receiverMessage);
-				
-				// 发送给自己
-				const senderMessage = {
-					...message,
-					isMe: true
-				};
-				if (!senderMessage.createTime) {
-					console.error('Invalid sender message: missing createTime', senderMessage);
-					return;
-				}
-				socket.emit('private message', senderMessage);
 				console.log(`message from ${userInfo.name} to ${to}: ${msg}`);
 			}
 		});

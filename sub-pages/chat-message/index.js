@@ -81,9 +81,9 @@ export default defineComponent({
 			state.messages = Object.values(messages).sort((a, b) => a.createTime - b.createTime);
 		});
 
+		// 监听发送过来的私聊消息
 		uni.$on('privateMessage',function(data){
 			state.messages.push(data)
-			console.log(data)
 			nextTick(() => {
 				state.scrollTop += 1;
 			});
