@@ -5,8 +5,8 @@
 	</view>
 	<view class="name">{{ userInfo.name }}</view>
 	<view class="description">个性签名</view>
-	<view class="flex-center-row-10">
-		<uv-tags text="标签" size="mini"></uv-tags>
+	<view class="flex-center-row">
+		<uv-tags style="margin-right: 10rpx;" text="标签" size="mini"></uv-tags>
 		<uv-tags text="标签" size="mini"></uv-tags>
 	</view>
 </template>
