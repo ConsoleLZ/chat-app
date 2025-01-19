@@ -1,5 +1,6 @@
 import { defineComponent } from 'vue';
 import UserDetailComp from '@/components/user-detail/index.vue'
+import {disconnectSocket} from '@/utils/socketService.js'
 
 export default defineComponent({
 	components: {
@@ -11,6 +12,8 @@ export default defineComponent({
 			// 退出登录
 			onQuit(){
 				uni.removeStorageSync('userInfo')
+				uni.removeStorageSync('token')
+				disconnectSocket()
 				uni.redirectTo({ url: '/pages/login/index' })
 			}
 		};

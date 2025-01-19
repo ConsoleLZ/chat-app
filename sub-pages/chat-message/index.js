@@ -34,6 +34,8 @@ export default defineComponent({
 						isMe: true
 					};
 					
+					uni.setStorageSync('messages', messages)
+
 					// 更新显示的消息
 					state.messages = Object.values(messages).sort((a, b) => a.createTime - b.createTime);
 					

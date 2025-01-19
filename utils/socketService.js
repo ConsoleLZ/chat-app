@@ -78,6 +78,7 @@ export function createPrivateMessage(senderId, receiverId, content, userInfo, is
 		content,
 		userInfo,
 		isMe,
-		messageType
+		messageType,
+		createTime: Date.now()
 	};
 }
