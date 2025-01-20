@@ -13,6 +13,7 @@ export default defineComponent({
 			onQuit(){
 				uni.removeStorageSync('userInfo')
 				uni.removeStorageSync('token')
+				uni.removeStorageSync('messages')
 				disconnectSocket()
 				uni.redirectTo({ url: '/pages/login/index' })
 			}

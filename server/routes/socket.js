@@ -146,13 +146,11 @@ async function storeMessageInRedis(message) {
  * @returns {Array} 消息数组
  */
 async function getMessagesFromRedis(userId) {
-	// 获取所有与该用户相关的消息key（作为发送方和接收方）
-	const sendKeys = await redisClient.keys(`messages:${userId}:*`);
+	// 只获取接收方是当前用户的消息
 	const receiveKeys = await redisClient.keys(`messages:*:${userId}`);
-	const allKeys = [...new Set([...sendKeys, ...receiveKeys])]; // 去重
 	
 	let messages = [];
-	for (const key of allKeys) {
+	for (const key of receiveKeys) {
 		// 获取有序集合中的所有消息
 		const values = await redisClient.zRange(key, 0, -1);
 		messages = messages.concat(values.map(v => {
