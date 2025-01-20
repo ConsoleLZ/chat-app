@@ -1,12 +1,19 @@
 <template>
 	<navbar-comp title="消息" />
 	<view class="list">
-		<view class="flex-center-row list-item" @click="onJumpChat(item)" v-for="(item, index) in messageList" :key="index">
+		<view
+			class="flex-center-row list-item"
+			@click="onJumpChat(item)"
+			v-for="(item, index) in messageList"
+			:key="index"
+		>
 			<uv-avatar
 				size="90rpx"
-				style="background-color: #c1c1c1;margin-right: 12rpx;"
+				style="background-color: #c1c1c1; margin-right: 12rpx"
 				:src="item.avatar"
+				v-if="item.avatar !== '' && item.avatar"
 			></uv-avatar>
+			<uv-avatar v-else :text="item.name?.slice(0, 1)" size="90rpx" style="margin-right: 12rpx" randomBgColor></uv-avatar>
 			<view style="flex: 1; position: relative; top: 5rpx">
 				<view class="flex-row">
 					<view class="title">{{ item.name }}</view>
