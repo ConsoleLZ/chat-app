@@ -36,7 +36,7 @@ io.on('connection', socket => {
 				users[userId] = socket.id;
 				socket.userId = userId;
 
-				// 检查并发送离线消息
+				// 检查并发送存储的消息
 				const messages = await getMessagesFromRedis(userId);
 				messages.forEach(msg => {
 					socket.emit('private message', msg);

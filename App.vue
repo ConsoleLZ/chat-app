@@ -24,8 +24,9 @@ export default {
 						url: '/pages/login/index'
 					});
 				} else {
+					const userInfo = uni.getStorageSync('userInfo')
 					// 初始化并连接到服务器
-					const socket = initSocket(uni.getStorageSync('userInfo'));
+					const socket = initSocket(userInfo);
 
 					// 监听服务器消息
 					listenPrivateMessage(data => {
