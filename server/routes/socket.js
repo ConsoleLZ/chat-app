@@ -127,17 +127,18 @@ async function storeMessageInRedis(message) {
 		return;
 	}
 	
-	const key = `messages:${message.senderId}:${message.receiverId}`;
+	// 只存储接收方的消息
+	const receiveKey = `messages:${message.senderId}:${message.receiverId}`;
 	const value = JSON.stringify(message);
 	
 	// 使用有序集合存储，以时间戳为score
-	await redisClient.zAdd(key, {
+	await redisClient.zAdd(receiveKey, {
 		score: message.createTime,
 		value
 	});
 	
 	// 设置过期时间（7天）
-	await redisClient.expire(key, 60 * 60 * 24 * 7);
+	await redisClient.expire(receiveKey, 60 * 60 * 24 * 7);
 }
 
 /**
@@ -146,11 +147,16 @@ async function storeMessageInRedis(message) {
  * @returns {Array} 消息数组
  */
 async function getMessagesFromRedis(userId) {
-	// 只获取接收方是当前用户的消息
+	// 获取发送方是当前用户的消息
+	const sendKeys = await redisClient.keys(`messages:${userId}:*`);
+	// 获取接收方是当前用户的消息
 	const receiveKeys = await redisClient.keys(`messages:*:${userId}`);
 	
+	// 合并所有相关key
+	const allKeys = [...new Set([...sendKeys, ...receiveKeys])];
+	
 	let messages = [];
-	for (const key of receiveKeys) {
+	for (const key of allKeys) {
 		// 获取有序集合中的所有消息
 		const values = await redisClient.zRange(key, 0, -1);
 		messages = messages.concat(values.map(v => {
