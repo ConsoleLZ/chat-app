@@ -1,7 +1,7 @@
 import { defineComponent, reactive, toRefs, nextTick, ref } from 'vue';
 import { faceList } from './constants';
 import { sendPrivateMessage, createPrivateMessage, listenPrivateMessage } from '@/utils/socketService';
-import { onLoad } from '@dcloudio/uni-app';
+import { onLoad, onShow } from '@dcloudio/uni-app';
 
 export default defineComponent({
 	setup() {
@@ -54,6 +54,14 @@ export default defineComponent({
 				state.inputText += item;
 				components.popupRef.value.close();
 			},
+			// 将所有的未读消息变成已读消息
+			changeMessageView(){
+				const messages = uni.getStorageSync('messages') || {};
+				Object.keys(messages).forEach(key=>{
+					messages[key].isView = true
+				})
+				uni.setStorageSync('messages', messages)
+			},
 			goBack() {
 				uni.navigateBack();
 			}
@@ -83,8 +91,13 @@ export default defineComponent({
 			state.messages = Object.values(messages).sort((a, b) => a.createTime - b.createTime);
 		});
 
+		onShow(()=>{
+			methods.changeMessageView()
+		})
+
 		// 监听发送过来的私聊消息
 		uni.$on('privateMessage',function(data){
+			data.isView = true
 			state.messages.push(data)
 			nextTick(() => {
 				state.scrollTop += 1;

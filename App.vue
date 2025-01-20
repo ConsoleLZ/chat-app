@@ -31,9 +31,9 @@ export default {
 					listenPrivateMessage(data => {
 						// 使用对象存储消息，以createTime作为key
 						const messages = uni.getStorageSync('messages') === '' ? {} : uni.getStorageSync('messages');
-
 						// 检查消息是否已存在
 						if (!messages[data.createTime]) {
+							data.isView = false
 							messages[data.createTime] = data;
 							uni.$emit('privateMessage', data);
 							uni.setStorageSync('messages', messages);
