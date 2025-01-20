@@ -12,6 +12,12 @@ export default defineComponent({
 		});
 
 		const methods = {
+			// 跳转到聊天页
+            onJumpChat(item){
+                uni.navigateTo({
+                    url: `/sub-pages/chat-message/index?userInfo=${JSON.stringify(item)}`
+                })
+            },
 			formateMessages(arr, message) {
 				const index = arr.findIndex(item => {
 					if (item.senderId === message.senderId || item.senderId === message.receiverId) {
@@ -44,9 +50,6 @@ export default defineComponent({
 							methods.formateMessages(arr, messages[key]);
 						});
 
-						console.log(arr)
-						console.log(contacts)
-
 						arr.forEach(messageItem=>{
 							contacts.forEach(contact=>{
 								if(messageItem.receiverId === contact.contactUserId || messageItem.senderId === contact.contactUserId){
@@ -57,8 +60,6 @@ export default defineComponent({
 								}
 							})
 						})
-
-						console.log(state.messageList)
 					})
 					.catch(() => {
 						components.toastRef.value.show({
@@ -76,7 +77,8 @@ export default defineComponent({
 		methods.getContactsData()
 
 		return {
-			...toRefs(state)
+			...toRefs(state),
+			...methods
 		};
 	}
 });

@@ -1,7 +1,7 @@
 <template>
 	<navbar-comp title="消息" />
 	<view class="list">
-		<view class="flex-center-row list-item" v-for="(item, index) in messageList" :key="index">
+		<view class="flex-center-row list-item" @click="onJumpChat(item)" v-for="(item, index) in messageList" :key="index">
 			<uv-avatar
 				size="90rpx"
 				style="background-color: #c1c1c1;margin-right: 12rpx;"
