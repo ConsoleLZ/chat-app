@@ -8,12 +8,17 @@
 	.title {
 		font-size: 32rpx;
 		font-weight: 600;
+		flex: 1;
 	}
 	.message {
 		font-size: 24rpx;
+		padding-left: 3rpx;
+		flex: 1;
 		color: #afabab;
-		position: relative;
-		left: 4rpx;
+		white-space: nowrap; /* 防止文本换行 */
+		overflow: hidden; /* 隐藏溢出内容 */
+		text-overflow: ellipsis; /* 溢出部分显示为省略号 */
+		width: 480rpx; /* 设置一个固定的宽度 */
 	}
 	.badge {
 		$size: 50rpx;
