@@ -23,13 +23,13 @@
 					<view class="message">
 						{{ item.content }}
 					</view>
-					<view class="badge flex-center-row">
+					<view v-if="item.unreadCount" class="badge flex-center-row">
 						<uv-badge
 							class="flex-center-row"
 							numberType="overflow"
 							type="error"
 							max="99"
-							:value="1"
+							:value="item.unreadCount"
 						></uv-badge>
 					</view>
 				</view>
