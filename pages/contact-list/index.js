@@ -1,7 +1,7 @@
 import { defineComponent, reactive, toRefs, ref } from 'vue';
 import NavbarComp from '@/components/navbar/index.vue';
 import { getContactsStore } from '@/store/index.js';
-import { onPullDownRefresh } from '@dcloudio/uni-app';
+import { onPullDownRefresh, onShow } from '@dcloudio/uni-app';
 
 export default defineComponent({
 	components: {
@@ -74,7 +74,9 @@ export default defineComponent({
 			methods.getContactsData();
 		});
 
-		methods.getContactsData();
+		onShow(()=>{
+			methods.getContactsData();
+		})
 
 		return {
 			...components,
