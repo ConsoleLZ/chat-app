@@ -74,6 +74,7 @@
 		"selectedColor": "#3c9cff",
 		"borderStyle": "white",
 		"backgroundColor": "#f9f9f9",
+		"iconWidth": "20px",
 		"list": [
 			{
 				"pagePath": "pages/message/index",
