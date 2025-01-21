@@ -34,7 +34,6 @@ export default {
 						const messages = uni.getStorageSync('messages') === '' ? {} : uni.getStorageSync('messages');
 						// 检查消息是否已存在
 						if (!messages[data.createTime]) {
-							console.log(data)
 							data.isView = false
 							messages[data.createTime] = data;
 							uni.$emit('privateMessage', data);
