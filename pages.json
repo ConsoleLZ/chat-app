@@ -20,9 +20,9 @@
 			}
 		},
 		{
-			"path": "pages/about/index",
+			"path": "pages/moments/index",
 			"style": {
-				"navigationStyle": "custom"
+				"navigationBarTitleText": "朋友圈"
 			}
 		},
 		{
@@ -78,20 +78,20 @@
 			{
 				"pagePath": "pages/message/index",
 				"iconPath": "/static/tabbar/message.png",
-				"selectedIconPath": "/static/tabbar/message-select.png",
+				"selectedIconPath": "/static/tabbar/message-active.png",
 				"text": "消息"
 			},
 			{
 				"pagePath": "pages/contact-list/index",
-				"iconPath": "/static/tabbar/contact.png",
-				"selectedIconPath": "/static/tabbar/contact-select.png",
+				"iconPath": "/static/tabbar/contacts.png",
+				"selectedIconPath": "/static/tabbar/contacts-active.png",
 				"text": "联系人"
 			},
 			{
-				"pagePath": "pages/about/index",
-				"iconPath": "/static/tabbar/about.png",
-				"selectedIconPath": "/static/tabbar/about-select.png",
-				"text": "我的"
+				"pagePath": "pages/moments/index",
+				"iconPath": "/static/tabbar/moments.png",
+				"selectedIconPath": "/static/tabbar/moments-active.png",
+				"text": "朋友圈"
 			}
 		]
 	},
