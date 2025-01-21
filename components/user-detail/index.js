@@ -1,10 +1,10 @@
-import {defineComponent} from 'vue'
+import { defineComponent } from 'vue';
 
 export default defineComponent({
-    props: {
-        userInfo: {
-            type: Object,
-            default: {}
-        }
-    }
-})
+	props: {
+		userInfo: {
+			type: Object,
+			default: {}
+		}
+	}
+});

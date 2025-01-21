@@ -1,4 +1,4 @@
-import { defineComponent, reactive, toRefs, computed } from 'vue';
+import { defineComponent, reactive, toRefs } from 'vue';
 import NavbarComp from '@/components/navbar/index.vue';
 import { getContactsStore } from '@/store/index.js';
 import { onShow } from '@dcloudio/uni-app';
@@ -87,13 +87,7 @@ export default defineComponent({
 						state.contacts = res.data?.contacts;
 						methods.setMessageList();
 					})
-					.catch(error => {
-						components.toastRef.value.show({
-							type: 'error',
-							title: '提示',
-							message: '服务器错误'
-						});
-					})
+					.catch(error => {})
 					.finally(() => {
 						uni.hideLoading();
 					});

@@ -1,7 +1,18 @@
 <template>
 	<view class="navbar flex-row">
-		<uv-avatar v-if="userInfo.avatar !== '' && userInfo.avatar" size="60rpx" :src="userInfo.avatar"></uv-avatar>
-        <uv-avatar v-else :text="userInfo.name?.slice(0, 1)" fontSize="12" size="60rpx"></uv-avatar>
+		<uv-avatar
+			@click="onOpenPopup"
+			v-if="userInfo.avatar !== '' && userInfo.avatar"
+			size="60rpx"
+			:src="userInfo.avatar"
+		></uv-avatar>
+		<uv-avatar
+			@click="onOpenPopup"
+			v-else
+			:text="userInfo.name?.slice(0, 1)"
+			fontSize="12"
+			size="60rpx"
+		></uv-avatar>
 		<text class="title">{{ title }}</text>
 		<image @click="onShowOverlay" style="width: 36rpx" src="/static/add.png" mode="widthFix"></image>
 	</view>
@@ -24,6 +35,9 @@
 			</view>
 		</view>
 	</uv-overlay>
+	<uv-popup ref="popupRef" mode="left">
+		<user-detail-comp />
+	</uv-popup>
 </template>
 
 <script src="./index.js"></script>

@@ -25,7 +25,7 @@ export default defineComponent({
 					})
 					.then(res => {
 						state.dataList = res.data.users;
-						console.log(state.dataList)
+						console.log(state.dataList);
 					})
 					.catch(() => {
 						components.toastRef.value.show({
@@ -65,7 +65,7 @@ export default defineComponent({
 				Promise.all([promiseSelf, promisePassive])
 					.then(res => {
 						console.log(res);
-						methods.getData()
+						methods.getData();
 					})
 					.catch(() => {
 						components.toastRef.value.show({

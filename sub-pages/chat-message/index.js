@@ -24,19 +24,24 @@ export default defineComponent({
 			sendMessage() {
 				const userInfo = uni.getStorageSync('userInfo');
 				if (state.inputText.trim()) {
-					const message = createPrivateMessage(userInfo.id, state.chatInfo.contactUserId, state.inputText, userInfo);
+					const message = createPrivateMessage(
+						userInfo.id,
+						state.chatInfo.contactUserId,
+						state.inputText,
+						userInfo
+					);
 					sendPrivateMessage(state.chatInfo.contactUserId, state.inputText, userInfo);
-					
+
 					// 更新本地存储
 					const messages = uni.getStorageSync('messages') || {};
 					messages[message.createTime] = {
 						...message,
 						isMe: true
 					};
-					uni.setStorageSync('messages', messages)
+					uni.setStorageSync('messages', messages);
 					// 更新显示的消息
 					state.messages = Object.values(messages).sort((a, b) => a.createTime - b.createTime);
-					
+
 					state.inputText = '';
 					nextTick(() => {
 						state.scrollTop += 1;
@@ -53,12 +58,12 @@ export default defineComponent({
 				components.popupRef.value.close();
 			},
 			// 将所有的未读消息变成已读消息
-			changeMessageView(){
+			changeMessageView() {
 				const messages = uni.getStorageSync('messages') || {};
-				Object.keys(messages).forEach(key=>{
-					messages[key].isView = true
-				})
-				uni.setStorageSync('messages', messages)
+				Object.keys(messages).forEach(key => {
+					messages[key].isView = true;
+				});
+				uni.setStorageSync('messages', messages);
 			},
 			goBack() {
 				uni.navigateBack();
@@ -71,10 +76,10 @@ export default defineComponent({
 			const messages = uni.getStorageSync('messages') || {};
 			if (!messages[data.createTime]) {
 				messages[data.createTime] = data;
-				
+
 				// 更新显示的消息
 				state.messages = Object.values(messages).sort((a, b) => a.createTime - b.createTime);
-				
+
 				nextTick(() => {
 					state.scrollTop += 1;
 				});
@@ -83,24 +88,24 @@ export default defineComponent({
 
 		onLoad(options => {
 			state.chatInfo = JSON.parse(options.userInfo);
-			
+
 			// 初始化时加载消息
 			const messages = uni.getStorageSync('messages') || {};
 			state.messages = Object.values(messages).sort((a, b) => a.createTime - b.createTime);
 		});
 
-		onShow(()=>{
-			methods.changeMessageView()
-		})
+		onShow(() => {
+			methods.changeMessageView();
+		});
 
 		// 监听发送过来的私聊消息
-		uni.$on('privateMessage',function(data){
-			data.isView = true
-			state.messages.push(data)
+		uni.$on('privateMessage', function (data) {
+			data.isView = true;
+			state.messages.push(data);
 			nextTick(() => {
 				state.scrollTop += 1;
 			});
-		})
+		});
 
 		return {
 			...toRefs(state),

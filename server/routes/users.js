@@ -77,12 +77,7 @@ router.post('/register', async function (req, res) {
 
 		const [result] = await promisePool.query(
 			`INSERT INTO ${userTable} (name, account, password, createTime) VALUES (?, ?, ?, ?)`,
-			[
-				name,
-				account,
-				hashedPassword,
-				dayjs().format('YYYY-MM-DD HH:mm:ss')
-			]
+			[name, account, hashedPassword, dayjs().format('YYYY-MM-DD HH:mm:ss')]
 		);
 
 		if (result.affectedRows > 0) {

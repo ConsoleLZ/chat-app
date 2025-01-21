@@ -1,16 +1,16 @@
 .description {
-    white-space: nowrap; /* 防止文本换行 */
+	white-space: nowrap; /* 防止文本换行 */
 	overflow: hidden; /* 隐藏溢出内容 */
 	text-overflow: ellipsis; /* 溢出部分显示为省略号 */
 	width: 80%; /* 设置一个固定的宽度 */
-    text-align: center;
-    margin: 20rpx auto;
-    font-size: 24rpx;
-    color: gray;
+	text-align: center;
+	margin: 20rpx auto;
+	font-size: 24rpx;
+	color: gray;
 }
 .name {
-    margin: 20rpx 0;
-    font-size: 36rpx;
-    font-weight: 600;
-    text-align: center;
+	margin: 20rpx 0;
+	font-size: 36rpx;
+	font-weight: 600;
+	text-align: center;
 }

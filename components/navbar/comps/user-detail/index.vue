@@ -1,5 +1,5 @@
 <template>
-	<view style="padding-top: 130rpx;">
+	<view style="padding-top: 130rpx; width: 600rpx">
 		<user-detail-comp :userInfo="userInfo" />
 		<uv-list style="margin-top: 50rpx">
 			<uv-list-item title="收藏" thumb="/static/about/star.png" link thumb-size="sm"></uv-list-item>

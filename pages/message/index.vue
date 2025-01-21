@@ -13,7 +13,13 @@
 				:src="item.avatar"
 				v-if="item.avatar !== '' && item.avatar"
 			></uv-avatar>
-			<uv-avatar v-else :text="item.name?.slice(0, 1)" size="90rpx" style="margin-right: 12rpx" bg-color="#3c9cff"></uv-avatar>
+			<uv-avatar
+				v-else
+				:text="item.name?.slice(0, 1)"
+				size="90rpx"
+				style="margin-right: 12rpx"
+				bg-color="#3c9cff"
+			></uv-avatar>
 			<view style="flex: 1; position: relative; top: 5rpx">
 				<view class="flex-row">
 					<view class="title">{{ item.name }}</view>

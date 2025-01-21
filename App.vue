@@ -24,7 +24,7 @@ export default {
 						url: '/pages/login/index'
 					});
 				} else {
-					const userInfo = uni.getStorageSync('userInfo')
+					const userInfo = uni.getStorageSync('userInfo');
 					// 初始化并连接到服务器
 					const socket = initSocket(userInfo);
 
@@ -34,7 +34,7 @@ export default {
 						const messages = uni.getStorageSync('messages') === '' ? {} : uni.getStorageSync('messages');
 						// 检查消息是否已存在
 						if (!messages[data.createTime]) {
-							data.isView = false
+							data.isView = false;
 							messages[data.createTime] = data;
 							uni.$emit('privateMessage', data);
 							uni.setStorageSync('messages', messages);

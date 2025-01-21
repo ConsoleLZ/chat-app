@@ -22,4 +22,4 @@ export const getApplicationStore = new Request('/api/get-application', 'GET');
 export const getContactsStore = new Request('/api/get-contacts', 'GET');
 
 // 同意申请
-export const postAgreeApplicationStore = new Request('/api/agree-application', 'POST')
+export const postAgreeApplicationStore = new Request('/api/agree-application', 'POST');

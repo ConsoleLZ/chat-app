@@ -51,7 +51,7 @@ io.on('connection', socket => {
 		// 监听来自客户端的消息
 		socket.on('private message', async ({ to, msg, userInfo, createTime }) => {
 			const toSocketId = users[to];
-			console.log(createTime, 'createTime')
+			console.log(createTime, 'createTime');
 			// 创建消息对象
 			const message = createPrivateMessage(userInfo.id, to, msg, userInfo, createTime);
 			if (!message.createTime) {

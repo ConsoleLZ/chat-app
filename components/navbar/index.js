@@ -1,6 +1,10 @@
-import { defineComponent, reactive, toRefs } from 'vue';
+import { defineComponent, reactive, toRefs, ref } from 'vue';
+import UserDetailComp from './comps/user-detail/index.vue';
 
 export default defineComponent({
+	components: {
+		UserDetailComp
+	},
 	props: {
 		title: {
 			type: String,
@@ -12,6 +16,10 @@ export default defineComponent({
 			isShowOverlay: false,
 			userInfo: uni.getStorageSync('userInfo')
 		});
+
+		const components = {
+			popupRef: ref(null)
+		};
 
 		const methods = {
 			// 展示遮罩
@@ -29,12 +37,17 @@ export default defineComponent({
 				setTimeout(() => {
 					uni.navigateTo({ url: '/sub-pages/search-contact/index' });
 				}, 150);
+			},
+			// 打开用户详情信息
+			onOpenPopup() {
+				components.popupRef.value.open();
 			}
 		};
 
 		return {
 			...methods,
-			...toRefs(state)
+			...toRefs(state),
+			...components
 		};
 	}
 });

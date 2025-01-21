@@ -20,8 +20,20 @@
 		<view class="search-list" v-if="users">
 			<uv-text style="margin-bottom: 24rpx" size="24rpx" type="info" text="用户"></uv-text>
 			<view class="flex-center-row search-list-item" v-for="item in users" :key="item.id">
-				<uv-avatar v-if="item.avatar !== '' && item.avatar" size="90rpx" style="margin-right: 15rpx" :src="item.avatar"></uv-avatar>
-				<uv-avatar v-else :text="item.name?.slice(0, 1)" fontSize="18" size="90rpx" randomBgColor style="margin-right: 15rpx"></uv-avatar>
+				<uv-avatar
+					v-if="item.avatar !== '' && item.avatar"
+					size="90rpx"
+					style="margin-right: 15rpx"
+					:src="item.avatar"
+				></uv-avatar>
+				<uv-avatar
+					v-else
+					:text="item.name?.slice(0, 1)"
+					fontSize="18"
+					size="90rpx"
+					randomBgColor
+					style="margin-right: 15rpx"
+				></uv-avatar>
 				<view style="flex: 1">
 					<view class="title">{{ item.name }}</view>
 					<view class="flex-row">
