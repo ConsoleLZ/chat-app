@@ -23,8 +23,13 @@ export default defineComponent({
 
 			formateMessages(arr, message) {
 				const index = arr.findIndex(item => {
-					if (item.senderId === message.senderId || item.senderId === message.receiverId) {
+					if (
+						(message.senderId === item.senderId && message.receiverId === item.receiverId) ||
+						(message.senderId === item.receiverId && message.receiverId === item.senderId)
+					) {
 						return true;
+					} else {
+						return false;
 					}
 				});
 				if (index !== -1) {

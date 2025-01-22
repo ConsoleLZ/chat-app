@@ -20,12 +20,12 @@
 				style="margin-right: 12rpx"
 				bg-color="#3c9cff"
 			></uv-avatar>
-			<view style="flex: 1; position: relative; top: 5rpx">
-				<view class="flex-row">
+			<view style="flex: 1;">
+				<view class="flex-row" style="margin-bottom: 4rpx;">
 					<view class="title">{{ item.name }}</view>
 					<text style="font-size: 20rpx; color: #c1c1c1">11:34</text>
 				</view>
-				<view class="flex-row">
+				<view class="flex-row" style="height: 35rpx;">
 					<view class="message">
 						{{ item.content }}
 					</view>

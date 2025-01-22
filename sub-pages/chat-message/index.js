@@ -61,7 +61,9 @@ export default defineComponent({
 			changeMessageView() {
 				const messages = uni.getStorageSync('messages') || {};
 				Object.keys(messages).forEach(key => {
-					messages[key].isView = true;
+					if(messages[key].senderId === state.chatInfo.contactUserId){
+						messages[key].isView = true;
+					}
 				});
 				uni.setStorageSync('messages', messages);
 			},
@@ -100,7 +102,9 @@ export default defineComponent({
 
 		// 监听发送过来的私聊消息
 		uni.$on('privateMessage', function (data) {
-			data.isView = true;
+			if(data.senderId === state.chatInfo.contactUserId){
+				data.isView = true;
+			}
 			state.messages.push(data);
 			nextTick(() => {
 				state.scrollTop += 1;
