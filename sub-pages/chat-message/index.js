@@ -61,27 +61,51 @@ export default defineComponent({
 			changeMessageView() {
 				const messages = uni.getStorageSync('messages') || {};
 				Object.keys(messages).forEach(key => {
-					if(messages[key].senderId === state.chatInfo.contactUserId){
+					if (messages[key].senderId === state.chatInfo.contactUserId) {
 						messages[key].isView = true;
 					}
 				});
 				uni.setStorageSync('messages', messages);
 			},
 			// 处理消息发送时间，显示在页面上
-			dateGroup(messages){
-				const disposeData = JSON.parse(JSON.stringify(messages))
-				let beforeDate = disposeData[0].createTime // 记录上一次循环的createTime
-				disposeData.forEach((item, index)=>{
-					console.log(item.createTime, beforeDate, item.createTime - beforeDate)
-					if(item.createTime - beforeDate > 300000){
-						disposeData.splice(index, 0, {isDate: true, date: item.createTime, senderId: item.senderId, receiverId: item.receiverId})
+			dateGroup(messages) {
+				// 深拷贝 messages 数组以避免修改原始数据
+				const disposeData = JSON.parse(JSON.stringify(messages));
+
+				// 创建一个新的数组来存储结果
+				const result = [];
+
+				if (disposeData.length === 0) return result;
+
+				// 初始化第一个日期标记
+				let beforeDate = disposeData[0].createTime;
+				result.push({
+					isDate: true,
+					date: beforeDate,
+					senderId: disposeData[0].senderId,
+					receiverId: disposeData[0].receiverId
+				});
+
+				// 遍历消息并添加日期标记
+				for (let i = 0; i < disposeData.length; i++) {
+					const item = disposeData[i];
+
+					// 如果当前消息的时间戳与上一个时间戳相差超过5分钟，则插入新的日期标记
+					if (item.createTime - beforeDate > 300000) {
+						result.push({
+							isDate: true,
+							date: item.createTime,
+							senderId: item.senderId,
+							receiverId: item.receiverId
+						});
+						beforeDate = item.createTime;
 					}
 
-					beforeDate = item.createTime
-				})
-				disposeData.splice(0, 0, {isDate: true, date: disposeData[0].createTime, senderId: disposeData[0].senderId, receiverId: disposeData[0].receiverId})
+					// 添加当前消息到结果数组
+					result.push(item);
+				}
 
-				return disposeData
+				return result;
 			},
 			goBack() {
 				uni.navigateBack();
@@ -110,8 +134,8 @@ export default defineComponent({
 			// 初始化时加载消息
 			const messages = uni.getStorageSync('messages') || {};
 			state.messages = Object.values(messages).sort((a, b) => a.createTime - b.createTime);
-			state.messages = methods.dateGroup(state.messages)
-			console.log(state.messages)
+			state.messages = methods.dateGroup(state.messages);
+			console.log(state.messages);
 		});
 
 		onShow(() => {
@@ -120,7 +144,7 @@ export default defineComponent({
 
 		// 监听发送过来的私聊消息
 		uni.$on('privateMessage', function (data) {
-			if(data.senderId === state.chatInfo.contactUserId){
+			if (data.senderId === state.chatInfo.contactUserId) {
 				data.isView = true;
 			}
 			state.messages.push(data);
