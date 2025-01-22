@@ -15,22 +15,26 @@
 			<view v-for="(msg, index) in messages" :key="index">
 				<view
 					v-if="msg.senderId == chatInfo.contactUserId || msg.receiverId == chatInfo.contactUserId"
-					:class="['message-item', msg.isMe ? 'me' : 'other']"
 				>
-					<uv-avatar
-						v-if="msg.userInfo.avatar !== '' && msg.userInfo.avatar"
-						:src="msg.userInfo.avatar"
-						shape="circle"
-						style="background-color: #e0e0e0"
-					></uv-avatar>
-					<uv-avatar
-						v-else
-						:text="msg.userInfo.name.slice(0, 1)"
-						fontSize="14"
-						bg-color="#8696de"
-					></uv-avatar>
-					<view class="message-content">
-						{{ msg.content }}
+					<view v-if="!msg.isDate" :class="['message-item', msg.isMe ? 'me' : 'other']">
+						<uv-avatar
+							v-if="msg.userInfo.avatar !== '' && msg.userInfo.avatar"
+							:src="msg.userInfo.avatar"
+							shape="circle"
+							style="background-color: #e0e0e0"
+						></uv-avatar>
+						<uv-avatar
+							v-else
+							:text="msg.userInfo.name.slice(0, 1)"
+							fontSize="14"
+							bg-color="#8696de"
+						></uv-avatar>
+						<view class="message-content">
+							{{ msg.content }}
+						</view>
+					</view>
+					<view v-else>
+						显示日期
 					</view>
 				</view>
 			</view>

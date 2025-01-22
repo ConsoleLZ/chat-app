@@ -67,6 +67,22 @@ export default defineComponent({
 				});
 				uni.setStorageSync('messages', messages);
 			},
+			// 处理消息发送时间，显示在页面上
+			dateGroup(messages){
+				const disposeData = JSON.parse(JSON.stringify(messages))
+				let beforeDate = disposeData[0].createTime // 记录上一次循环的createTime
+				disposeData.forEach((item, index)=>{
+					console.log(item.createTime, beforeDate, item.createTime - beforeDate)
+					if(item.createTime - beforeDate > 300000){
+						disposeData.splice(index, 0, {isDate: true, date: item.createTime, senderId: item.senderId, receiverId: item.receiverId})
+					}
+
+					beforeDate = item.createTime
+				})
+				disposeData.splice(0, 0, {isDate: true, date: disposeData[0].createTime, senderId: disposeData[0].senderId, receiverId: disposeData[0].receiverId})
+
+				return disposeData
+			},
 			goBack() {
 				uni.navigateBack();
 			}
@@ -94,6 +110,8 @@ export default defineComponent({
 			// 初始化时加载消息
 			const messages = uni.getStorageSync('messages') || {};
 			state.messages = Object.values(messages).sort((a, b) => a.createTime - b.createTime);
+			state.messages = methods.dateGroup(state.messages)
+			console.log(state.messages)
 		});
 
 		onShow(() => {
