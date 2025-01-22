@@ -33,8 +33,8 @@
 							{{ msg.content }}
 						</view>
 					</view>
-					<view v-else>
-						显示日期
+					<view class="date-text flex-center-row" v-else>
+						<uni-dateformat :date="msg.date" :threshold="[0,14515200000]"></uni-dateformat>
 					</view>
 				</view>
 			</view>
