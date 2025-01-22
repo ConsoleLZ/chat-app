@@ -71,6 +71,7 @@ export default defineComponent({
 							state.messageList.push({
 								...contact,
 								content: messageItem.content,
+								createTime: messageItem.createTime,
 								unreadCount: counts[contact.contactUserId] || 0
 							});
 						}
