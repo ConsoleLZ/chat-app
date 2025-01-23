@@ -1,9 +1,14 @@
 .navbar {
+	width: 100vw;
 	justify-content: space-between;
 	height: 130rpx;
-	padding: 50rpx 50rpx 0 50rpx;
+	padding: 0 50rpx;
 	background-color: #ffffff;
-	position: relative;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 99;
+	box-sizing: border-box;
 	.title {
 		font-size: 36rpx;
 		text-align: center;
@@ -17,7 +22,7 @@
 	border-radius: 12rpx;
 	background-color: #ffffff;
 	position: absolute;
-	top: 165rpx;
-	right: 50rpx;
+	top: 105rpx;
+	right: 60rpx;
 	padding: 30rpx 0;
 }

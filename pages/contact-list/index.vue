@@ -1,6 +1,6 @@
 <template>
 	<navbar-comp title="联系人" />
-	<uv-list>
+	<uv-list style="padding-top: 130rpx;">
 		<uv-list-item @click="onJumpNew" title="新朋友" note="交友需谨慎哦" link></uv-list-item>
 	</uv-list>
 	<uv-tabs :list="tabList" @click="onChangeTabs"></uv-tabs>
