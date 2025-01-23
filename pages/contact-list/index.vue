@@ -1,6 +1,6 @@
 <template>
 	<navbar-comp title="联系人" />
-	<uv-list style="padding-top: 160rpx;">
+	<uv-list style="padding-top: 160rpx">
 		<uv-list-item @click="onJumpNew" title="新朋友" note="交友需谨慎哦" link></uv-list-item>
 	</uv-list>
 	<uv-tabs :list="tabList" @click="onChangeTabs"></uv-tabs>
@@ -12,33 +12,31 @@
 				<uv-collapse-item title="同学">111</uv-collapse-item>
 				<uv-collapse-item title="朋友">111</uv-collapse-item>
 				<uv-collapse-item title="好友" name="expand">
-					<view class="contact-list">
-						<view
-							class="flex-center-row contact-list-item"
-							hover-class="hover-class-background"
-							hover-stay-time="150"
-							v-for="item in classifyContactsData?.normal"
-							:key="item.id"
-							style="padding: 12rpx"
-							@click="onJumpUserDetail(item)"
-						>
-							<uv-avatar
-								v-if="item.avatar !== '' && item.avatar"
-								size="90rpx"
-								style="margin-right: 15rpx"
-								:src="item.avatar"
-							></uv-avatar>
-							<uv-avatar
-								v-else
-								:text="item.name?.slice(0, 1)"
-								size="90rpx"
-								style="margin-right: 15rpx"
-							></uv-avatar>
-							<view style="flex: 1">
-								<view class="title">{{ item.name }}</view>
-								<view class="flex-row">
-									<text style="font-size: 24rpx">[手机在线]</text>
-								</view>
+					<view
+						class="flex-center-row"
+						hover-class="hover-class-background"
+						hover-stay-time="150"
+						v-for="item in classifyContactsData?.normal"
+						:key="item.id"
+						style="padding: 12rpx"
+						@click="onJumpUserDetail(item)"
+					>
+						<uv-avatar
+							v-if="item.avatar !== '' && item.avatar"
+							size="90rpx"
+							style="margin-right: 15rpx"
+							:src="item.avatar"
+						></uv-avatar>
+						<uv-avatar
+							v-else
+							:text="item.name?.slice(0, 1)"
+							size="90rpx"
+							style="margin-right: 15rpx"
+						></uv-avatar>
+						<view style="flex: 1">
+							<view class="title">{{ item.name }}</view>
+							<view class="flex-row">
+								<text style="font-size: 24rpx">[手机在线]</text>
 							</view>
 						</view>
 					</view>
