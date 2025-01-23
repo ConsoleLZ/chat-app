@@ -1,6 +1,7 @@
 <script>
 import { postVerifiedStore } from '@/store/index.js';
-import { initSocket, listenPrivateMessage } from '@/utils/socketService.js';
+import { initSocket, getSocket } from '@/utils/socketService.js';
+import {listenMessage} from '@/utils/utils.js'
 
 export default {
 	onLaunch: function () {
@@ -26,20 +27,12 @@ export default {
 				} else {
 					const userInfo = uni.getStorageSync('userInfo');
 					// 初始化并连接到服务器
-					const socket = initSocket(userInfo);
+					if (!getSocket()) {
+						initSocket(userInfo);
 
-					// 监听服务器消息
-					listenPrivateMessage(data => {
-						// 使用对象存储消息，以createTime作为key
-						const messages = uni.getStorageSync('messages') === '' ? {} : uni.getStorageSync('messages');
-						// 检查消息是否已存在
-						if (!messages[data.createTime]) {
-							data.isView = false;
-							messages[data.createTime] = data;
-							uni.$emit('privateMessage', data);
-							uni.setStorageSync('messages', messages);
-						}
-					});
+						// 监听服务器消息
+						listenMessage().private1()
+					}
 				}
 			})
 			.catch(error => {
