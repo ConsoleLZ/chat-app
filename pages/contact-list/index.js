@@ -18,7 +18,8 @@ export default defineComponent({
 					name: '群聊'
 				}
 			],
-			classifyContactsData: null // 分类的联系人数据
+			classifyContactsData: null, // 分类的联系人数据
+			statusBarHeight: uni.getSystemInfoSync().statusBarHeight
 		});
 
 		const components = {

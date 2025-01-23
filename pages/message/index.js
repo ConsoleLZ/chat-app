@@ -10,7 +10,8 @@ export default defineComponent({
 	setup() {
 		const state = reactive({
 			messageList: [],
-			contacts: null
+			contacts: null,
+			statusBarHeight: uni.getSystemInfoSync().statusBarHeight
 		});
 
 		const methods = {

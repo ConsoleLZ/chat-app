@@ -1,6 +1,6 @@
 <template>
 	<navbar-comp title="消息" />
-	<view class="list">
+	<view class="list" :style="`padding-top: ${statusBarHeight + 130}rpx;`">
 		<view
 			class="flex-center-row list-item"
 			@click="onJumpChat(item)"
