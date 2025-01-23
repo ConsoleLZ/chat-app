@@ -61,7 +61,7 @@ export default defineComponent({
 			// 将所有的未读消息变成已读消息
 			changeMessageView() {
 				const messages = uni.getStorageSync('messages') || {};
-				Object.keys(messages).forEach(key => {
+				Object.keys(messages)?.forEach(key => {
 					if (messages[key].senderId === state.chatInfo.contactUserId) {
 						messages[key].isView = true;
 					}

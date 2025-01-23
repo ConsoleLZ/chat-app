@@ -49,7 +49,7 @@ export default defineComponent({
 				const counts = {};
 				const messages = uni.getStorageSync('messages') || {};
 
-				Object.values(messages).forEach(message => {
+				Object.values(messages)?.forEach(message => {
 					if (!message.isView && message.receiverId === currentUserId) {
 						const contactId = message.senderId;
 						counts[contactId] = (counts[contactId] || 0) + 1;
@@ -58,12 +58,12 @@ export default defineComponent({
 
 				const arr = [];
 
-				Object.keys(messages).forEach(key => {
+				Object.keys(messages)?.forEach(key => {
 					methods.formateMessages(arr, messages[key]);
 				});
 
 				arr.forEach(messageItem => {
-					state.contacts.forEach(contact => {
+					state.contacts?.forEach(contact => {
 						if (
 							messageItem.receiverId === contact.contactUserId ||
 							messageItem.senderId === contact.contactUserId
