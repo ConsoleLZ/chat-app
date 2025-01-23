@@ -1,5 +1,5 @@
 <template>
-	<view class="navbar flex-row">
+	<view class="navbar flex-row" :style="`padding-top: ${statusBarHeight}px;`">
 		<uv-avatar
 			@click="onOpenPopup"
 			v-if="userInfo.avatar !== '' && userInfo.avatar"

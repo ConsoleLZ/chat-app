@@ -14,7 +14,8 @@ export default defineComponent({
 	setup() {
 		const state = reactive({
 			isShowOverlay: false,
-			userInfo: uni.getStorageSync('userInfo')
+			userInfo: uni.getStorageSync('userInfo'),
+			statusBarHeight: uni.getSystemInfoSync().statusBarHeight
 		});
 
 		const components = {
