@@ -42,6 +42,7 @@ export default defineComponent({
 					// 更新显示的消息
 					state.messages = Object.values(messages).sort((a, b) => a.createTime - b.createTime);
 
+					state.messages = methods.dateGroup(state.messages);
 					state.inputText = '';
 					nextTick(() => {
 						state.scrollTop += 1;
@@ -135,7 +136,6 @@ export default defineComponent({
 			const messages = uni.getStorageSync('messages') || {};
 			state.messages = Object.values(messages).sort((a, b) => a.createTime - b.createTime);
 			state.messages = methods.dateGroup(state.messages);
-			console.log(state.messages);
 		});
 
 		onShow(() => {
