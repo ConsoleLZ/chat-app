@@ -1,25 +1,25 @@
-import {defineComponent, reactive, toRefs} from 'vue'
+import {defineComponent} from 'vue'
 
 export default defineComponent({
     props: {
         data: {
             type: Array,
             default: []
+        },
+        modelValue: {
+            type: Array,
+            default: []
         }
     },
-    setup() {
-        const state = reactive({
-            checkboxValue: []
-        })
-
+    emits: ['update:modelValue'],
+    setup(_props, {emit}){
         const methods = {
-            onCreate(){
-                console.log(state.checkboxValue)
+            onChange(value){
+                emit('update:modelValue', value)
             }
         }
 
         return {
-            ...toRefs(state),
             ...methods
         }
     }

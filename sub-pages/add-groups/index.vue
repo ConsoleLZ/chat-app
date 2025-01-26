@@ -31,11 +31,12 @@
 					<collapse-data-comp :data="classifyContactsData?.friend" />
 				</uv-collapse-item>
 				<uv-collapse-item title="好友" name="expand">
-					<collapse-data-comp :data="classifyContactsData?.normal" />
+					<collapse-data-comp v-model="checkedValue" :data="classifyContactsData?.normal" />
 				</uv-collapse-item>
 			</uv-collapse>
 		</view>
 	</view>
+	<uv-button text="创建" type="primary" @click="onCreate"></uv-button>
 </template>
 
 <script src="./index.js"></script>

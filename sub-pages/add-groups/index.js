@@ -11,7 +11,8 @@ export default defineComponent({
         const state = reactive({
 			searchValue: '',
 			statusBarHeight: uni.getSystemInfoSync().statusBarHeight,
-			classifyContactsData: null
+			classifyContactsData: null,
+			checkedValue: []
 		});
 
 		const components = {
@@ -44,6 +45,9 @@ export default defineComponent({
 						uni.stopPullDownRefresh();
 						components.collapseRef.value.init();
 					});
+			},
+			onCreate(){
+				console.log(state.checkedValue)
 			},
             // 清空列表
 			onClear() {
