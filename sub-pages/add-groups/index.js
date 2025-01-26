@@ -1,26 +1,38 @@
-import {defineComponent, toRefs, reactive, ref} from 'vue'
+import { defineComponent, toRefs, reactive, ref } from 'vue';
 import { getContactsStore } from '@/store/index.js';
 import { onShow } from '@dcloudio/uni-app';
-import CollapseDataComp from './comps/collapse-data/index.vue'
+import CollapseDataComp from './comps/collapse-data/index.vue';
 
 export default defineComponent({
 	components: {
 		CollapseDataComp
 	},
-    setup() {
-        const state = reactive({
+	setup() {
+		const state = reactive({
 			searchValue: '',
 			statusBarHeight: uni.getSystemInfoSync().statusBarHeight,
 			classifyContactsData: null,
-			checkedValue: []
+			checkedValue: [],
+			formState: {
+				groupName: null
+			},
+			rules: {
+				groupName: {
+					type: 'string',
+					required: true,
+					message: '请填写群聊名称',
+					trigger: ['change']
+				}
+			}
 		});
 
 		const components = {
 			collapseRef: ref(null),
-			modalRef: ref(null)
+			modalRef: ref(null),
+			fromRef: ref(null)
 		};
 
-        const methods = {
+		const methods = {
 			// 获取联系人数据
 			getContactsData() {
 				uni.showLoading({
@@ -47,10 +59,15 @@ export default defineComponent({
 						components.collapseRef.value.init();
 					});
 			},
-			onCreate(){
-				components.modalRef.value.open()
+			async onConfirm() {
+				await components.fromRef.value.validate();
+				console.log(state.formState.groupName);
 			},
-            // 清空列表
+			onCreate() {
+				state.formState.groupName = null;
+				components.modalRef.value.open();
+			},
+			// 清空列表
 			onClear() {
 				state.searchValue = '';
 				state.users = null;
@@ -59,16 +76,16 @@ export default defineComponent({
 			onBack() {
 				uni.navigateBack({ delta: 1 });
 			}
-        }
+		};
 
-		onShow(()=>{
-			methods.getContactsData()
-		})
+		onShow(() => {
+			methods.getContactsData();
+		});
 
-        return {
-            ...toRefs(state),
-            ...methods,
+		return {
+			...toRefs(state),
+			...methods,
 			...components
-        }
-    }
-})
+		};
+	}
+});

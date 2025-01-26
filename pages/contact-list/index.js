@@ -2,7 +2,7 @@ import { defineComponent, reactive, toRefs, ref } from 'vue';
 import NavbarComp from '@/components/navbar/index.vue';
 import { getContactsStore } from '@/store/index.js';
 import { onPullDownRefresh, onShow } from '@dcloudio/uni-app';
-import CollapseDataComp from './comps/collapse-data/index.vue'
+import CollapseDataComp from './comps/collapse-data/index.vue';
 
 export default defineComponent({
 	components: {

@@ -1,7 +1,7 @@
 <script>
 import { postVerifiedStore } from '@/store/index.js';
 import { initSocket, getSocket } from '@/utils/socketService.js';
-import {listenMessage} from '@/utils/utils.js'
+import { listenMessage } from '@/utils/utils.js';
 
 export default {
 	onLaunch: function () {
@@ -31,7 +31,7 @@ export default {
 						initSocket(userInfo);
 
 						// 监听服务器消息
-						listenMessage().private1()
+						listenMessage().private1();
 					}
 				}
 			})

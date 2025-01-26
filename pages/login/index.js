@@ -1,7 +1,7 @@
 import { defineComponent, reactive, toRefs, ref } from 'vue';
 import { postLoginStore } from '@/store/index.js';
 import { initSocket, getSocket } from '@/utils/socketService.js';
-import {listenMessage} from '@/utils/utils.js'
+import { listenMessage } from '@/utils/utils.js';
 
 export default defineComponent({
 	setup() {
@@ -49,7 +49,7 @@ export default defineComponent({
 									if (!getSocket()) {
 										initSocket(res.data?.userInfo);
 										// 监听服务器消息
-										listenMessage().private1()
+										listenMessage().private1();
 									}
 									uni.switchTab({ url: '/pages/message/index' });
 								}

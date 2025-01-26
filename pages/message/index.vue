@@ -20,14 +20,14 @@
 				style="margin-right: 12rpx"
 				bg-color="#3c9cff"
 			></uv-avatar>
-			<view style="flex: 1;">
-				<view class="flex-row" style="margin-bottom: 4rpx;">
+			<view style="flex: 1">
+				<view class="flex-row" style="margin-bottom: 4rpx">
 					<view class="title">{{ item.name }}</view>
 					<text style="font-size: 22rpx; color: #c1c1c1">
-						<uni-dateformat :date="item.createTime" :threshold="[0,14515200000]"></uni-dateformat>
+						<uni-dateformat :date="item.createTime" :threshold="[0, 14515200000]"></uni-dateformat>
 					</text>
 				</view>
-				<view class="flex-row" style="height: 35rpx;">
+				<view class="flex-row" style="height: 35rpx">
 					<view class="message">
 						{{ item.content }}
 					</view>

@@ -1,6 +1,6 @@
 import { defineComponent, reactive, toRefs, ref } from 'vue';
 import UserDetailComp from './comps/user-detail/index.vue';
-import {jump} from '@/utils/utils.js'
+import { jump } from '@/utils/utils.js';
 
 export default defineComponent({
 	components: {

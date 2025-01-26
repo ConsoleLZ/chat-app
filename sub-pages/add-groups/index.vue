@@ -39,11 +39,11 @@
 	<view class="btn flex-center-row">
 		<uv-button style="width: 80%" text="创建" type="primary" @click="onCreate"></uv-button>
 	</view>
-	<uv-modal ref="modalRef" title="创建群聊" showCancelButton @confirm="confirm">
+	<uv-modal ref="modalRef" title="创建群聊" showCancelButton asyncClose @confirm="onConfirm">
 		<template #default>
-			<uv-form labelPosition="left">
-				<uv-form-item label="名称" prop="userInfo.name" borderBottom>
-					<uv-input border="none"></uv-input>
+			<uv-form ref="fromRef" labelPosition="left" :model="formState" :rules="rules">
+				<uv-form-item label="名称" prop="groupName">
+					<uv-input v-model="formState.groupName" border="bottom" placeholder="请输入群聊名称"></uv-input>
 				</uv-form-item>
 			</uv-form>
 		</template>
