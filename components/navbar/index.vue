@@ -31,7 +31,7 @@
 					mode="widthFix"
 					style="margin-right: 12rpx"
 				></uv-image>
-				<text style="width: 150rpx;">创建群聊</text>
+				<text class="overlay-text">创建群聊</text>
 			</view>
 			<view
 				@click="onJumpSearchContact"
@@ -46,7 +46,7 @@
 					mode="widthFix"
 					style="margin-right: 12rpx"
 				></uv-image>
-				<text style="width: 150rpx;">加好友/群</text>
+				<text class="overlay-text">加好友/群</text>
 			</view>
 		</view>
 	</uv-overlay>
