@@ -2,10 +2,12 @@ import { defineComponent, reactive, toRefs, ref } from 'vue';
 import NavbarComp from '@/components/navbar/index.vue';
 import { getContactsStore } from '@/store/index.js';
 import { onPullDownRefresh, onShow } from '@dcloudio/uni-app';
+import CollapseDataComp from './comps/collapse-data/index.vue'
 
 export default defineComponent({
 	components: {
-		NavbarComp
+		NavbarComp,
+		CollapseDataComp
 	},
 	setup() {
 		const state = reactive({
@@ -35,12 +37,6 @@ export default defineComponent({
 			onJumpNew() {
 				uni.navigateTo({
 					url: '/sub-pages/new-contacts/index'
-				});
-			},
-			// 跳转到用户详情页
-			onJumpUserDetail(userInfo) {
-				uni.navigateTo({
-					url: `/sub-pages/user-detail/index?userInfo=${JSON.stringify(userInfo)}`
 				});
 			},
 			// 获取联系人数据

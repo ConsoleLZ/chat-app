@@ -12,34 +12,7 @@
 				<uv-collapse-item title="同学">111</uv-collapse-item>
 				<uv-collapse-item title="朋友">111</uv-collapse-item>
 				<uv-collapse-item title="好友" name="expand">
-					<view
-						class="flex-center-row"
-						hover-class="hover-class-background"
-						hover-stay-time="150"
-						v-for="item in classifyContactsData?.normal"
-						:key="item.id"
-						style="padding: 12rpx"
-						@click="onJumpUserDetail(item)"
-					>
-						<uv-avatar
-							v-if="item.avatar !== '' && item.avatar"
-							size="90rpx"
-							style="margin-right: 15rpx"
-							:src="item.avatar"
-						></uv-avatar>
-						<uv-avatar
-							v-else
-							:text="item.name?.slice(0, 1)"
-							size="90rpx"
-							style="margin-right: 15rpx"
-						></uv-avatar>
-						<view style="flex: 1">
-							<view class="title">{{ item.name }}</view>
-							<view class="flex-row">
-								<text style="font-size: 24rpx">[手机在线]</text>
-							</view>
-						</view>
-					</view>
+					<collapse-data-comp :data="classifyContactsData?.normal" />
 				</uv-collapse-item>
 			</uv-collapse>
 		</view>
