@@ -16,6 +16,29 @@
 				<uv-text @click="onClear" type="primary" text="清空"></uv-text>
 			</view>
 		</view>
+		<view>
+			<uv-collapse ref="collapseRef" accordion :border="false" value="expand">
+				<uv-collapse-item title="特别关心">
+					<collapse-data-comp :data="classifyContactsData?.particularly" />
+				</uv-collapse-item>
+				<uv-collapse-item title="家人">
+					<collapse-data-comp :data="classifyContactsData?.family" />
+				</uv-collapse-item>
+				<uv-collapse-item title="同学">
+					<collapse-data-comp :data="classifyContactsData?.schoolmate" />
+				</uv-collapse-item>
+				<uv-collapse-item title="朋友" name="expand">
+					<uv-radio :customStyle="{ margin: '8px' }" name="123">
+						<template #default>
+							<view>hhh</view>
+						</template>
+					</uv-radio>
+				</uv-collapse-item>
+				<uv-collapse-item title="好友">
+					<collapse-data-comp :data="classifyContactsData?.normal" />
+				</uv-collapse-item>
+			</uv-collapse>
+		</view>
 	</view>
 </template>
 
