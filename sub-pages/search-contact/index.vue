@@ -1,7 +1,7 @@
 <template>
 	<view class="container">
-		<view class="navbar flex-center-row">
-			<uv-icon @click="onBack" name="arrow-left"></uv-icon>
+		<view class="navbar flex-center-row" :style="`padding-top: ${statusBarHeight}px;`">
+			<uv-icon @click="onBack" name="arrow-left" size="36rpx"></uv-icon>
 			<view style="flex: 1; margin: 0 20rpx">
 				<uv-input
 					v-model="searchValue"

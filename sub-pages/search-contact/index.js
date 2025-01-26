@@ -7,7 +7,8 @@ export default defineComponent({
 			searchValue: '',
 			users: null, // 搜索到的用户
 			contactUserIdList: [], // 已经添加的联系人id
-			userId: null // 登录用户的id
+			userId: null, // 登录用户的id
+			statusBarHeight: uni.getSystemInfoSync().statusBarHeight
 		});
 		const components = {
 			toastRef: ref(null)
