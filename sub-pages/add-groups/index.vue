@@ -37,8 +37,17 @@
 		</view>
 	</view>
 	<view class="btn flex-center-row">
-		<uv-button style="width: 80%;" text="创建" type="primary" @click="onCreate"></uv-button>
+		<uv-button style="width: 80%" text="创建" type="primary" @click="onCreate"></uv-button>
 	</view>
+	<uv-modal ref="modalRef" title="创建群聊" showCancelButton @confirm="confirm">
+		<template #default>
+			<uv-form labelPosition="left">
+				<uv-form-item label="名称" prop="userInfo.name" borderBottom>
+					<uv-input border="none"></uv-input>
+				</uv-form-item>
+			</uv-form>
+		</template>
+	</uv-modal>
 </template>
 
 <script src="./index.js"></script>

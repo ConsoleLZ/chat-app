@@ -16,7 +16,8 @@ export default defineComponent({
 		});
 
 		const components = {
-			collapseRef: ref(null)
+			collapseRef: ref(null),
+			modalRef: ref(null)
 		};
 
         const methods = {
@@ -47,7 +48,7 @@ export default defineComponent({
 					});
 			},
 			onCreate(){
-				console.log(state.checkedValue)
+				components.modalRef.value.open()
 			},
             // 清空列表
 			onClear() {
