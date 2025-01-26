@@ -1,4 +1,4 @@
-import {defineComponent, toRefs, reactive} from 'vue'
+import {defineComponent, toRefs, reactive, ref} from 'vue'
 import { getContactsStore } from '@/store/index.js';
 import { onShow } from '@dcloudio/uni-app';
 import CollapseDataComp from './comps/collapse-data/index.vue'
@@ -13,6 +13,10 @@ export default defineComponent({
 			statusBarHeight: uni.getSystemInfoSync().statusBarHeight,
 			classifyContactsData: null
 		});
+
+		const components = {
+			collapseRef: ref(null)
+		};
 
         const methods = {
 			// 获取联系人数据
@@ -38,6 +42,7 @@ export default defineComponent({
 					.finally(() => {
 						uni.hideLoading();
 						uni.stopPullDownRefresh();
+						components.collapseRef.value.init();
 					});
 			},
             // 清空列表
@@ -57,7 +62,8 @@ export default defineComponent({
 
         return {
             ...toRefs(state),
-            ...methods
+            ...methods,
+			...components
         }
     }
 })
