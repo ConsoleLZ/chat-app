@@ -1,5 +1,5 @@
 <template>
-	<uv-checkbox-group @change="onChange" style="margin-bottom: 30rpx;">
+	<uv-checkbox-group v-if="data?.length" @change="onChange" style="margin-bottom: 30rpx;">
 		<uv-checkbox v-for="(item, index) in data" :key="index" :customStyle="{ margin: '8px' }" :name="item.contactUserId">
 			<template #default>
 				<view style="width: 100vw;" class="flex-row">
@@ -20,6 +20,7 @@
 			</template>
 		</uv-checkbox>
 	</uv-checkbox-group>
+    <uv-empty v-else mode="list"></uv-empty>
 </template>
 
 <script src="./index.js"></script>

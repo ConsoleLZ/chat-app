@@ -36,7 +36,9 @@
 			</uv-collapse>
 		</view>
 	</view>
-	<uv-button text="创建" type="primary" @click="onCreate"></uv-button>
+	<view class="btn flex-center-row">
+		<uv-button style="width: 80%;" text="创建" type="primary" @click="onCreate"></uv-button>
+	</view>
 </template>
 
 <script src="./index.js"></script>
