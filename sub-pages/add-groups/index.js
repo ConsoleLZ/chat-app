@@ -1,8 +1,12 @@
 import {defineComponent, toRefs, reactive} from 'vue'
 import { getContactsStore } from '@/store/index.js';
 import { onShow } from '@dcloudio/uni-app';
+import CollapseDataComp from './comps/collapse-data/index.vue'
 
 export default defineComponent({
+	components: {
+		CollapseDataComp
+	},
     setup() {
         const state = reactive({
 			searchValue: '',
@@ -22,7 +26,6 @@ export default defineComponent({
 						userId: userInfo.id
 					})
 					.then(res => {
-						console.log(res)
 						state.classifyContactsData = res.data.classifyContacts;
 					})
 					.catch(() => {

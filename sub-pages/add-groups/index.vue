@@ -28,11 +28,7 @@
 					<collapse-data-comp :data="classifyContactsData?.schoolmate" />
 				</uv-collapse-item>
 				<uv-collapse-item title="朋友" name="expand">
-					<uv-radio :customStyle="{ margin: '8px' }" name="123">
-						<template #default>
-							<view>hhh</view>
-						</template>
-					</uv-radio>
+					<collapse-data-comp :data="classifyContactsData?.friend" />
 				</uv-collapse-item>
 				<uv-collapse-item title="好友">
 					<collapse-data-comp :data="classifyContactsData?.normal" />
