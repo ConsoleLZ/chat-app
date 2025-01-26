@@ -1,4 +1,4 @@
-import {defineComponent} from 'vue'
+import {defineComponent, reactive, toRefs} from 'vue'
 
 export default defineComponent({
     props: {
@@ -7,7 +7,20 @@ export default defineComponent({
             default: []
         }
     },
-    setup(props) {
-        console.log(props)
+    setup() {
+        const state = reactive({
+            checkboxValue: []
+        })
+
+        const methods = {
+            onCreate(){
+                console.log(state.checkboxValue)
+            }
+        }
+
+        return {
+            ...toRefs(state),
+            ...methods
+        }
     }
 })
