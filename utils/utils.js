@@ -55,3 +55,10 @@ export const listenMessage = () => {
 		private1
 	};
 };
+
+// 页面跳转
+export const jump = (url, delay)=>{
+	setTimeout(()=>{
+		uni.navigateTo({ url });
+	}, delay)
+}

@@ -62,6 +62,12 @@
 			"style": {
 				"navigationBarTitleText": "联系人信息"
 			}
+		},
+		{
+			"path": "sub-pages/add-groups/index",
+			"style": {
+				"navigationStyle": "custom"
+			}
 		}
 	],
 	"globalStyle": {

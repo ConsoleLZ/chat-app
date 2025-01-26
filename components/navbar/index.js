@@ -1,5 +1,6 @@
 import { defineComponent, reactive, toRefs, ref } from 'vue';
 import UserDetailComp from './comps/user-detail/index.vue';
+import {jump} from '@/utils/utils.js'
 
 export default defineComponent({
 	components: {
@@ -33,12 +34,6 @@ export default defineComponent({
 				await uni.showTabBar();
 				state.isShowOverlay = false;
 			},
-			// 跳转到搜索联系人页面
-			onJumpSearchContact() {
-				setTimeout(() => {
-					uni.navigateTo({ url: '/sub-pages/search-contact/index' });
-				}, 150);
-			},
 			// 打开用户详情信息
 			onOpenPopup() {
 				components.popupRef.value.open();
@@ -46,6 +41,7 @@ export default defineComponent({
 		};
 
 		return {
+			jump,
 			...methods,
 			...toRefs(state),
 			...components

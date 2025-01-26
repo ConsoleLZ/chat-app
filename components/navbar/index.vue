@@ -19,7 +19,7 @@
 	<uv-overlay :show="isShowOverlay" @click="onCloseOverlay" opacity="0.2" duration="150">
 		<view class="overlay-box flex-column">
 			<view
-				@click="onJumpSearchContact"
+				@click="jump('/sub-pages/add-groups/index', 150)"
 				class="flex-center-row"
 				style="padding: 15rpx 0; width: 100%"
 				hover-class="hover-class-background"
@@ -34,7 +34,7 @@
 				<text class="overlay-text">创建群聊</text>
 			</view>
 			<view
-				@click="onJumpSearchContact"
+				@click="jump('/sub-pages/search-contact/index', 150)"
 				class="flex-center-row"
 				style="padding: 15rpx 0; width: 100%"
 				hover-class="hover-class-background"
