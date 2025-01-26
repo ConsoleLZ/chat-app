@@ -7,10 +7,18 @@
 	<view>
 		<view v-if="tabsIndex === 0">
 			<uv-collapse ref="collapseRef" accordion :border="false" value="expand">
-				<uv-collapse-item title="特别关心">111</uv-collapse-item>
-				<uv-collapse-item title="家人">111</uv-collapse-item>
-				<uv-collapse-item title="同学">111</uv-collapse-item>
-				<uv-collapse-item title="朋友">111</uv-collapse-item>
+				<uv-collapse-item title="特别关心">
+					<collapse-data-comp :data="classifyContactsData?.particularly" />
+				</uv-collapse-item>
+				<uv-collapse-item title="家人">
+					<collapse-data-comp :data="classifyContactsData?.family" />
+				</uv-collapse-item>
+				<uv-collapse-item title="同学">
+					<collapse-data-comp :data="classifyContactsData?.schoolmate" />
+				</uv-collapse-item>
+				<uv-collapse-item title="朋友">
+					<collapse-data-comp :data="classifyContactsData?.friend" />
+				</uv-collapse-item>
 				<uv-collapse-item title="好友" name="expand">
 					<collapse-data-comp :data="classifyContactsData?.normal" />
 				</uv-collapse-item>

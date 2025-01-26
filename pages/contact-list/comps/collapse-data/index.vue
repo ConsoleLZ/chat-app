@@ -23,7 +23,7 @@
 			</view>
 		</view>
 	</view>
-	<uv-empty v-else mode="data"></uv-empty>
+	<uv-empty v-else mode="list"></uv-empty>
 </template>
 
 <script src="./index.js"></script>
