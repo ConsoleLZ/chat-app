@@ -2,7 +2,6 @@ const express = require('express');
 const mysql2 = require('mysql2');
 const { dbConfig, userTable } = require('../db.config');
 const { tokenManager } = require('../tokenManager');
-const dayjs = require('dayjs');
 const bcrypt = require('bcrypt'); // 引入 bcrypt 用于密码加密
 
 // 创建一个全局的连接池
@@ -77,7 +76,7 @@ router.post('/register', async function (req, res) {
 
 		const [result] = await promisePool.query(
 			`INSERT INTO ${userTable} (name, account, password, createTime) VALUES (?, ?, ?, ?)`,
-			[name, account, hashedPassword, dayjs().format('YYYY-MM-DD HH:mm:ss')]
+			[name, account, hashedPassword, Date.now()]
 		);
 
 		if (result.affectedRows > 0) {

@@ -30,7 +30,8 @@ export default defineComponent({
 		const components = {
 			collapseRef: ref(null),
 			modalRef: ref(null),
-			fromRef: ref(null)
+			fromRef: ref(null),
+			toastRef: ref(null)
 		};
 
 		const methods = {
@@ -62,9 +63,31 @@ export default defineComponent({
 			},
 			async onConfirm() {
 				await components.fromRef.value.validate();
-				postCreateGroupStore.post(state.formState).then(res=>{
-					console.log(res)
-				})
+				postCreateGroupStore
+					.post(state.formState)
+					.then(res => {
+						const data = res.data;
+						console.log(data)
+						if (data?.ok) {
+							components.toastRef.value.show({
+								type: 'success',
+								title: '提示',
+								message: '创建成功',
+								duration: 1000
+							});
+						} else {
+							components.toastRef.value.show({
+								type: 'error',
+								title: '提示',
+								message: '创建失败',
+								duration: 1000
+							});
+						}
+					})
+					.finally(() => {
+						components.modalRef.value.closeLoading();
+						components.modalRef.value.close();
+					});
 			},
 			onCreate() {
 				state.formState.name = null;

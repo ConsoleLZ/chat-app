@@ -22,7 +22,9 @@ const table = {
 	// 联系人表
 	contactsTable: 'contacts',
 	// 联系人申请表
-	contactsApplicationTable: 'contactsApplication'
+	contactsApplicationTable: 'contactsApplication',
+	// 群组表
+	groupsTable: 'groups'
 };
 
 module.exports = {
