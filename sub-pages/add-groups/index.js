@@ -1,5 +1,5 @@
 import { defineComponent, toRefs, reactive, ref } from 'vue';
-import { getContactsStore } from '@/store/index.js';
+import { getContactsStore, postCreateGroupStore } from '@/store/index.js';
 import { onShow } from '@dcloudio/uni-app';
 import CollapseDataComp from './comps/collapse-data/index.vue';
 
@@ -14,10 +14,11 @@ export default defineComponent({
 			classifyContactsData: null,
 			checkedValue: [],
 			formState: {
-				groupName: null
+				name: null, // 群聊名称
+				ownerId: uni.getStorageSync('userInfo').id // 创建者id
 			},
 			rules: {
-				groupName: {
+				name: {
 					type: 'string',
 					required: true,
 					message: '请填写群聊名称',
@@ -61,10 +62,12 @@ export default defineComponent({
 			},
 			async onConfirm() {
 				await components.fromRef.value.validate();
-				console.log(state.formState.groupName);
+				postCreateGroupStore.post(state.formState).then(res=>{
+					console.log(res)
+				})
 			},
 			onCreate() {
-				state.formState.groupName = null;
+				state.formState.name = null;
 				components.modalRef.value.open();
 			},
 			// 清空列表

@@ -23,3 +23,6 @@ export const getContactsStore = new Request('/api/get-contacts', 'GET');
 
 // 同意申请
 export const postAgreeApplicationStore = new Request('/api/agree-application', 'POST');
+
+// 创建群聊
+export const postCreateGroupStore = new Request('/api/create-group', 'POST')

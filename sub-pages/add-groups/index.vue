@@ -9,7 +9,6 @@
 					prefixIcon="search"
 					confirmType="search"
 					clearable
-					focus
 				></uv-input>
 			</view>
 			<view>
@@ -42,8 +41,8 @@
 	<uv-modal ref="modalRef" title="创建群聊" showCancelButton asyncClose @confirm="onConfirm">
 		<template #default>
 			<uv-form ref="fromRef" labelPosition="left" :model="formState" :rules="rules">
-				<uv-form-item label="名称" prop="groupName">
-					<uv-input v-model="formState.groupName" border="bottom" placeholder="请输入群聊名称"></uv-input>
+				<uv-form-item label="名称" prop="name">
+					<uv-input v-model="formState.name" border="bottom" placeholder="请输入群聊名称"></uv-input>
 				</uv-form-item>
 			</uv-form>
 		</template>
