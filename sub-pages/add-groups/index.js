@@ -2,7 +2,7 @@ import { defineComponent, toRefs, reactive, ref } from 'vue';
 import { getContactsStore, postCreateGroupStore } from '@/store/index.js';
 import { onShow } from '@dcloudio/uni-app';
 import CollapseDataComp from './comps/collapse-data/index.vue';
-import ToastComp from '@/components/toast/index.vue'
+import ToastComp from '@/components/toast/index.vue';
 
 export default defineComponent({
 	components: {
@@ -62,27 +62,33 @@ export default defineComponent({
 						components.collapseRef.value.init();
 					});
 			},
-			async onConfirm() {
-				await components.fromRef.value.validate();
-				postCreateGroupStore
-					.post(state.formState)
-					.then(res => {
-						const data = res.data;
-						if (data?.ok) {
-							components.toastRef.value.show({
-								type: 'success',
-								message: '创建成功',
+			onConfirm() {
+				components.fromRef.value
+					.validate()
+					.then(() => {
+						postCreateGroupStore
+							.post(state.formState)
+							.then(res => {
+								const data = res.data;
+								if (data?.ok) {
+									components.toastRef.value.show({
+										type: 'success',
+										message: '创建成功'
+									});
+								} else {
+									components.toastRef.value.show({
+										type: 'error',
+										message: '创建失败'
+									});
+								}
+							})
+							.finally(() => {
+								components.modalRef.value.closeLoading();
+								components.modalRef.value.close();
 							});
-						} else {
-							components.toastRef.value.show({
-								type: 'error',
-								message: '创建失败',
-							});
-						}
 					})
-					.finally(() => {
+					.catch(() => {
 						components.modalRef.value.closeLoading();
-						components.modalRef.value.close();
 					});
 			},
 			onCreate() {
