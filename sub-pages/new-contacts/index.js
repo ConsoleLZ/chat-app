@@ -1,8 +1,12 @@
 import { defineComponent, reactive, ref, toRefs } from 'vue';
 import { getApplicationStore, postAgreeApplicationStore } from '@/store/index.js';
 import { onShow } from '@dcloudio/uni-app';
+import ToastComp from '@/components/toast/index.vue'
 
 export default defineComponent({
+	components: {
+		ToastComp
+	},
 	setup() {
 		const state = reactive({
 			dataList: null
@@ -30,7 +34,6 @@ export default defineComponent({
 					.catch(() => {
 						components.toastRef.value.show({
 							type: 'error',
-							title: '提示',
 							message: '服务器错误'
 						});
 					})
@@ -70,7 +73,6 @@ export default defineComponent({
 					.catch(() => {
 						components.toastRef.value.show({
 							type: 'error',
-							title: '提示',
 							message: '服务器错误'
 						});
 					})

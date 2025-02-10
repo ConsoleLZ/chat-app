@@ -14,7 +14,7 @@
 	</view>
 	<uv-empty v-else style="height: 80vh" mode="data" icon-size="100rpx"></uv-empty>
 
-	<uv-toast ref="toastRef"></uv-toast>
+	<toast-comp ref="toastRef"></toast-comp>
 </template>
 
 <script src="./index.js"></script>

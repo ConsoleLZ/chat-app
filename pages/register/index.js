@@ -1,7 +1,11 @@
 import { defineComponent, reactive, toRefs, ref } from 'vue';
 import { postRegisterStore } from '@/store/index.js';
+import ToastComp from '@/components/toast/index.vue'
 
 export default defineComponent({
+	components: {
+		ToastComp
+	},
 	setup() {
 		const state = reactive({
 			isPasswordType: true,
@@ -36,7 +40,6 @@ export default defineComponent({
 						if (ok) {
 							components.toastRef.value.show({
 								type: 'success',
-								title: '提示',
 								message: '注册成功',
 								complete() {
 									uni.navigateTo({ url: '/pages/login/index' });
@@ -45,7 +48,6 @@ export default defineComponent({
 						} else {
 							components.toastRef.value.show({
 								type: 'error',
-								title: '提示',
 								message: '注册失败,请联系管理'
 							});
 						}
@@ -53,7 +55,6 @@ export default defineComponent({
 					.catch(() => {
 						components.toastRef.value.show({
 							type: 'error',
-							title: '提示',
 							message: '服务器错误'
 						});
 					})

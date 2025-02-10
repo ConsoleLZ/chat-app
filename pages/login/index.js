@@ -2,8 +2,12 @@ import { defineComponent, reactive, toRefs, ref } from 'vue';
 import { postLoginStore } from '@/store/index.js';
 import { initSocket, getSocket } from '@/utils/socketService.js';
 import { listenMessage } from '@/utils/utils.js';
+import ToastComp from '@/components/toast/index.vue'
 
 export default defineComponent({
+	components: {
+		ToastComp
+	},
 	setup() {
 		const state = reactive({
 			isPasswordType: true,
@@ -43,7 +47,6 @@ export default defineComponent({
 							uni.setStorageSync('userInfo', res.data?.userInfo);
 							components.toastRef.value.show({
 								type: 'success',
-								title: '提示',
 								message: '登录成功',
 								complete() {
 									if (!getSocket()) {
@@ -57,7 +60,6 @@ export default defineComponent({
 						} else {
 							components.toastRef.value.show({
 								type: 'error',
-								title: '提示',
 								message: '账号或者密码错误'
 							});
 						}
@@ -65,7 +67,6 @@ export default defineComponent({
 					.catch(() => {
 						components.toastRef.value.show({
 							type: 'error',
-							title: '提示',
 							message: '服务器错误'
 						});
 					})

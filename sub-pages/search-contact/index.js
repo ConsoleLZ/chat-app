@@ -1,7 +1,11 @@
 import { defineComponent, ref, reactive, toRefs } from 'vue';
 import { getSearchUsersStore, getContactsStore, postApplicationStore } from '@/store/index.js';
+import ToastComp from '@/components/toast/index.vue'
 
 export default defineComponent({
+	components: {
+		ToastComp
+	},
 	setup() {
 		const state = reactive({
 			searchValue: '',
@@ -34,13 +38,11 @@ export default defineComponent({
 						if (ok) {
 							components.toastRef.value.show({
 								type: 'success',
-								title: '提示',
 								message: '申请成功'
 							});
 						} else {
 							components.toastRef.value.show({
 								type: 'warning',
-								title: '提示',
 								message: res.data.message
 							});
 						}
@@ -48,7 +50,6 @@ export default defineComponent({
 					.catch(() => {
 						components.toastRef.value.show({
 							type: 'error',
-							title: '提示',
 							message: '服务器错误'
 						});
 					})
@@ -87,7 +88,6 @@ export default defineComponent({
 						console.log(err);
 						components.toastRef.value.show({
 							type: 'error',
-							title: '提示',
 							message: '服务器错误'
 						});
 					})

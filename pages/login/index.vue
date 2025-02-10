@@ -32,7 +32,7 @@
 		<view class="or-text">——OR——</view>
 		<uv-button type="primary" @click="onRegister" :plain="true" text="注册"></uv-button>
 	</view>
-	<uv-toast ref="toastRef"></uv-toast>
+	<toast-comp ref="toastRef"></toast-comp>
 </template>
 
 <script src="./index.js"></script>

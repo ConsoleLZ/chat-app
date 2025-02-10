@@ -3,11 +3,13 @@ import NavbarComp from '@/components/navbar/index.vue';
 import { getContactsStore } from '@/store/index.js';
 import { onPullDownRefresh, onShow } from '@dcloudio/uni-app';
 import CollapseDataComp from './comps/collapse-data/index.vue';
+import ToastComp from '@/components/toast/index.vue'
 
 export default defineComponent({
 	components: {
 		NavbarComp,
-		CollapseDataComp
+		CollapseDataComp,
+		ToastComp
 	},
 	setup() {
 		const state = reactive({
@@ -55,7 +57,6 @@ export default defineComponent({
 					.catch(() => {
 						components.toastRef.value.show({
 							type: 'error',
-							title: '提示',
 							message: '服务器错误'
 						});
 					})
