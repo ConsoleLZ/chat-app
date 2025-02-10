@@ -2,10 +2,12 @@ import { defineComponent, toRefs, reactive, ref } from 'vue';
 import { getContactsStore, postCreateGroupStore } from '@/store/index.js';
 import { onShow } from '@dcloudio/uni-app';
 import CollapseDataComp from './comps/collapse-data/index.vue';
+import ToastComp from '@/components/toast/index.vue'
 
 export default defineComponent({
 	components: {
-		CollapseDataComp
+		CollapseDataComp,
+		ToastComp
 	},
 	setup() {
 		const state = reactive({
@@ -51,7 +53,6 @@ export default defineComponent({
 					.catch(() => {
 						components.toastRef.value.show({
 							type: 'error',
-							title: '提示',
 							message: '服务器错误'
 						});
 					})
@@ -67,20 +68,15 @@ export default defineComponent({
 					.post(state.formState)
 					.then(res => {
 						const data = res.data;
-						console.log(data)
 						if (data?.ok) {
 							components.toastRef.value.show({
 								type: 'success',
-								title: '提示',
 								message: '创建成功',
-								duration: 1000
 							});
 						} else {
 							components.toastRef.value.show({
 								type: 'error',
-								title: '提示',
 								message: '创建失败',
-								duration: 1000
 							});
 						}
 					})

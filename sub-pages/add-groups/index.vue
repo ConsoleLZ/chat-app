@@ -48,7 +48,7 @@
 		</template>
 	</uv-modal>
 
-	<uv-toast ref="toastRef"></uv-toast>
+	<toast-comp ref="toastRef"></toast-comp>
 </template>
 
 <script src="./index.js"></script>
