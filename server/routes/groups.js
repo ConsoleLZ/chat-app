@@ -20,26 +20,19 @@ router.post('/create-group', async function (req, res) {
 	}
 
 	try {
-		// 使用 ON DUPLICATE KEY UPDATE 处理可能的重复插入
+		// 确保使用反引号包裹表名，以防它是保留关键字
 		const [result] = await promisePool.query(
-			`INSERT INTO ${groupsTable} (name, ownerId, createTime)
-             VALUES (?, ?, ?)`,
-			[name, ownerId, Date.now()]
+			`INSERT INTO \`${groupsTable}\` (name, ownerId, createTime) VALUES (?, ?, ?)`,
+			[name, ownerId, Math.floor(Date.now() / 1000)] // 使用秒级别时间戳
 		);
 
-		// 检查 affectedRows 判断是否成功插入或更新
+		// 检查 affectedRows 判断是否成功插入
 		if (result.affectedRows > 0) {
-			if (result.insertId > 0) {
-				res.json({
-					ok: true,
-					message: '创建成功'
-				});
-			} else {
-				res.json({
-					ok: false,
-					message: '请勿重复添加'
-				});
-			}
+			res.json({
+				ok: true,
+				message: '创建成功',
+				insertId: result.insertId // 返回插入记录的ID
+			});
 		} else {
 			res.status(500).json({
 				ok: false,

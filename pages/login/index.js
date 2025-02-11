@@ -12,7 +12,7 @@ export default defineComponent({
 		const state = reactive({
 			isPasswordType: true,
 			account: 'admin',
-			password: '123456',
+			password: '123',
 			isLoading: false
 		});
 
