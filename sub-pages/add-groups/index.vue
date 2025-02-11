@@ -30,13 +30,13 @@
 					<collapse-data-comp :data="classifyContactsData?.friend" />
 				</uv-collapse-item>
 				<uv-collapse-item title="好友" name="expand">
-					<collapse-data-comp v-model="checkedValue" :data="classifyContactsData?.normal" />
+					<collapse-data-comp v-model="checkedValue" :data="classifyContactsData?.normal" @change="onChange" />
 				</uv-collapse-item>
 			</uv-collapse>
 		</view>
 	</view>
 	<view class="btn flex-center-row">
-		<uv-button style="width: 80%" text="创建" type="primary" @click="onCreate"></uv-button>
+		<uv-button style="width: 80%" text="创建" type="primary" @click="onCreate" :disabled="disabled"></uv-button>
 	</view>
 	<uv-modal ref="modalRef" title="创建群聊" showCancelButton asyncClose @confirm="onConfirm">
 		<template #default>

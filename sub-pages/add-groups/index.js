@@ -26,7 +26,8 @@ export default defineComponent({
 					message: '请填写群聊名称',
 					trigger: ['change']
 				}
-			}
+			},
+			disabled: true
 		});
 
 		const components = {
@@ -61,6 +62,13 @@ export default defineComponent({
 						uni.stopPullDownRefresh();
 						components.collapseRef.value.init();
 					});
+			},
+			onChange(){
+				if(state.checkedValue.length >= 2){
+					state.disabled = false
+				}else {
+					state.disabled = true
+				}
 			},
 			onConfirm() {
 				components.fromRef.value

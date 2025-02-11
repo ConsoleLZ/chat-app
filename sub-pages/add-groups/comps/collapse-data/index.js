@@ -11,11 +11,12 @@ export default defineComponent({
 			default: []
 		}
 	},
-	emits: ['update:modelValue'],
+	emits: ['update:modelValue', 'change'],
 	setup(_props, { emit }) {
 		const methods = {
 			onChange(value) {
 				emit('update:modelValue', value);
+				emit('change')
 			}
 		};
 
