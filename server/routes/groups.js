@@ -1,6 +1,7 @@
 const express = require('express');
 const mysql2 = require('mysql2');
-const { dbConfig, groupsTable } = require('../db.config');
+const { dbConfig, groupsTable, groupMembersTable } = require('../db.config');
+const { v4: uuidv4 } = require('uuid');
 
 // 创建一个全局的连接池
 const promisePool = mysql2.createPool(dbConfig()).promise();
@@ -9,6 +10,7 @@ const router = express.Router();
 
 // 创建群聊
 router.post('/create-group', async function (req, res) {
+	const groupId = uuidv4()
 	const { name, ownerId } = req.body;
 
 	// 参数验证
@@ -22,8 +24,8 @@ router.post('/create-group', async function (req, res) {
 	try {
 		// 确保使用反引号包裹表名，以防它是保留关键字
 		const [result] = await promisePool.query(
-			`INSERT INTO \`${groupsTable}\` (name, ownerId, createTime) VALUES (?, ?, ?)`,
-			[name, ownerId, Math.floor(Date.now() / 1000)] // 使用秒级别时间戳
+			`INSERT INTO \`${groupsTable}\` (id, name, ownerId, createTime) VALUES (?, ?, ?, ?)`,
+			[groupId, name, ownerId, Math.floor(Date.now() / 1000)] // 使用秒级别时间戳
 		);
 
 		// 检查 affectedRows 判断是否成功插入

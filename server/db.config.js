@@ -24,7 +24,9 @@ const table = {
 	// 联系人申请表
 	contactsApplicationTable: 'contactsApplication',
 	// 群组表
-	groupsTable: 'groups'
+	groupsTable: 'groups',
+	// 群组成员表
+	groupMembersTable: 'groupMembers'
 };
 
 module.exports = {
