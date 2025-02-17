@@ -17,7 +17,11 @@ export default defineComponent({
 			checkedValue: [],
 			formState: {
 				name: null, // 群聊名称
-				ownerId: uni.getStorageSync('userInfo').id // 创建者id
+				ownerInfo: { // 创建者信息
+					id: uni.getStorageSync('userInfo').id,
+					name: uni.getStorageSync('userInfo').name,
+					avatar: uni.getStorageSync('userInfo').avatar,
+				}
 			},
 			rules: {
 				name: {
@@ -84,7 +88,10 @@ export default defineComponent({
 								if (data?.ok) {
 									components.toastRef.value.show({
 										type: 'success',
-										message: '创建成功'
+										message: '创建成功',
+										complete(){
+											uni.navigateBack()
+										}
 									});
 								} else {
 									components.toastRef.value.show({
