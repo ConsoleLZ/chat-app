@@ -63,11 +63,11 @@ export default defineComponent({
 						components.collapseRef.value.init();
 					});
 			},
-			onChange(){
-				if(state.checkedValue.length >= 2){
-					state.disabled = false
-				}else {
-					state.disabled = true
+			onChange() {
+				if (state.checkedValue.length >= 2) {
+					state.disabled = false;
+				} else {
+					state.disabled = true;
 				}
 			},
 			onConfirm() {
@@ -75,7 +75,10 @@ export default defineComponent({
 					.validate()
 					.then(() => {
 						postCreateGroupStore
-							.post(state.formState)
+							.post({
+								...state.formState,
+								members: state.checkedValue
+							})
 							.then(res => {
 								const data = res.data;
 								if (data?.ok) {

@@ -4,7 +4,7 @@
 			v-for="(item, index) in data"
 			:key="index"
 			:customStyle="{ margin: '8px' }"
-			:name="item.contactUserId"
+			:name="JSON.stringify(item)"
 		>
 			<template #default>
 				<view style="width: 100vw" class="flex-row">

@@ -10,8 +10,8 @@ const router = express.Router();
 
 // 创建群聊
 router.post('/create-group', async function (req, res) {
-	const groupId = uuidv4()
-	const { name, ownerId } = req.body;
+	const groupId = uuidv4();
+	const { name, ownerId, members } = req.body;
 
 	// 参数验证
 	if (!name || !ownerId) {
@@ -25,11 +25,19 @@ router.post('/create-group', async function (req, res) {
 		// 确保使用反引号包裹表名，以防它是保留关键字
 		const [result] = await promisePool.query(
 			`INSERT INTO \`${groupsTable}\` (id, name, ownerId, createTime) VALUES (?, ?, ?, ?)`,
-			[groupId, name, ownerId, Math.floor(Date.now() / 1000)] // 使用秒级别时间戳
+			[groupId, name, ownerId, Date.now()]
 		);
 
 		// 检查 affectedRows 判断是否成功插入
 		if (result.affectedRows > 0) {
+			// 插入成员表
+			members.forEach(async item => {
+				await promisePool.query(
+					`INSERT INTO \`${groupMembersTable}\` (groupId, userId, name, avatar, joinedTime) VALUES (?, ?, ?, ?, ?)`,
+					[groupId, item.contactUserId, item.name, item.avatar, Date.now()]
+				);
+			});
+
 			res.json({
 				ok: true,
 				message: '创建成功',

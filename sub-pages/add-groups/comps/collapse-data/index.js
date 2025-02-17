@@ -15,7 +15,8 @@ export default defineComponent({
 	setup(_props, { emit }) {
 		const methods = {
 			onChange(value) {
-				emit('update:modelValue', value);
+				const data = value.map(item=>JSON.parse(item))
+				emit('update:modelValue', data);
 				emit('change')
 			}
 		};
