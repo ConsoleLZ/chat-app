@@ -81,7 +81,7 @@ router.get('/get-groups', async function (req, res) {
 		let sql = `
   		SELECT g.id AS groupId, g.name AS groupName, g.avatar AS groupAvatar
     	FROM groupMembers gm
-    	INNER JOIN \`groups\` g ON gm.groupId = g.id
+    	INNER JOIN \`${groupsTable}\` g ON gm.groupId = g.id
     	WHERE gm.userId = ?
 		`;
 
