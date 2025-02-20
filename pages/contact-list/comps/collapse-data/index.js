@@ -5,6 +5,11 @@ export default defineComponent({
 		data: {
 			type: Array,
 			default: []
+		},
+		// 两种模式，0：列表展示在线状态 1：不展示状态
+		mode: {
+			type: Number,
+			default: 0
 		}
 	},
 	setup() {
