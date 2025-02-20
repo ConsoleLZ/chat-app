@@ -26,3 +26,6 @@ export const postAgreeApplicationStore = new Request('/api/agree-application', '
 
 // 创建群聊
 export const postCreateGroupStore = new Request('/api/create-group', 'POST')
+
+// 加入的群聊
+export const getGroupsStore = new Request('/api/get-groups', 'GET')

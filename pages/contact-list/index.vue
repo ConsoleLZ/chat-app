@@ -24,7 +24,9 @@
 				</uv-collapse-item>
 			</uv-collapse>
 		</view>
-		<view v-else-if="tabsIndex === 1">222</view>
+		<view v-else-if="tabsIndex === 1">
+			<collapse-data-comp :data="groupsData" />
+		</view>
 	</view>
 	
 	<toast-comp ref="toastRef"></toast-comp>

@@ -91,7 +91,7 @@ router.get('/get-groups', async function (req, res) {
 		if (rows.length > 0) {
 			res.json({
 				ok: true,
-				users: rows
+				data: rows
 			});
 		} else {
 			res.json({
