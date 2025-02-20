@@ -6,19 +6,21 @@ export default defineComponent({
 			type: Array,
 			default: []
 		},
-		// 两种模式，0：列表展示在线状态 1：不展示状态
+		// 两种模式，0：联系人列表 1：群聊列表
 		mode: {
 			type: Number,
 			default: 0
 		}
 	},
-	setup() {
+	setup(props) {
 		const methods = {
-			// 跳转到用户详情页
-			onJumpUserDetail(userInfo) {
-				uni.navigateTo({
-					url: `/sub-pages/user-detail/index?userInfo=${JSON.stringify(userInfo)}`
-				});
+			onJump(userInfo) {
+				if (props.mode === 0) {
+					// 跳转到用户详情
+					uni.navigateTo({
+						url: `/sub-pages/user-detail/index?userInfo=${JSON.stringify(userInfo)}`
+					});
+				}
 			}
 		};
 

@@ -7,7 +7,7 @@
 		v-for="item in data"
 		:key="item.id"
 		style="padding: 12rpx"
-		@click="onJumpUserDetail(item)"
+		@click="onJump(item)"
 	>
 		<uv-avatar
 			v-if="item.avatar !== '' && item.avatar"
