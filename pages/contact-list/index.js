@@ -68,7 +68,6 @@ export default defineComponent({
 								avatar: item.groupAvatar,
 							}
 						})
-						console.log(state.groupsData)
 						state.classifyContactsData = contactsData.classifyContacts;
 					})
 					.catch(() => {

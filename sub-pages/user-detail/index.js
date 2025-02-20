@@ -21,7 +21,8 @@ export default defineComponent({
 		};
 
 		onLoad(options => {
-			state.userInfo = JSON.parse(options.userInfo);
+			// state.userInfo = JSON.parse(options.userInfo);
+			console.log(options)
 		});
 
 		return {

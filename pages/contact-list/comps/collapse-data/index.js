@@ -14,12 +14,13 @@ export default defineComponent({
 	},
 	setup(props) {
 		const methods = {
-			onJump(userInfo) {
+			onJump(data) {
+				console.log(data)
 				if (props.mode === 0) {
 					// 跳转到用户详情
-					uni.navigateTo({
-						url: `/sub-pages/user-detail/index?userInfo=${JSON.stringify(userInfo)}`
-					});
+					// uni.navigateTo({
+					// 	url: `/sub-pages/user-detail/index`
+					// });
 				}
 			}
 		};
