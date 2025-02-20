@@ -16,7 +16,7 @@ export default defineComponent({
 			// 跳转到聊天页
 			onJumpChat() {
 				uni.navigateTo({
-					url: `/sub-pages/chat-message/index?userInfo=${JSON.stringify(state.userInfo)}`
+					url: `/sub-pages/chat-message/index?userId=${state.userInfo.id}`
 				});
 			}
 		};

@@ -54,6 +54,8 @@
 				<text @click="selectFace(item)" v-for="(item, index) in faceList" :key="index">{{ item }}</text>
 			</view>
 		</uv-popup>
+
+		<uv-loading-page :loading="loading" loading-text="加载中..." font-size="24rpx"></uv-loading-page>
 	</view>
 </template>
 

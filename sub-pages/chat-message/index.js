@@ -2,6 +2,7 @@ import { defineComponent, reactive, toRefs, nextTick, ref } from 'vue';
 import { faceList } from './constants';
 import { sendPrivateMessage, createPrivateMessage, listenPrivateMessage } from '@/utils/socketService';
 import { onLoad, onShow } from '@dcloudio/uni-app';
+import { getUserInfoStore } from '@/store/index.js';
 
 export default defineComponent({
 	setup() {
@@ -9,7 +10,8 @@ export default defineComponent({
 			messages: [],
 			inputText: '',
 			scrollTop: 9999,
-			chatInfo: {} // 联系人信息
+			chatInfo: {}, // 联系人信息
+			loading: false
 		});
 
 		const constants = {
@@ -130,7 +132,18 @@ export default defineComponent({
 		});
 
 		onLoad(options => {
-			state.chatInfo = JSON.parse(options.userInfo);
+			state.loading = true;
+			const userId = options.userId;
+			getUserInfoStore
+				.get({
+					userId
+				})
+				.then(res => {
+					state.chatInfo = res.data.info[0];
+				})
+				.finally(() => {
+					state.loading = false;
+				});
 
 			// 初始化时加载消息
 			const messages = uni.getStorageSync('messages') || {};
