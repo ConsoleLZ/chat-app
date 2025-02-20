@@ -28,11 +28,11 @@ export default defineComponent({
 				if (state.inputText.trim()) {
 					const message = createPrivateMessage(
 						userInfo.id,
-						state.chatInfo.contactUserId,
+						state.chatInfo.id,
 						state.inputText,
 						userInfo
 					);
-					sendPrivateMessage(state.chatInfo.contactUserId, state.inputText, userInfo);
+					sendPrivateMessage(state.chatInfo.id, state.inputText, userInfo);
 
 					// 更新本地存储
 					const messages = uni.getStorageSync('messages') || {};
@@ -64,7 +64,7 @@ export default defineComponent({
 			changeMessageView() {
 				const messages = uni.getStorageSync('messages') || {};
 				Object.keys(messages)?.forEach(key => {
-					if (messages[key].senderId === state.chatInfo.contactUserId) {
+					if (messages[key].senderId === state.chatInfo.id) {
 						messages[key].isView = true;
 					}
 				});
@@ -140,15 +140,16 @@ export default defineComponent({
 				})
 				.then(res => {
 					state.chatInfo = res.data.info[0];
+					console.log(state.chatInfo)
+
+					// 初始化时加载消息
+					const messages = uni.getStorageSync('messages') || {};
+					state.messages = Object.values(messages).sort((a, b) => a.createTime - b.createTime);
+					state.messages = methods.dateGroup(state.messages);
 				})
 				.finally(() => {
 					state.loading = false;
 				});
-
-			// 初始化时加载消息
-			const messages = uni.getStorageSync('messages') || {};
-			state.messages = Object.values(messages).sort((a, b) => a.createTime - b.createTime);
-			state.messages = methods.dateGroup(state.messages);
 		});
 
 		onShow(() => {
@@ -157,7 +158,7 @@ export default defineComponent({
 
 		// 监听发送过来的私聊消息
 		uni.$on('privateMessage', function (data) {
-			if (data.senderId === state.chatInfo.contactUserId) {
+			if (data.senderId === state.chatInfo.id) {
 				data.isView = true;
 			}
 			state.messages.push(data);
