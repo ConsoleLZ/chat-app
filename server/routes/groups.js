@@ -66,10 +66,10 @@ router.post('/create-group', async function (req, res) {
 
 // 获取群聊信息
 router.get('/get-groups', async function (req, res) {
-	const { contactUserId } = req.query;
+	const { userId } = req.query;
 
 	// 参数验证
-	if (!contactUserId) {
+	if (!userId) {
 		return res.status(400).json({
 			ok: false,
 			message: '缺少参数'
@@ -78,12 +78,15 @@ router.get('/get-groups', async function (req, res) {
 
 	try {
 		// 构建 SQL 查询语句
-		let sql = `SELECT *
-				   FROM ${contactsApplicationTable} 
-				   WHERE contactUserId = ?`;
+		let sql = `
+  		SELECT g.id AS groupId, g.name AS groupName, g.avatar AS groupAvatar
+    	FROM groupMembers gm
+    	INNER JOIN \`groups\` g ON gm.groupId = g.id
+    	WHERE gm.userId = ?
+		`;
 
 		// 执行查询
-		const [rows] = await promisePool.query(sql, [contactUserId]);
+		const [rows] = await promisePool.query(sql, [userId]);
 		// 检查查询结果
 		if (rows.length > 0) {
 			res.json({
@@ -93,7 +96,7 @@ router.get('/get-groups', async function (req, res) {
 		} else {
 			res.json({
 				ok: false,
-				message: '暂无申请的朋友'
+				message: '该用户暂未加入群聊'
 			});
 		}
 	} catch (error) {
