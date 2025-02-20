@@ -25,7 +25,9 @@
 			</uv-collapse>
 		</view>
 		<view v-else-if="tabsIndex === 1">
-			<collapse-data-comp :data="groupsData" :mode="1" />
+			<view style="padding: 0 15rpx;">
+				<collapse-data-comp :data="groupsData" :mode="1" />
+			</view>
 		</view>
 	</view>
 	
