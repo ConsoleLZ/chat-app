@@ -1,6 +1,7 @@
 import { defineComponent, reactive, toRefs } from 'vue';
 import { onLoad } from '@dcloudio/uni-app';
 import UserDetailComp from '@/components/user-detail/index.vue';
+import {getUserInfoStore} from '@/store/index.js'
 
 export default defineComponent({
 	components: {
@@ -21,8 +22,13 @@ export default defineComponent({
 		};
 
 		onLoad(options => {
-			// state.userInfo = JSON.parse(options.userInfo);
-			console.log(options)
+			const userId = options.userId
+
+			getUserInfoStore.get({
+				userId
+			}).then(res=>{
+				state.userInfo = res.data.info[0]
+			})
 		});
 
 		return {

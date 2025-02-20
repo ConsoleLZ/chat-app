@@ -138,4 +138,44 @@ router.get('/search-users', async function (req, res) {
 	}
 });
 
+// 获取用户详细信息
+router.get('/user-info', async function (req, res) {
+	const { userId } = req.query;
+
+	// 参数验证
+	if (!userId) {
+		return res.status(400).json({
+			ok: false,
+			message: '缺少参数'
+		});
+	}
+
+	try {
+		const [rows] = await promisePool.query(
+			`SELECT id, name, avatar, account, createTime 
+       FROM ${userTable} 
+       WHERE id = ?`,
+			[userId]
+		);
+
+		if (rows.length > 0) {
+			res.json({
+				ok: true,
+				info: rows
+			});
+		} else {
+			res.status(404).json({
+				ok: false,
+				message: '没有该用户信息'
+			});
+		}
+	} catch (error) {
+		console.error('数据库交互失败:', error);
+		res.status(500).json({
+			ok: false,
+			message: '服务器发生错误'
+		});
+	}
+});
+
 module.exports = router;

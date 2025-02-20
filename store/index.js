@@ -29,3 +29,6 @@ export const postCreateGroupStore = new Request('/api/create-group', 'POST')
 
 // 加入的群聊
 export const getGroupsStore = new Request('/api/get-groups', 'GET')
+
+// 用户详情信息
+export const getUserInfoStore = new Request('/api/user-info', 'GET')

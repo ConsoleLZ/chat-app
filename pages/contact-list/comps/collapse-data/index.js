@@ -15,12 +15,11 @@ export default defineComponent({
 	setup(props) {
 		const methods = {
 			onJump(data) {
-				console.log(data)
 				if (props.mode === 0) {
 					// 跳转到用户详情
-					// uni.navigateTo({
-					// 	url: `/sub-pages/user-detail/index`
-					// });
+					uni.navigateTo({
+						url: `/sub-pages/user-detail/index?userId=${data.contactUserId}`
+					});
 				}
 			}
 		};
