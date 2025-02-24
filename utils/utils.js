@@ -51,11 +51,16 @@ export const listenMessage = () => {
 		});
 	};
 	// 群聊消息
-	const group = ()=> {
+	const group = () => {
 		listenGroupMessage(data => {
+			// 使用对象存储消息，以createTime作为key
+			const messages = uni.getStorageSync('groupMessages') === '' ? [] : uni.getStorageSync('groupMessages');
+			data.isView = false;
+			messages.push(data);
 			uni.$emit('groupMessage', data);
-		})
-	}
+			uni.setStorageSync('groupMessages', messages);
+		});
+	};
 
 	return {
 		private1,

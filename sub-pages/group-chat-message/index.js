@@ -35,11 +35,11 @@ export default defineComponent({
                     
                     sendGroupMessage(state.memberIds, state.inputText, userInfo)
 
-                    state.messages.push({
-						...message,
-						isMe: true
-					})
+                    const messages = uni.getStorageSync('groupMessages') || [];
+                    messages.push(message)
+                    state.messages = messages
 
+					uni.setStorageSync('groupMessages', messages);
                     state.inputText = ''
                 }
             },

@@ -85,13 +85,13 @@ export function listenUpdateUsers(callback) {
  * @isMe 是否是自己发送的
  * @messageType 消息类型
  */
-export function createMessage(senderId, receiverId, content, userInfo, isMe, messageType = 'text') {
+export function createMessage(senderId, receiverId, content, userInfo, messageType = 'text') {
 	return {
 		senderId,
 		receiverId,
 		content,
 		userInfo,
-		isMe,
+		isMe: true,
 		messageType,
 		createTime: Date.now()
 	};
