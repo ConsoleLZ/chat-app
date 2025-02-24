@@ -21,10 +21,10 @@ export default defineComponent({
 						url: `/sub-pages/user-detail/index?userId=${data.contactUserId}`
 					});
 				}else {
-					console.log(data)
 					const info = {
 						id: data.id,
-						name: data.name
+						name: data.name,
+						memberIds: data.memberIds
 					}
 					// 跳转到群聊页
 					uni.navigateTo({

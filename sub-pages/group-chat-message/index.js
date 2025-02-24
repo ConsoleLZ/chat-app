@@ -8,6 +8,7 @@ export default defineComponent({
         const state = reactive({
 			messages: [],
 			inputText: '',
+            memberIds: null,
 			scrollTop: 9999,
 			loading: false,
             title: null
@@ -23,8 +24,9 @@ export default defineComponent({
 
         const methods = {
             sendMessage(){
-                console.log(state.inputText)
-                sendGroupMessage()
+                const userInfo = uni.getStorageSync('userInfo');
+
+                sendGroupMessage(state.memberIds, state.inputText, userInfo)
             },
             goBack() {
 				uni.navigateBack();
@@ -42,8 +44,9 @@ export default defineComponent({
 
         onLoad(options=>{
             const info = JSON.parse(options.info)
-
+            
             state.title = info.name
+            state.memberIds = info.memberIds
         })
 
         return {
