@@ -11,7 +11,8 @@ export default defineComponent({
             memberIds: null,
 			scrollTop: 9999,
 			loading: false,
-            title: null
+            title: null,
+            groupId: null
 		});
 
         const constants = {
@@ -33,10 +34,13 @@ export default defineComponent({
                         userInfo
                     );
                     
-                    sendGroupMessage(state.memberIds, state.inputText, userInfo)
+                    sendGroupMessage(state.groupId, state.memberIds, state.inputText, userInfo)
 
                     const messages = uni.getStorageSync('groupMessages') || [];
-                    messages.push(message)
+                    messages.push({
+                        ...message,
+                        groupId: state.groupId
+                    })
                     state.messages = messages
 
 					uni.setStorageSync('groupMessages', messages);
@@ -59,9 +63,13 @@ export default defineComponent({
 
         onLoad(options=>{
             const info = JSON.parse(options.info)
-
+            state.groupId = info.id
             state.title = info.name
             state.memberIds = info.memberIds
+
+            // 初始化加载消息
+            const messages = uni.getStorageSync('groupMessages') || [];
+            state.messages = messages
         })
 
         // 监听发送过来的消息

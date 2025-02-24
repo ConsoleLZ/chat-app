@@ -63,9 +63,9 @@ export function listenGroupMessage(callback) {
 }
 
 // 发送群聊消息
-export function sendGroupMessage(to, msg, userInfo, createTime = Date.now()) {
+export function sendGroupMessage(groupId, to, msg, userInfo, createTime = Date.now()) {
 	if (socket) {
-		socket.emit('group message', { to, msg, userInfo, createTime });
+		socket.emit('group message', { groupId, to, msg, userInfo, createTime });
 	}
 }
 

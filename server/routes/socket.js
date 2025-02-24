@@ -72,14 +72,17 @@ io.on('connection', socket => {
 		});
 
 		// 群聊
-		socket.on('group message', async ({ to, msg, userInfo, createTime }) => {
+		socket.on('group message', async ({ groupId, to, msg, userInfo, createTime }) => {
 			const message = createMessage(userInfo.id, to, msg, userInfo, createTime);
 
 			if(to?.length){
 				to.forEach(item=>{
 					// 不发送给自己
 					if(userInfo.id !== item){
-						io.to(users[item]).emit('group message', message);
+						io.to(users[item]).emit('group message', {
+							...message,
+							groupId
+						});
 					}
 				})
 			}
