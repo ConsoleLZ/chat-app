@@ -2,7 +2,7 @@
 	<view class="chat-container">
 		<!-- 顶部导航 -->
 		<uv-navbar
-			title="群聊"
+			:title="title"
 			:border="true"
 			:fixed="true"
 			placeholder

@@ -8,7 +8,8 @@ export default defineComponent({
 			messages: [],
 			inputText: '',
 			scrollTop: 9999,
-			loading: false
+			loading: false,
+            title: null
 		});
 
         const constants = {
@@ -38,7 +39,9 @@ export default defineComponent({
         }
 
         onLoad(options=>{
-            console.log(options)
+            const info = JSON.parse(options.info)
+
+            state.title = info.name
         })
 
         return {
