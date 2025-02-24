@@ -48,7 +48,7 @@ io.on('connection', socket => {
 			}
 		});
 
-		// 监听来自客户端的消息
+		// 单聊
 		socket.on('private message', async ({ to, msg, userInfo, createTime }) => {
 			const toSocketId = users[to];
 			// 创建消息对象
@@ -75,6 +75,8 @@ io.on('connection', socket => {
 				console.log(`message from ${userInfo.name} to ${to}: ${msg}`);
 			}
 		});
+
+		// 群聊
 
 		// 当用户断开连接时触发
 		socket.on('disconnect', () => {
