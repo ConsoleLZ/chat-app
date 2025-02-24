@@ -77,7 +77,10 @@ io.on('connection', socket => {
 
 			if(to?.length){
 				to.forEach(item=>{
-					io.to(users[item]).emit('group message', message);
+					// 不发送给自己
+					if(userInfo.id !== item){
+						io.to(users[item]).emit('group message', message);
+					}
 				})
 			}
 		});

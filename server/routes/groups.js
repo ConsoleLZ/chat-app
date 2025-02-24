@@ -79,7 +79,7 @@ router.get('/get-groups', async function (req, res) {
 	try {
 		// 构建 SQL 查询语句
 		let sql = `
-  		SELECT g.id AS groupId, g.name AS groupName, g.avatar AS groupAvatar, g.memberIds AS memberIds
+  		SELECT g.id AS groupId, g.name AS groupName, g.avatar AS groupAvatar, g.memberIds AS memberIds, g.ownerId AS ownerId
     	FROM \`${groupMembersTable}\` gm
     	INNER JOIN \`${groupsTable}\` g ON gm.groupId = g.id
     	WHERE gm.userId = ?

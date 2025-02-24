@@ -66,7 +66,8 @@ export default defineComponent({
 
         // 监听发送过来的消息
 		uni.$on('groupMessage', function (data) {
-			state.messages.push(data);
+			// state.messages.push(data);
+            console.log(data)
 			nextTick(() => {
 				state.scrollTop += 1;
 			});
