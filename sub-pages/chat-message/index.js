@@ -112,22 +112,6 @@ export default defineComponent({
 			}
 		};
 
-		// 监听服务器消息
-		listenPrivateMessage(data => {
-			// 更新本地存储
-			const messages = uni.getStorageSync('messages') || {};
-			if (!messages[data.createTime]) {
-				messages[data.createTime] = data;
-
-				// 更新显示的消息
-				state.messages = Object.values(messages).sort((a, b) => a.createTime - b.createTime);
-
-				nextTick(() => {
-					state.scrollTop += 1;
-				});
-			}
-		});
-
 		onLoad(options => {
 			state.loading = true;
 			const userId = options.userId;
