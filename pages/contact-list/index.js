@@ -82,7 +82,7 @@ export default defineComponent({
 					.finally(() => {
 						uni.hideLoading();
 						uni.stopPullDownRefresh();
-						components.collapseRef.value.init();
+						components.collapseRef.value?.init();
 					});
 			}
 		};
