@@ -1,6 +1,7 @@
 import {defineComponent, reactive, toRefs, ref} from 'vue'
 import { faceList } from '@/sub-pages/chat-message/constants.js';
 import { onLoad } from '@dcloudio/uni-app';
+import { sendGroupMessage } from '@/utils/socketService';
 
 export default defineComponent({
     setup() {
@@ -23,6 +24,7 @@ export default defineComponent({
         const methods = {
             sendMessage(){
                 console.log(state.inputText)
+                sendGroupMessage()
             },
             goBack() {
 				uni.navigateBack();
