@@ -72,11 +72,18 @@ io.on('connection', socket => {
 					return;
 				}
 				io.to(toSocketId).emit('private message', receiverMessage);
-				console.log(`message from ${userInfo.name} to ${to}: ${msg}`);
 			}
 		});
 
 		// 群聊
+		socket.on('group message', async ({ to, msg, userInfo, createTime }) => {
+			console.log(to, msg)
+			if(to?.length){
+				to.forEach(item=>{
+					io.to(users[item]).emit('group message', msg);
+				})
+			}
+		});
 
 		// 当用户断开连接时触发
 		socket.on('disconnect', () => {

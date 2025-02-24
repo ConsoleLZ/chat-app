@@ -1,4 +1,4 @@
-import { listenPrivateMessage } from '@/utils/socketService.js';
+import { listenPrivateMessage, listenGroupMessage } from '@/utils/socketService.js';
 
 // get请求的参数拼接
 export const buildQueryString = params => {
@@ -50,9 +50,16 @@ export const listenMessage = () => {
 			}
 		});
 	};
+	// 群聊消息
+	const group = ()=> {
+		listenGroupMessage(data => {
+			console.log(data)
+		})
+	}
 
 	return {
-		private1
+		private1,
+		group
 	};
 };
 

@@ -68,7 +68,8 @@ export function sendGroupMessage() {
 		socket.emit('group message', {
 			to: [12, 13],
 			msg: '欢迎加入群聊！',
-			userInfo: { id: '11', name: '管理员' }
+			userInfo: { id: '11', name: '管理员' },
+			createTime: Date.now()
 		});
 	}
 }

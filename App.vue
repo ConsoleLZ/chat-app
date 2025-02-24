@@ -32,6 +32,7 @@ export default {
 
 						// 监听服务器消息
 						listenMessage().private1();
+						listenMessage().group();
 					}
 				}
 			})
