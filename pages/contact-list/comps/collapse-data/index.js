@@ -20,6 +20,15 @@ export default defineComponent({
 					uni.navigateTo({
 						url: `/sub-pages/user-detail/index?userId=${data.contactUserId}`
 					});
+				}else {
+					const info = {
+						id: data.id,
+						name: data.name
+					}
+					// 跳转到群聊页
+					uni.navigateTo({
+						url: `/sub-pages/group-chat-message/index?info=${JSON.stringify(info)}`
+					});
 				}
 			}
 		};

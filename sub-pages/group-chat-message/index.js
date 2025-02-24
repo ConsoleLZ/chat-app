@@ -1,5 +1,6 @@
 import {defineComponent, reactive, toRefs, ref} from 'vue'
 import { faceList } from '@/sub-pages/chat-message/constants.js';
+import { onLoad } from '@dcloudio/uni-app';
 
 export default defineComponent({
     setup() {
@@ -35,6 +36,10 @@ export default defineComponent({
 				components.popupRef.value.close();
 			},
         }
+
+        onLoad(options=>{
+            console.log(options)
+        })
 
         return {
             ...methods,
