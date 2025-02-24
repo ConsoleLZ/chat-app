@@ -58,6 +58,12 @@
 			}
 		},
 		{
+			"path": "sub-pages/group-chat-message/index",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
 			"path": "sub-pages/user-detail/index",
 			"style": {
 				"navigationBarTitleText": "联系人信息"

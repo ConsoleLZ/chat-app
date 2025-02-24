@@ -55,6 +55,20 @@ export function sendPrivateMessage(to, msg, userInfo, createTime = Date.now()) {
 	}
 }
 
+// 监听群聊消息
+export function listenGroupMessage(callback) {
+	if (socket) {
+		socket.on('group message', callback);
+	}
+}
+
+// 发送群聊消息
+export function sendGroupMessage(to, msg, userInfo, createTime = Date.now()) {
+	if (socket) {
+		socket.emit('group message', { to, msg, userInfo, createTime });
+	}
+}
+
 // 监听更新用户列表
 export function listenUpdateUsers(callback) {
 	if (socket) {
