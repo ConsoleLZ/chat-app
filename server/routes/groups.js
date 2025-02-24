@@ -24,8 +24,8 @@ router.post('/create-group', async function (req, res) {
 	try {
 		// 确保使用反引号包裹表名，以防它是保留关键字
 		const [result] = await promisePool.query(
-			`INSERT INTO \`${groupsTable}\` (id, name, ownerId, createTime) VALUES (?, ?, ?, ?)`,
-			[groupId, name, ownerInfo.id, Date.now()]
+			`INSERT INTO \`${groupsTable}\` (id, name, ownerId, memberIds, createTime) VALUES (?, ?, ?, ?, ?)`,
+			[groupId, name, ownerInfo.id, JSON.stringify(members.map(item=>item.contactUserId)), Date.now()]
 		);
 
 		// 检查 affectedRows 判断是否成功插入
@@ -79,7 +79,7 @@ router.get('/get-groups', async function (req, res) {
 	try {
 		// 构建 SQL 查询语句
 		let sql = `
-  		SELECT g.id AS groupId, g.name AS groupName, g.avatar AS groupAvatar
+  		SELECT g.id AS groupId, g.name AS groupName, g.avatar AS groupAvatar, g.memberIds AS memberIds
     	FROM \`${groupMembersTable}\` gm
     	INNER JOIN \`${groupsTable}\` g ON gm.groupId = g.id
     	WHERE gm.userId = ?

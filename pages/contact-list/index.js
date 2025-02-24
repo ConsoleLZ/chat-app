@@ -66,6 +66,7 @@ export default defineComponent({
 								id: item.groupId,
 								name: item.groupName,
 								avatar: item.groupAvatar,
+								memberIds: item.memberIds,
 							}
 						})
 						state.classifyContactsData = contactsData.classifyContacts;
