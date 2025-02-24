@@ -77,7 +77,7 @@ export function listenUpdateUsers(callback) {
 }
 
 /**
- * 创建一条私聊消息
+ * 创建一条聊天消息
  * @senderId 发送者id
  * @receiverId 接收者id
  * @content 消息内容
@@ -85,7 +85,7 @@ export function listenUpdateUsers(callback) {
  * @isMe 是否是自己发送的
  * @messageType 消息类型
  */
-export function createPrivateMessage(senderId, receiverId, content, userInfo, isMe, messageType = 'text') {
+export function createMessage(senderId, receiverId, content, userInfo, isMe, messageType = 'text') {
 	return {
 		senderId,
 		receiverId,
@@ -96,3 +96,4 @@ export function createPrivateMessage(senderId, receiverId, content, userInfo, is
 		createTime: Date.now()
 	};
 }
+

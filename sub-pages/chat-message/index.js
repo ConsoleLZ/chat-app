@@ -1,6 +1,6 @@
 import { defineComponent, reactive, toRefs, nextTick, ref } from 'vue';
 import { faceList } from './constants';
-import { sendPrivateMessage, createPrivateMessage, listenPrivateMessage } from '@/utils/socketService';
+import { sendPrivateMessage, createMessage, listenPrivateMessage } from '@/utils/socketService';
 import { onLoad, onShow } from '@dcloudio/uni-app';
 import { getUserInfoStore } from '@/store/index.js';
 
@@ -26,7 +26,7 @@ export default defineComponent({
 			sendMessage() {
 				const userInfo = uni.getStorageSync('userInfo');
 				if (state.inputText.trim()) {
-					const message = createPrivateMessage(
+					const message = createMessage(
 						userInfo.id,
 						state.chatInfo.id,
 						state.inputText,
