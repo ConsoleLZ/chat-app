@@ -61,7 +61,7 @@ export default defineComponent({
 						const contactsData = res[0].data;
 						const groupsData = res[1].data;
 
-						state.groupsData = groupsData.data.map(item=>{
+						state.groupsData = groupsData.data?.map(item=>{
 							return {
 								id: item.groupId,
 								name: item.groupName,
@@ -70,7 +70,8 @@ export default defineComponent({
 						})
 						state.classifyContactsData = contactsData.classifyContacts;
 					})
-					.catch(() => {
+					.catch((error) => {
+						console.log(error)
 						components.toastRef.value.show({
 							type: 'error',
 							message: '服务器错误'
