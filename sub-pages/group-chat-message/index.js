@@ -1,7 +1,7 @@
 import {defineComponent, reactive, toRefs, ref} from 'vue'
 import { faceList } from '@/sub-pages/chat-message/constants.js';
 import { onLoad } from '@dcloudio/uni-app';
-import { sendGroupMessage } from '@/utils/socketService';
+import { sendGroupMessage, createMessage } from '@/utils/socketService';
 
 export default defineComponent({
     setup() {
@@ -25,8 +25,23 @@ export default defineComponent({
         const methods = {
             sendMessage(){
                 const userInfo = uni.getStorageSync('userInfo');
+                if(state.inputText.trim()){
+                    const message = createMessage(
+                        userInfo.id,
+                        state.memberIds,
+                        state.inputText,
+                        userInfo
+                    );
+                    
+                    sendGroupMessage(state.memberIds, state.inputText, userInfo)
 
-                sendGroupMessage(state.memberIds, state.inputText, userInfo)
+                    state.messages.push({
+						...message,
+						isMe: true
+					})
+
+                    state.inputText = ''
+                }
             },
             goBack() {
 				uni.navigateBack();
@@ -44,7 +59,7 @@ export default defineComponent({
 
         onLoad(options=>{
             const info = JSON.parse(options.info)
-            
+
             state.title = info.name
             state.memberIds = info.memberIds
         })

@@ -11,6 +11,32 @@
 		></uv-navbar>
 
 		<!-- 消息列表 -->
+        <scroll-view class="message-list" scroll-y :scroll-top="scrollTop">
+			<view v-for="(msg, index) in messages" :key="index">
+				<view>
+					<view v-if="!msg.isDate" :class="['message-item', msg.isMe ? 'me' : 'other']">
+						<uv-avatar
+							v-if="msg.userInfo.avatar !== '' && msg.userInfo.avatar"
+							:src="msg.userInfo.avatar"
+							shape="circle"
+							style="background-color: #e0e0e0"
+						></uv-avatar>
+						<uv-avatar
+							v-else
+							:text="msg.userInfo.name.slice(0, 1)"
+							fontSize="14"
+							bg-color="#8696de"
+						></uv-avatar>
+						<view class="message-content">
+							{{ msg.content }}
+						</view>
+					</view>
+					<view class="date-text flex-center-row" v-else>
+						<uni-dateformat :date="msg.date" :threshold="[0, 14515200000]"></uni-dateformat>
+					</view>
+				</view>
+			</view>
+		</scroll-view>
 
 		<!-- 输入框 -->
 		<view class="input-area">
