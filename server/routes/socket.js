@@ -52,7 +52,7 @@ io.on('connection', socket => {
 		socket.on('private message', async ({ to, msg, userInfo, createTime }) => {
 			const toSocketId = users[to];
 			// 创建消息对象
-			const message = createPrivateMessage(userInfo.id, to, msg, userInfo, createTime);
+			const message = createMessage(userInfo.id, to, msg, userInfo, createTime);
 			if (!message.createTime) {
 				console.error('Invalid message: missing createTime', message);
 				return;
@@ -63,24 +63,21 @@ io.on('connection', socket => {
 
 			if (toSocketId) {
 				// 只发送给接收方
-				const receiverMessage = {
-					...message,
-					isMe: false
-				};
-				if (!receiverMessage.createTime) {
-					console.error('Invalid receiver message: missing createTime', receiverMessage);
+				if (!message.createTime) {
+					console.error('Invalid receiver message: missing createTime', message);
 					return;
 				}
-				io.to(toSocketId).emit('private message', receiverMessage);
+				io.to(toSocketId).emit('private message', message);
 			}
 		});
 
 		// 群聊
 		socket.on('group message', async ({ to, msg, userInfo, createTime }) => {
-			console.log(to, msg)
+			const message = createMessage(userInfo.id, to, msg, userInfo, createTime);
+
 			if(to?.length){
 				to.forEach(item=>{
-					io.to(users[item]).emit('group message', msg);
+					io.to(users[item]).emit('group message', message);
 				})
 			}
 		});
@@ -108,21 +105,22 @@ server.listen(port, '0.0.0.0', () => {
 initRedis();
 
 /**
- * 创建一条私聊消息
+ * 创建一条消息
  * @param senderId 发送者id
  * @param receiverId 接收者id
  * @param content 消息内容
  * @param userInfo 发送该条消息的用户信息
  * @param messageType 消息类型
  */
-function createPrivateMessage(senderId, receiverId, content, userInfo, createTime = Date.now(), messageType = 'text') {
+function createMessage(senderId, receiverId, content, userInfo, createTime = Date.now(), messageType = 'text') {
 	return {
 		senderId,
 		receiverId,
 		content,
 		userInfo,
 		createTime,
-		messageType
+		messageType,
+		isMe: false
 	};
 }
 

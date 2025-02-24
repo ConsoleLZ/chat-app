@@ -53,7 +53,7 @@ export const listenMessage = () => {
 	// 群聊消息
 	const group = ()=> {
 		listenGroupMessage(data => {
-			console.log(data)
+			uni.$emit('groupMessage', data);
 		})
 	}
 

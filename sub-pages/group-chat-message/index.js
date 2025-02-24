@@ -1,4 +1,4 @@
-import {defineComponent, reactive, toRefs, ref} from 'vue'
+import {defineComponent, reactive, toRefs, ref, nextTick} from 'vue'
 import { faceList } from '@/sub-pages/chat-message/constants.js';
 import { onLoad } from '@dcloudio/uni-app';
 import { sendGroupMessage, createMessage } from '@/utils/socketService';
@@ -63,6 +63,14 @@ export default defineComponent({
             state.title = info.name
             state.memberIds = info.memberIds
         })
+
+        // 监听发送过来的消息
+		uni.$on('groupMessage', function (data) {
+			state.messages.push(data);
+			nextTick(() => {
+				state.scrollTop += 1;
+			});
+		});
 
         return {
             ...methods,

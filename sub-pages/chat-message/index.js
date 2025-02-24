@@ -156,7 +156,7 @@ export default defineComponent({
 			methods.changeMessageView();
 		});
 
-		// 监听发送过来的私聊消息
+		// 监听发送过来的消息
 		uni.$on('privateMessage', function (data) {
 			if (data.senderId === state.chatInfo.id) {
 				data.isView = true;
