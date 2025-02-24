@@ -13,7 +13,7 @@
 		<!-- 消息列表 -->
         <scroll-view class="message-list" scroll-y :scroll-top="scrollTop">
 			<view v-for="(msg, index) in messages" :key="index">
-				<view>
+				<view v-if="msg.groupId === groupId">
 					<view v-if="!msg.isDate" :class="['message-item', msg.isMe ? 'me' : 'other']">
 						<uv-avatar
 							v-if="msg.userInfo.avatar !== '' && msg.userInfo.avatar"
