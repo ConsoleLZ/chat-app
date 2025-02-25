@@ -73,19 +73,26 @@ io.on('connection', socket => {
 
 		// 群聊
 		socket.on('group message', async ({ groupId, to, msg, userInfo, createTime }) => {
-			const message = createMessage(userInfo.id, to, msg, userInfo, createTime);
+			// 创建消息时，设置groupId，并将receiverId设为null（或群组ID）
+			const message = createMessage(
+				userInfo.id, // senderId
+				groupId, // 将群组ID作为receiverId（或设为null，根据需求调整）
+				msg,
+				userInfo,
+				createTime,
+				'text',
+				groupId // 显式传递groupId
+			);
 
-			if(to?.length){
-				to.forEach(item=>{
-					// 不发送给自己
-					if(userInfo.id !== item){
-						io.to(users[item]).emit('group message', {
-							...message,
-							groupId
-						});
-					}
-				})
-			}
+			// 存储消息到Redis
+			await storeMessageInRedis(message);
+
+			// 发送给群成员（排除自己）
+			to.forEach(item => {
+				if (userInfo.id !== item && users[item]) {
+					io.to(users[item]).emit('group message', message);
+				}
+			});
 		});
 
 		// 当用户断开连接时触发
@@ -118,7 +125,15 @@ initRedis();
  * @param userInfo 发送该条消息的用户信息
  * @param messageType 消息类型
  */
-function createMessage(senderId, receiverId, content, userInfo, createTime = Date.now(), messageType = 'text') {
+function createMessage(
+	senderId,
+	receiverId,
+	content,
+	userInfo,
+	createTime = Date.now(),
+	messageType = 'text',
+	groupId = null // 新增groupId参数
+) {
 	return {
 		senderId,
 		receiverId,
@@ -126,7 +141,8 @@ function createMessage(senderId, receiverId, content, userInfo, createTime = Dat
 		userInfo,
 		createTime,
 		messageType,
-		isMe: false
+		isMe: false,
+		groupId // 明确标识群组消息
 	};
 }
 
@@ -140,18 +156,21 @@ async function storeMessageInRedis(message) {
 		return;
 	}
 
-	// 只存储接收方的消息
-	const receiveKey = `messages:${message.senderId}:${message.receiverId}`;
+	// 根据是否存在groupId选择存储键
+	let key;
+	if (message.groupId) {
+		key = `group_messages:${message.groupId}`; // 群聊消息键
+	} else {
+		key = `messages:${message.senderId}:${message.receiverId}`; // 单聊消息键
+	}
+
 	const value = JSON.stringify(message);
 
-	// 使用有序集合存储，以时间戳为score
-	await redisClient.zAdd(receiveKey, {
-		score: message.createTime,
-		value
-	});
+	// 存储到有序集合
+	await redisClient.zAdd(key, { score: message.createTime, value });
 
 	// 设置过期时间（7天）
-	await redisClient.expire(receiveKey, 60 * 60 * 24 * 7);
+	await redisClient.expire(key, 60 * 60 * 24 * 7);
 }
 
 /**
