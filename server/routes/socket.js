@@ -3,6 +3,11 @@ const http = require('http');
 const { Server } = require('socket.io');
 const { redisConfig } = require('../db.config');
 const redis = require('redis');
+const mysql2 = require('mysql2');
+const { dbConfig, groupMembersTable } = require('../db.config');
+
+// 创建一个全局的连接池
+const promisePool = mysql2.createPool(dbConfig()).promise();
 
 // 创建 HTTP 服务器
 const server = http.createServer((req, res) => {
@@ -39,7 +44,12 @@ io.on('connection', socket => {
 				// 检查并发送存储的消息
 				const messages = await getMessagesFromRedis(userId);
 				messages.forEach(msg => {
-					socket.emit('private message', msg);
+					if(msg.groupId){
+						socket.emit('group message', msg);
+					}else {
+						socket.emit('private message', msg);
+					}
+					
 				});
 
 				io.emit('update users', Object.keys(users)); // 发送当前在线用户列表给所有客户端
@@ -179,31 +189,41 @@ async function storeMessageInRedis(message) {
  * @returns {Array} 消息数组
  */
 async function getMessagesFromRedis(userId) {
-	// 获取发送方是当前用户的消息
-	const sendKeys = await redisClient.keys(`messages:${userId}:*`);
-	// 获取接收方是当前用户的消息
-	const receiveKeys = await redisClient.keys(`messages:*:${userId}`);
+	try {
+		// 1. 查询用户群组ID
+		const [groupRows] = await promisePool.query(`SELECT groupId FROM \`${groupMembersTable}\` WHERE userId = ?`, [
+			userId
+		]);
+		const groupIds = groupRows.map(row => row.groupId);
+		const groupKeys = groupIds.map(gid => `group_messages:${gid}`);
 
-	// 合并所有相关key
-	const allKeys = [...new Set([...sendKeys, ...receiveKeys])];
+		// 获取发送方是当前用户的消息
+		const sendKeys = await redisClient.keys(`messages:${userId}:*`);
+		// 获取接收方是当前用户的消息
+		const receiveKeys = await redisClient.keys(`messages:*:${userId}`);
 
-	let messages = [];
-	for (const key of allKeys) {
-		// 获取有序集合中的所有消息
-		const values = await redisClient.zRange(key, 0, -1);
-		messages = messages.concat(
-			values.map(v => {
-				const message = JSON.parse(v);
-				// 根据当前用户身份设置isMe
-				message.isMe = message.senderId === userId;
-				return message;
-			})
-		);
+		// 合并所有相关key
+		const allKeys = [...new Set([...sendKeys, ...receiveKeys, ...groupKeys])];
+
+		let messages = [];
+		for (const key of allKeys) {
+			// 获取有序集合中的所有消息
+			const values = await redisClient.zRange(key, 0, -1);
+			messages = messages.concat(
+				values.map(v => {
+					const message = JSON.parse(v);
+					// 根据当前用户身份设置isMe
+					message.isMe = message.senderId === userId;
+					return message;
+				})
+			);
+		}
+		// 按时间排序
+		messages.sort((a, b) => a.createTime - b.createTime);
+		return messages;
+	} catch (error) {
+		console.log(error);
 	}
-
-	// 按时间排序
-	messages.sort((a, b) => a.createTime - b.createTime);
-	return messages;
 }
 
 // 初始化redis
