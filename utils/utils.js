@@ -53,12 +53,17 @@ export const listenMessage = () => {
 	// 群聊消息
 	const group = () => {
 		listenGroupMessage(data => {
-			// 使用对象存储消息，以createTime作为key
-			const messages = uni.getStorageSync('groupMessages') === '' ? [] : uni.getStorageSync('groupMessages');
-			data.isView = false;
-			messages.push(data);
-			uni.$emit('groupMessage', data);
-			uni.setStorageSync('groupMessages', messages);
+			const messages = uni.getStorageSync('groupMessages') || []; // 获取现有消息或初始化空数组
+			// 检查是否已存在相同 createTime 的消息
+			const isDuplicate = messages.some(
+				msg => msg.createTime === data.createTime && msg.senderId === data.senderId
+			);
+			if (!isDuplicate) {
+				data.isView = false;
+				messages.push(data); // 添加新消息
+				uni.$emit('groupMessage', data); // 触发事件
+				uni.setStorageSync('groupMessages', messages); // 更新存储
+			}
 		});
 	};
 
