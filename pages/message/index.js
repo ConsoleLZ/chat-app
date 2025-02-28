@@ -91,6 +91,7 @@ export default defineComponent({
 					if (!groupMap[groupId] || createTime > groupMap[groupId].createTime) {
 						const groupInfo = state.groups.find(item => item.groupId === message.groupId);
 						message.avatar = groupInfo.avatar;
+						message.name = groupInfo.groupName;
 						groupMap[groupId] = message;
 					}
 				});
