@@ -1,6 +1,6 @@
 import { defineComponent, reactive, toRefs } from 'vue';
 import NavbarComp from '@/components/navbar/index.vue';
-import { getContactsStore } from '@/store/index.js';
+import { getContactsStore, getGroupsStore } from '@/store/index.js';
 import { onShow } from '@dcloudio/uni-app';
 
 export default defineComponent({
@@ -9,8 +9,10 @@ export default defineComponent({
 	},
 	setup() {
 		const state = reactive({
-			messageList: [],
+			messageList: [], // 单聊消息
+			messageGroupList: [], //群聊消息
 			contacts: null,
+			groups: null,
 			statusBarHeight: uni.getSystemInfoSync().statusBarHeight
 		});
 
@@ -41,7 +43,7 @@ export default defineComponent({
 
 				return arr;
 			},
-
+			// 单聊消息回显
 			setMessageList() {
 				const userInfo = uni.getStorageSync('userInfo');
 				const currentUserId = userInfo.id;
@@ -78,10 +80,24 @@ export default defineComponent({
 						}
 					});
 				});
-
-				console.log(state.messageList)
 			},
+			// 群聊消息回显
+			setMessageGroupList() {
+				const groupMap = {}; // 用于存储每个 groupId 对应的最早消息
+				const groupMessages = uni.getStorageSync('groupMessages') || [];
+				groupMessages.forEach(message => {
+					const { groupId, createTime } = message;
+					// 如果当前 groupId 不存在，或当前消息时间更早，则更新
+					if (!groupMap[groupId] || createTime > groupMap[groupId].createTime) {
+						const groupInfo = state.groups.find(item => item.groupId === message.groupId);
+						message.avatar = groupInfo.avatar;
+						groupMap[groupId] = message;
+					}
+				});
 
+				state.messageGroupList = Object.values(groupMap);
+				console.log(Object.values(groupMap));
+			},
 			// 获取联系人数据
 			getContactsData() {
 				uni.showLoading({
@@ -100,6 +116,18 @@ export default defineComponent({
 					.finally(() => {
 						uni.hideLoading();
 					});
+			},
+			// 获取群聊数据
+			getGroupsData() {
+				const userInfo = uni.getStorageSync('userInfo');
+				getGroupsStore
+					.get({
+						userId: userInfo.id
+					})
+					.then(res => {
+						state.groups = res.data?.data || [];
+						methods.setMessageGroupList();
+					});
 			}
 		};
 
@@ -117,6 +145,7 @@ export default defineComponent({
 			// 清空并重新获取数据
 			state.messageList = [];
 			methods.getContactsData();
+			methods.getGroupsData();
 		});
 
 		return {
