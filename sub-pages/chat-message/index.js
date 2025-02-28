@@ -107,6 +107,16 @@ export default defineComponent({
 
 				return result;
 			},
+			// 将消息变成已读
+			readMessage(){
+				const messages = uni.getStorageSync('messages') || {};
+
+				Object.values(messages).forEach(item=>{
+					item.isView = true
+				})
+
+				uni.setStorageSync('messages', messages)
+			},
 			goBack() {
 				uni.navigateBack();
 			}
@@ -120,8 +130,8 @@ export default defineComponent({
 					userId
 				})
 				.then(res => {
+					methods.readMessage()
 					state.chatInfo = res.data.info[0];
-					console.log(state.chatInfo)
 
 					// 初始化时加载消息
 					const messages = uni.getStorageSync('messages') || {};
