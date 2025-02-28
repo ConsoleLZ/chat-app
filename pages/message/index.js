@@ -78,6 +78,8 @@ export default defineComponent({
 						}
 					});
 				});
+
+				console.log(state.messageList)
 			},
 
 			// 获取联系人数据
