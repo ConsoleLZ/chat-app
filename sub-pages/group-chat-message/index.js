@@ -45,6 +45,10 @@ export default defineComponent({
 
 					uni.setStorageSync('groupMessages', messages);
                     state.inputText = ''
+
+                    nextTick(() => {
+                        state.scrollTop += 1;
+                    });
                 }
             },
             goBack() {

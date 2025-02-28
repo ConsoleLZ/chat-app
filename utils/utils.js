@@ -46,7 +46,7 @@ export const listenMessage = () => {
 				data.isView = false;
 				messages[data.createTime] = data;
 				uni.setStorageSync('messages', messages);
-				uni.$emit('privateMessage');
+				uni.$emit('privateMessage', data);
 			}
 		});
 	};
@@ -62,7 +62,7 @@ export const listenMessage = () => {
 				data.isView = false;
 				messages.push(data); // 添加新消息
 				uni.setStorageSync('groupMessages', messages); // 更新存储
-				uni.$emit('groupMessage'); // 触发事件
+				uni.$emit('groupMessage', data); // 触发事件
 			}
 		});
 	};
