@@ -45,8 +45,8 @@ export const listenMessage = () => {
 			if (!messages[data.createTime]) {
 				data.isView = false;
 				messages[data.createTime] = data;
-				uni.$emit('privateMessage', data);
 				uni.setStorageSync('messages', messages);
+				uni.$emit('privateMessage');
 			}
 		});
 	};
@@ -61,8 +61,8 @@ export const listenMessage = () => {
 			if (!isDuplicate) {
 				data.isView = false;
 				messages.push(data); // 添加新消息
-				uni.$emit('groupMessage', data); // 触发事件
 				uni.setStorageSync('groupMessages', messages); // 更新存储
+				uni.$emit('groupMessage'); // 触发事件
 			}
 		});
 	};

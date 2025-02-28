@@ -47,6 +47,7 @@ export default defineComponent({
 			setMessageList() {
 				const userInfo = uni.getStorageSync('userInfo');
 				const currentUserId = userInfo.id;
+				state.messageList = []
 
 				// 计算未读消息数量
 				const counts = {};
@@ -97,7 +98,6 @@ export default defineComponent({
 				});
 
 				state.messageGroupList = Object.values(groupMap);
-				console.log(Object.values(groupMap));
 			},
 			// 获取联系人数据
 			getContactsData() {
@@ -133,13 +133,13 @@ export default defineComponent({
 		};
 
 		// 监听私聊消息
-		uni.$on('privateMessage', data => {
-			state.messageList = [];
-			const messages = uni.getStorageSync('messages') || {};
-			messages[data.createTime] = data;
-			uni.setStorageSync('messages', messages);
-
+		uni.$on('privateMessage', () => {
 			methods.setMessageList();
+		});
+
+		// 监听群聊消息
+		uni.$on('groupMessage', () => {
+			methods.setMessageGroupList();
 		});
 
 		onShow(() => {
