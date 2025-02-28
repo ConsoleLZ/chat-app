@@ -19,9 +19,20 @@ export default defineComponent({
 		const methods = {
 			// 跳转到聊天页
 			onJumpChat(item) {
-				uni.navigateTo({
-					url: `/sub-pages/chat-message/index?userId=${item.contactUserId}`
-				});
+				if (item.groupId) {
+					const info = {
+						id: item.groupId,
+						name: item.name,
+						memberIds: item.memberIds?.concat([item.ownerId])
+					};
+					uni.navigateTo({
+						url: `/sub-pages/group-chat-message/index?info=${JSON.stringify(info)}`
+					});
+				} else {
+					uni.navigateTo({
+						url: `/sub-pages/chat-message/index?userId=${item.contactUserId}`
+					});
+				}
 			},
 
 			formateMessages(arr, message) {
@@ -47,7 +58,7 @@ export default defineComponent({
 			setMessageList() {
 				const userInfo = uni.getStorageSync('userInfo');
 				const currentUserId = userInfo.id;
-				state.messageList = []
+				state.messageList = [];
 
 				// 计算未读消息数量
 				const counts = {};
@@ -93,6 +104,8 @@ export default defineComponent({
 						const groupInfo = state.groups.find(item => item.groupId === message.groupId);
 						message.avatar = groupInfo.avatar;
 						message.name = groupInfo.groupName;
+						message.memberIds = groupInfo.memberIds;
+						message.ownerId = groupInfo.ownerId;
 						groupMap[groupId] = message;
 					}
 				});
