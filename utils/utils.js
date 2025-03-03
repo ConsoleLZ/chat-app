@@ -74,7 +74,7 @@ export const listenMessage = () => {
 };
 
 // 页面跳转
-export const jump = (url, delay) => {
+export const jump = (url, delay = 0) => {
 	setTimeout(() => {
 		uni.navigateTo({ url });
 	}, delay);
