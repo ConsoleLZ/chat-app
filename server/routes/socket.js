@@ -43,7 +43,7 @@ io.on('connection', socket => {
 
 				// 检查并发送存储的消息
 				const messages = await getMessagesFromRedis(userId);
-				messages.forEach(msg => {
+				messages?.forEach(msg => {
 					if(msg.groupId){
 						socket.emit('group message', msg);
 					}else {

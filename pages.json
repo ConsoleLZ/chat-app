@@ -74,6 +74,12 @@
 			"style": {
 				"navigationStyle": "custom"
 			}
+		},
+		{
+			"path": "sub-pages/set-user-info/index",
+			"style": {
+				"navigationBarTitleText": "我的信息"
+			}
 		}
 	],
 	"globalStyle": {
