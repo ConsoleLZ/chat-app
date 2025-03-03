@@ -1,6 +1,8 @@
+const host = '172.20.104.44'
+
 function dbConfig() {
 	return {
-		host: '172.20.104.44',
+		host,
 		port: 3306,
 		user: 'root',
 		password: '123456',
@@ -10,9 +12,9 @@ function dbConfig() {
 }
 
 const redisConfig = {
-	host: '172.20.104.44', // Redis服务器地址
-	port: 6379, // Redis服务器端口
-	password: '123456' // Redis密码
+	host,
+	port: 6379,
+	password: '123456'
 };
 
 // 数据库所有的表

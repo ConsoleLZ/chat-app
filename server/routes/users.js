@@ -152,7 +152,7 @@ router.get('/user-info', async function (req, res) {
 
 	try {
 		const [rows] = await promisePool.query(
-			`SELECT id, name, avatar, account, createTime 
+			`SELECT id, name, avatar, account, createTime, signature, tags
        FROM ${userTable} 
        WHERE id = ?`,
 			[userId]

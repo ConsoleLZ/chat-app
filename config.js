@@ -1,2 +1,4 @@
-export const SERVER_URL = 'http://172.20.104.9:3000';
-export const SOCKET_URL = 'ws://172.20.104.9:3001';
+const host = '172.20.104.9'
+
+export const SERVER_URL = `http://${host}:3000`;
+export const SOCKET_URL = `ws://${host}:3001`;
