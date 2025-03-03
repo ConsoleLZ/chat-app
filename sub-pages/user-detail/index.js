@@ -9,7 +9,6 @@ export default defineComponent({
 	},
 	setup() {
 		const state = reactive({
-			loading: false,
 			userId: null
 		});
 
@@ -23,7 +22,6 @@ export default defineComponent({
 		};
 
 		onLoad(options => {
-			state.loading = true
 			state.userId = options.userId
 		});
 

@@ -4,7 +4,7 @@ import { getUserInfoStore } from '@/store/index.js';
 export default defineComponent({
 	props: {
 		userId: {
-			type: Number,
+			type: String,
 			default: null
 		}
 	},
