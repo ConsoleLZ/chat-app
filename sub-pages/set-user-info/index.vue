@@ -2,7 +2,7 @@
 	<view style="padding: 0 20rpx">
 		<uv-form
 			labelAlign="right"
-			labelWidth="170rpx"
+			labelWidth="195rpx"
 			labelPosition="left"
 			:model="formState"
 			:rules="rules"
