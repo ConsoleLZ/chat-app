@@ -9,8 +9,8 @@ export default defineComponent({
 	},
 	setup() {
 		const state = reactive({
-			userInfo: {},
-			loading: false
+			loading: false,
+			userId: null
 		});
 
 		const methods = {
@@ -24,15 +24,7 @@ export default defineComponent({
 
 		onLoad(options => {
 			state.loading = true
-			const userId = options.userId
-
-			getUserInfoStore.get({
-				userId
-			}).then(res=>{
-				state.userInfo = res.data.info[0]
-			}).finally(()=>{
-				state.loading = false
-			})
+			state.userId = options.userId
 		});
 
 		return {

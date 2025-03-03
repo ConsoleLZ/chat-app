@@ -8,7 +8,6 @@ export default defineComponent({
 		UserDetailComp
 	},
 	setup() {
-		const userInfo = uni.getStorageSync('userInfo');
 		const methods = {
 			// 退出登录
 			onQuit() {
@@ -26,7 +25,6 @@ export default defineComponent({
 
 		return {
 			jump,
-			userInfo,
 			...methods
 		};
 	}
