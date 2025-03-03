@@ -11,7 +11,7 @@
  Target Server Version : 80040 (8.0.40-0ubuntu0.20.04.1)
  File Encoding         : 65001
 
- Date: 03/03/2025 15:53:10
+ Date: 03/03/2025 17:16:35
 */
 
 SET NAMES utf8mb4;
@@ -102,6 +102,8 @@ CREATE TABLE `users`  (
   `account` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `createTime` bigint NOT NULL,
+  `signature` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `tags` json NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
