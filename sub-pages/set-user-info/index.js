@@ -5,7 +5,9 @@ export default defineComponent({
         const state = reactive({
             formState: {
                 userInfo: {
-                    name: null
+                    name: null,
+                    signature: null,
+                    tags: null,
                 }
             },
             rules: {
