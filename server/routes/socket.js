@@ -121,7 +121,7 @@ io.on('connection', socket => {
 const port = 3001;
 
 // 开始监听端口
-server.listen(port, '0.0.0.0', () => {
+server.listen(port, () => {
 	console.log(`socket服务启动成功，端口在:${port}`);
 });
 
