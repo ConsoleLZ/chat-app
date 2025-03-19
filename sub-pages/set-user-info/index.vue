@@ -40,7 +40,7 @@
 			</uv-form-item>
 		</uv-form>
 		<view class="flex-center-row">
-			<uv-button class="save" type="primary" shape="circle" text="保存"></uv-button>
+			<uv-button @click="onSave" class="save" type="primary" shape="circle" text="保存"></uv-button>
 		</view>
 	</view>
 

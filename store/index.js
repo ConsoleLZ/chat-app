@@ -32,3 +32,6 @@ export const getGroupsStore = new Request('/api/get-groups', 'GET')
 
 // 用户详情信息
 export const getUserInfoStore = new Request('/api/user-info', 'GET')
+
+// 更新用户信息
+export const postUpdateUserInfoStore = new Request('/api/update-user-info', 'POST')

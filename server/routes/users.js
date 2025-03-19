@@ -180,11 +180,14 @@ router.get('/user-info', async function (req, res) {
 
 // 更新用户信息
 router.post('/update-user-info', async function (req, res) {
-	const { userId, name, avatar, signature, tags } = req.query;
-
+	const { userId, name, avatar, signature, tags } = req.body;
+	const sqlTags = []
+	tags?.forEach(item=>{
+		
+	})
 	console.log(userId, name, avatar, signature, tags)
 	// // 参数验证
-	// if (!userId || !name || !avatar || !signature || !tags) {
+	// if (!userId || !name) {
 	// 	return res.status(400).json({
 	// 		ok: false,
 	// 		message: '缺少参数'

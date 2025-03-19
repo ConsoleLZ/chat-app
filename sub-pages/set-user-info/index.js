@@ -1,5 +1,5 @@
 import { defineComponent, reactive, toRefs, ref } from 'vue';
-import { getUserInfoStore } from '@/store/index.js';
+import { getUserInfoStore, postUpdateUserInfoStore } from '@/store/index.js';
 import ModalAddTagComp from './comps/modal-add-tag/index.vue';
 
 export default defineComponent({
@@ -36,6 +36,7 @@ export default defineComponent({
 			getData() {
 				state.loading = true;
 				const userId = uni.getStorageSync('userInfo').id;
+				state.formState.userInfo.userId = userId
 
 				getUserInfoStore
 					.get({ userId })
@@ -71,6 +72,17 @@ export default defineComponent({
 			// 删除标签
 			closeTag(index) {
 				state.formState.userInfo.tags.splice(index, 1);
+			},
+			// 保存
+			onSave(){
+				const postData = {
+					...state.formState.userInfo,
+					tags: JSON.stringify(state.formState.userInfo.tags)
+				}
+				console.log(postData)
+				postUpdateUserInfoStore.post(postData).then(res=>{
+					console.log(res)
+				})
 			}
 		};
 
