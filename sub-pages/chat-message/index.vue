@@ -47,7 +47,7 @@
 			<!-- 发送表情包 -->
 			<uv-icon @click="openFace" style="margin-right: 66rpx" size="46rpx" name="/static/face.png"></uv-icon>
 			<!-- 发送图片 -->
-			<uv-icon size="41rpx" name="/static/photo.png"></uv-icon>
+			<uv-icon @click="onChooseImage" size="41rpx" name="/static/photo.png"></uv-icon>
 		</view>
 		<uv-popup ref="popupRef" mode="bottom">
 			<view class="popupFace">

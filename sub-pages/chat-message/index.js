@@ -52,6 +52,16 @@ export default defineComponent({
 			openFace() {
 				components.popupRef.value.open();
 			},
+			// 发送图片
+			onChooseImage(){
+				uni.chooseImage({
+					count: 1,
+					success(info){
+						const file = info.tempFiles[0]
+						console.log(file)
+					}
+				})
+			},
 			// 选择表情
 			selectFace(item) {
 				state.inputText += item;
