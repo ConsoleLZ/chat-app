@@ -127,6 +127,11 @@ server.listen(port, () => {
 
 initRedis();
 
+const messageTypeMap = {
+	text: 'text',
+	image: 'image'
+}
+
 /**
  * 创建一条消息
  * @param senderId 发送者id
@@ -141,7 +146,7 @@ function createMessage(
 	content,
 	userInfo,
 	createTime = Date.now(),
-	messageType = 'text',
+	messageType = messageTypeMap.text,
 	groupId = null // 新增groupId参数
 ) {
 	return {
