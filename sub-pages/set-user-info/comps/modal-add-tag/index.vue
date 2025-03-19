@@ -1,5 +1,5 @@
 <template>
-	<uv-modal ref="modalRef" title="增加标签" :closeOnClickOverlay="false" showCancelButton @confirm="onConfirm">
+	<uv-modal ref="modalRef" title="增加标签" :closeOnClickOverlay="false" asyncClose showCancelButton @confirm="onConfirm">
 		<template #default>
 			<uv-form labelWidth="105rpx" ref="fromRef" labelPosition="left" :model="formState" :rules="rules">
 				<uv-form-item label="标签名" prop="title">

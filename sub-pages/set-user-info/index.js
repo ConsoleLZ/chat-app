@@ -1,6 +1,6 @@
 import { defineComponent, reactive, toRefs, ref } from 'vue';
 import { getUserInfoStore } from '@/store/index.js';
-import ModalAddTagComp from './comps/modal-add-tag/index.vue'
+import ModalAddTagComp from './comps/modal-add-tag/index.vue';
 
 export default defineComponent({
 	components: {
@@ -8,13 +8,13 @@ export default defineComponent({
 	},
 	setup() {
 		const state = reactive({
-            loading: false,
+			loading: false,
 			formState: {
 				userInfo: {
-                    avatar: null,
+					avatar: null,
 					name: null,
 					signature: null,
-					tags: null
+					tags: []
 				}
 			},
 			rules: {
@@ -29,49 +29,55 @@ export default defineComponent({
 
 		const components = {
 			modalAddTagRef: ref(null)
-		}
+		};
 
 		const methods = {
 			getData() {
-                state.loading = true
+				state.loading = true;
 				const userId = uni.getStorageSync('userInfo').id;
 
-				getUserInfoStore.get({ userId }).then(res => {
-					const userInfo = res.data.info[0];
-					
-                    const tags = userInfo.tags?.map(item=>{
-                        return {
-                            show: true,
-                            title: item
-                        }
-                    })
-                    state.formState.userInfo.name = userInfo.name
-                    state.formState.userInfo.avatar = userInfo.avatar
-                    state.formState.userInfo.signature = userInfo.signature
-                    state.formState.userInfo.tags = tags
-				}).finally(()=>{
-                    state.loading = false
-                })
+				getUserInfoStore
+					.get({ userId })
+					.then(res => {
+						const userInfo = res.data.info[0];
+
+						const tags = userInfo.tags?.map(item => {
+							return {
+								show: true,
+								title: item
+							};
+						});
+						state.formState.userInfo.name = userInfo.name;
+						state.formState.userInfo.avatar = userInfo.avatar;
+						state.formState.userInfo.signature = userInfo.signature;
+						state.formState.userInfo.tags = tags;
+					})
+					.finally(() => {
+						state.loading = false;
+					});
 			},
 			// 添加标签
-			onAddTag(){
-				components.modalAddTagRef.value.open()
+			onAddTag() {
+				components.modalAddTagRef.value.open();
 			},
 			// 确认标签
-			onConfirmTag(value){
-				console.log(value)
+			onConfirmTag(value) {
+				state.formState.userInfo.tags.push({
+					show: true,
+					title: value
+				});
 			},
 			// 删除标签
-            closeTag(index){
-                state.formState.userInfo.tags.splice(index, 1)
-            }
+			closeTag(index) {
+				state.formState.userInfo.tags.splice(index, 1);
+			}
 		};
 
 		methods.getData();
 
 		return {
 			...toRefs(state),
-            ...methods,
+			...methods,
 			...components
 		};
 	}
