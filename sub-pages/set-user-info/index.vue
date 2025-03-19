@@ -35,13 +35,14 @@
 							@close="closeTag(index)"
 						></uv-tags>
 					</div>
-					<uv-button type="primary" text="增加" size="mini"></uv-button>
+					<uv-button @click="onAddTag" type="primary" text="增加" size="mini"></uv-button>
 				</div>
 			</uv-form-item>
 		</uv-form>
 	</view>
 
 	<uv-loading-page :loading="loading" loading-text="加载中..." font-size="24rpx"></uv-loading-page>
+	<modal-add-tag-comp ref="modalAddTagRef" />
 </template>
 
 <script src="./index.js"></script>

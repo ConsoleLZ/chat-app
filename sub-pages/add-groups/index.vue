@@ -38,7 +38,7 @@
 	<view class="btn flex-center-row">
 		<uv-button style="width: 80%" text="创建" type="primary" @click="onCreate" :disabled="disabled"></uv-button>
 	</view>
-	<uv-modal ref="modalRef" title="创建群聊" showCancelButton asyncClose @confirm="onConfirm">
+	<uv-modal ref="modalRef" title="创建群聊" :closeOnClickOverlay="false" showCancelButton asyncClose @confirm="onConfirm">
 		<template #default>
 			<uv-form ref="fromRef" labelPosition="left" :model="formState" :rules="rules">
 				<uv-form-item label="名称" prop="name">

@@ -1,7 +1,11 @@
-import { defineComponent, reactive, toRefs } from 'vue';
+import { defineComponent, reactive, toRefs, ref } from 'vue';
 import { getUserInfoStore } from '@/store/index.js';
+import ModalAddTagComp from './comps/modal-add-tag/index.vue'
 
 export default defineComponent({
+	components: {
+		ModalAddTagComp
+	},
 	setup() {
 		const state = reactive({
             loading: false,
@@ -23,6 +27,10 @@ export default defineComponent({
 			}
 		});
 
+		const components = {
+			modalAddTagRef: ref(null)
+		}
+
 		const methods = {
 			getData() {
                 state.loading = true
@@ -41,11 +49,15 @@ export default defineComponent({
                     state.formState.userInfo.avatar = userInfo.avatar
                     state.formState.userInfo.signature = userInfo.signature
                     state.formState.userInfo.tags = tags
-                    console.log(tags)
 				}).finally(()=>{
                     state.loading = false
                 })
 			},
+			// 添加标签
+			onAddTag(){
+				components.modalAddTagRef.value.open()
+			},
+			// 删除标签
             closeTag(index){
                 state.formState.userInfo.tags.splice(index, 1)
             }
@@ -55,7 +67,8 @@ export default defineComponent({
 
 		return {
 			...toRefs(state),
-            ...methods
+            ...methods,
+			...components
 		};
 	}
 });
