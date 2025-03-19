@@ -1,7 +1,7 @@
 import { defineComponent, reactive, ref, toRefs } from 'vue';
 
 export default defineComponent({
-	setup() {
+	setup(props, {emit}) {
 		const state = reactive({
 			formState: {
 				title: null
@@ -25,7 +25,10 @@ export default defineComponent({
 			open() {
 				components.modalRef.value.open();
 			},
-			onConfirm() {}
+			async onConfirm() {
+                await components.fromRef.value.validate()
+                emit('confirmTag', state.formState.title)
+            }
 		};
 
 		return {

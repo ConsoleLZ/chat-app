@@ -42,7 +42,7 @@
 	</view>
 
 	<uv-loading-page :loading="loading" loading-text="加载中..." font-size="24rpx"></uv-loading-page>
-	<modal-add-tag-comp ref="modalAddTagRef" />
+	<modal-add-tag-comp ref="modalAddTagRef" @confirmTag="onConfirmTag" />
 </template>
 
 <script src="./index.js"></script>

@@ -57,6 +57,10 @@ export default defineComponent({
 			onAddTag(){
 				components.modalAddTagRef.value.open()
 			},
+			// 确认标签
+			onConfirmTag(value){
+				console.log(value)
+			},
 			// 删除标签
             closeTag(index){
                 state.formState.userInfo.tags.splice(index, 1)
