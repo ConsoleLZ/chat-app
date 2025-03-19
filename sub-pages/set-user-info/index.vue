@@ -1,5 +1,5 @@
 <template>
-	<view style="padding: 0 20rpx">
+	<view style="padding: 0 20rpx;position: relative;">
 		<uv-form
 			labelAlign="right"
 			labelWidth="185rpx"
@@ -39,6 +39,9 @@
 				</div>
 			</uv-form-item>
 		</uv-form>
+		<view class="flex-center-row">
+			<uv-button class="save" type="primary" shape="circle" text="保存"></uv-button>
+		</view>
 	</view>
 
 	<uv-loading-page :loading="loading" loading-text="加载中..." font-size="24rpx"></uv-loading-page>
