@@ -5,11 +5,20 @@ export default defineComponent({
 		const state = reactive({
 			formState: {
 				title: null
-			}
+			},
+            rules: {
+				title: {
+					type: 'string',
+					required: true,
+					message: '请填写标签名称',
+					trigger: ['change']
+				}
+			},
 		});
 
 		const components = {
-			modalRef: ref(null)
+			modalRef: ref(null),
+            fromRef: ref(null)
 		};
 
 		const methods = {
