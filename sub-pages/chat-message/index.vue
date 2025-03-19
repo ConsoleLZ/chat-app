@@ -30,8 +30,8 @@
 						<view v-if="msg.messageType === messageType.text" class="message-content">
 							{{ msg.content }}
 						</view>
-						<view v-if="msg.messageType === messageType.image" class="message-content">
-							<uv-image :src="msg.content" width="80px" height="80px"></uv-image>
+						<view v-if="msg.messageType === messageType.image" class="message-image">
+							<uv-image :src="msg.content" height="240rpx" mode="heightFix"></uv-image>
 						</view>
 					</view>
 					<view class="date-text flex-center-row" v-else>
