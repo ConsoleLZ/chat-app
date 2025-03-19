@@ -178,4 +178,33 @@ router.get('/user-info', async function (req, res) {
 	}
 });
 
+// 更新用户信息
+router.post('/update-user-info', async function (req, res) {
+	const { userId, name, avatar, signature, tags } = req.query;
+
+	console.log(userId, name, avatar, signature, tags)
+	// // 参数验证
+	// if (!userId || !name || !avatar || !signature || !tags) {
+	// 	return res.status(400).json({
+	// 		ok: false,
+	// 		message: '缺少参数'
+	// 	});
+	// }
+
+	// try {
+	// 	const [rows] = await promisePool.query(
+	// 		`UPDATE ${userTable} SET name = ?, avatar = ?, signature = ?, tags = ? WHERE id = ?`,
+	// 		[name, avatar, signature, tags, userId]
+	// 	);
+
+	// 	console.log(rows, '更新用户信息')
+	// } catch (error) {
+	// 	console.error('数据库交互失败:', error);
+	// 	res.status(500).json({
+	// 		ok: false,
+	// 		message: '服务器发生错误'
+	// 	});
+	// }
+});
+
 module.exports = router;

@@ -11,6 +11,7 @@ export default defineComponent({
 			loading: false,
 			formState: {
 				userInfo: {
+					userId: null,
 					avatar: null,
 					name: null,
 					signature: null,
