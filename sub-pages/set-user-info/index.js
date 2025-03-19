@@ -1,10 +1,12 @@
 import { defineComponent, reactive, toRefs, ref } from 'vue';
 import { getUserInfoStore, postUpdateUserInfoStore } from '@/store/index.js';
 import ModalAddTagComp from './comps/modal-add-tag/index.vue';
+import ToastComp from '@/components/toast/index.vue'
 
 export default defineComponent({
 	components: {
-		ModalAddTagComp
+		ModalAddTagComp,
+		ToastComp
 	},
 	setup() {
 		const state = reactive({
@@ -29,7 +31,8 @@ export default defineComponent({
 		});
 
 		const components = {
-			modalAddTagRef: ref(null)
+			modalAddTagRef: ref(null),
+			toastRef: ref(null),
 		};
 
 		const methods = {
@@ -79,9 +82,18 @@ export default defineComponent({
 					...state.formState.userInfo,
 					tags: JSON.stringify(state.formState.userInfo.tags)
 				}
-				console.log(postData)
 				postUpdateUserInfoStore.post(postData).then(res=>{
-					console.log(res)
+					if(res.data.ok){
+						components.toastRef.value.show({
+							message: '保存成功',
+							type: 'success'
+						})
+					}else {
+						components.toastRef.value.show({
+							message: '保存失败',
+							type: 'error'
+						})
+					}
 				})
 			}
 		};

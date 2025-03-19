@@ -46,6 +46,7 @@
 
 	<uv-loading-page :loading="loading" loading-text="加载中..." font-size="24rpx"></uv-loading-page>
 	<modal-add-tag-comp ref="modalAddTagRef" @confirmTag="onConfirmTag" />
+	<toast-comp ref="toastRef" />
 </template>
 
 <script src="./index.js"></script>
