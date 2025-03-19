@@ -1,6 +1,6 @@
 import { defineComponent, reactive, toRefs, nextTick, ref } from 'vue';
 import { faceList } from './constants';
-import { sendPrivateMessage, createMessage, listenPrivateMessage } from '@/utils/socketService';
+import { sendPrivateMessage, createMessage, messageType } from '@/utils/socketService';
 import { onLoad, onShow } from '@dcloudio/uni-app';
 import { getUserInfoStore } from '@/store/index.js';
 
@@ -15,7 +15,8 @@ export default defineComponent({
 		});
 
 		const constants = {
-			faceList
+			faceList,
+			messageType
 		};
 
 		const components = {
@@ -54,11 +55,20 @@ export default defineComponent({
 			},
 			// 发送图片
 			onChooseImage(){
+				const userInfo = uni.getStorageSync('userInfo');
 				uni.chooseImage({
 					count: 1,
 					success(info){
 						const file = info.tempFiles[0]
-						console.log(file)
+						const priview = info.tempFilePaths[0]
+						const message = createMessage(
+							userInfo.id,
+							state.chatInfo.id,
+							priview,
+							userInfo,
+							messageType.image
+						);
+						state.messages.push(message)
 					}
 				})
 			},

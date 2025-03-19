@@ -27,8 +27,11 @@
 							fontSize="14"
 							bg-color="#8696de"
 						></uv-avatar>
-						<view class="message-content">
+						<view v-if="msg.messageType === messageType.text" class="message-content">
 							{{ msg.content }}
+						</view>
+						<view v-if="msg.messageType === messageType.image" class="message-content">
+							<uv-image :src="msg.content" width="80px" height="80px"></uv-image>
 						</view>
 					</view>
 					<view class="date-text flex-center-row" v-else>
