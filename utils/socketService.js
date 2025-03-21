@@ -1,5 +1,6 @@
 import io from '@hyoga/uni-socket.io';
 import { SOCKET_URL } from '@/config.js';
+import { v4 as uuidv4 } from 'uuid';
 
 let socket = null;
 
@@ -92,12 +93,14 @@ export const messageType = {
  */
 export function createMessage(senderId, receiverId, content, userInfo, messageType = messageType.text) {
 	return {
+		id: uuidv4(),
 		senderId,
 		receiverId,
 		content,
 		userInfo,
 		isMe: true,
 		messageType,
+		loading: true,
 		createTime: Date.now()
 	};
 }

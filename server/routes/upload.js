@@ -38,6 +38,7 @@ router.post('/upload-images', uploadImages.single('file'), function (req, res, n
 	// 返回文件上传信息
 	res.send({
 		ok: 1,
+    id: req.body?.id,
 		originalName: req.file.originalname,
 		fileName: req.file.filename,
     url: UPLOAD_URL + req.file.filename

@@ -27,12 +27,7 @@ export default defineComponent({
 			sendMessage() {
 				const userInfo = uni.getStorageSync('userInfo');
 				if (state.inputText.trim()) {
-					const message = createMessage(
-						userInfo.id,
-						state.chatInfo.id,
-						state.inputText,
-						userInfo
-					);
+					const message = createMessage(userInfo.id, state.chatInfo.id, state.inputText, userInfo);
 					sendPrivateMessage(state.chatInfo.id, state.inputText, userInfo);
 
 					// 更新本地存储
@@ -54,13 +49,12 @@ export default defineComponent({
 				components.popupRef.value.open();
 			},
 			// 发送图片
-			onChooseImage(){
+			onChooseImage() {
 				const userInfo = uni.getStorageSync('userInfo');
 				uni.chooseImage({
 					count: 1,
-					success(info){
-						const file = info.tempFiles[0]
-						const filePath = info.tempFilePaths[0]
+					success(info) {
+						const filePath = info.tempFilePaths[0];
 						const message = createMessage(
 							userInfo.id,
 							state.chatInfo.id,
@@ -68,15 +62,13 @@ export default defineComponent({
 							userInfo,
 							messageType.image
 						);
-						state.messages.push(message)
-
-						const formData = new FormData();
-						formData.append('file', file);
-						postUploadImagesStore.uploadFile(filePath, 'file').then(res => {
-						    console.log(res);
-						})
+						state.messages.push(message);
+						console.log(state.messages);
+						postUploadImagesStore.uploadFile(filePath, 'file', { id: message.id }).then(res => {
+							console.log(res);
+						});
 					}
-				})
+				});
 			},
 			// 选择表情
 			selectFace(item) {
@@ -134,14 +126,14 @@ export default defineComponent({
 				return result;
 			},
 			// 将消息变成已读
-			readMessage(){
+			readMessage() {
 				const messages = uni.getStorageSync('messages') || {};
 
-				Object.values(messages).forEach(item=>{
-					item.isView = true
-				})
+				Object.values(messages).forEach(item => {
+					item.isView = true;
+				});
 
-				uni.setStorageSync('messages', messages)
+				uni.setStorageSync('messages', messages);
 			},
 			goBack() {
 				uni.navigateBack();
@@ -156,7 +148,7 @@ export default defineComponent({
 					userId
 				})
 				.then(res => {
-					methods.readMessage()
+					methods.readMessage();
 					state.chatInfo = res.data.info[0];
 
 					// 初始化时加载消息
