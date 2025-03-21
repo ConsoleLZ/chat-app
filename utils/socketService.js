@@ -57,7 +57,7 @@ export function listenPrivateMessage(callback) {
 // 发送私聊消息
 export function sendPrivateMessage(id, to, msg, userInfo, messageType = messageType.text, createTime = Date.now()) {
 	if (socket) {
-		socket.emit('private message', {id, to, msg, userInfo, messageType, createTime });
+		socket.emit('private message', { id, to, msg, userInfo, messageType, createTime });
 	}
 }
 
@@ -69,9 +69,17 @@ export function listenGroupMessage(callback) {
 }
 
 // 发送群聊消息
-export function sendGroupMessage(groupId, to, msg, userInfo, createTime = Date.now()) {
+export function sendGroupMessage(
+	id,
+	groupId,
+	to,
+	msg,
+	userInfo,
+	messageType = messageType.text,
+	createTime = Date.now()
+) {
 	if (socket) {
-		socket.emit('group message', { groupId, to, msg, userInfo, createTime });
+		socket.emit('group message', {id, groupId, to, msg, userInfo, createTime, messageType });
 	}
 }
 
