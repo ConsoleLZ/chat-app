@@ -125,6 +125,12 @@ export default defineComponent({
 				});
 				uni.setStorageSync('messages', messages);
 			},
+			// 图片预览
+			onPreviewImage(url){
+				uni.previewImage({
+					urls: [url]
+				})
+			},
 			// 处理消息发送时间，显示在页面上
 			dateGroup(messages) {
 				// 深拷贝 messages 数组以避免修改原始数据
