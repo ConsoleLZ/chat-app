@@ -4,6 +4,11 @@ import { v4 as uuidv4 } from 'uuid';
 
 let socket = null;
 
+export const messageType = {
+	text: 'text',
+	image: 'image'
+};
+
 // 初始化Socket连接并发送用户信息
 export function initSocket(userInfo) {
 	if (!socket) {
@@ -50,9 +55,9 @@ export function listenPrivateMessage(callback) {
 }
 
 // 发送私聊消息
-export function sendPrivateMessage(to, msg, userInfo, createTime = Date.now()) {
+export function sendPrivateMessage(to, msg, userInfo, messageType = messageType.text, createTime = Date.now()) {
 	if (socket) {
-		socket.emit('private message', { to, msg, userInfo, createTime });
+		socket.emit('private message', { to, msg, userInfo, messageType, createTime });
 	}
 }
 
@@ -76,12 +81,6 @@ export function listenUpdateUsers(callback) {
 		socket.on('update users', callback);
 	}
 }
-
-export const messageType = {
-	text: 'text',
-	image: 'image'
-}
-
 /**
  * 创建一条聊天消息
  * @senderId 发送者id
@@ -91,7 +90,7 @@ export const messageType = {
  * @isMe 是否是自己发送的
  * @messageType 消息类型
  */
-export function createMessage(senderId, receiverId, content, userInfo, messageType = messageType.text) {
+export function createMessage(senderId, receiverId, content, userInfo, loading, messageType = messageType.text) {
 	return {
 		id: uuidv4(),
 		senderId,
@@ -100,8 +99,7 @@ export function createMessage(senderId, receiverId, content, userInfo, messageTy
 		userInfo,
 		isMe: true,
 		messageType,
-		loading: true,
+		loading,
 		createTime: Date.now()
 	};
 }
-
