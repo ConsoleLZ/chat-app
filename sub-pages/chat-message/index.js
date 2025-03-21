@@ -28,7 +28,7 @@ export default defineComponent({
 				const userInfo = uni.getStorageSync('userInfo');
 				if (state.inputText.trim()) {
 					const message = createMessage(userInfo.id, state.chatInfo.id, state.inputText, userInfo);
-					sendPrivateMessage(state.chatInfo.id, state.inputText, userInfo);
+					sendPrivateMessage(message.id, state.chatInfo.id, state.inputText, userInfo);
 
 					// 更新本地存储
 					const messages = uni.getStorageSync('messages') || {};
@@ -73,26 +73,29 @@ export default defineComponent({
 								data.url,
 								userInfo,
 								false,
-								messageType.image,
+								messageType.image
 							);
 
-							sendPrivateMessage(state.chatInfo.id, data.url, userInfo, messageType.image);
-							// 更新本地存储
-							const messages = uni.getStorageSync('messages') || {};
-							messages[message.createTime] = message;
-							uni.setStorageSync('messages', messages);
-							// 更新显示的消息
-							state.messages = Object.values(messages).sort((a, b) => a.createTime - b.createTime);
+							sendPrivateMessage(message.id, state.chatInfo.id, data.url, userInfo, messageType.image);
+							// // 更新本地存储
+							// const messages = uni.getStorageSync('messages') || {};
+							// messages[message.createTime] = message;
+							// uni.setStorageSync('messages', messages);
+							// // 更新显示的消息
+							// state.messages = Object.values(messages).sort((a, b) => a.createTime - b.createTime);
 
-							state.messages = methods.dateGroup(state.messages);
-							state.inputText = '';
-							nextTick(() => {
-								state.scrollTop += 1;
-							});
-
+							// state.messages = methods.dateGroup(state.messages);
+							// state.inputText = '';
+							// nextTick(() => {
+							// 	state.scrollTop += 1;
+							// });
+							console.log(state.messages);
 							state.messages = state.messages.map(item => {
-								if (item.id === data.id) {
-									item.loading = false;
+								if (item?.id === data.id) {
+									return {
+										...item,
+										loading: false
+									};
 								}
 							});
 						});
@@ -125,27 +128,19 @@ export default defineComponent({
 				if (disposeData.length === 0) return result;
 
 				// 初始化第一个日期标记
-				let beforeDate = disposeData[0].createTime;
-				result.push({
-					isDate: true,
-					date: beforeDate,
-					senderId: disposeData[0].senderId,
-					receiverId: disposeData[0].receiverId
-				});
+				let beforeDate = new Date(disposeData[0].createTime).toLocaleDateString();
 
-				// 遍历消息并添加日期标记
 				for (let i = 0; i < disposeData.length; i++) {
 					const item = disposeData[i];
+					const currentDate = new Date(item.createTime).toLocaleDateString();
 
-					// 如果当前消息的时间戳与上一个时间戳相差超过5分钟，则插入新的日期标记
-					if (item.createTime - beforeDate > 300000) {
+					// 如果当前消息的日期与上一条消息不同，则插入新的日期标记
+					if (currentDate !== beforeDate) {
 						result.push({
 							isDate: true,
-							date: item.createTime,
-							senderId: item.senderId,
-							receiverId: item.receiverId
+							date: currentDate
 						});
-						beforeDate = item.createTime;
+						beforeDate = currentDate;
 					}
 
 					// 添加当前消息到结果数组

@@ -37,12 +37,28 @@ app.use(express.static(path.join(__dirname, 'upload')));
 
 // 正确解析图片文件的MIME类型
 app.get('/image/:name', (req, res) => {
-    const img = `${__dirname}/upload/images/${req.params.name}`;
-    const contentType = mime.lookup(img); // 获取正确的MIME类型
-    if (contentType) {
-        res.setHeader('Content-Type', contentType);
-    }
-    fs.createReadStream(img).pipe(res);
+	const imgPath = path.join(__dirname, 'upload/images', req.params.name);
+	// 检查文件是否存在
+	fs.access(imgPath, fs.constants.F_OK, err => {
+		if (err) {
+			console.error(`文件未找到: ${imgPath}`);
+			res.status(404).send('文件未找到');
+			return;
+		}
+
+		const contentType = mime.lookup(imgPath); // 获取正确的MIME类型
+		if (contentType) {
+			res.setHeader('Content-Type', contentType);
+		}
+
+		const readStream = fs.createReadStream(imgPath);
+		readStream
+			.on('error', streamErr => {
+				console.error(`读取文件时出错: ${streamErr.message}`);
+				res.status(500).send('服务器内部错误');
+			})
+			.pipe(res);
+	});
 });
 
 app.use('/', indexRouter);

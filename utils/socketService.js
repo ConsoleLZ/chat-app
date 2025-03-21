@@ -55,9 +55,9 @@ export function listenPrivateMessage(callback) {
 }
 
 // 发送私聊消息
-export function sendPrivateMessage(to, msg, userInfo, messageType = messageType.text, createTime = Date.now()) {
+export function sendPrivateMessage(id, to, msg, userInfo, messageType = messageType.text, createTime = Date.now()) {
 	if (socket) {
-		socket.emit('private message', { to, msg, userInfo, messageType, createTime });
+		socket.emit('private message', {id, to, msg, userInfo, messageType, createTime });
 	}
 }
 
