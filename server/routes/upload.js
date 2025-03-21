@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const multer = require('multer');
 const path = require('path');
+const { UPLOAD_URL } = require('../constants');
 
 // 设置存储属性
 const storage = multer.diskStorage({
@@ -38,7 +39,8 @@ router.post('/upload-images', uploadImages.single('file'), function (req, res, n
 	res.send({
 		ok: 1,
 		originalName: req.file.originalname,
-		fileName: req.file.filename
+		fileName: req.file.filename,
+    url: UPLOAD_URL + req.file.filename
 	});
 });
 
