@@ -91,14 +91,15 @@ export default defineComponent({
 							// 更新显示的消息
 							state.messages = Object.values(messages).sort((a, b) => a.createTime - b.createTime);
 
-							// state.messages = state.messages.map(item => {
-							// 	if (item?.id === data.id) {
-							// 		return {
-							// 			...item,
-							// 			loading: false
-							// 		};
-							// 	}
-							// });
+							state.messages = state.messages.map(item => {
+								if (item?.id === data.id) {
+									return {
+										...item,
+										loading: false
+									};
+								}
+								return item;
+							});
 							state.messages = methods.dateGroup(state.messages);
 							state.inputText = '';
 							nextTick(() => {
