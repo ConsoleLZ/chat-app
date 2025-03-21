@@ -2,6 +2,7 @@ import { defineComponent, reactive, toRefs } from 'vue';
 import NavbarComp from '@/components/navbar/index.vue';
 import { getContactsStore, getGroupsStore } from '@/store/index.js';
 import { onShow } from '@dcloudio/uni-app';
+import { messageType } from '@/utils/socketService.js';
 
 export default defineComponent({
 	components: {
@@ -85,7 +86,7 @@ export default defineComponent({
 						) {
 							state.messageList.push({
 								...contact,
-								content: messageItem.content,
+								content: messageItem.messageType === messageType.text ? messageItem.content : '图片',
 								createTime: messageItem.createTime,
 								unreadCount: counts[contact.contactUserId] || 0
 							});
@@ -106,6 +107,7 @@ export default defineComponent({
 						message.name = groupInfo.groupName;
 						message.memberIds = groupInfo.memberIds;
 						message.ownerId = groupInfo.ownerId;
+						message.content = message.messageType === messageType.text ? message.content : '图片';
 						groupMap[groupId] = message;
 					}
 				});
