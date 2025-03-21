@@ -35,3 +35,6 @@ export const getUserInfoStore = new Request('/api/user-info', 'GET')
 
 // 更新用户信息
 export const postUpdateUserInfoStore = new Request('/api/update-user-info', 'POST')
+
+// 图片上传
+export const postUploadImagesStore = new Request('/api/upload-images', 'POST')

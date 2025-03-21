@@ -2,7 +2,7 @@ import { defineComponent, reactive, toRefs, nextTick, ref } from 'vue';
 import { faceList } from './constants';
 import { sendPrivateMessage, createMessage, messageType } from '@/utils/socketService';
 import { onLoad, onShow } from '@dcloudio/uni-app';
-import { getUserInfoStore } from '@/store/index.js';
+import { getUserInfoStore, postUploadImagesStore } from '@/store/index.js';
 
 export default defineComponent({
 	setup() {
@@ -60,15 +60,21 @@ export default defineComponent({
 					count: 1,
 					success(info){
 						const file = info.tempFiles[0]
-						const priview = info.tempFilePaths[0]
+						const filePath = info.tempFilePaths[0]
 						const message = createMessage(
 							userInfo.id,
 							state.chatInfo.id,
-							priview,
+							filePath,
 							userInfo,
 							messageType.image
 						);
 						state.messages.push(message)
+
+						const formData = new FormData();
+						formData.append('file', file);
+						postUploadImagesStore.uploadFile(filePath, 'file').then(res => {
+						    console.log(res);
+						})
 					}
 				})
 			},

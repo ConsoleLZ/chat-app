@@ -37,4 +37,21 @@ export class Request {
 			});
 		});
 	}
+
+	uploadFile(filePath, name, formData = {}) {
+		return new Promise((resolve, reject) => {
+			uni.uploadFile({
+				url: this.url,
+				filePath,
+				name,
+				formData,
+				success(res) {
+					resolve(res);
+				},
+				fail(err) {
+					reject(err);
+				}
+			});
+		});
+	}
 }
