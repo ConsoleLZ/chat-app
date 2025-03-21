@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const mime = require('mime-types');
+const fs = require('fs');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -31,6 +33,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'upload')));
+
+// 正确解析图片文件的MIME类型
+app.get('/image/:name', (req, res) => {
+    const img = `${__dirname}/upload/images/${req.params.name}`;
+    const contentType = mime.lookup(img); // 获取正确的MIME类型
+    if (contentType) {
+        res.setHeader('Content-Type', contentType);
+    }
+    fs.createReadStream(img).pipe(res);
+});
 
 app.use('/', indexRouter);
 app.use('/api', usersRouter);
