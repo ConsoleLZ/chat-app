@@ -44,12 +44,11 @@ io.on('connection', socket => {
 				// 检查并发送存储的消息
 				const messages = await getMessagesFromRedis(userId);
 				messages?.forEach(msg => {
-					if(msg.groupId){
+					if (msg.groupId) {
 						socket.emit('group message', msg);
-					}else {
+					} else {
 						socket.emit('private message', msg);
 					}
-					
 				});
 
 				io.emit('update users', Object.keys(users)); // 发送当前在线用户列表给所有客户端
@@ -59,10 +58,10 @@ io.on('connection', socket => {
 		});
 
 		// 单聊
-		socket.on('private message', async ({ to, msg, userInfo, createTime }) => {
+		socket.on('private message', async ({ id, to, msg, userInfo, messageType, createTime }) => {
 			const toSocketId = users[to];
 			// 创建消息对象
-			const message = createMessage(userInfo.id, to, msg, userInfo, createTime);
+			const message = createMessage(id, userInfo.id, to, msg, userInfo, messageType, createTime);
 			if (!message.createTime) {
 				console.error('Invalid message: missing createTime', message);
 				return;
@@ -82,15 +81,16 @@ io.on('connection', socket => {
 		});
 
 		// 群聊
-		socket.on('group message', async ({ groupId, to, msg, userInfo, createTime }) => {
+		socket.on('group message', async ({ id, groupId, to, msg, userInfo, messageType, createTime }) => {
 			// 创建消息时，设置groupId，并将receiverId设为null（或群组ID）
 			const message = createMessage(
+				id,
 				userInfo.id, // senderId
 				groupId, // 将群组ID作为receiverId（或设为null，根据需求调整）
 				msg,
 				userInfo,
+				messageType,
 				createTime,
-				'text',
 				groupId // 显式传递groupId
 			);
 
@@ -130,7 +130,7 @@ initRedis();
 const messageTypeMap = {
 	text: 'text',
 	image: 'image'
-}
+};
 
 /**
  * 创建一条消息
@@ -141,15 +141,17 @@ const messageTypeMap = {
  * @param messageType 消息类型
  */
 function createMessage(
+	id,
 	senderId,
 	receiverId,
 	content,
 	userInfo,
-	createTime = Date.now(),
 	messageType = messageTypeMap.text,
+	createTime = Date.now(),
 	groupId = null // 新增groupId参数
 ) {
 	return {
+		id,
 		senderId,
 		receiverId,
 		content,
