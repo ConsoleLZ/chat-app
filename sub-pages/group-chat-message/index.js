@@ -160,8 +160,8 @@ export default defineComponent({
 		});
 
 		return {
-			...methods,
 			...toRefs(state),
+			...methods,
 			...components,
 			...constants
 		};
