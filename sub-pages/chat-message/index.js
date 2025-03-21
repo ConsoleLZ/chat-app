@@ -84,27 +84,27 @@ export default defineComponent({
 							);
 
 							sendPrivateMessage(message.id, state.chatInfo.id, data.url, userInfo, messageType.image);
-							// // 更新本地存储
+							// 更新本地存储
 							const messages = uni.getStorageSync('messages') || {};
 							messages[message.createTime] = message;
 							uni.setStorageSync('messages', messages);
 							// 更新显示的消息
 							state.messages = Object.values(messages).sort((a, b) => a.createTime - b.createTime);
 
+							// state.messages = state.messages.map(item => {
+							// 	if (item?.id === data.id) {
+							// 		return {
+							// 			...item,
+							// 			loading: false
+							// 		};
+							// 	}
+							// });
 							state.messages = methods.dateGroup(state.messages);
 							state.inputText = '';
 							nextTick(() => {
 								state.scrollTop += 1;
 							});
 							console.log(state.messages);
-							state.messages = state.messages.map(item => {
-								if (item?.id === data.id) {
-									return {
-										...item,
-										loading: false
-									};
-								}
-							});
 						});
 					}
 				});
