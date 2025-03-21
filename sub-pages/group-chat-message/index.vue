@@ -11,7 +11,7 @@
 		></uv-navbar>
 
 		<!-- 消息列表 -->
-        <scroll-view class="message-list" scroll-y :scroll-top="scrollTop">
+		<scroll-view class="message-list" scroll-y :scroll-top="scrollTop">
 			<view v-for="(msg, index) in messages" :key="index">
 				<view v-if="msg.groupId === groupId">
 					<view v-if="!msg.isDate" :class="['message-item', msg.isMe ? 'me' : 'other']">
@@ -27,8 +27,12 @@
 							fontSize="14"
 							bg-color="#8696de"
 						></uv-avatar>
-						<view class="message-content">
+						<view v-if="msg.messageType === messageType.text" class="message-content">
 							{{ msg.content }}
+						</view>
+						<view v-if="msg.messageType === messageType.image" class="message-image flex-center-row">
+							<uv-loading-icon v-if="msg.loading"></uv-loading-icon>
+							<uv-image :src="msg.content" height="240rpx" mode="heightFix" />
 						</view>
 					</view>
 					<view class="date-text flex-center-row" v-else>
@@ -47,7 +51,7 @@
 			<!-- 发送表情包 -->
 			<uv-icon @click="openFace" style="margin-right: 66rpx" size="46rpx" name="/static/face.png"></uv-icon>
 			<!-- 发送图片 -->
-			<uv-icon size="41rpx" name="/static/photo.png"></uv-icon>
+			<uv-icon @click="onChooseImage" size="41rpx" name="/static/photo.png"></uv-icon>
 		</view>
 		<uv-popup ref="popupRef" mode="bottom">
 			<view class="popupFace">

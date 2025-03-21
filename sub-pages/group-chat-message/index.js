@@ -2,6 +2,7 @@ import { defineComponent, reactive, toRefs, ref, nextTick } from 'vue';
 import { faceList } from '@/sub-pages/chat-message/constants.js';
 import { onLoad } from '@dcloudio/uni-app';
 import { sendGroupMessage, createMessage, messageType } from '@/utils/socketService';
+import { postUploadImagesStore } from '@/store/index.js';
 
 export default defineComponent({
 	setup() {
@@ -16,7 +17,8 @@ export default defineComponent({
 		});
 
 		const constants = {
-			faceList
+			faceList,
+            messageType
 		};
 
 		const components = {
@@ -99,9 +101,9 @@ export default defineComponent({
 								message.id,
 								state.groupId,
 								state.memberIds,
-								state.inputText,
+								data.url,
 								userInfo,
-								messageType.text
+								messageType.image
 							);
 							// 更新本地存储
 							const messages = uni.getStorageSync('groupMessages') || [];
