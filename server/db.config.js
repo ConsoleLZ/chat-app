@@ -1,4 +1,4 @@
-const host = '172.20.104.44'
+const host = '127.0.0.1'
 
 function dbConfig() {
 	return {
