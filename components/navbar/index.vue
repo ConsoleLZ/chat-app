@@ -48,6 +48,21 @@
 				></uv-image>
 				<text class="overlay-text">加好友/群</text>
 			</view>
+			<view
+				@click="jump('/sub-pages/search-contact/index', 150)"
+				class="flex-center-row"
+				style="padding: 15rpx 0; width: 100%"
+				hover-class="hover-class-background"
+				hover-stay-time="150"
+			>
+				<uv-image
+					src="/static/tabbar/moments.png"
+					width="36rpx"
+					mode="widthFix"
+					style="margin-right: 12rpx"
+				></uv-image>
+				<text class="overlay-text">发布动态</text>
+			</view>
 		</view>
 	</uv-overlay>
 	<uv-popup ref="popupRef" mode="left">

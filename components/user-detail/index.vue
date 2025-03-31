@@ -10,8 +10,8 @@
 		</view>
 		<view class="name">{{ userInfo.name }}</view>
 		<view class="description">{{ userInfo.signature }}</view>
-		<view class="flex-center-row">
-			<uv-tags v-for="item in userInfo.tags" style="margin-right: 10rpx" :text="item" size="mini"></uv-tags>
+		<view class="flex-center-row" style="gap: 10rpx;">
+			<uv-tags v-for="item in userInfo.tags" :text="item" size="mini"></uv-tags>
 		</view>
 	</view>
 </template>
