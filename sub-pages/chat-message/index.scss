@@ -46,6 +46,11 @@
 			.message-image {
 				margin: 16rpx 24rpx;
 				gap: 12rpx;
+				.img {
+					width: 300rpx;
+					max-width: 400rpx;
+					background-color: red;
+				}
 			}
 		}
 		.date-text {

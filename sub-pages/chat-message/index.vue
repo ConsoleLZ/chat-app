@@ -32,7 +32,9 @@
 						</view>
 						<view v-if="msg.messageType === messageType.image" class="message-image flex-center-row">
 							<uv-loading-icon v-if="msg.loading"></uv-loading-icon>
-							<uv-image @click="onPreviewImage(msg.content)"  :src="msg.content" height="240rpx" mode="heightFix" />
+							<view class="img">
+								<uv-image @click="onPreviewImage(msg.content)" :src="msg.content" width="100%" mode="widthFix" />
+							</view>
 						</view>
 					</view>
 					<view class="date-text flex-center-row" v-else>
