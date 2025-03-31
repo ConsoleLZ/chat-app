@@ -21,7 +21,14 @@ export default defineComponent({
 					state.fileList.push(item);
 				});
 
-				postUploadImagesStore.uploadFile(undefined, undefined, {}, fileList).then(res=>{
+				const formData = new FormData()
+
+				state.fileList.forEach(item => {
+					console.log(item)
+				    formData.append('file', item)
+				})
+
+				postUploadImagesStore.uploadFile(undefined, undefined, {}, formData).then(res=>{
 					const data = res.data;
 					console.log(data);
 				})
