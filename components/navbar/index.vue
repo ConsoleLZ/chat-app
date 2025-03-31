@@ -49,7 +49,7 @@
 				<text class="overlay-text">加好友/群</text>
 			</view>
 			<view
-				@click="jump('/sub-pages/search-contact/index', 150)"
+				@click="jump('/sub-pages/publish-moments/index', 150)"
 				class="flex-center-row"
 				style="padding: 15rpx 0; width: 100%"
 				hover-class="hover-class-background"

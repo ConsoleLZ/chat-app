@@ -38,12 +38,13 @@ export class Request {
 		});
 	}
 
-	uploadFile(filePath, name, formData = {}) {
+	uploadFile(filePath, name, formData = {}, files) {
 		return new Promise((resolve, reject) => {
 			uni.uploadFile({
 				url: this.url,
 				filePath,
 				name,
+				files,
 				formData,
 				success(res) {
 					resolve(res);

@@ -1,5 +1,5 @@
 import { defineComponent, reactive, toRefs } from 'vue';
-import { postAddMomentStore } from '@/store/index';
+import { postAddMomentStore, postUploadImagesStore } from '@/store/index';
 
 export default defineComponent({
 	setup() {
@@ -20,6 +20,11 @@ export default defineComponent({
 				fileList.forEach(item => {
 					state.fileList.push(item);
 				});
+
+				postUploadImagesStore.uploadFile(undefined, undefined, {}, fileList).then(res=>{
+					const data = res.data;
+					console.log(data);
+				})
 			},
 			onPublish() {
 				if (!state.content) {
