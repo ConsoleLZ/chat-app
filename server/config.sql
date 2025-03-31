@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : termux-mysql
+ Source Server         : localhost-mysql
  Source Server Type    : MySQL
- Source Server Version : 80040 (8.0.40-0ubuntu0.20.04.1)
- Source Host           : 192.168.18.213:3306
+ Source Server Version : 80300 (8.3.0)
+ Source Host           : localhost:3306
  Source Schema         : chat-app
 
  Target Server Type    : MySQL
- Target Server Version : 80040 (8.0.40-0ubuntu0.20.04.1)
+ Target Server Version : 80300 (8.3.0)
  File Encoding         : 65001
 
- Date: 03/03/2025 17:16:35
+ Date: 01/04/2025 05:29:44
 */
 
 SET NAMES utf8mb4;
@@ -33,13 +33,13 @@ CREATE TABLE `contacts`  (
   INDEX `contacts_ibfk_2`(`contactUserId` ASC) USING BTREE,
   CONSTRAINT `contacts_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `contacts_ibfk_2` FOREIGN KEY (`contactUserId`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 41 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 45 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Table structure for contactsApplication
+-- Table structure for contactsapplication
 -- ----------------------------
-DROP TABLE IF EXISTS `contactsApplication`;
-CREATE TABLE `contactsApplication`  (
+DROP TABLE IF EXISTS `contactsapplication`;
+CREATE TABLE `contactsapplication`  (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `avatar` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
@@ -52,13 +52,13 @@ CREATE TABLE `contactsApplication`  (
   INDEX `contactUserId`(`contactUserId` ASC) USING BTREE,
   CONSTRAINT `contactsApplication_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `contactsApplication_ibfk_2` FOREIGN KEY (`contactUserId`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Table structure for groupMembers
+-- Table structure for groupmembers
 -- ----------------------------
-DROP TABLE IF EXISTS `groupMembers`;
-CREATE TABLE `groupMembers`  (
+DROP TABLE IF EXISTS `groupmembers`;
+CREATE TABLE `groupmembers`  (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `groupId` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `userId` bigint NOT NULL,
@@ -72,7 +72,7 @@ CREATE TABLE `groupMembers`  (
   INDEX `members_link_2`(`userId` ASC) USING BTREE,
   CONSTRAINT `members_link_1` FOREIGN KEY (`groupId`) REFERENCES `groups` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `members_link_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for groups
@@ -89,6 +89,23 @@ CREATE TABLE `groups`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `ownerId`(`ownerId` ASC) USING BTREE,
   CONSTRAINT `groups_link_1` FOREIGN KEY (`ownerId`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for moments
+-- ----------------------------
+DROP TABLE IF EXISTS `moments`;
+CREATE TABLE `moments`  (
+  `id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `userId` bigint NOT NULL,
+  `createTime` bigint NOT NULL,
+  `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `imgList` json NULL,
+  `thumbs` int NOT NULL DEFAULT 0 COMMENT '点赞数量',
+  `comments` json NULL COMMENT '评论',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `moments_link_1`(`userId` ASC) USING BTREE,
+  CONSTRAINT `moments_link_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -105,7 +122,7 @@ CREATE TABLE `users`  (
   `signature` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `tags` json NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Triggers structure for table users
