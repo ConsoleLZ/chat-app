@@ -21,17 +21,19 @@ export default defineComponent({
 					state.fileList.push(item);
 				});
 
-				const formData = new FormData()
-
-				state.fileList.forEach(item => {
-					console.log(item)
-				    formData.append('file', item)
-				})
-
-				postUploadImagesStore.uploadFile(undefined, undefined, {}, formData).then(res=>{
-					const data = res.data;
-					console.log(data);
-				})
+				state.fileList.forEach(async (item, index) => {
+					const result = await postUploadImagesStore.uploadFile(item.url, 'file');
+					const data = JSON.parse(result.data);
+					state.fileList.splice(
+						index,
+						1,
+						Object.assign(item, {
+							status: 'success',
+							message: '',
+							url: data.url
+						})
+					);
+				});
 			},
 			onPublish() {
 				if (!state.content) {
@@ -41,11 +43,13 @@ export default defineComponent({
 					});
 					return;
 				}
+				const imgList = state.fileList.map(item => item.url);
+				console.log(imgList);
 				const userId = uni.getStorageSync('userInfo').id;
 				const postData = {
 					userId,
 					content: state.content,
-					imgList: state.fileList
+					imgList
 				};
 
 				postAddMomentStore.post(postData).then(res => {
