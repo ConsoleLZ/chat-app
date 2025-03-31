@@ -38,3 +38,6 @@ export const postUpdateUserInfoStore = new Request('/api/update-user-info', 'POS
 
 // 图片上传
 export const postUploadImagesStore = new Request('/api/upload-images', 'POST')
+
+// 发布动态
+export const postAddMomentStore = new Request('/api/add-moment', 'POST')

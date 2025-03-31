@@ -28,7 +28,9 @@ const table = {
 	// 群组表
 	groupsTable: 'groups',
 	// 群组成员表
-	groupMembersTable: 'groupMembers'
+	groupMembersTable: 'groupMembers',
+	// 朋友圈表
+	momentsTable: 'moments'
 };
 
 module.exports = {

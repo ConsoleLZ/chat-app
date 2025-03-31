@@ -2,7 +2,7 @@
 	<view class="page">
 		<uv-navbar title="发布动态">
 			<template #right>
-				<uv-button type="primary" customStyle="height: 55rpx;" text="发布"></uv-button>
+				<uv-button type="primary" customStyle="height: 55rpx;" text="发布" @click="onPublish"></uv-button>
 			</template>
 		</uv-navbar>
 		<uv-textarea
