@@ -26,6 +26,12 @@
 			}
 		},
 		{
+			"path": "sub-pages/publish-moments/index",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
 			"path": "pages/login/index",
 			"style": {
 				"navigationBarTitleText": "登录",
