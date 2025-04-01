@@ -35,7 +35,7 @@ export default defineComponent({
 				});
 			},
 			// 点赞
-			onThumbsUp(id, thumbs, thumbsIcon, hasThmbs) {
+			async onThumbsUp(id, thumbs, thumbsIcon, hasThmbs) {
 				if (hasThmbs) {
 					return;
 				}
@@ -52,7 +52,8 @@ export default defineComponent({
 					id,
 					thumbs
 				};
-				postUpdateMomentsStore.post(postData);
+				await postUpdateMomentsStore.post(postData);
+				methods.getData();
 			}
 		};
 
