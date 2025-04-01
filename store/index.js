@@ -41,3 +41,6 @@ export const postUploadImagesStore = new Request('/api/upload-images', 'POST')
 
 // 发布动态
 export const postAddMomentStore = new Request('/api/add-moment', 'POST')
+
+// 获取朋友圈动态
+export const GetMomentsStore = new Request('/api/get-moments', 'GET')
