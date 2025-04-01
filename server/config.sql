@@ -11,7 +11,7 @@
  Target Server Version : 80300 (8.3.0)
  File Encoding         : 65001
 
- Date: 01/04/2025 05:29:44
+ Date: 01/04/2025 22:40:47
 */
 
 SET NAMES utf8mb4;
@@ -101,7 +101,7 @@ CREATE TABLE `moments`  (
   `createTime` bigint NOT NULL,
   `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `imgList` json NULL,
-  `thumbs` int NOT NULL DEFAULT 0 COMMENT '点赞数量',
+  `thumbs` json NULL COMMENT '点赞',
   `comments` json NULL COMMENT '评论',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `moments_link_1`(`userId` ASC) USING BTREE,
