@@ -15,6 +15,7 @@
 			<view class="margin-bottom-20">
 				{{ item.content }}
 			</view>
+			<uv-album v-if="item.imgList?.length" :urls="item.imgList"></uv-album>
 			<view class="icon-box">
 				<uv-icon size="20" name="/static/moments/1.png"></uv-icon>
 				<uv-icon size="20" name="/static/moments/3.png"></uv-icon>
