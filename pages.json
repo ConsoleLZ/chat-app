@@ -22,7 +22,7 @@
 		{
 			"path": "pages/moments/index",
 			"style": {
-				"navigationBarTitleText": "朋友圈"
+				"navigationStyle": "custom"
 			}
 		},
 		{

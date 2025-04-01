@@ -1,8 +1,12 @@
 import { defineComponent, reactive, toRefs } from 'vue';
 import { GetMomentsStore } from '@/store/index.js';
 import dayjs from 'dayjs'
+import NavbarComp from '@/components/navbar/index.vue';
 
 export default defineComponent({
+    components: {
+		NavbarComp
+	},
 	setup() {
 		const state = reactive({
 			list: null
