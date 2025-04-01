@@ -19,7 +19,6 @@
 			<uv-album v-if="item.imgList?.length" :urls="item.imgList"></uv-album>
 			<view class="icon-box">
 				<uv-icon size="20" :name="item.thumbsIcon" @click="onThumbsUp(item.id, item.thumbs, item.thumbsIcon, item.hasThmbs)"></uv-icon>
-				<uv-icon size="20" name="/static/moments/3.png"></uv-icon>
 			</view>
 			<view v-if="item.thumbsText">
 				<uv-text v-if="item.thumbsText?.length <= 10" type="info" :text="`${item.thumbsText?.join('、')}赞了`"></uv-text>
