@@ -1,6 +1,6 @@
 const express = require('express');
 const mysql2 = require('mysql2');
-const { dbConfig, momentsTable, userTable } = require('../db.config');
+const { dbConfig, momentsTable, userTable, contactsTable } = require('../db.config');
 const { v4: uuidv4 } = require('uuid');
 
 // 创建一个全局的连接池
@@ -61,16 +61,25 @@ router.get('/get-moments', async function (req, res) {
 	}
 
 	try {
+		// 获取联系人信息
+		const contactsInfo = await promisePool.query(`SELECT contactUserId FROM ${contactsTable} WHERE userId = ?`, [
+			userId
+		]);
+		const contactUserIdArr = contactsInfo[0].map(item => item.contactUserId);
+
 		// 构建 SQL 查询语句
 		let sql = `
-  		SELECT m.id, m.userId, m.content, m.imgList, m.createTime, m.thumbs, m.comments, u.name, u.avatar
-    	FROM \`${momentsTable}\` m
-    	INNER JOIN \`${userTable}\` u ON m.userId = u.id
-    	WHERE m.userId = ?
+  			SELECT m.id, m.userId, m.content, m.imgList, m.createTime, m.thumbs, m.comments, u.name, u.avatar
+    		FROM \`${momentsTable}\` m
+    		INNER JOIN \`${userTable}\` u ON m.userId = u.id
+    		WHERE m.userId IN (?)
 		`;
 
+		// 将当前用户的ID加入到联系人ID数组中，避免重复可以使用Set
+		const queryIds = Array.from(new Set([...contactUserIdArr, parseInt(userId)]));
+
 		// 执行查询
-		const [rows] = await promisePool.query(sql, [userId]);
+		const [rows] = await promisePool.query(sql, [queryIds]);
 		// 检查查询结果
 		if (rows.length > 0) {
 			res.json({
