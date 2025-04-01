@@ -21,8 +21,10 @@
 				<uv-icon size="20" :name="item.thumbsIcon" @click="onThumbsUp(item.id, item.thumbs, item.thumbsIcon, item.hasThmbs)"></uv-icon>
 				<uv-icon size="20" name="/static/moments/3.png"></uv-icon>
 			</view>
-			<uv-text v-if="item.thumbsText?.length <= 10" type="info" :text="`${item.thumbsText?.join('、')}赞了`"></uv-text>
-			<uv-text v-else type="info" :text="`${item.thumbsText?.slice(0, 10).join('，')}等${item.thumbsText?.length}人赞了`"></uv-text>
+			<view v-if="item.thumbsText">
+				<uv-text v-if="item.thumbsText?.length <= 10" type="info" :text="`${item.thumbsText?.join('、')}赞了`"></uv-text>
+				<uv-text v-else type="info" :text="`${item.thumbsText?.slice(0, 10).join('，')}等${item.thumbsText?.length}人赞了`"></uv-text> 
+			</view>
 		</view>
 	</view>
 </template>

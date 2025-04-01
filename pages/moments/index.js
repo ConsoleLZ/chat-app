@@ -28,7 +28,7 @@ export default defineComponent({
 								? '/static/moments/2.png'
 								: '/static/moments/1.png',
 							hasThmbs: item.thumbs?.some(thumb => thumb.userId == userId),
-							thumbsText: item.thumbs.map(item=>item.name)
+							thumbsText: item.thumbs?.map(item=>item.name)
 						};
 					});
 					console.log(state.list);
