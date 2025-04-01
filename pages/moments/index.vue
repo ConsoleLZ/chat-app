@@ -18,10 +18,11 @@
 			</view>
 			<uv-album v-if="item.imgList?.length" :urls="item.imgList"></uv-album>
 			<view class="icon-box">
-				<uv-icon size="20" name="/static/moments/1.png"></uv-icon>
+				<uv-icon size="20" :name="item.thumbsIcon" @click="onThumbsUp(item.id, item.thumbs, item.thumbsIcon, item.hasThmbs)"></uv-icon>
 				<uv-icon size="20" name="/static/moments/3.png"></uv-icon>
 			</view>
-			<uv-text type="info" text="小哲赞了、阿松地哦赞了"></uv-text>
+			<uv-text v-if="item.thumbsText.length <= 10" type="info" :text="`${item.thumbsText.join('，')}赞了`"></uv-text>
+			<uv-text v-else type="info" :text="`${item.thumbsText.slice(0, 10).join('，')}等${item.thumbsText.length}人赞了`"></uv-text>
 		</view>
 	</view>
 </template>

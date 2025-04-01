@@ -21,7 +21,6 @@ router.post('/add-moment', async function (req, res) {
 	}
 
 	try {
-		// 使用 ON DUPLICATE KEY UPDATE 处理可能的重复插入
 		const [result] = await promisePool.query(
 			`INSERT INTO ${momentsTable} (id, userId, content, imgList, createTime) VALUES (?, ?, ?, ?, ?)`,
 			[uuidv4(), userId, content, JSON.stringify(imgList), Date.now()]
@@ -61,7 +60,6 @@ router.get('/get-moments', async function (req, res) {
 	}
 
 	try {
-		// 获取联系人信息
 		const contactsInfo = await promisePool.query(`SELECT contactUserId FROM ${contactsTable} WHERE userId = ?`, [
 			userId
 		]);
@@ -90,6 +88,42 @@ router.get('/get-moments', async function (req, res) {
 			res.json({
 				ok: false,
 				message: '暂无数据'
+			});
+		}
+	} catch (error) {
+		console.error('数据库交互失败:', error);
+		res.status(500).json({
+			ok: false,
+			message: '服务器发生错误'
+		});
+	}
+});
+
+// 更新朋友圈点赞和评论
+router.post('/update-moments', async function (req, res) {
+	const { id, thumbs, comments } = req.body;
+	// 参数验证
+	if (!id) {
+		return res.status(400).json({
+			ok: false,
+			message: '缺少参数'
+		});
+	}
+
+	try {
+		const [rows] = await promisePool.query(
+			`UPDATE ${momentsTable} SET thumbs = ?, comments = ? WHERE id = ?`,
+			[JSON.stringify(thumbs), JSON.stringify(comments), id]
+		);
+
+		if (rows.affectedRows > 0) {
+			res.json({
+				ok: true
+			});
+		} else {
+			res.status(404).json({
+				ok: false,
+				message: '更新失败'
 			});
 		}
 	} catch (error) {
