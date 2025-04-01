@@ -2,6 +2,7 @@ import { defineComponent, reactive, toRefs } from 'vue';
 import { getMomentsStore, postUpdateMomentsStore } from '@/store/index.js';
 import dayjs from 'dayjs';
 import NavbarComp from '@/components/navbar/index.vue';
+import { onShow } from '@dcloudio/uni-app';
 
 export default defineComponent({
 	components: {
@@ -57,7 +58,9 @@ export default defineComponent({
 			}
 		};
 
-		methods.getData();
+		onShow(()=>{
+			methods.getData();
+		})
 
 		return {
 			...toRefs(state),
