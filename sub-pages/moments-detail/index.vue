@@ -36,11 +36,11 @@
 				></uv-text>
 			</view>
 		</view>
-		<view>
-			<uv-text type="primary" text="名字：发送的内容"></uv-text>
+		<view v-if="data?.comments">
+			<uv-text v-for="(item, index) in data?.comments" :key="index" :text="item.name + '：' + item.value"></uv-text>
 		</view>
 		<view class="input-box flex-center-row">
-			<uv-input placeholder="发送评论" border="surround">
+			<uv-input v-model="value" @confirm="onConfirm" placeholder="发送评论" border="surround">
 				<template #prefix>
 					<uv-icon size="20" name="/static/moments/3.png"></uv-icon>
 				</template>

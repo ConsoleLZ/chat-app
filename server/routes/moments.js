@@ -111,10 +111,18 @@ router.post('/update-moments', async function (req, res) {
 	}
 
 	try {
-		const [rows] = await promisePool.query(
-			`UPDATE ${momentsTable} SET thumbs = ?, comments = ? WHERE id = ?`,
-			[JSON.stringify(thumbs), JSON.stringify(comments), id]
-		);
+		let rows = null
+		if(thumbs){
+			[rows] = await promisePool.query(
+				`UPDATE ${momentsTable} SET thumbs = ? WHERE id = ?`,
+				[JSON.stringify(thumbs), id]
+			);
+		}else {
+			[rows] = await promisePool.query(
+				`UPDATE ${momentsTable} SET comments = ? WHERE id = ?`,
+				[JSON.stringify(comments), id]
+			);
+		}
 
 		if (rows.affectedRows > 0) {
 			res.json({
