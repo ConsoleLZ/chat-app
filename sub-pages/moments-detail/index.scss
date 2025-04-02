@@ -10,3 +10,12 @@
     align-items: center;
     gap: 20rpx;
 }
+.input-box {
+    width: 100vw;
+    height: 65rpx;
+    position: fixed;
+    left: 0;
+    bottom: 45rpx;
+    padding: 0 40rpx;
+    box-sizing: border-box;
+}
