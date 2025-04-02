@@ -2,8 +2,8 @@
 	<view class="page">
 		<view class="moment-box" v-if="data">
 			<view class="flex-row margin-bottom-20" style="gap: 20rpx">
-				<uv-avatar v-if="data.avatar !== '' && data.avatar" shape="square" :src="data.avatar"></uv-avatar>
-				<uv-avatar v-else :text="data.name?.slice(0, 1)" shape="square"></uv-avatar>
+				<uv-avatar v-if="data.avatar !== '' && data.avatar" :src="data.avatar"></uv-avatar>
+				<uv-avatar v-else :text="data.name?.slice(0, 1)"></uv-avatar>
 				<view>
 					<view>{{ data.name }}</view>
 					<uv-text
@@ -35,6 +35,9 @@
 					:text="`${data.thumbsText?.slice(0, 10).join('，')}等${data.thumbsText?.length}人赞了`"
 				></uv-text>
 			</view>
+		</view>
+		<view>
+			<uv-text type="primary" text="名字：发送的内容"></uv-text>
 		</view>
 		<view class="input-box flex-center-row">
 			<uv-input placeholder="发送评论" border="surround">
