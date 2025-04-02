@@ -76,6 +76,12 @@
 			}
 		},
 		{
+			"path": "sub-pages/moments-detail/index",
+			"style": {
+				"navigationBarTitleText": "详情"
+			}
+		},
+		{
 			"path": "sub-pages/add-groups/index",
 			"style": {
 				"navigationStyle": "custom"
@@ -90,7 +96,7 @@
 	],
 	"globalStyle": {
 		"navigationBarTitleText": "随聊",
-		"navigationBarBackgroundColor": "#3c9cff",
+		"navigationBarBackgroundColor": "#ffffff",
 		"navigationBarTextStyle": "black"
 	},
 	"tabBar": {
