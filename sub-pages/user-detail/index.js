@@ -1,7 +1,6 @@
 import { defineComponent, reactive, toRefs } from 'vue';
 import { onLoad } from '@dcloudio/uni-app';
 import UserDetailComp from '@/components/user-detail/index.vue';
-import {getUserInfoStore} from '@/store/index.js'
 
 export default defineComponent({
 	components: {

@@ -149,14 +149,16 @@ router.get('/get-moments-detail', async function (req, res) {
 
 	try {
 		const [rows] = await promisePool.query(
-			`SELECT * FROM ${momentsTable} WHERE id = ?`,
+			`SELECT m.id, m.userId, m.content, m.imgList, m.createTime, m.thumbs, m.comments, u.name, u.avatar
+    		FROM \`${momentsTable}\` m
+    		INNER JOIN \`${userTable}\` u WHERE m.id IN (?)`,
 			[id]
 		);
 
 		if (rows.length > 0) {
 			res.json({
 				ok: true,
-				info: rows
+				detail: rows[0]
 			});
 		} else {
 			res.status(404).json({
