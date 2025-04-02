@@ -3,6 +3,7 @@ import { getMomentsStore, postUpdateMomentsStore } from '@/store/index.js';
 import dayjs from 'dayjs';
 import NavbarComp from '@/components/navbar/index.vue';
 import { onShow } from '@dcloudio/uni-app';
+import {jump} from '@/utils/utils'
 
 export default defineComponent({
 	components: {
@@ -14,7 +15,8 @@ export default defineComponent({
 		});
 
 		const constants = {
-			dayjs
+			dayjs,
+			jump
 		};
 
 		const methods = {

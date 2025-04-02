@@ -47,3 +47,6 @@ export const getMomentsStore = new Request('/api/get-moments', 'GET')
 
 // 获取朋友圈动态
 export const postUpdateMomentsStore = new Request('/api/update-moments', 'POST')
+
+// 获取动态详情
+export const getMomentsDetailStore = new Request('/api/get-moments-detail', 'GET')

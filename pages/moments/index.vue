@@ -1,7 +1,7 @@
 <template>
 	<navbar-comp title="朋友圈" />
 	<view class="page">
-		<view class="moment-box" v-for="item in list" :key="item.id">
+		<view class="moment-box" v-for="item in list" :key="item.id" @click="jump('/sub-pages/moments-detail/index?id=' + item.id)">
 			<view class="flex-row margin-bottom-20" style="gap: 20rpx">
 				<uv-avatar v-if="item.avatar !== '' && item.avatar" shape="square" :src="item.avatar"></uv-avatar>
 				<uv-avatar v-else :text="item.name?.slice(0, 1)" shape="square"></uv-avatar>
