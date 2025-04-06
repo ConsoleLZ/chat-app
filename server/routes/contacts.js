@@ -137,7 +137,7 @@ router.post('/delete-contact', async function (req, res) {
 	if (!contactUserId || !userId) {
 		return res.status(400).json({
 			ok: false,
-			message: '参数为空'
+			message: '缺少参数'
 		});
 	}
 

@@ -50,3 +50,6 @@ export const postUpdateMomentsStore = new Request('/api/update-moments', 'POST')
 
 // 获取动态详情
 export const getMomentsDetailStore = new Request('/api/get-moments-detail', 'GET')
+
+// 删除联系人
+export const postDeleteContactStore = new Request('/api/delete-contact', 'POST')

@@ -2,14 +2,18 @@
 	<view class="page">
 		<uv-navbar title="用户信息" @leftClick="onGoBack">
 			<template #right>
-				<uv-icon @click="jump('/sub-pages/user-setting/index')" name="setting" size="22"></uv-icon>
+				<uv-icon
+					@click="jump(`/sub-pages/user-setting/index?contactUserId=${userId}`)"
+					name="setting"
+					size="22"
+				></uv-icon>
 			</template>
 		</uv-navbar>
 		<view style="padding-top: 40rpx">
 			<user-detail-comp :userId="userId" />
 		</view>
 		<view class="btn">
-			<uv-button @click="onJumpChat" style="width: 90%;" type="primary" text="发消息"></uv-button>
+			<uv-button @click="onJumpChat" style="width: 90%" type="primary" text="发消息"></uv-button>
 		</view>
 	</view>
 </template>
