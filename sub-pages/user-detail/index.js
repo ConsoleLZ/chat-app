@@ -1,5 +1,6 @@
 import { defineComponent, reactive, toRefs } from 'vue';
 import { onLoad } from '@dcloudio/uni-app';
+import { jump } from '@/utils/utils'
 import UserDetailComp from '@/components/user-detail/index.vue';
 
 export default defineComponent({
@@ -28,6 +29,7 @@ export default defineComponent({
 		});
 
 		return {
+			jump,
 			...toRefs(state),
 			...methods
 		};

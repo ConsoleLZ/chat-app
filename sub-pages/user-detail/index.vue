@@ -2,7 +2,7 @@
 	<view class="page">
 		<uv-navbar title="用户信息" @leftClick="onGoBack">
 			<template #right>
-				<uv-icon name="setting" size="22"></uv-icon>
+				<uv-icon @click="jump('/sub-pages/user-setting/index')" name="setting" size="22"></uv-icon>
 			</template>
 		</uv-navbar>
 		<view style="padding-top: 40rpx">

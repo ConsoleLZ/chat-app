@@ -8,6 +8,8 @@
         <view class="btn">
 			<uv-button @click="onDel" style="width: 90%;" type="error" text="删除联系人"></uv-button>
 		</view>
+
+		<uv-modal ref="modalRef" title="提示" content='是否删除该联系人' align="center" @confirm="onConfirmDel"></uv-modal>
 	</view>
 </template>
 
