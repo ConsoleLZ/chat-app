@@ -5,11 +5,19 @@
 			<uv-list-item title="分组" show-arrow></uv-list-item>
 		</uv-list>
 
-        <view class="btn">
-			<uv-button @click="onDel" style="width: 90%;" type="error" text="删除联系人"></uv-button>
+		<view class="btn">
+			<uv-button @click="onDel" style="width: 90%" type="error" text="删除联系人"></uv-button>
 		</view>
 
-		<uv-modal ref="modalRef" title="提示" content='是否删除该联系人' align="center" @confirm="onConfirmDel"></uv-modal>
+		<uv-modal
+			ref="modalRef"
+			title="提示"
+			content="是否删除该联系人"
+			align="center"
+			showCancelButton
+			@confirm="onConfirmDel"
+			:closeOnClickOverlay="false"
+		></uv-modal>
 	</view>
 </template>
 
