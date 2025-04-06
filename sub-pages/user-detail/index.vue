@@ -2,7 +2,7 @@
 	<view class="page">
 		<uv-navbar title="用户信息" @leftClick="onGoBack">
 			<template #right>
-				<uv-icon name="more-dot-fill" size="24"></uv-icon>
+				<uv-icon name="setting" size="22"></uv-icon>
 			</template>
 		</uv-navbar>
 		<view style="padding-top: 40rpx">

@@ -82,6 +82,12 @@
 			}
 		},
 		{
+			"path": "sub-pages/user-setting/index",
+			"style": {
+				"navigationBarTitleText": "设置"
+			}
+		},
+		{
 			"path": "sub-pages/add-groups/index",
 			"style": {
 				"navigationStyle": "custom"
