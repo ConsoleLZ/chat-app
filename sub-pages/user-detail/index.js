@@ -17,6 +17,9 @@ export default defineComponent({
 				uni.navigateTo({
 					url: `/sub-pages/chat-message/index?userId=${state.userId}`
 				});
+			},
+			onGoBack(){
+				uni.navigateBack()
 			}
 		};
 

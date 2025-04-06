@@ -72,7 +72,7 @@
 		{
 			"path": "sub-pages/user-detail/index",
 			"style": {
-				"navigationBarTitleText": "联系人信息"
+				"navigationStyle": "custom"
 			}
 		},
 		{
