@@ -1,6 +1,6 @@
 <template>
 	<view class="page">
-		<uv-navbar title="发布动态">
+		<uv-navbar title="发布动态" @leftClick="onGoBack">
 			<template #right>
 				<uv-button type="primary" customStyle="height: 55rpx;" text="发布" @click="onPublish"></uv-button>
 			</template>

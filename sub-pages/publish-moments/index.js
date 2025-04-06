@@ -68,6 +68,9 @@ export default defineComponent({
 						});
 					}
 				});
+			},
+			onGoBack(){
+				uni.navigateBack()
 			}
 		};
 
