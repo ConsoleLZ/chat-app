@@ -1,7 +1,7 @@
 import { defineComponent, reactive, toRefs, ref } from 'vue';
-import { getUserInfoStore, postUpdateUserInfoStore } from '@/store/index.js';
+import { getUserInfoStore, postUpdateUserInfoStore, postUploadImagesStore } from '@/store/index.js';
 import ModalAddTagComp from './comps/modal-add-tag/index.vue';
-import ToastComp from '@/components/toast/index.vue'
+import ToastComp from '@/components/toast/index.vue';
 
 export default defineComponent({
 	components: {
@@ -20,6 +20,7 @@ export default defineComponent({
 					tags: []
 				}
 			},
+			isSelectAvatar: false,
 			rules: {
 				'userInfo.name': {
 					type: 'string',
@@ -32,14 +33,14 @@ export default defineComponent({
 
 		const components = {
 			modalAddTagRef: ref(null),
-			toastRef: ref(null),
+			toastRef: ref(null)
 		};
 
 		const methods = {
 			getData() {
 				state.loading = true;
 				const userId = uni.getStorageSync('userInfo').id;
-				state.formState.userInfo.userId = userId
+				state.formState.userInfo.userId = userId;
 
 				getUserInfoStore
 					.get({ userId })
@@ -61,6 +62,16 @@ export default defineComponent({
 						state.loading = false;
 					});
 			},
+			// 选择头像
+			onChooseAvatar() {
+				uni.chooseImage({
+					count: 1,
+					success(e) {
+						state.isSelectAvatar = true;
+						state.formState.userInfo.avatar = e.tempFilePaths[0];
+					}
+				});
+			},
 			// 添加标签
 			onAddTag() {
 				components.modalAddTagRef.value.open();
@@ -77,24 +88,32 @@ export default defineComponent({
 				state.formState.userInfo.tags.splice(index, 1);
 			},
 			// 保存
-			onSave(){
+			async onSave() {
 				const postData = {
 					...state.formState.userInfo,
 					tags: JSON.stringify(state.formState.userInfo.tags)
-				}
-				postUpdateUserInfoStore.post(postData).then(res=>{
-					if(res.data.ok){
-						components.toastRef.value.show({
-							message: '保存成功',
-							type: 'success'
-						})
-					}else {
-						components.toastRef.value.show({
-							message: '保存失败',
-							type: 'error'
-						})
+				};
+
+				try {
+					// 如果用户修改了头像，应该先上传头像图片
+					if (state.isSelectAvatar) {
+						const res = await postUploadImagesStore.uploadFile(postData.avatar, 'file');
+						const data = JSON.parse(res.data);
+						
+						postData.avatar = data.url
 					}
-				})
+					console.log(postData)
+					await postUpdateUserInfoStore.post(postData);
+					components.toastRef.value.show({
+						message: '保存成功',
+						type: 'success'
+					});
+				} catch (error) {
+					components.toastRef.value.show({
+						message: '保存失败',
+						type: 'error'
+					});
+				}
 			}
 		};
 

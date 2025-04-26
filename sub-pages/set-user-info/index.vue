@@ -13,8 +13,9 @@
 					v-if="formState.userInfo.avatar !== '' && formState.userInfo.avatar"
 					size="70rpx"
 					:src="formState.userInfo.avatar"
+					@click="onChooseAvatar"
 				></uv-avatar>
-				<uv-avatar v-else :text="formState.userInfo.name?.slice(0, 1)" fontSize="18" size="70rpx"></uv-avatar>
+				<uv-avatar @click="onChooseAvatar" v-else :text="formState.userInfo.name?.slice(0, 1)" fontSize="18" size="70rpx"></uv-avatar>
 			</uv-form-item>
 			<uv-form-item label="昵称:" prop="userInfo.name" borderBottom>
 				<uv-input v-model="formState.userInfo.name" border="none"></uv-input>
