@@ -102,7 +102,7 @@ export default defineComponent({
 						
 						postData.avatar = data.url
 					}
-					console.log(postData)
+
 					await postUpdateUserInfoStore.post(postData);
 					components.toastRef.value.show({
 						message: '保存成功',

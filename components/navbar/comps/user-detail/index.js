@@ -20,6 +20,13 @@ export default defineComponent({
 			// 跳转到我的信息页
 			onJumpSet(){
 				jump('/sub-pages/set-user-info/index')
+			},
+			onOpenVersion(){
+				uni.showToast({
+					title: '开发阶段',
+					icon: 'none',
+					mask: true
+				})
 			}
 		};
 
