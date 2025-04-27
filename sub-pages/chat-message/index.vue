@@ -33,7 +33,12 @@
 						<view v-if="msg.messageType === messageType.image" class="message-image flex-center-row">
 							<uv-loading-icon v-if="msg.loading"></uv-loading-icon>
 							<view class="img">
-								<uv-image @click="onPreviewImage(msg.content)" :src="msg.content" width="100%" mode="widthFix" />
+								<uv-image
+									@click="onPreviewImage(msg.content)"
+									:src="msg.content"
+									width="100%"
+									mode="widthFix"
+								/>
 							</view>
 						</view>
 					</view>
@@ -61,7 +66,14 @@
 				<text @click="selectFace(item)" v-for="(item, index) in faceList" :key="index">{{ item }}</text>
 			</view>
 			<view class="expression" v-if="index === 1">
-				<uv-image v-for="item in expressionList" :src="item.url" :key="item.id" width="220rpx" height="220rpx"></uv-image>
+				<uv-image
+					v-for="item in expressionList"
+					:src="item.url"
+					:key="item.id"
+					width="220rpx"
+					height="220rpx"
+					@click="onSendExpression(item.url)"
+				></uv-image>
 			</view>
 		</uv-popup>
 

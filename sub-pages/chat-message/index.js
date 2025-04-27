@@ -71,6 +71,10 @@ export default defineComponent({
 			openFace() {
 				components.popupRef.value.open();
 			},
+			// 发送表情包
+			onSendExpression(url){
+				console.log(url)
+			},
 			// 发送图片
 			onChooseImage() {
 				const userInfo = uni.getStorageSync('userInfo');
