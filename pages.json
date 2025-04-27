@@ -98,6 +98,12 @@
 			"style": {
 				"navigationBarTitleText": "我的信息"
 			}
+		},
+		{
+			"path": "sub-pages/my-expression/index",
+			"style": {
+				"navigationBarTitleText": "我的表情包"
+			}
 		}
 	],
 	"globalStyle": {

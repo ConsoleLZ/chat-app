@@ -2,7 +2,7 @@
 	<view style="padding-top: 130rpx; width: 600rpx">
 		<user-detail-comp />
 		<uv-list style="margin-top: 50rpx">
-			<uv-list-item title="我的表情包" thumb="/static/about/face.png" link thumb-size="sm"></uv-list-item>
+			<uv-list-item title="我的表情包" @click="jump('/sub-pages/my-expression/index')" thumb="/static/about/face.png" link thumb-size="sm"></uv-list-item>
 			<uv-list-item title="个人信息" @click="onJumpSet" thumb="/static/about/user.png" link thumb-size="sm"></uv-list-item>
 			<uv-list-item title="版本信息" thumb="/static/about/version.png" link thumb-size="sm" @click="onOpenVersion"></uv-list-item>
 		</uv-list>
