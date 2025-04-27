@@ -1,3 +1,9 @@
 .page{
-    padding: 15px;
+    padding: 30rpx;
+}
+.expression-list {
+    display: grid;
+	grid-template-columns: repeat(auto-fill, 220rpx);
+	gap: 15rpx; /* 间距 */
+	justify-content: center;
 }
