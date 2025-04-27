@@ -72,8 +72,34 @@ export default defineComponent({
 				components.popupRef.value.open();
 			},
 			// 发送表情包
-			onSendExpression(url){
-				console.log(url)
+			onSendExpression(url) {
+				const userInfo = uni.getStorageSync('userInfo');
+				// 创建一个新的表情包消息
+				const message = createMessage(
+					userInfo.id,
+					state.chatInfo.id,
+					url, // 表情包的链接地址
+					userInfo,
+					false,
+					messageType.image // 假设有一个专门用于表情包的消息类型
+				);
+				// 通过 WebSocket 或者其他方式发送私信
+				sendPrivateMessage(message.id, state.chatInfo.id, url, userInfo, messageType.image);
+
+				// 更新本地存储
+				const messages = uni.getStorageSync('messages') || {};
+				messages[message.createTime] = message;
+				uni.setStorageSync('messages', messages);
+
+				// 更新显示的消息
+				state.messages = Object.values(messages).sort((a, b) => a.createTime - b.createTime);
+				state.messages = methods.dateGroup(state.messages); // 按日期分组
+
+				components.popupRef.value.close();
+				// 滚动到底部
+				nextTick(() => {
+					state.scrollTop += 1;
+				});
 			},
 			// 发送图片
 			onChooseImage() {

@@ -15,8 +15,7 @@ export default defineComponent({
 					})
 					.then(res => {
 						const data = res.data;
-						state.imgList = data?.data
-                        console.log(state.imgList)
+						state.imgList = data?.data || []
 					});
 			},
 			async afterRead(e) {

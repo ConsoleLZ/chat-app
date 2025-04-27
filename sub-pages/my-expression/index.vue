@@ -8,6 +8,7 @@
         <view class="expression-list" v-if="imgList.length">
             <uv-image v-for="item in imgList" :src="item.url" :key="item.id" width="220rpx" height="220rpx"></uv-image>
         </view>
+		<uv-empty v-else></uv-empty>
 	</view>
 </template>
 
