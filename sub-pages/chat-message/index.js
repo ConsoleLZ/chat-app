@@ -96,6 +96,7 @@ export default defineComponent({
 				state.messages = methods.dateGroup(state.messages); // 按日期分组
 
 				components.popupRef.value.close();
+				state.index = 0;
 				// 滚动到底部
 				nextTick(() => {
 					state.scrollTop += 1;
