@@ -92,4 +92,13 @@
 		padding: 30rpx 15rpx;
 		overflow-y: auto;
 	}
+	.expression {
+		height: 340rpx;
+		padding: 30rpx 15rpx;
+		display: grid;
+		grid-template-columns: repeat(auto-fill, 220rpx);
+		gap: 15rpx; /* 间距 */
+		justify-content: center;
+		overflow-y: auto;
+	}
 }

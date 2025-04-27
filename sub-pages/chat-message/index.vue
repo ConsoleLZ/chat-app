@@ -50,14 +50,18 @@
 			<uv-button type="primary" @click="sendMessage" class="send-btn" :disabled="!inputText">发送</uv-button>
 		</view>
 		<view class="select flex-row">
-			<!-- 发送表情包 -->
+			<!-- 发送emoj表情 -->
 			<uv-icon @click="openFace" style="margin-right: 66rpx" size="46rpx" name="/static/face.png"></uv-icon>
 			<!-- 发送图片 -->
 			<uv-icon @click="onChooseImage" size="41rpx" name="/static/photo.png"></uv-icon>
 		</view>
 		<uv-popup ref="popupRef" mode="bottom">
-			<view class="popupFace">
+			<uv-tabs :list="tabs" @click="onChangeTabs"></uv-tabs>
+			<view class="popupFace" v-if="index === 0">
 				<text @click="selectFace(item)" v-for="(item, index) in faceList" :key="index">{{ item }}</text>
+			</view>
+			<view class="expression" v-if="index === 1">
+				<uv-image v-for="item in expressionList" :src="item.url" :key="item.id" width="220rpx" height="220rpx"></uv-image>
 			</view>
 		</uv-popup>
 

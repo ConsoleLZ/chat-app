@@ -1,8 +1,8 @@
 import { defineComponent, reactive, toRefs, nextTick, ref } from 'vue';
-import { faceList } from './constants';
+import { faceList, tabs } from './constants';
 import { sendPrivateMessage, createMessage, messageType } from '@/utils/socketService';
 import { onLoad, onShow } from '@dcloudio/uni-app';
-import { getUserInfoStore, postUploadImagesStore } from '@/store/index.js';
+import { getUserInfoStore, postUploadImagesStore, getExpressionStore } from '@/store/index.js';
 
 export default defineComponent({
 	setup() {
@@ -11,12 +11,15 @@ export default defineComponent({
 			inputText: '',
 			scrollTop: 9999,
 			chatInfo: {}, // 联系人信息
-			loading: false
+			loading: false,
+			index: 0,
+			expressionList: []
 		});
 
 		const constants = {
 			faceList,
-			messageType
+			messageType,
+			tabs
 		};
 
 		const components = {
@@ -24,6 +27,16 @@ export default defineComponent({
 		};
 
 		const methods = {
+			getExpressionData() {
+				getExpressionStore
+					.get({
+						userId: uni.getStorageSync('userInfo').id
+					})
+					.then(res => {
+						const data = res.data;
+						state.expressionList = data?.data;
+					});
+			},
 			sendMessage() {
 				const userInfo = uni.getStorageSync('userInfo');
 				if (state.inputText.trim()) {
@@ -50,6 +63,9 @@ export default defineComponent({
 						state.scrollTop += 1;
 					});
 				}
+			},
+			onChangeTabs(item) {
+				state.index = item.index;
 			},
 			// 打开表情包弹窗
 			openFace() {
@@ -126,10 +142,10 @@ export default defineComponent({
 				uni.setStorageSync('messages', messages);
 			},
 			// 图片预览
-			onPreviewImage(url){
+			onPreviewImage(url) {
 				uni.previewImage({
 					urls: [url]
-				})
+				});
 			},
 			// 处理消息发送时间，显示在页面上
 			dateGroup(messages) {
@@ -209,6 +225,7 @@ export default defineComponent({
 
 		onShow(() => {
 			methods.changeMessageView();
+			methods.getExpressionData();
 		});
 
 		// 监听发送过来的消息

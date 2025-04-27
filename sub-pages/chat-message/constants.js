@@ -31,3 +31,12 @@ export const faceList = [
 	'🤝',
 	'🙏'
 ];
+
+export const tabs = [
+	{
+		name: 'Emoji'
+	},
+	{
+		name: '表情包'
+	}
+]
