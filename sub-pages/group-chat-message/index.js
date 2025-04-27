@@ -1,8 +1,8 @@
 import { defineComponent, reactive, toRefs, ref, nextTick } from 'vue';
-import { faceList } from '@/sub-pages/chat-message/constants.js';
-import { onLoad } from '@dcloudio/uni-app';
+import { faceList, tabs } from '@/sub-pages/chat-message/constants.js';
+import { onLoad, onShow } from '@dcloudio/uni-app';
 import { sendGroupMessage, createMessage, messageType } from '@/utils/socketService';
-import { postUploadImagesStore } from '@/store/index.js';
+import { postUploadImagesStore, getExpressionStore } from '@/store/index.js';
 
 export default defineComponent({
 	setup() {
@@ -13,12 +13,15 @@ export default defineComponent({
 			scrollTop: 9999,
 			loading: false,
 			title: null,
-			groupId: null
+			groupId: null,
+			index: 0,
+			expressionList: []
 		});
 
 		const constants = {
 			faceList,
-            messageType
+			messageType,
+			tabs
 		};
 
 		const components = {
@@ -26,6 +29,16 @@ export default defineComponent({
 		};
 
 		const methods = {
+			getExpressionData() {
+				getExpressionStore
+					.get({
+						userId: uni.getStorageSync('userInfo').id
+					})
+					.then(res => {
+						const data = res.data;
+						state.expressionList = data?.data;
+					});
+			},
 			sendMessage() {
 				const userInfo = uni.getStorageSync('userInfo');
 				if (state.inputText.trim()) {
@@ -65,9 +78,37 @@ export default defineComponent({
 			goBack() {
 				uni.navigateBack();
 			},
+			onChangeTabs(item) {
+				state.index = item.index;
+			},
 			// 打开表情包弹窗
 			openFace() {
 				components.popupRef.value.open();
+			},
+			// 发送表情包
+			onSendExpression(url) {
+				const userInfo = uni.getStorageSync('userInfo');
+				// 创建一个新的表情包消息
+				const message = createMessage(userInfo.id, state.memberIds, url, userInfo, false, messageType.image);
+
+				sendGroupMessage(message.id, state.groupId, state.memberIds, url, userInfo, messageType.image);
+
+				const messages = uni.getStorageSync('groupMessages') || [];
+				messages.push({
+					...message,
+					groupId: state.groupId
+				});
+				
+				state.messages = messages;
+
+				uni.setStorageSync('groupMessages', messages);
+
+				components.popupRef.value.close();
+				state.index = 0;
+				// 滚动到底部
+				nextTick(() => {
+					state.scrollTop += 1;
+				});
 			},
 			// 发送图片
 			onChooseImage() {
@@ -148,6 +189,10 @@ export default defineComponent({
 			// 初始化加载消息
 			const messages = uni.getStorageSync('groupMessages') || [];
 			state.messages = messages;
+		});
+
+		onShow(() => {
+			methods.getExpressionData();
 		});
 
 		// 监听发送过来的消息
