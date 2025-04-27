@@ -30,7 +30,9 @@ const table = {
 	// 群组成员表
 	groupMembersTable: 'groupMembers',
 	// 朋友圈表
-	momentsTable: 'moments'
+	momentsTable: 'moments',
+	// 表情包表
+	expressionPackTable: 'expressionPack'
 };
 
 module.exports = {
