@@ -53,3 +53,6 @@ export const getMomentsDetailStore = new Request('/api/get-moments-detail', 'GET
 
 // 删除联系人
 export const postDeleteContactStore = new Request('/api/delete-contact', 'POST')
+
+// 添加表情包
+export const postAddExpressionStore = new Request('/api/add-expression', 'POST')
