@@ -5,10 +5,8 @@
 			:maxCount="10"
 			@afterRead="afterRead"
 		></uv-upload>
-        <view class="expression-list">
-            <uv-image src="https://cdn.uviewui.com/uview/album/1.jpg" width="220rpx" height="220rpx"></uv-image>
-            <uv-image src="https://cdn.uviewui.com/uview/album/1.jpg" width="220rpx" height="220rpx"></uv-image>
-            <uv-image src="https://cdn.uviewui.com/uview/album/1.jpg" width="220rpx" height="220rpx"></uv-image>
+        <view class="expression-list" v-if="imgList.length">
+            <uv-image v-for="item in imgList" :src="item.url" :key="item.id" width="220rpx" height="220rpx"></uv-image>
         </view>
 	</view>
 </template>
