@@ -187,7 +187,7 @@ async function storeMessageInRedis(message) {
 	await redisClient.zAdd(key, { score: message.createTime, value });
 
 	// 设置过期时间（7天）
-	await redisClient.expire(key, 60 * 60 * 24 * 7);
+	// await redisClient.expire(key, 60 * 60 * 24 * 7);
 }
 
 /**
