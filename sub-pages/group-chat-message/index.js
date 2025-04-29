@@ -25,7 +25,8 @@ export default defineComponent({
 		};
 
 		const components = {
-			popupRef: ref(null)
+			popupRef: ref(null),
+			popupInfoRef: ref(null)
 		};
 
 		const methods = {
@@ -38,6 +39,10 @@ export default defineComponent({
 						const data = res.data;
 						state.expressionList = data?.data;
 					});
+			},
+			// 查看群聊相关信息
+			onShowInfo(){
+				components.popupInfoRef.value.open();
 			},
 			sendMessage() {
 				const userInfo = uni.getStorageSync('userInfo');

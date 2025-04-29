@@ -1,14 +1,11 @@
 <template>
 	<view class="chat-container">
 		<!-- 顶部导航 -->
-		<uv-navbar
-			:title="title"
-			:border="true"
-			:fixed="true"
-			placeholder
-			leftIcon="arrow-left"
-			@leftClick="goBack"
-		></uv-navbar>
+		<uv-navbar :title="title" :border="true" :fixed="true" placeholder leftIcon="arrow-left" @leftClick="goBack">
+			<template #right>
+				<uv-icon @click="onShowInfo" name="more-dot-fill" size="20"></uv-icon>
+			</template>
+		</uv-navbar>
 
 		<!-- 消息列表 -->
 		<scroll-view class="message-list" scroll-y :scroll-top="scrollTop">
@@ -73,6 +70,9 @@
 		</uv-popup>
 
 		<uv-loading-page :loading="loading" loading-text="加载中..." font-size="24rpx"></uv-loading-page>
+		<uv-popup ref="popupInfoRef" mode="right" closeable>
+			<view class="group-info">123</view>
+		</uv-popup>
 	</view>
 </template>
 
