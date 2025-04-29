@@ -11,7 +11,7 @@ const router = express.Router();
 // 创建群聊
 router.post('/create-group', async function (req, res) {
 	const groupId = uuidv4();
-	const { name, ownerInfo } = req.body;
+	const { name, ownerInfo, members } = req.body;
 
 	// 参数验证
 	if (!name || !ownerInfo?.id) {
@@ -24,7 +24,7 @@ router.post('/create-group', async function (req, res) {
 	try {
 		// 确保使用反引号包裹表名，以防它是保留关键字
 		const [result] = await promisePool.query(
-			`INSERT INTO \`${groupsTable}\` (id, name, ownerId, createTime) VALUES (?, ?, ?, ?, ?)`,
+			`INSERT INTO \`${groupsTable}\` (id, name, ownerId, createTime) VALUES (?, ?, ?, ?)`,
 			[groupId, name, ownerInfo.id, Date.now()]
 		);
 

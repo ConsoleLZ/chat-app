@@ -79,7 +79,10 @@ export default defineComponent({
 					.validate()
 					.then(() => {
 						postCreateGroupStore
-							.post(state.formState)
+							.post({
+								...state.formState,
+								members: state.checkedValue
+							})
 							.then(res => {
 								const data = res.data;
 								if (data?.ok) {
