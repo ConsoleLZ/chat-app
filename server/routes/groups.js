@@ -11,7 +11,7 @@ const router = express.Router();
 // 创建群聊
 router.post('/create-group', async function (req, res) {
 	const groupId = uuidv4();
-	const { name, ownerInfo, members } = req.body;
+	const { name, ownerInfo } = req.body;
 
 	// 参数验证
 	if (!name || !ownerInfo?.id) {
@@ -24,8 +24,8 @@ router.post('/create-group', async function (req, res) {
 	try {
 		// 确保使用反引号包裹表名，以防它是保留关键字
 		const [result] = await promisePool.query(
-			`INSERT INTO \`${groupsTable}\` (id, name, ownerId, memberIds, createTime) VALUES (?, ?, ?, ?, ?)`,
-			[groupId, name, ownerInfo.id, JSON.stringify(members.map(item=>item.contactUserId)), Date.now()]
+			`INSERT INTO \`${groupsTable}\` (id, name, ownerId, createTime) VALUES (?, ?, ?, ?, ?)`,
+			[groupId, name, ownerInfo.id, Date.now()]
 		);
 
 		// 检查 affectedRows 判断是否成功插入
@@ -79,7 +79,7 @@ router.get('/get-groups', async function (req, res) {
 	try {
 		// 构建 SQL 查询语句
 		let sql = `
-  		SELECT g.id AS groupId, g.name AS groupName, g.avatar AS groupAvatar, g.memberIds AS memberIds, g.ownerId AS ownerId
+  		SELECT g.id AS groupId, g.name AS groupName, g.avatar AS groupAvatar, g.ownerId AS ownerId
     	FROM \`${groupMembersTable}\` gm
     	INNER JOIN \`${groupsTable}\` g ON gm.groupId = g.id
     	WHERE gm.userId = ?
@@ -97,6 +97,47 @@ router.get('/get-groups', async function (req, res) {
 			res.json({
 				ok: false,
 				message: '该用户暂未加入群聊'
+			});
+		}
+	} catch (error) {
+		console.error('数据库交互失败:', error);
+		res.status(500).json({
+			ok: false,
+			message: '服务器发生错误'
+		});
+	}
+});
+
+// 获取群聊所有的成员
+router.get('/get-all-members', async function (req, res) {
+	const { groupId } = req.query;
+
+	// 参数验证
+	if (!groupId) {
+		return res.status(400).json({
+			ok: false,
+			message: '缺少参数'
+		});
+	}
+
+	try {
+		// 构建 SQL 查询语句
+		let sql = `SELECT *
+				   FROM ${groupMembersTable} 
+				   WHERE groupId = ?`;
+
+		// 执行查询
+		const [rows] = await promisePool.query(sql, [groupId]);
+		// 检查查询结果
+		if (rows.length > 0) {
+			res.json({
+				ok: true,
+				data: rows
+			});
+		} else {
+			res.json({
+				ok: false,
+				message: '暂无数据'
 			});
 		}
 	} catch (error) {

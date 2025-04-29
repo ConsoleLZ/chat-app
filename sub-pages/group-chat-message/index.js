@@ -2,7 +2,7 @@ import { defineComponent, reactive, toRefs, ref, nextTick } from 'vue';
 import { faceList, tabs } from '@/sub-pages/chat-message/constants.js';
 import { onLoad, onShow } from '@dcloudio/uni-app';
 import { sendGroupMessage, createMessage, messageType } from '@/utils/socketService';
-import { postUploadImagesStore, getExpressionStore } from '@/store/index.js';
+import { postUploadImagesStore, getExpressionStore, getAllMembersStore } from '@/store/index.js';
 
 export default defineComponent({
 	setup() {
@@ -185,11 +185,14 @@ export default defineComponent({
 			}
 		};
 
-		onLoad(options => {
+		onLoad(async (options) => {
 			const info = JSON.parse(options.info);
 			state.groupId = info.id;
-			state.title = info.name;
-			state.memberIds = info.memberIds;
+			const res = await getAllMembersStore.get({groupId: info.id})
+			const memberIds = res.data?.data?.map(item=>item.userId)
+			state.title = `${info.name}(${memberIds.length})`;
+			
+			state.memberIds = memberIds;
 
 			// 初始化加载消息
 			const messages = uni.getStorageSync('groupMessages') || [];

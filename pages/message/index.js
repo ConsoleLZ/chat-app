@@ -24,7 +24,6 @@ export default defineComponent({
 					const info = {
 						id: item.groupId,
 						name: item.name,
-						memberIds: item.memberIds?.concat([item.ownerId])
 					};
 					uni.navigateTo({
 						url: `/sub-pages/group-chat-message/index?info=${JSON.stringify(info)}`
@@ -105,7 +104,6 @@ export default defineComponent({
 						const groupInfo = state.groups.find(item => item.groupId === message.groupId);
 						message.avatar = groupInfo.avatar;
 						message.name = groupInfo.groupName;
-						message.memberIds = groupInfo.memberIds;
 						message.ownerId = groupInfo.ownerId;
 						message.content = message.messageType === messageType.text ? message.content : '图片';
 						groupMap[groupId] = message;

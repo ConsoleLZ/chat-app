@@ -59,3 +59,6 @@ export const postAddExpressionStore = new Request('/api/add-expression', 'POST')
 
 // 获取表情包数据
 export const getExpressionStore = new Request('/api/get-expression', 'GET')
+
+// 获取群聊成员
+export const getAllMembersStore = new Request('/api/get-all-members', 'GET')

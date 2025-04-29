@@ -66,7 +66,6 @@ export default defineComponent({
 								id: item.groupId,
 								name: item.groupName,
 								avatar: item.groupAvatar,
-								memberIds: item.memberIds,
 								ownerId: item.ownerId,
 							}
 						})

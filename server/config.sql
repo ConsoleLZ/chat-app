@@ -11,7 +11,7 @@
  Target Server Version : 80300 (8.3.0)
  File Encoding         : 65001
 
- Date: 27/04/2025 22:50:03
+ Date: 29/04/2025 22:39:47
 */
 
 SET NAMES utf8mb4;
@@ -33,7 +33,7 @@ CREATE TABLE `contacts`  (
   INDEX `contacts_ibfk_2`(`contactUserId` ASC) USING BTREE,
   CONSTRAINT `contacts_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `contacts_ibfk_2` FOREIGN KEY (`contactUserId`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 45 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 47 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for contactsapplication
@@ -52,7 +52,7 @@ CREATE TABLE `contactsapplication`  (
   INDEX `contactUserId`(`contactUserId` ASC) USING BTREE,
   CONSTRAINT `contactsApplication_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `contactsApplication_ibfk_2` FOREIGN KEY (`contactUserId`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 32 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 33 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for expressionpack
@@ -65,7 +65,7 @@ CREATE TABLE `expressionpack`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `expressionPack_1`(`userId` ASC) USING BTREE,
   CONSTRAINT `expressionPack_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for groupmembers
@@ -98,7 +98,6 @@ CREATE TABLE `groups`  (
   `ownerId` bigint NOT NULL,
   `silence` tinyint(1) NOT NULL DEFAULT 0,
   `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `memberIds` json NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `ownerId`(`ownerId` ASC) USING BTREE,
   CONSTRAINT `groups_link_1` FOREIGN KEY (`ownerId`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
