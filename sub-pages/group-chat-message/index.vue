@@ -71,7 +71,14 @@
 
 		<uv-loading-page :loading="loading" loading-text="加载中..." font-size="24rpx"></uv-loading-page>
 		<uv-popup ref="popupInfoRef" mode="right" closeable>
-			<view class="group-info">123</view>
+			<view class="group-info">
+				<view class="members-box">
+					<view style="margin-bottom: 15rpx;">群聊成员:</view>
+					<view class="members-item">
+						<uv-avatar v-for="item in groupMembers" :key="item.id" :src="item.avatar" size="70rpx"></uv-avatar>
+					</view>
+				</view>
+			</view>
 		</uv-popup>
 	</view>
 </template>
