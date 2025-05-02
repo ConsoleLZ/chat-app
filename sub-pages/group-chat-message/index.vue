@@ -74,7 +74,7 @@
 			<view class="popup-box">
 				<view class="group-info-box">
 					<view style="margin-bottom: 15rpx" class="flex-between-row">
-						<view style="font-size: 30rpx;">群聊成员:</view>
+						<view style="font-size: 30rpx">群聊成员:</view>
 						<view class="flex-row" @click="onShowAllMembers">
 							<view style="font-size: 26rpx; color: #666666; margin-right: 5rpx">查看更多</view>
 							<uv-icon name="arrow-right"></uv-icon>
@@ -90,18 +90,38 @@
 				<view class="group-info-box" style="margin-top: 30rpx">
 					<uv-list>
 						<uv-list-item title="群聊名称" :rightText="title" show-arrow></uv-list-item>
-						<uv-list-item title="群公告" show-arrow></uv-list-item>
-						<uv-list-item title="群ID" :rightText="groupId" show-arrow></uv-list-item>
+						<uv-list-item border title="群公告" show-arrow></uv-list-item>
+						<uv-list-item border title="群ID" :rightText="groupId" show-arrow></uv-list-item>
 					</uv-list>
 				</view>
-				<uv-button style="margin-top: 50rpx;" type="error" text="退出群聊"></uv-button>
+				<uv-button style="margin-top: 50rpx" type="error" text="退出群聊"></uv-button>
 			</view>
 		</uv-popup>
 
 		<!-- 展开所有的群聊成员 -->
 		<uv-popup ref="popupAllMembersRef" mode="right" closeable>
 			<view class="popup-box">
-				123
+				<uv-list>
+					<uv-list-item v-for="item in groupMembers" :key="item.id">
+						<template #default>
+							<view class="flex-between-row" style="padding: 15rpx">
+								<view class="flex-row" style="gap: 20rpx;">
+									<view>
+										<uv-avatar v-if="item.avatar" :src="item.avatar" size="70rpx"></uv-avatar>
+										<uv-avatar
+											v-else
+											:text="item.name?.slice(0, 1)"
+											fontSize="16"
+											size="70rpx"
+										></uv-avatar>
+									</view>
+									<uv-text :text="item.name" type="info"></uv-text>
+								</view>
+								<uv-button type="warning " text="踢出" size="mini"></uv-button>
+							</view>
+						</template>
+					</uv-list-item>
+				</uv-list>
 			</view>
 		</uv-popup>
 	</view>
