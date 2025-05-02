@@ -162,10 +162,7 @@ router.post('/delete-member', async function (req, res) {
 	}
 
 	try {
-		const [result] = await promisePool.query(
-			`DELETE FROM ${groupMembersTable} WHERE id=?;`,
-			[id]
-		);
+		const [result] = await promisePool.query(`DELETE FROM ${groupMembersTable} WHERE id=?;`, [id]);
 
 		// 检查 affectedRows 判断是否成功插入或更新
 		if (result.affectedRows > 0) {
@@ -177,6 +174,43 @@ router.post('/delete-member', async function (req, res) {
 			res.status(404).json({
 				ok: false,
 				message: '删除失败'
+			});
+		}
+	} catch (error) {
+		console.error('数据库交互失败:', error);
+		res.status(500).json({
+			ok: false,
+			message: '服务器发生错误'
+		});
+	}
+});
+
+// 搜索群聊
+router.get('/search-groups', async function (req, res) {
+	const { searchValue } = req.query;
+
+	if (!searchValue) {
+		return res.status(400).json({
+			ok: false,
+			message: '参数不能为空'
+		});
+	}
+
+	try {
+		const [rows] = await promisePool.query(
+			`SELECT * FROM \`${groupsTable}\` WHERE id = ? OR name LIKE CONCAT('%', ?, '%')`,
+			[searchValue, searchValue]
+		);
+
+		if (rows.length > 0) {
+			res.json({
+				ok: true,
+				data: rows
+			});
+		} else {
+			res.status(404).json({
+				ok: false,
+				message: '未查询到结果'
 			});
 		}
 	} catch (error) {

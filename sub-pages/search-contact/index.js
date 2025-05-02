@@ -1,5 +1,5 @@
 import { defineComponent, ref, reactive, toRefs } from 'vue';
-import { getSearchUsersStore, getContactsStore, postApplicationStore } from '@/store/index.js';
+import { getSearchUsersStore, getContactsStore, postApplicationStore, getSearchGroupsStore } from '@/store/index.js';
 import ToastComp from '@/components/toast/index.vue'
 
 export default defineComponent({
@@ -12,7 +12,8 @@ export default defineComponent({
 			users: null, // 搜索到的用户
 			contactUserIdList: [], // 已经添加的联系人id
 			userId: null, // 登录用户的id
-			statusBarHeight: uni.getSystemInfoSync().statusBarHeight
+			statusBarHeight: uni.getSystemInfoSync().statusBarHeight,
+			groups: null // 搜索到的群聊
 		});
 		const components = {
 			toastRef: ref(null)
@@ -75,10 +76,16 @@ export default defineComponent({
 					userId: userInfo.id
 				});
 
-				Promise.all([promiseUsers, promiseContacts])
+				const promiseGroups = getSearchGroupsStore.get({
+					searchValue: state.searchValue
+				})
+
+				Promise.all([promiseUsers, promiseContacts, promiseGroups])
 					.then(res => {
 						const contacts = res[1].data.contacts;
 						state.users = res[0].data?.users;
+						state.groups = res[2].data?.data
+						console.log(state.groups)
 						contacts &&
 							contacts.forEach(item => {
 								state.contactUserIdList.push(item.contactUserId);

@@ -65,3 +65,6 @@ export const getAllMembersStore = new Request('/api/get-all-members', 'GET')
 
 // 踢出群聊成员
 export const postDeleteMemberStore = new Request('/api/delete-member', 'POST')
+
+// 搜索群聊
+export const getSearchGroupsStore = new Request('/api/search-groups', 'GET')
