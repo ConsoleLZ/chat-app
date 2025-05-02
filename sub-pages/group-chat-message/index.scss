@@ -105,12 +105,12 @@
 		box-sizing: border-box;
 		background-color: #f5f5f5;
 	}
-	.members-box {
+	.group-info-box {
 		background-color: #ffffff;
 		border-radius: 12rpx;
 		padding: 20rpx 26rpx;
 	}
-	.members-item {
+	.members {
 		max-height: 400rpx;
 		display: grid;
 		grid-template-columns: repeat(auto-fill, 100rpx);

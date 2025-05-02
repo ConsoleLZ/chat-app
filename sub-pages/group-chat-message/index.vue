@@ -72,20 +72,25 @@
 		<uv-loading-page :loading="loading" loading-text="加载中..." font-size="24rpx"></uv-loading-page>
 		<uv-popup ref="popupInfoRef" mode="right" closeable>
 			<view class="group-info">
-				<view class="members-box">
+				<view class="group-info-box">
 					<view style="margin-bottom: 15rpx" class="flex-between-row">
-						<view>群聊成员:</view>
+						<view style="font-size: 30rpx;">群聊成员:</view>
 						<view class="flex-row">
-							<view style="font-size: 30rpx;color: #666666;margin-right: 5rpx;">查看更多</view>
+							<view style="font-size: 26rpx; color: #666666; margin-right: 5rpx">查看更多</view>
 							<uv-icon name="arrow-right"></uv-icon>
 						</view>
 					</view>
-					<view class="members-item">
+					<view class="members">
 						<view v-for="item in groupMembers" :key="item.id">
 							<uv-avatar v-if="item.avatar" :src="item.avatar" size="70rpx"></uv-avatar>
 							<uv-avatar v-else :text="item.name?.slice(0, 1)" fontSize="16" size="70rpx"></uv-avatar>
 						</view>
 					</view>
+				</view>
+				<view class="group-info-box" style="margin-top: 30rpx">
+					<uv-list>
+						<uv-list-item title="群聊名称" :rightText="title" show-arrow></uv-list-item>
+					</uv-list>
 				</view>
 			</view>
 		</uv-popup>
