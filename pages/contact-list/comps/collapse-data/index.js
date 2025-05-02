@@ -24,6 +24,7 @@ export default defineComponent({
 					const info = {
 						id: data.id,
 						name: data.name,
+						ownerId: data.ownerId
 					}
 					// 跳转到群聊页
 					uni.navigateTo({

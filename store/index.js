@@ -62,3 +62,6 @@ export const getExpressionStore = new Request('/api/get-expression', 'GET')
 
 // 获取群聊成员
 export const getAllMembersStore = new Request('/api/get-all-members', 'GET')
+
+// 踢出群聊成员
+export const postDeleteMemberStore = new Request('/api/delete-member', 'POST')

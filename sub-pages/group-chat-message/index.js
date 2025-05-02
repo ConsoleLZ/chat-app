@@ -2,7 +2,7 @@ import { defineComponent, reactive, toRefs, ref, nextTick } from 'vue';
 import { faceList, tabs } from '@/sub-pages/chat-message/constants.js';
 import { onLoad, onShow } from '@dcloudio/uni-app';
 import { sendGroupMessage, createMessage, messageType } from '@/utils/socketService';
-import { postUploadImagesStore, getExpressionStore, getAllMembersStore } from '@/store/index.js';
+import { postUploadImagesStore, getExpressionStore, getAllMembersStore, postDeleteMemberStore } from '@/store/index.js';
 
 export default defineComponent({
 	setup() {
@@ -16,7 +16,8 @@ export default defineComponent({
 			groupId: null,
 			index: 0,
 			expressionList: [],
-			groupMembers: []
+			groupMembers: [],
+			ownerId: null
 		});
 
 		const constants = {
@@ -28,7 +29,7 @@ export default defineComponent({
 		const components = {
 			popupRef: ref(null),
 			popupInfoRef: ref(null),
-			popupAllMembersRef: ref(null),
+			popupAllMembersRef: ref(null)
 		};
 
 		const methods = {
@@ -42,12 +43,39 @@ export default defineComponent({
 						state.expressionList = data?.data;
 					});
 			},
+			// 踢人
+			onKickOut(id) {
+				const userInfo = uni.getStorageSync('userInfo');
+				if (state.ownerId === userInfo.id) {
+					postDeleteMemberStore.post({id}).then(res=>{
+						const data = res.data
+						if(data.ok){
+							uni.showToast({
+								title: '操作成功',
+								mask: true
+							});
+						}else {
+							uni.showToast({
+								title: '操作失败',
+								icon: 'error',
+								mask: true
+							});
+						}
+					})
+				} else {
+					uni.showToast({
+						title: '只有群主或者管理员可以踢人',
+						icon: 'error',
+						mask: true
+					});
+				}
+			},
 			// 展开所有的群聊成员
-			onShowAllMembers(){
-				components.popupAllMembersRef.value.open()
+			onShowAllMembers() {
+				components.popupAllMembersRef.value.open();
 			},
 			// 查看群聊相关信息
-			onShowInfo(){
+			onShowInfo() {
 				components.popupInfoRef.value.open();
 			},
 			sendMessage() {
@@ -109,7 +137,7 @@ export default defineComponent({
 					...message,
 					groupId: state.groupId
 				});
-				
+
 				state.messages = messages;
 
 				uni.setStorageSync('groupMessages', messages);
@@ -191,14 +219,15 @@ export default defineComponent({
 			}
 		};
 
-		onLoad(async (options) => {
+		onLoad(async options => {
 			const info = JSON.parse(options.info);
+			state.ownerId = info.ownerId;
 			state.groupId = info.id;
-			const res = await getAllMembersStore.get({groupId: info.id})
-			state.groupMembers = res.data?.data
-			const memberIds = res.data?.data?.map(item=>item.userId)
+			const res = await getAllMembersStore.get({ groupId: info.id });
+			state.groupMembers = res.data?.data;
+			const memberIds = res.data?.data?.map(item => item.userId);
 			state.title = `${info.name}(${memberIds.length})`;
-			
+
 			state.memberIds = memberIds;
 
 			// 初始化加载消息

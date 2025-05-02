@@ -117,7 +117,7 @@
 									</view>
 									<uv-text :text="item.name" type="info"></uv-text>
 								</view>
-								<uv-button type="warning " text="踢出" size="mini"></uv-button>
+								<uv-button v-if="item.userId !== ownerId" @click="onKickOut(item.id)" type="warning" text="踢出" size="mini"></uv-button>
 							</view>
 						</template>
 					</uv-list-item>

@@ -20,10 +20,12 @@ export default defineComponent({
 		const methods = {
 			// 跳转到聊天页
 			onJumpChat(item) {
+				console.log(item)
 				if (item.groupId) {
 					const info = {
 						id: item.groupId,
 						name: item.name,
+						ownerId: item.ownerId
 					};
 					uni.navigateTo({
 						url: `/sub-pages/group-chat-message/index?info=${JSON.stringify(info)}`
