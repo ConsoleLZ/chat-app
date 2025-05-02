@@ -90,6 +90,8 @@
 				<view class="group-info-box" style="margin-top: 30rpx">
 					<uv-list>
 						<uv-list-item title="群聊名称" :rightText="title" show-arrow></uv-list-item>
+						<uv-list-item title="群公告" show-arrow></uv-list-item>
+						<uv-list-item title="群ID" :rightText="groupId" show-arrow></uv-list-item>
 					</uv-list>
 				</view>
 			</view>

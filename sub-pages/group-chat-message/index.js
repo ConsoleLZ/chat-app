@@ -191,7 +191,6 @@ export default defineComponent({
 			state.groupId = info.id;
 			const res = await getAllMembersStore.get({groupId: info.id})
 			state.groupMembers = res.data?.data
-			console.log(state.groupMembers)
 			const memberIds = res.data?.data?.map(item=>item.userId)
 			state.title = `${info.name}(${memberIds.length})`;
 			
