@@ -149,4 +149,43 @@ router.get('/get-all-members', async function (req, res) {
 	}
 });
 
+// 群聊成员移除
+router.post('/delete-member', async function (req, res) {
+	const { id } = req.body;
+
+	// 参数验证
+	if (!id) {
+		return res.status(400).json({
+			ok: false,
+			message: '缺少参数'
+		});
+	}
+
+	try {
+		const [result] = await promisePool.query(
+			`DELETE FROM ${groupMembersTable} WHERE id=?;`,
+			[id]
+		);
+
+		// 检查 affectedRows 判断是否成功插入或更新
+		if (result.affectedRows > 0) {
+			res.json({
+				ok: true,
+				message: '删除成功'
+			});
+		} else {
+			res.status(404).json({
+				ok: false,
+				message: '删除失败'
+			});
+		}
+	} catch (error) {
+		console.error('数据库交互失败:', error);
+		res.status(500).json({
+			ok: false,
+			message: '服务器发生错误'
+		});
+	}
+});
+
 module.exports = router;

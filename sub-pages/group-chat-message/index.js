@@ -27,7 +27,8 @@ export default defineComponent({
 
 		const components = {
 			popupRef: ref(null),
-			popupInfoRef: ref(null)
+			popupInfoRef: ref(null),
+			popupAllMembersRef: ref(null),
 		};
 
 		const methods = {
@@ -40,6 +41,10 @@ export default defineComponent({
 						const data = res.data;
 						state.expressionList = data?.data;
 					});
+			},
+			// 展开所有的群聊成员
+			onShowAllMembers(){
+				components.popupAllMembersRef.value.open()
 			},
 			// 查看群聊相关信息
 			onShowInfo(){

@@ -71,11 +71,11 @@
 
 		<uv-loading-page :loading="loading" loading-text="加载中..." font-size="24rpx"></uv-loading-page>
 		<uv-popup ref="popupInfoRef" mode="right" closeable>
-			<view class="group-info">
+			<view class="popup-box">
 				<view class="group-info-box">
 					<view style="margin-bottom: 15rpx" class="flex-between-row">
 						<view style="font-size: 30rpx;">群聊成员:</view>
-						<view class="flex-row">
+						<view class="flex-row" @click="onShowAllMembers">
 							<view style="font-size: 26rpx; color: #666666; margin-right: 5rpx">查看更多</view>
 							<uv-icon name="arrow-right"></uv-icon>
 						</view>
@@ -94,6 +94,14 @@
 						<uv-list-item title="群ID" :rightText="groupId" show-arrow></uv-list-item>
 					</uv-list>
 				</view>
+				<uv-button style="margin-top: 50rpx;" type="error" text="退出群聊"></uv-button>
+			</view>
+		</uv-popup>
+
+		<!-- 展开所有的群聊成员 -->
+		<uv-popup ref="popupAllMembersRef" mode="right" closeable>
+			<view class="popup-box">
+				123
 			</view>
 		</uv-popup>
 	</view>
