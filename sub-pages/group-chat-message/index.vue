@@ -73,9 +73,18 @@
 		<uv-popup ref="popupInfoRef" mode="right" closeable>
 			<view class="group-info">
 				<view class="members-box">
-					<view style="margin-bottom: 15rpx;">群聊成员:</view>
+					<view style="margin-bottom: 15rpx" class="flex-between-row">
+						<view>群聊成员:</view>
+						<view class="flex-row">
+							<view style="font-size: 30rpx;color: #666666;margin-right: 5rpx;">查看更多</view>
+							<uv-icon name="arrow-right"></uv-icon>
+						</view>
+					</view>
 					<view class="members-item">
-						<uv-avatar v-for="item in groupMembers" :key="item.id" :src="item.avatar" size="70rpx"></uv-avatar>
+						<view v-for="item in groupMembers" :key="item.id">
+							<uv-avatar v-if="item.avatar" :src="item.avatar" size="70rpx"></uv-avatar>
+							<uv-avatar v-else :text="item.name?.slice(0, 1)" fontSize="16" size="70rpx"></uv-avatar>
+						</view>
 					</view>
 				</view>
 			</view>
