@@ -109,13 +109,14 @@ export default defineComponent({
 					});
 			},
 			// 申请进群
-			onApplicationGroup(id) {
+			onApplicationGroup(item) {
 				const userInfo = uni.getStorageSync('userInfo');
 				const postData = {
 					userId: userInfo.id,
-					groupId: id,
+					groupId: item.id,
 					name: userInfo.name,
-					avatar: userInfo.avatar
+					avatar: userInfo.avatar,
+					ownerId: item.ownerId
 				};
 				postApplicationGroupStore
 					.post(postData)

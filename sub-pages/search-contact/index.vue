@@ -72,7 +72,7 @@
 					<view style="flex: 1">
 						<view class="title">{{ item.name }}</view>
 					</view>
-					<uv-button type="primary" @click="onApplicationGroup(item.id)" text="申请"></uv-button>
+					<uv-button type="primary" @click="onApplicationGroup(item)" text="申请"></uv-button>
 					<!-- <uv-button v-else type="primary" disabled text="已添加"></uv-button> -->
 				</view>
 			</view>
