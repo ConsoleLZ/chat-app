@@ -129,7 +129,7 @@ export default defineComponent({
 						} else {
 							components.toastRef.value.show({
 								type: 'error',
-								message: '申请失败'
+								message: data?.message
 							});
 						}
 					})
