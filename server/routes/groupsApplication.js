@@ -1,6 +1,6 @@
 const express = require('express');
 const mysql2 = require('mysql2');
-const { dbConfig, groupsApplicationTable, groupsTable } = require('../db.config');
+const { dbConfig, groupsApplicationTable, groupMembersTable } = require('../db.config');
 
 // 创建一个全局的连接池
 const promisePool = mysql2.createPool(dbConfig()).promise();
@@ -20,6 +20,22 @@ router.post('/application-group', async function (req, res) {
 	}
 
 	try {
+		// 先判断申请者是否已经加入该群聊
+		// 构建 SQL 查询语句
+		let sql = `SELECT *
+				   FROM ${groupMembersTable} 
+				   WHERE groupId = ?`;
+
+		// 执行查询
+		const [rows] = await promisePool.query(sql, [groupId]);
+		const memberIds = rows.map(item=>item.userId)
+		if(memberIds.includes(userId)){
+			return res.json({
+				ok: false,
+				message: '已经加入该群聊'
+			})
+		}
+
 		// 使用 ON DUPLICATE KEY UPDATE 处理可能的重复插入
 		const [result] = await promisePool.query(
 			`INSERT INTO ${groupsApplicationTable} (groupId, userId, name, avatar, ownerId)
@@ -27,7 +43,7 @@ router.post('/application-group', async function (req, res) {
          ON DUPLICATE KEY UPDATE name = VALUES(name), avatar = VALUES(avatar)`,
 			[groupId, userId, name, avatar, ownerId]
 		);
-
+		
 		// 检查 affectedRows 判断是否成功插入或更新
 		if (result.affectedRows > 0) {
 			if (result.insertId > 0) {
