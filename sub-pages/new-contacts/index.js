@@ -2,6 +2,7 @@ import { defineComponent, reactive, ref, toRefs } from 'vue';
 import { getApplicationStore, postAgreeApplicationStore } from '@/store/index.js';
 import { onShow } from '@dcloudio/uni-app';
 import ToastComp from '@/components/toast/index.vue'
+import {tabList} from './constants'
 
 export default defineComponent({
 	components: {
@@ -9,7 +10,8 @@ export default defineComponent({
 	},
 	setup() {
 		const state = reactive({
-			dataList: null
+			dataList: null,
+			tabsIndex: 0
 		});
 
 		const components = {
@@ -79,6 +81,9 @@ export default defineComponent({
 					.finally(() => {
 						uni.hideLoading();
 					});
+			},
+			onChangeTabs(e){
+				state.tabsIndex = e.index
 			}
 		};
 
@@ -87,6 +92,7 @@ export default defineComponent({
 		});
 
 		return {
+			tabList,
 			...toRefs(state),
 			...methods
 		};

@@ -1,5 +1,6 @@
 <template>
-	<view class="list" v-if="dataList">
+	<uv-tabs :list="tabList" @click="onChangeTabs"></uv-tabs>
+	<view class="list" v-show="tabsIndex === 0">
 		<view class="flex-center-row list-item" v-for="item in dataList" :key="item.id">
 			<uv-avatar
 				v-if="item.avatar !== '' && item.avatar"
@@ -18,7 +19,10 @@
 			<uv-button v-else type="primary" text="已同意" disabled></uv-button>
 		</view>
 	</view>
-	<uv-empty v-else style="height: 80vh" mode="data" icon-size="100rpx"></uv-empty>
+
+	<view class="list" v-show="tabsIndex === 1">
+		123
+	</view>
 
 	<toast-comp ref="toastRef"></toast-comp>
 </template>
