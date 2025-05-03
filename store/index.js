@@ -74,3 +74,6 @@ export const postApplicationGroupStore = new Request('/api/application-group', '
 
 // 查找申请进群的用户
 export const getApplicationGroupStore = new Request('/api/get-application-group', 'GET')
+
+// 添加群聊成员
+export const postAddGroupMemberStore = new Request('/api/add-group-member', 'POST')

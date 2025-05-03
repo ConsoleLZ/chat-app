@@ -32,7 +32,7 @@
 			<view style="flex: 1">
 				<view class="title">{{ item.name }}</view>
 			</view>
-			<uv-button v-if="item.agree === 0" type="primary" text="同意"></uv-button>
+			<uv-button v-if="item.agree === 0" @click="onAddMember(item)" type="primary" text="同意"></uv-button>
 			<uv-button v-else type="primary" text="已同意" disabled></uv-button>
 		</view>
 	</view>

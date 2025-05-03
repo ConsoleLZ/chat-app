@@ -1,5 +1,10 @@
 import { defineComponent, reactive, ref, toRefs } from 'vue';
-import { getApplicationStore, postAgreeApplicationStore, getApplicationGroupStore } from '@/store/index.js';
+import {
+	getApplicationStore,
+	postAgreeApplicationStore,
+	getApplicationGroupStore,
+	postAddGroupMemberStore
+} from '@/store/index.js';
 import { onShow } from '@dcloudio/uni-app';
 import ToastComp from '@/components/toast/index.vue';
 import { tabList } from './constants';
@@ -44,7 +49,7 @@ export default defineComponent({
 					});
 				getApplicationGroupStore.get({ ownerId: uni.getStorageSync('userInfo').id }).then(res => {
 					const data = res.data;
-					state.groupDataList = data?.data
+					state.groupDataList = data?.data;
 				});
 			},
 			// 同意申请
@@ -86,6 +91,32 @@ export default defineComponent({
 						uni.hideLoading();
 					});
 			},
+			// 同意进群
+			onAddMember(item) {
+				postAddGroupMemberStore
+					.post(item)
+					.then(res => {
+						const data = res.data;
+						if (data.ok) {
+							methods.getData();
+							components.toastRef.value.show({
+								type: 'success',
+								message: '操作成功'
+							});
+						} else {
+							components.toastRef.value.show({
+								type: 'error',
+								message: '操作失败'
+							});
+						}
+					})
+					.catch(() => {
+						components.toastRef.value.show({
+							type: 'error',
+							message: '服务器错误'
+						});
+					});
+			},
 			onChangeTabs(e) {
 				state.tabsIndex = e.index;
 			}
@@ -98,7 +129,8 @@ export default defineComponent({
 		return {
 			tabList,
 			...toRefs(state),
-			...methods
+			...methods,
+			...components
 		};
 	}
 });

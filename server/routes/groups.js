@@ -1,6 +1,6 @@
 const express = require('express');
 const mysql2 = require('mysql2');
-const { dbConfig, groupsTable, groupMembersTable } = require('../db.config');
+const { dbConfig, groupsTable, groupMembersTable, groupsApplicationTable } = require('../db.config');
 const { v4: uuidv4 } = require('uuid');
 
 // 创建一个全局的连接池
@@ -138,6 +138,49 @@ router.get('/get-all-members', async function (req, res) {
 			res.json({
 				ok: false,
 				message: '暂无数据'
+			});
+		}
+	} catch (error) {
+		console.error('数据库交互失败:', error);
+		res.status(500).json({
+			ok: false,
+			message: '服务器发生错误'
+		});
+	}
+});
+
+// 添加群聊成员
+router.post('/add-group-member', async function (req, res) {
+	const { userId, groupId, name, avatar } = req.body;
+
+	// 参数验证
+	if (!userId || !groupId || !name) {
+		return res.status(400).json({
+			ok: false,
+			message: '参数为空'
+		});
+	}
+
+	try {
+		const [result] = await promisePool.query(
+			`INSERT INTO ${groupMembersTable} (groupId, userId, name, avatar, joinedTime) VALUES (?, ?, ?, ?, ?)`,
+			[groupId, userId, name, avatar, Date.now()]
+		);
+
+		// 检查 affectedRows 判断是否成功插入或更新
+		if (result.affectedRows > 0) {
+			await promisePool.query(
+				`UPDATE ${groupsApplicationTable} SET agree = 1 WHERE userId = ? AND groupId = ?`,
+				[userId, groupId]
+			);
+			res.json({
+				ok: true,
+				message: '操作成功'
+			});
+		} else {
+			res.status(500).json({
+				ok: false,
+				message: '操作失败'
 			});
 		}
 	} catch (error) {
