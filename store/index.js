@@ -71,3 +71,6 @@ export const getSearchGroupsStore = new Request('/api/search-groups', 'GET')
 
 // 申请进入群聊
 export const postApplicationGroupStore = new Request('/api/application-group', 'POST')
+
+// 查找申请进群的用户
+export const getApplicationGroupStore = new Request('/api/get-application-group', 'GET')

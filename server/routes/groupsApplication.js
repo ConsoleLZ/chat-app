@@ -74,10 +74,10 @@ router.post('/application-group', async function (req, res) {
 
 // 查找申请进群的用户
 router.get('/get-application-group', async function (req, res) {
-	const { userId } = req.query;
+	const { ownerId } = req.query;
 
 	// 参数验证
-	if (!userId) {
+	if (!ownerId) {
 		return res.status(400).json({
 			ok: false,
 			message: '缺少参数'
@@ -88,10 +88,10 @@ router.get('/get-application-group', async function (req, res) {
 		// 构建 SQL 查询语句
 		let sql = `SELECT *
 				   FROM ${groupsApplicationTable} 
-				   WHERE userId = ?`;
+				   WHERE ownerId = ?`;
 
 		// 执行查询
-		const [rows] = await promisePool.query(sql, [userId]);
+		const [rows] = await promisePool.query(sql, [ownerId]);
 		// 检查查询结果
 		if (rows.length > 0) {
 			res.json({

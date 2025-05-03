@@ -21,7 +21,20 @@
 	</view>
 
 	<view class="list" v-show="tabsIndex === 1">
-		123
+		<view class="flex-center-row list-item" v-for="item in groupDataList" :key="item.id">
+			<uv-avatar
+				v-if="item.avatar !== '' && item.avatar"
+				size="90rpx"
+				:src="item.avatar"
+				class="margin-right-20"
+			></uv-avatar>
+			<uv-avatar v-else :text="item.name?.slice(0, 1)" size="90rpx" class="margin-right-20"></uv-avatar>
+			<view style="flex: 1">
+				<view class="title">{{ item.name }}</view>
+			</view>
+			<uv-button v-if="item.agree === 0" type="primary" text="同意"></uv-button>
+			<uv-button v-else type="primary" text="已同意" disabled></uv-button>
+		</view>
 	</view>
 
 	<toast-comp ref="toastRef"></toast-comp>

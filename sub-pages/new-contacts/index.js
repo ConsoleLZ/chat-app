@@ -1,8 +1,8 @@
 import { defineComponent, reactive, ref, toRefs } from 'vue';
-import { getApplicationStore, postAgreeApplicationStore } from '@/store/index.js';
+import { getApplicationStore, postAgreeApplicationStore, getApplicationGroupStore } from '@/store/index.js';
 import { onShow } from '@dcloudio/uni-app';
-import ToastComp from '@/components/toast/index.vue'
-import {tabList} from './constants'
+import ToastComp from '@/components/toast/index.vue';
+import { tabList } from './constants';
 
 export default defineComponent({
 	components: {
@@ -10,7 +10,8 @@ export default defineComponent({
 	},
 	setup() {
 		const state = reactive({
-			dataList: null,
+			dataList: [],
+			groupDataList: [],
 			tabsIndex: 0
 		});
 
@@ -31,7 +32,6 @@ export default defineComponent({
 					})
 					.then(res => {
 						state.dataList = res.data.users;
-						console.log(state.dataList);
 					})
 					.catch(() => {
 						components.toastRef.value.show({
@@ -42,6 +42,10 @@ export default defineComponent({
 					.finally(() => {
 						uni.hideLoading();
 					});
+				getApplicationGroupStore.get({ ownerId: uni.getStorageSync('userInfo').id }).then(res => {
+					const data = res.data;
+					state.groupDataList = data?.data
+				});
 			},
 			// 同意申请
 			onAgree(item) {
@@ -82,8 +86,8 @@ export default defineComponent({
 						uni.hideLoading();
 					});
 			},
-			onChangeTabs(e){
-				state.tabsIndex = e.index
+			onChangeTabs(e) {
+				state.tabsIndex = e.index;
 			}
 		};
 
