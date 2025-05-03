@@ -2,7 +2,13 @@ import { defineComponent, reactive, toRefs, ref, nextTick } from 'vue';
 import { faceList, tabs } from '@/sub-pages/chat-message/constants.js';
 import { onLoad, onShow } from '@dcloudio/uni-app';
 import { sendGroupMessage, createMessage, messageType } from '@/utils/socketService';
-import { postUploadImagesStore, getExpressionStore, getAllMembersStore, postDeleteMemberStore } from '@/store/index.js';
+import {
+	postUploadImagesStore,
+	getExpressionStore,
+	getAllMembersStore,
+	postDeleteMemberStore,
+	postExitGroupStore
+} from '@/store/index.js';
 
 export default defineComponent({
 	setup() {
@@ -43,25 +49,50 @@ export default defineComponent({
 						state.expressionList = data?.data;
 					});
 			},
+			// 退出群聊
+			onExitGroup() {
+				postExitGroupStore
+					.post({
+						userId: uni.getStorageSync('userInfo').id,
+						groupId: state.groupId
+					})
+					.then(res => {
+						const data = res.data;
+						if (data.ok) {
+							uni.showToast({
+								title: '退出成功',
+								mask: true
+							});
+
+							uni.navigateBack()
+						} else {
+							uni.showToast({
+								title: data.message,
+								type: 'error',
+								mask: true
+							});
+						}
+					});
+			},
 			// 踢人
 			onKickOut(id) {
 				const userInfo = uni.getStorageSync('userInfo');
 				if (state.ownerId === userInfo.id) {
-					postDeleteMemberStore.post({id}).then(res=>{
-						const data = res.data
-						if(data.ok){
+					postDeleteMemberStore.post({ id }).then(res => {
+						const data = res.data;
+						if (data.ok) {
 							uni.showToast({
 								title: '操作成功',
 								mask: true
 							});
-						}else {
+						} else {
 							uni.showToast({
 								title: '操作失败',
 								icon: 'error',
 								mask: true
 							});
 						}
-					})
+					});
 				} else {
 					uni.showToast({
 						title: '只有群主或者管理员可以踢人',

@@ -228,6 +228,54 @@ router.post('/delete-member', async function (req, res) {
 	}
 });
 
+// 退出群聊
+router.post('/exit-group', async function (req, res) {
+	const { userId, groupId } = req.body;
+
+	// 参数验证
+	if (!userId || !groupId) {
+		return res.status(400).json({
+			ok: false,
+			message: '缺少参数'
+		});
+	}
+
+	const [rows] = await promisePool.query(
+		`SELECT * FROM \`${groupsTable}\` WHERE id = ?`,
+		[groupId]
+	);
+
+	if(rows[0].ownerId == userId){
+		return res.json({
+			ok: false,
+			message: "群主无法退出群聊"
+		})
+	}
+
+	try {
+		const [result] = await promisePool.query(`DELETE FROM ${groupMembersTable} WHERE userId=? AND groupId=?;`, [userId, groupId]);
+
+		// 检查 affectedRows 判断是否成功插入或更新
+		if (result.affectedRows > 0) {
+			res.json({
+				ok: true,
+				message: '退出成功'
+			});
+		} else {
+			res.status(404).json({
+				ok: false,
+				message: '退出失败'
+			});
+		}
+	} catch (error) {
+		console.error('数据库交互失败:', error);
+		res.status(500).json({
+			ok: false,
+			message: '服务器发生错误'
+		});
+	}
+});
+
 // 搜索群聊
 router.get('/search-groups', async function (req, res) {
 	const { searchValue } = req.query;

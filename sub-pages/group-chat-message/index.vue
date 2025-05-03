@@ -94,7 +94,7 @@
 						<uv-list-item border title="群ID" :rightText="groupId" show-arrow></uv-list-item>
 					</uv-list>
 				</view>
-				<uv-button style="margin-top: 50rpx" type="error" text="退出群聊"></uv-button>
+				<uv-button style="margin-top: 50rpx" type="error" text="退出群聊" @click="onExitGroup"></uv-button>
 			</view>
 		</uv-popup>
 

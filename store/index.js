@@ -77,3 +77,6 @@ export const getApplicationGroupStore = new Request('/api/get-application-group'
 
 // 添加群聊成员
 export const postAddGroupMemberStore = new Request('/api/add-group-member', 'POST')
+
+// 退出群聊
+export const postExitGroupStore = new Request('/api/exit-group', 'POST')
