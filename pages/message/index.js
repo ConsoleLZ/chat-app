@@ -104,10 +104,10 @@ export default defineComponent({
 					// 如果当前 groupId 不存在，或当前消息时间更早，则更新
 					if (!groupMap[groupId] || createTime > groupMap[groupId].createTime) {
 						const groupInfo = state.groups.find(item => item.groupId === message.groupId);
-						message.avatar = groupInfo.avatar;
-						message.name = groupInfo.groupName;
-						message.ownerId = groupInfo.ownerId;
-						message.content = message.messageType === messageType.text ? message.content : '图片';
+						message.avatar = groupInfo?.avatar;
+						message.name = groupInfo?.groupName;
+						message.ownerId = groupInfo?.ownerId;
+						message.content = message?.messageType === messageType.text ? message.content : '图片';
 						groupMap[groupId] = message;
 					}
 				});
