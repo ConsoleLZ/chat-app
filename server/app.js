@@ -14,6 +14,7 @@ var groupsRouter = require('./routes/groups');
 var uploadRouter = require('./routes/upload');
 var momentsRouter = require('./routes/moments');
 var expressionPackRouter = require('./routes/expressionPack');
+var groupsApplicationRouter = require('./routes/groupsApplication');
 
 var app = express();
 
@@ -71,6 +72,7 @@ app.use('/api', groupsRouter);
 app.use('/api', uploadRouter);
 app.use('/api', momentsRouter);
 app.use('/api', expressionPackRouter);
+app.use('/api', groupsApplicationRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

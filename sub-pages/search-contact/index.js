@@ -1,6 +1,12 @@
 import { defineComponent, ref, reactive, toRefs } from 'vue';
-import { getSearchUsersStore, getContactsStore, postApplicationStore, getSearchGroupsStore } from '@/store/index.js';
-import ToastComp from '@/components/toast/index.vue'
+import {
+	getSearchUsersStore,
+	getContactsStore,
+	postApplicationStore,
+	getSearchGroupsStore,
+	postApplicationGroupStore
+} from '@/store/index.js';
+import ToastComp from '@/components/toast/index.vue';
 
 export default defineComponent({
 	components: {
@@ -78,14 +84,14 @@ export default defineComponent({
 
 				const promiseGroups = getSearchGroupsStore.get({
 					searchValue: state.searchValue
-				})
+				});
 
 				Promise.all([promiseUsers, promiseContacts, promiseGroups])
 					.then(res => {
 						const contacts = res[1].data.contacts;
 						state.users = res[0].data?.users;
-						state.groups = res[2].data?.data
-						console.log(state.groups)
+						state.groups = res[2].data?.data;
+						console.log(state.groups);
 						contacts &&
 							contacts.forEach(item => {
 								state.contactUserIdList.push(item.contactUserId);
@@ -100,6 +106,38 @@ export default defineComponent({
 					})
 					.finally(() => {
 						uni.hideLoading();
+					});
+			},
+			// 申请进群
+			onApplicationGroup(id) {
+				const userInfo = uni.getStorageSync('userInfo');
+				const postData = {
+					userId: userInfo.id,
+					groupId: id,
+					name: userInfo.name,
+					avatar: userInfo.avatar
+				};
+				postApplicationGroupStore
+					.post(postData)
+					.then(res => {
+						const data = res.data;
+						if (data.ok) {
+							components.toastRef.value.show({
+								type: 'success',
+								message: '申请成功'
+							});
+						} else {
+							components.toastRef.value.show({
+								type: 'error',
+								message: '申请失败'
+							});
+						}
+					})
+					.catch(() => {
+						components.toastRef.value.show({
+							type: 'error',
+							message: '服务器错误'
+						});
 					});
 			},
 			// 清空列表

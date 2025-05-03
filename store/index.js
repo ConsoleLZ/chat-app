@@ -68,3 +68,6 @@ export const postDeleteMemberStore = new Request('/api/delete-member', 'POST')
 
 // 搜索群聊
 export const getSearchGroupsStore = new Request('/api/search-groups', 'GET')
+
+// 申请进入群聊
+export const postApplicationGroupStore = new Request('/api/application-group', 'POST')

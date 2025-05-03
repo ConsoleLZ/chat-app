@@ -17,7 +17,7 @@
 				<uv-text @click="onClear" type="primary" text="清空"></uv-text>
 			</view>
 		</view>
-		<view class="search-list">
+		<view class="search-list" v-if="users || groups">
 			<!-- 用户 -->
 			<view v-if="users">
 				<uv-text style="margin-bottom: 24rpx" size="24rpx" type="info" text="用户"></uv-text>
@@ -72,7 +72,7 @@
 					<view style="flex: 1">
 						<view class="title">{{ item.name }}</view>
 					</view>
-					<uv-button type="primary" text="申请"></uv-button>
+					<uv-button type="primary" @click="onApplicationGroup(item.id)" text="申请"></uv-button>
 					<!-- <uv-button v-else type="primary" disabled text="已添加"></uv-button> -->
 				</view>
 			</view>
