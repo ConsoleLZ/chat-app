@@ -1,6 +1,7 @@
 import { defineComponent, reactive, toRefs, ref } from 'vue';
 import { postDeleteContactStore } from '@/store/index';
 import { onLoad } from '@dcloudio/uni-app';
+import {groupSelectActions} from './constants'
 
 export default defineComponent({
 	setup() {
@@ -9,8 +10,13 @@ export default defineComponent({
 		});
 
 		const components = {
-			modalRef: ref(null)
+			modalRef: ref(null),
+			groupSelectRef: ref(null),
 		};
+
+		const constants = {
+			groupSelectActions
+		}
 
 		const methods = {
 			onDel() {
@@ -35,6 +41,10 @@ export default defineComponent({
 						});
 					}
 				});
+			},
+			// 选择分组
+			showGroupSelect(){
+				components.groupSelectRef.value.open()
 			}
 		};
 
@@ -45,7 +55,8 @@ export default defineComponent({
 		return {
 			...toRefs(state),
 			...methods,
-			...components
+			...components,
+			...constants
 		};
 	}
 });

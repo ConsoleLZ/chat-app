@@ -1,12 +1,25 @@
 <template>
-	<view>
-		<uv-list>
-			<uv-list-item title="备注"></uv-list-item>
-			<uv-list-item title="分组" show-arrow></uv-list-item>
-		</uv-list>
+	<view style="padding: 20rpx;">
+		<uv-form labelPosition="left">
+			<uv-form-item label="备注" borderBottom>
+				<uv-input border="none"></uv-input>
+			</uv-form-item>
+			<uv-form-item label="分组" borderBottom @click="showGroupSelect">
+				<uv-input
+					disabled
+					disabledColor="#ffffff"
+					placeholder="请选择分组"
+					border="none"
+				></uv-input>
+				<template v-slot:right>
+					<uv-icon name="arrow-right"></uv-icon>
+				</template>
+			</uv-form-item>
+		</uv-form>
 
 		<view class="btn">
-			<uv-button @click="onDel" style="width: 90%" type="error" text="删除联系人"></uv-button>
+			<uv-button style="width: 40%;margin-right: 20rpx;" type="primary" text="保存" @click="submit"></uv-button>
+			<uv-button style="width: 40%;" @click="onDel" type="error" text="删除联系人"></uv-button>
 		</view>
 
 		<uv-modal
@@ -18,6 +31,14 @@
 			@confirm="onConfirmDel"
 			:closeOnClickOverlay="false"
 		></uv-modal>
+
+		<!-- 分组 -->
+		<uv-action-sheet
+			ref="groupSelectRef"
+			:actions="groupSelectActions"
+			title="请选择分组"
+			@select="groupSelect"
+		></uv-action-sheet>
 	</view>
 </template>
 
