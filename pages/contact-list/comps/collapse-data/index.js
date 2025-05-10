@@ -18,7 +18,7 @@ export default defineComponent({
 				if (props.mode === 0) {
 					// 跳转到用户详情
 					uni.navigateTo({
-						url: `/sub-pages/user-detail/index?userId=${data.contactUserId}`
+						url: `/sub-pages/user-detail/index?userId=${data.contactUserId}&remarks=${data.remarks || ''}&grouping=${data.grouping}`
 					});
 				}else {
 					const info = {

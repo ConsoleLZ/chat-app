@@ -3,7 +3,7 @@
 		<uv-navbar title="用户信息" @leftClick="onGoBack">
 			<template #right>
 				<uv-icon
-					@click="jump(`/sub-pages/user-setting/index?contactUserId=${userId}`)"
+					@click="jump(`/sub-pages/user-setting/index?contactUserId=${userId}&remarks=${remarks}&grouping=${grouping}`)"
 					name="setting"
 					size="22"
 				></uv-icon>

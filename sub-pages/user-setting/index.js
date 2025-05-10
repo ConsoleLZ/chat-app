@@ -26,7 +26,13 @@ export default defineComponent({
 		const methods = {
 			// 保存
 			onSave(){
-				console.log(state.formState)
+				const postData = {
+					...state.formState,
+					contactUserId: state.contactUserId,
+					userId: uni.getStorageSync('userInfo').id
+				}
+
+				console.log(postData)
 			},
 			onDel() {
 				components.modalRef.value.open();
@@ -64,6 +70,9 @@ export default defineComponent({
 
 		onLoad(options => {
 			state.contactUserId = options.contactUserId;
+			state.formState.remarks = options.remarks
+			state.formState.grouping = options.grouping
+			state.groupingName = groupSelectActions.find(item=>item.key === options.grouping).name
 		});
 
 		return {

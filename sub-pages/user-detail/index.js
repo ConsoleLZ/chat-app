@@ -9,7 +9,9 @@ export default defineComponent({
 	},
 	setup() {
 		const state = reactive({
-			userId: null
+			userId: null,
+			remarks: null,
+			grouping: null
 		});
 
 		const methods = {
@@ -26,6 +28,8 @@ export default defineComponent({
 
 		onLoad(options => {
 			state.userId = options.userId
+			state.remarks = options.remarks
+			state.grouping = options.grouping
 		});
 
 		return {

@@ -168,4 +168,40 @@ router.post('/delete-contact', async function (req, res) {
 	}
 });
 
+// 联系人设置
+router.post('/set-contacts', async function (req, res) {
+	const { userId, contactUserId, remarks, grouping } = req.body;
+	// 参数验证
+	if (!userId || !contactUserId || !remarks || !grouping) {
+		return res.status(400).json({
+			ok: false,
+			message: '缺少参数'
+		});
+	}
+
+	try {
+		[rows] = await promisePool.query(
+			`UPDATE ${contactsTable} SET remarks = ?, grouping = ? WHERE userId = ? AND contactUserId = ?`,
+			[remarks, grouping, userId, contactUserId]
+		);
+
+		if (rows.affectedRows > 0) {
+			res.json({
+				ok: true
+			});
+		} else {
+			res.status(404).json({
+				ok: false,
+				message: '更新失败'
+			});
+		}
+	} catch (error) {
+		console.error('数据库交互失败:', error);
+		res.status(500).json({
+			ok: false,
+			message: '服务器发生错误'
+		});
+	}
+});
+
 module.exports = router;
