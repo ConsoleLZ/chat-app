@@ -17,7 +17,7 @@
 		></uv-avatar>
 		<uv-avatar v-else :text="item.name?.slice(0, 1)" size="90rpx" style="margin-right: 15rpx"></uv-avatar>
 		<view style="flex: 1">
-			<view :class="mode === 0 ? 'title' : ''">{{ item.name }}</view>
+			<view :class="mode === 0 ? 'title' : ''">{{ item.name }}<span v-if="item.remarks">({{ item.remarks }})</span></view>
 			<view class="flex-row">
 				<text v-if="mode === 0" style="font-size: 24rpx">[手机在线]</text>
 			</view>

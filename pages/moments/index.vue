@@ -6,7 +6,7 @@
 				<uv-avatar v-if="item.avatar !== '' && item.avatar" shape="square" :src="item.avatar"></uv-avatar>
 				<uv-avatar v-else :text="item.name?.slice(0, 1)" shape="square"></uv-avatar>
 				<view>
-					<view>{{ item.name }}</view>
+					<view>{{ item.name }}<span v-if="item.remarks">({{ item.remarks }})</span></view>
 					<uv-text
 						type="info"
 						:text="'发布时间：' + dayjs(item.createTime).format('YYYY-MM-DD HH:mm')"

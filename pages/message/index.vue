@@ -23,7 +23,7 @@
 			></uv-avatar>
 			<view style="flex: 1">
 				<view class="flex-row" style="margin-bottom: 4rpx">
-					<view class="title">{{ item.name }}</view>
+					<view class="title">{{ item.name }}<span v-if="item.remarks">({{ item.remarks }})</span></view>
 					<text style="font-size: 22rpx; color: #c1c1c1">
 						<uni-dateformat :date="item.createTime" :threshold="[0, 14515200000]"></uni-dateformat>
 					</text>
