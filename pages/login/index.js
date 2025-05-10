@@ -11,8 +11,8 @@ export default defineComponent({
 	setup() {
 		const state = reactive({
 			isPasswordType: true,
-			account: 'admin',
-			password: '123',
+			account: null,
+			password: null,
 			isLoading: false
 		});
 
