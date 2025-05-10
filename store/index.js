@@ -80,3 +80,6 @@ export const postAddGroupMemberStore = new Request('/api/add-group-member', 'POS
 
 // 退出群聊
 export const postExitGroupStore = new Request('/api/exit-group', 'POST')
+
+// 联系人设置
+export const postSetContactsStore = new Request('/api/set-contacts', 'POST')

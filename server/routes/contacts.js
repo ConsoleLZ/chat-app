@@ -181,7 +181,7 @@ router.post('/set-contacts', async function (req, res) {
 
 	try {
 		[rows] = await promisePool.query(
-			`UPDATE ${contactsTable} SET remarks = ?, grouping = ? WHERE userId = ? AND contactUserId = ?`,
+			`UPDATE ${contactsTable} SET remarks = ?, \`grouping\` = ? WHERE userId = ? AND contactUserId = ?`,
 			[remarks, grouping, userId, contactUserId]
 		);
 
