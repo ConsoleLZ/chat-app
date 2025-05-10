@@ -2,10 +2,11 @@
 	<view style="padding: 20rpx;">
 		<uv-form labelPosition="left">
 			<uv-form-item label="备注" borderBottom>
-				<uv-input border="none"></uv-input>
+				<uv-input border="none" v-model="formState.remarks"></uv-input>
 			</uv-form-item>
 			<uv-form-item label="分组" borderBottom @click="showGroupSelect">
 				<uv-input
+					v-model="groupingName"
 					disabled
 					disabledColor="#ffffff"
 					placeholder="请选择分组"
@@ -18,7 +19,7 @@
 		</uv-form>
 
 		<view class="btn">
-			<uv-button style="width: 40%;margin-right: 20rpx;" type="primary" text="保存" @click="submit"></uv-button>
+			<uv-button style="width: 40%;margin-right: 20rpx;" type="primary" text="保存" @click="onSave"></uv-button>
 			<uv-button style="width: 40%;" @click="onDel" type="error" text="删除联系人"></uv-button>
 		</view>
 
@@ -37,7 +38,7 @@
 			ref="groupSelectRef"
 			:actions="groupSelectActions"
 			title="请选择分组"
-			@select="groupSelect"
+			@select="onGroupSelect"
 		></uv-action-sheet>
 	</view>
 </template>

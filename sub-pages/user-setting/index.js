@@ -6,7 +6,12 @@ import {groupSelectActions} from './constants'
 export default defineComponent({
 	setup() {
 		const state = reactive({
-			contactUserId: null
+			contactUserId: null,
+			groupingName: null,
+			formState: {
+				remarks: null, // 备注
+				grouping: null // 分组
+			}
 		});
 
 		const components = {
@@ -19,6 +24,10 @@ export default defineComponent({
 		}
 
 		const methods = {
+			// 保存
+			onSave(){
+				console.log(state.formState)
+			},
 			onDel() {
 				components.modalRef.value.open();
 			},
@@ -42,9 +51,14 @@ export default defineComponent({
 					}
 				});
 			},
-			// 选择分组
+			// 显示分组
 			showGroupSelect(){
 				components.groupSelectRef.value.open()
+			},
+			// 选择分组
+			onGroupSelect(e){
+				state.formState.grouping = e.key
+				state.groupingName = e.name
 			}
 		};
 
